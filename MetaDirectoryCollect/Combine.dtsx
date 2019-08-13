@@ -1,0 +1,1757 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/17/2017 2:02:52 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName=""
+  DTS:CreatorName="Jonas Sjömark"
+  DTS:DTSID="{68B49D42-81C3-4F61-B837-CC2CA5C63E92}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1053"
+  DTS:ObjectName="Combine"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{F0C63E13-1CCE-481D-8867-AA76D2EC4EAF}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MetaDirectory]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{960414E8-E711-4D36-8345-2F97B1CA2813}"
+      DTS:ObjectName="MetaDirectory">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::MetaDirectoryConnectionString]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{4A9FDC02-A9FE-4C2F-952C-60D2DA1E80C7}"
+      DTS:ObjectName="CombineGroupMyndighet"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{217DBC18-15D6-4B7A-A0D8-D4C99804EE34}"
+      DTS:ObjectName="CombineGroupUtforare"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{AC7556A1-8EB2-4ABA-BE89-3FC6F9C919E7}"
+      DTS:ObjectName="CombineSearchRoot"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{6E6E14B6-6B4F-4183-A8DE-37A7BD675E62}"
+      DTS:ObjectName="MetaDirectoryConnectionString"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DBF7E67D-E681-4A19-A613-CD5C2748A1E0}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="rowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Commit"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{041FFFE1-DC79-4FE5-8F52-CF0D747D08E3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Commit"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{960414E8-E711-4D36-8345-2F97B1CA2813}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spCommitCombine" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\FailPackage"
+      DTS:CreationName="Microsoft.ScriptTask"
+      DTS:Description="Script Task"
+      DTS:DTSID="{BAD96BF2-EAA2-4784-A284-679BC80C4FD3}"
+      DTS:ExecutableType="Microsoft.ScriptTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FailPackage"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ScriptProject
+          Name="ST_4e8fa910b43b49fe92b56fdba0039b4c"
+          VSTAMajorVersion="15"
+          VSTAMinorVersion="0"
+          Language="CSharp" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PrepareCombineExport"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0F8C7963-DCF4-407F-9898-1F70C2BCCCA2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PrepareCombineExport"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{960414E8-E711-4D36-8345-2F97B1CA2813}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spPrepareCombineExport" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2F0B485F-5076-48BB-B868-3D71A741A8B5}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Combine_stage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[personnr]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="personnr"
+                      externalMetadataColumnId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
+                      lineageId="Package\Stage\Script Component.Outputs[Output 0].Columns[personnr]" />
+                    <inputColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[myndighet]"
+                      cachedDataType="ui1"
+                      cachedName="myndighet"
+                      externalMetadataColumnId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[myndighet]"
+                      lineageId="Package\Stage\Script Component.Outputs[Output 0].Columns[myndighet]" />
+                    <inputColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[utforare]"
+                      cachedDataType="ui1"
+                      cachedName="utforare"
+                      externalMetadataColumnId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[utforare]"
+                      lineageId="Package\Stage\Script Component.Outputs[Output 0].Columns[utforare]" />
+                    <inputColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[fornamn]"
+                      cachedDataType="wstr"
+                      cachedLength="64"
+                      cachedName="fornamn"
+                      externalMetadataColumnId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fornamn]"
+                      lineageId="Package\Stage\Script Component.Outputs[Output 0].Columns[fornamn]" />
+                    <inputColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[efternamn]"
+                      cachedDataType="wstr"
+                      cachedLength="64"
+                      cachedName="efternamn"
+                      externalMetadataColumnId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[efternamn]"
+                      lineageId="Package\Stage\Script Component.Outputs[Output 0].Columns[efternamn]" />
+                    <inputColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[epost]"
+                      cachedDataType="wstr"
+                      cachedLength="1024"
+                      cachedName="epost"
+                      externalMetadataColumnId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[epost]"
+                      lineageId="Package\Stage\Script Component.Outputs[Output 0].Columns[epost]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
+                      dataType="wstr"
+                      length="12"
+                      name="personnr" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[myndighet]"
+                      dataType="ui1"
+                      name="myndighet" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[utforare]"
+                      dataType="ui1"
+                      name="utforare" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fornamn]"
+                      dataType="wstr"
+                      length="64"
+                      name="fornamn" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[efternamn]"
+                      dataType="wstr"
+                      length="64"
+                      name="efternamn" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[epost]"
+                      dataType="wstr"
+                      length="1024"
+                      name="epost" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::rowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Stage\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Stage\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage\Script Component"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;10"
+              description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+              name="Script Component"
+              version="12">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Stores the source code of the component"
+                  isArray="true"
+                  name="SourceCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="30">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public Output0Buffer Output0Buffer;
+
+    public virtual void FinishOutputs()
+    {
+    }
+
+    private void MarkOutputsFinished()
+    {
+
+        if (null != Output0Buffer)
+        {
+            Output0Buffer.SetEndOfRowset();
+            Output0Buffer = null;
+        }
+
+    }
+
+    public override void PrimeOutput(int Outputs, int[] OutputIDs, PipelineBuffer[] Buffers, OutputNameMap OutputMap)
+    {
+       for(int Idx = 0; Idx < Outputs; Idx++)
+       {
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"Output 0"))
+            {
+                Output0Buffer = new Output0Buffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+        }
+
+        CreateNewOutputRows();
+
+        FinishOutputs();
+        MarkOutputsFinished();
+
+    }
+
+    public virtual void CreateNewOutputRows()
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public String CombineGroupMyndighet
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["CombineGroupMyndighet"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String CombineGroupUtforare
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["CombineGroupUtforare"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String CombineSearchRoot
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["CombineSearchRoot"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+using System.DirectoryServices;
+using System.Collections.Generic;
+
+class CombineUser
+{
+    public string EmployeeNumber { get; set; }
+    public string GivenName { get; set; }
+    public string Surname { get; set; }
+    public string UserPrincipalName { get; set; }
+    public bool Municipality { get; set; } = false;
+    public bool Performer { get; set; } = false;
+}
+
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent
+{
+    Dictionary<string, CombineUser> _users = new Dictionary<string, CombineUser>();
+
+    public override void PreExecute()
+    {
+        base.PreExecute();
+    }
+
+    public override void PostExecute()
+    {
+        base.PostExecute();
+    }
+
+    public override void CreateNewOutputRows()
+    {
+        foreach (var user in EnumerateGroup(Variables.CombineGroupMyndighet))
+        {
+            // EmployeeNumber is primary key in the destination table. This avoids
+            // duplicate key errors.
+            if (!_users.ContainsKey(user.EmployeeNumber))
+            {
+                user.Municipality = true;
+                _users.Add(user.EmployeeNumber, user);
+            }
+        }
+        foreach( var user in EnumerateGroup(Variables.CombineGroupUtforare))
+        {
+            CombineUser existingUser;
+            if (_users.TryGetValue(user.EmployeeNumber, out existingUser))
+            {
+                existingUser.Performer = true;
+            }
+            else
+            {
+                user.Performer = true;
+                _users.Add(user.EmployeeNumber, user);
+            }
+        }
+        foreach (var user in _users.Values)
+        {
+            Output0Buffer.AddRow();
+            Output0Buffer.personnr = user.EmployeeNumber;
+            Output0Buffer.fornamn = user.GivenName;
+            Output0Buffer.efternamn = user.Surname;
+            Output0Buffer.epost = user.UserPrincipalName;
+            Output0Buffer.myndighet = Convert.ToByte(user.Municipality);
+            Output0Buffer.utforare = Convert.ToByte(user.Performer);
+        }
+    }
+
+    private List<CombineUser> EnumerateGroup(string groupDn)
+    {
+        var list = new List<CombineUser>();
+        var today = DateTime.Today.ToFileTimeUtc();
+        var filter =
+            $"(&(memberOf:1.2.840.113556.1.4.1941:={groupDn})" +
+            "(objectClass=user)(objectCategory=person)" +
+            "(employeeNumber=*)(userPrincipalName=*)(givenName=*)(sn=*)" +
+            "(!userAccountControl:1.2.840.113556.1.4.803:=2)" +
+            $"(|(accountExpires>={today})(accountExpires=0)))";
+        var properties = new string[] { "employeeNumber", "givenName", "sn", "userPrincipalName" };
+        using (var searchRoot = new DirectoryEntry("LDAP://" + Variables.CombineSearchRoot))
+        using (var searcher = new DirectorySearcher(searchRoot, filter, properties))
+        {
+            searcher.PageSize = 1000;
+            var result = searcher.FindAll();
+            foreach (SearchResult item in result)
+            {
+                list.Add(new CombineUser()
+                {
+                    EmployeeNumber = (string)item.Properties["employeeNumber"][0],
+                    GivenName = (string)item.Properties["givenName"][0],
+                    Surname = (string)item.Properties["sn"][0],
+                    UserPrincipalName = (string)item.Properties["userPrincipalName"][0]
+                });
+            }
+        }
+        return list;
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class Output0Buffer: ScriptBuffer
+
+{
+    public Output0Buffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public String personnr
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool personnr_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Byte myndighet
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool myndighet_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Byte utforare
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool utforare_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String fornamn
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool fornamn_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String efternamn
+    {
+        set
+        {
+            this[4] = value;
+        }
+    }
+    public bool efternamn_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(4);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String epost
+    {
+        set
+        {
+            this[5] = value;
+        }
+    }
+    public bool epost_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(5);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_946c8768755a4e6bbb25c09f0bf42eb5.Properties.Settings.get_Default():SC_946c8768755a4e6bbb25c09f0bf42eb5.Properties.Sett" +
+    "ings")]
+
+namespace SC_946c8768755a4e6bbb25c09f0bf42eb5.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_946c8768755a4e6bbb25c09f0bf42eb5")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_946c8768755a4e6bbb25c09f0bf42eb5")]
+[assembly: AssemblyCopyright("Copyright @  2017")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.0.0")]
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Project]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>SC_946c8768755a4e6bbb25c09f0bf42eb5</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>SC_946c8768755a4e6bbb25c09f0bf42eb5</msb:DisplayName>
+    <msb:ProjectId>{5EFCA023-25EC-4414-BAE1-BAE376036614}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="SC_946c8768755a4e6bbb25c09f0bf42eb5.csproj" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+    <msb:File Include="main.cs" />
+    <msb:File Include="BufferWrapper.cs" />
+    <msb:File Include="ComponentWrapper.cs" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+  </msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_946c8768755a4e6bbb25c09f0bf42eb5.csproj]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{428AD088-F578-465C-B847-54F7BD6FC0DA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC_946c8768755a4e6bbb25c09f0bf42eb5</RootNamespace>
+    <AssemblyName>SC_946c8768755a4e6bbb25c09f0bf42eb5</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=15.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=15.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=15.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=15.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="main.cs" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptComponent" IconIndex="0" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC150</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_946c8768755a4e6bbb25c09f0bf42eb5.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_946c8768755a4e6bbb25c09f0bf42eb5.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_946c8768755a4e6bbb25c09f0bf42eb5.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_946c8768755a4e6bbb25c09f0bf42eb5.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_946c8768755a4e6bbb25c09f0bf42eb5.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Stores the binary representation of the component"
+                  isArray="true"
+                  name="BinaryCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="2">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_946c8768755a4e6bbb25c09f0bf42eb5.dll]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAOFgUl0AAAAAAAAAAOAAIiALATAAACYAAAAIAAAAAAAAdkQA
+AAAgAAAAYAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACgAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAACREAABPAAAAAGAAAEgEAAAAAAAAAAAAAAAAAAAA
+AAAAAIAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAfCQAAAAgAAAAJgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAEgEAAAAYAAAAAYAAAAoAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAIAAAAACAAAALgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAABY
+RAAAAAAAAEgAAAACAAUA1CYAAJgcAAABAAAAAAAAAGxDAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CewEAAAQqIgIDfQEAAAQqHgJ7AgAABCoiAgN9AgAABCoe
+AnsDAAAEKiICA30DAAAEKh4CewQAAAQqIgIDfQQAAAQqHgJ7BQAABCoiAgN9BQAABCoeAnsGAAAE
+KiICA30GAAAEKh4CKBAAAAoqHgIoEQAACioeAigSAAAKKgAAGzADAJUBAAABAAARAgJ7CQAABG8q
+AAAGKBEAAAZvEwAACgorNBIAKBQAAAoLAnsHAAAEB28BAAAGbxUAAAotGQcXbwoAAAYCewcAAAQH
+bwEAAAYHbxYAAAoSACgXAAAKLcPeDhIA/hYCAAAbbxgAAArcAgJ7CQAABG8rAAAGKBEAAAZvEwAA
+CgorPxIAKBQAAAoMAnsHAAAECG8BAAAGEgNvGQAACiwJCRdvDAAABisZCBdvDAAABgJ7BwAABAhv
+AQAABghvFgAAChIAKBcAAAotuN4OEgD+FgIAABtvGAAACtwCewcAAARvGgAACm8bAAAKEwQ4igAA
+ABIEKBwAAAoTBQJ7CgAABG8gAAAGAnsKAAAEEQVvAQAABm8UAAAGAnsKAAAEEQVvAwAABm8aAAAG
+AnsKAAAEEQVvBQAABm8cAAAGAnsKAAAEEQVvBwAABm8eAAAGAnsKAAAEEQVvCQAABigdAAAKbxYA
+AAYCewoAAAQRBW8LAAAGKB0AAApvGAAABhIEKB4AAAo6av///94OEgT+FgUAABtvGAAACtwqAAAA
+ASgAAAIAFwBBWAAOAAAAAAIAfQBMyQAOAAAAAAIA6QCdhgEOAAAAABswBQCBAQAAAgAAEXMfAAAK
+CiggAAAKEwQSBCghAAAKC3IBAABwA3JNAABwcnYBAHAHjCYAAAEoIgAACigjAAAKDBqNJwAAASUW
+cs4BAHCiJRdy7AEAcKIlGHIAAgBwoiUZcgYCAHCiDXIqAgBwAnsJAAAEbywAAAYoJAAACnMlAAAK
+EwURBQgJcyYAAAoTBhEGIOgDAABvJwAAChEGbygAAApvKQAAChMHOKEAAAARB28qAAAKdBkAAAET
+CAZzDQAABiURCG8rAAAKcs4BAHBvLAAAChZvLQAACnQnAAABbwIAAAYlEQhvKwAACnLsAQBwbywA
+AAoWby0AAAp0JwAAAW8EAAAGJREIbysAAApyAAIAcG8sAAAKFm8tAAAKdCcAAAFvBgAABiURCG8r
+AAAKcgYCAHBvLAAAChZvLQAACnQnAAABbwgAAAZvLgAAChEHby8AAAo6U////94tEQd1GgAAARMJ
+EQksBxEJbxgAAArcEQYsBxEGbxgAAArcEQUsBxEFbxgAAArcBioAAAABKAAAAgCeALRSARUAAAAA
+AgCEAONnAQwAAAAAAgB5APpzAQwAAAAASgJzMAAACn0HAAAEAigjAAAGKioCAwQFKDEAAAoqJgIW
+AygyAAAKKloDLAgCFigzAAAKKnI6AgBwczQAAAp6OgIXA4wsAAABKDIAAAoqWgMsCAIXKDMAAAoq
+cjoCAHBzNAAACno6AhgDjCwAAAEoMgAACipaAywIAhgoMwAACipyOgIAcHM0AAAKeiYCGQMoMgAA
+CipaAywIAhkoMwAACipyOgIAcHM0AAAKeiYCGgMoMgAACipaAywIAhooMwAACipyOgIAcHM0AAAK
+eiYCGwMoMgAACipaAywIAhsoMwAACipyOgIAcHM0AAAKeh4CKDUAAAoqHgIoNgAACioeAig3AAAK
+Kn4CKDgAAAoCAnMoAAAGfQgAAAQCAnMpAAAGfQkAAAQqBipuAnsKAAAELBICewoAAARvIQAABgIU
+fQoAAAQqEzAFAEkAAAADAAARFgorLgQGlA4EctcCAHAoOQAACjMZAgUGmgIEBpQoOgAACg4EcxMA
+AAZ9CgAABAYXWAoGAzLOAm8nAAAGAm8kAAAGAiglAAAGKjoCKBAAAAoCA30LAAAEKjoCKBAAAAoC
+A30MAAAEKpYCewwAAARvOwAACnLpAgBwbzwAAAooPQAACm8+AAAKdCcAAAEqlgJ7DAAABG87AAAK
+chUDAHBvPAAACig9AAAKbz4AAAp0JwAAASqWAnsMAAAEbzsAAApyPwMAcG88AAAKKD0AAApvPgAA
+CnQnAAABKq5+DQAABC0ecmMDAHDQCAAAAig/AAAKb0AAAApzQQAACoANAAAEfg0AAAQqGn4OAAAE
+Kh4CgA4AAAQqGn4PAAAEKh4CKEIAAAoqLnMyAAAGgA8AAAQqAEJTSkIBAAEAAAAAAAwAAAB2NC4w
+LjMwMzE5AAAAAAUAbAAAAEgKAAAjfgAAtAoAADALAAAjU3RyaW5ncwAAAADkFQAA2AMAACNVUwC8
+GQAAEAAAACNHVUlEAAAAzBkAAMwCAAAjQmxvYgAAAAAAAAACAAABVxWiCQkBAAAA+gEzABYAAAEA
+AAAzAAAACQAAAA8AAAAzAAAAHQAAAEIAAAAiAAAAAwAAAAUAAAAYAAAAHwAAAAUAAAABAAAABgAA
+AAEAAAAAAPMEAQAAAAAABgDFA/wHBgBZBPwHBgARA+kHDwCJCAAABgA+AxUGBgCoAxUGBgCJAxUG
+BgBABBUGBgDlAxUGBgD+AxUGBgBVAxUGBgBwA7QEBgCDCasFBgDZAvwHCgAZBDACBgBBAJYABgA6
+AJYARwDHBwAAQwA1BgAATwDHBwAABgAnAqsFDgD9ChwIDgBJBxwIBgC4ByUJDgDNCRwIBgCXAasF
+CgAoBzACEgAZBzACCgCbBjACCgD4CTACBgD0AukHBgA5BzUIBgCPBgAGFgDEAtUEFgAlA9UEFgCk
+AusFBgBHCqsFBgBOAKsFBgDOBKsFDgBFBhwIDgBcBhwIDgAnBhwIBgB1BqsFBgCQBKsFGgARAHcH
+GgABAHcHewCjCgAAGgAiAHcHBgBRAqsFBgCjAasFBgD0ChUGAAAAAHgAAAAAAAEAAQAAABAAnwcA
+ADUAAQABAAEAEADGBQAAFAAHAA4AAQAQAAsHAABtAAgAEwABABAA2gkAAHkACAAjAAEAEAA4CQAA
+NQALACgAAQAQAOIIAAA1AAwAKQAAABAAPAiYCDUADQAtAAABEAAcCZgIkQAPADEAAQAuAXYBAQD6
+AHYBAQAVAXYBAQDXAHYBAQBpAXkBAQBOAXkBAQBMCXwBBgA4CYUBBgDiCIkBBgALB40BAQDoCZEB
+AQDoCZEBEQC6BZUBEQCUApoBEQCHAZ8BUCAAAAAAhgjlBqMBAQBYIAAAAACGCPgGEAABAGEgAAAA
+AIYI8wGjAQIAaSAAAAAAhggBAhAAAgByIAAAAACGCA8CowEDAHogAAAAAIYIGwIQAAMAgyAAAAAA
+hgjHAaMBBACLIAAAAACGCN0BEAAEAJQgAAAAAIYIDAtmAAUAnCAAAAAAhggdC6cBBQClIAAAAACG
+CFsHZgAGAK0gAAAAAIYIaQenAQYAtiAAAAAAhhjSBwYABwC+IAAAAADGAHcEBgAHAMYgAAAAAMYA
+ggQGAAcA0CAAAAAAxgBhCQYABwCcIgAAAACBANYGrAEHAFQkAAAAAIYY0gcGAAgAZyQAAAAAhhjS
+BwkBCAByJAAAAACGCKsHEAALAHwkAAAAAIYIVwWnAQwAkyQAAAAAhgikCbYBDQCiJAAAAACGCGsF
+pwEOALkkAAAAAIYIbwK2AQ8AyCQAAAAAhggbBacBEADfJAAAAACGCN8FEAARAOkkAAAAAIYIRAWn
+ARIAACUAAAAAhgjRBRAAEwAKJQAAAACGCC8FpwEUACElAAAAAIYIcAoQABUAKyUAAAAAhgiABacB
+FgBCJQAAAACGANMKBgAXAEolAAAAAIYAsgkGABcAUiUAAAAAhgC1CWYAFwBaJQAAAACGGNIHBgAX
+AHolAAAAAMYBUwkGABcAfCUAAAAAgQDDAAYAFwCYJQAAAADGAHoKuwEXAHolAAAAAMYBYQkGABsA
+7SUAAAAAhhjSB8cBGwD8JQAAAACGGNIHxwEcAAsmAAAAAIYIigmjAR0AMSYAAAAAhghWAqMBHQBX
+JgAAAACGCBQKowEdALYgAAAAAIMY0gcGAB0AfSYAAAAAkwg1B80BHQCpJgAAAACTCHwC0wEdALAm
+AAAAAJMIiALZAR0AuCYAAAAAlgjBCeABHgC/JgAAAACGGNIHBgAeAMcmAAAAAJEY2AflAR4AAAAB
+AKEEAAABAKEEAAABAKEEAAABAKEEAAABAKEEAAABAKEEAAABALIFAAABAC4HAAACAPcIAAADAKkG
+AAABAKEEAAABAKEEAAABAKEEAAABAKEEAAABAKEEAAABAKEEAAABAKEEAAABAKEEAAABAKEEAAAB
+AKEEAAABAKEEAAABAKEEAAABAFkJAAACAN8HAAADAEQJAAAEAKkGAAABAP4JAAABAP4JAAABAKEE
+CQDSBwEAEQDSBwYAGQDSBwoAKQDSBxAAMQDSBxAAOQDSBxAAQQDSBxAASQDSBxAAUQDSBxAAWQDS
+BxAAYQDSBxAAcQDSBwYAeQDSBwYA+QDSBwYAGQHSBxUAaQDSBwYA8QB3BAYA8QCCBAYADADEBzsA
+FAAICksAHADkClgAHAC/AF4AFACGCmYA0QC8AgYAHACVBGoAHADsCHMAJADEB4YALAAICpkAKQGO
+BJ4ALACGCmYADADSBwYAqQDaCrwAqQCxAMEAOQF8CcUAOQF1CcsAOQF1CdMAsQDSBxAAuQDSB9kA
+uQCnBAEAuQDrBOIAQQHEB+gAwQAICu0AyQDHCPEASQGZBfcAUQGZBf4ADAC/AAMBwQCGCmYAHADS
+BwYA2QDSBwkB2QCiBRMB2QCRBQEAWQHSBxAA2QDTCgYA2QCyCQYA2QC1CWYA8QDSBwYA8QCBAB0B
+8QALCSQB8QDWCCoBaQGZBTAB8QC+CjcBcQGPCj0BiQG1AUQBiQHwCk0BAQHSB1MBIQHSBwYAIABj
+AMcCIQBjAMcCLgALAAYCLgATAA8CLgAbAC4CLgAjADcCLgArAGACLgAzAGACLgA7AGACLgBDADcC
+LgBLAGYCLgBTAGACLgBbAH0CQABjAMcCQQBjAMcCYABjAMcCYQBjAMcCYwBrAMcCgABjAMcCgQBj
+AMcCoABjAMcCoQBjAMcCwABjAMcCwQBjAMcC4ABjAMcCAAFjAMcCAwFzAMcCIAFjAMcCQAFjAMcC
+YAFjAMcCgAFjAMcC4QFjAMcCyQJ7AC4C6QJ7AC4CHACjABkBAgABAAQABwAHABMACAAWAAkAGAAA
+APwG6QEAAAUC6QEAAB8C6QEAAOEB6QEAACEL7QEAAG0H7QEAAK8H6QEAAFsF7QEAAKgJ8QEAAG8F
+7QEAAHMC8QEAAB8F7QEAAOMF6QEAAEgF7QEAANUF6QEAADMF7QEAAHQK6QEAAIQF7QEAAI4J6QEA
+AFoC6QEAABgK6QEAADkH9QEAAJwC+wEAAMUJAQICAAEAAwABAAIAAwACAAMABQABAAQABQACAAUA
+BwABAAYABwACAAcACQABAAgACQACAAkACwABAAoACwACAAsADQABAAwADQABABQADwABABUAEQAB
+ABYAEwABABcAFQABABgAFwABABkAGQABABoAGwABABsAHQABABwAHwABAB0AIQABAB4AIwABAB8A
+JQACACoAJwACACsAKQACACwAKwACAC4ALQACAC8ALwABADAALwACADEAMQA0AEQAUAB+AJEABIAA
+AAEAAAAAAAAAAAAAAAAAVAAAAAQAAAAAAAAAAAAAAFsBjQAAAAAADwAAAAAAAAAAAAAAZAEqCgAA
+AAAEAAAAAAAAAAAAAABtARwIAAAAAA8AAAAAAAAAAAAAAGQBTwoAAAAABAAAAAAAAAAAAAAAWwGr
+BQAAAAAPAAAAAAAAAAAAAABkAbMGAAAAAAAAAAABAAAARggAAAAAAAAASURUU1ZhcmlhYmxlMTAw
+AElEVFNWYXJpYWJsZXMxMDAASURUU0V2YWx1YXRvckNvbnRleHQxMDAATGlzdGAxAERpY3Rpb25h
+cnlgMgBJbnQ2NABTQ185NDZjODc2ODc1NWE0ZTZiYmIyNWMwOWYwYmY0MmViNQA8TW9kdWxlPgBH
+ZXRPdXRwdXRJRABtc2NvcmxpYgBTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYwBUb0ZpbGVUaW1l
+VXRjAEFkZABNYXJrT3V0cHV0c0ZpbmlzaGVkADxVc2VyUHJpbmNpcGFsTmFtZT5rX19CYWNraW5n
+RmllbGQAPEdpdmVuTmFtZT5rX19CYWNraW5nRmllbGQAPFN1cm5hbWU+a19fQmFja2luZ0ZpZWxk
+ADxFbXBsb3llZU51bWJlcj5rX19CYWNraW5nRmllbGQAPFBlcmZvcm1lcj5rX19CYWNraW5nRmll
+bGQAPE11bmljaXBhbGl0eT5rX19CYWNraW5nRmllbGQAZGVmYXVsdEluc3RhbmNlAElEaXNwb3Nh
+YmxlAFJ1bnRpbWVUeXBlSGFuZGxlAEdldFR5cGVGcm9tSGFuZGxlAGdldF9Vc2VyUHJpbmNpcGFs
+TmFtZQBzZXRfVXNlclByaW5jaXBhbE5hbWUAZ2V0X0dpdmVuTmFtZQBzZXRfR2l2ZW5OYW1lAGdl
+dF9TdXJuYW1lAHNldF9TdXJuYW1lAERhdGVUaW1lAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlBp
+cGVsaW5lAFR5cGUAZ2V0X0NvbWJpbmVHcm91cFV0Zm9yYXJlAHNldF91dGZvcmFyZQBnZXRfQ3Vs
+dHVyZQBzZXRfQ3VsdHVyZQByZXNvdXJjZUN1bHR1cmUAQXBwbGljYXRpb25TZXR0aW5nc0Jhc2UA
+RGlzcG9zZQBFZGl0b3JCcm93c2FibGVTdGF0ZQBDb21waWxlckdlbmVyYXRlZEF0dHJpYnV0ZQBE
+ZWJ1Z2dlck5vblVzZXJDb2RlQXR0cmlidXRlAERlYnVnZ2FibGVBdHRyaWJ1dGUARWRpdG9yQnJv
+d3NhYmxlQXR0cmlidXRlAEFzc2VtYmx5VGl0bGVBdHRyaWJ1dGUAQXNzZW1ibHlUcmFkZW1hcmtB
+dHRyaWJ1dGUAVGFyZ2V0RnJhbWV3b3JrQXR0cmlidXRlAEFzc2VtYmx5Q29uZmlndXJhdGlvbkF0
+dHJpYnV0ZQBBc3NlbWJseURlc2NyaXB0aW9uQXR0cmlidXRlAENvbXBpbGF0aW9uUmVsYXhhdGlv
+bnNBdHRyaWJ1dGUAQXNzZW1ibHlQcm9kdWN0QXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0
+cmlidXRlAFNTSVNTY3JpcHRDb21wb25lbnRFbnRyeVBvaW50QXR0cmlidXRlAEFzc2VtYmx5Q29t
+cGFueUF0dHJpYnV0ZQBSdW50aW1lQ29tcGF0aWJpbGl0eUF0dHJpYnV0ZQBQcmVFeGVjdXRlAFBv
+c3RFeGVjdXRlAFRvQnl0ZQBUcnlHZXRWYWx1ZQB2YWx1ZQBzZXRfUGFnZVNpemUAU3lzdGVtLlJ1
+bnRpbWUuVmVyc2lvbmluZwBTdHJpbmcAU3lzdGVtLkNvbXBvbmVudE1vZGVsAEZpbmRBbGwAU0Nf
+OTQ2Yzg3Njg3NTVhNGU2YmJiMjVjMDlmMGJmNDJlYjUuZGxsAHNldF91dGZvcmFyZV9Jc051bGwA
+c2V0X2VmdGVybmFtbl9Jc051bGwAc2V0X2Zvcm5hbW5fSXNOdWxsAHNldF9wZXJzb25ucl9Jc051
+bGwAc2V0X215bmRpZ2hldF9Jc051bGwAc2V0X2Vwb3N0X0lzTnVsbABTZXROdWxsAGdldF9JdGVt
+AHNldF9JdGVtAFN5c3RlbQBncm91cERuAHJlc291cmNlTWFuAFNjcmlwdE1haW4Ac2V0X2VmdGVy
+bmFtbgBzZXRfZm9ybmFtbgBTeXN0ZW0uQ29uZmlndXJhdGlvbgBTeXN0ZW0uR2xvYmFsaXphdGlv
+bgBTeXN0ZW0uUmVmbGVjdGlvbgBSZXN1bHRQcm9wZXJ0eVZhbHVlQ29sbGVjdGlvbgBTZWFyY2hS
+ZXN1bHRDb2xsZWN0aW9uAFJlc3VsdFByb3BlcnR5Q29sbGVjdGlvbgBJbnZhbGlkT3BlcmF0aW9u
+RXhjZXB0aW9uAEN1bHR1cmVJbmZvAE91dHB1dE5hbWVNYXAAT3V0cHV0TWFwAE1pY3Jvc29mdC5T
+cWxTZXJ2ZXIuRFRTUnVudGltZVdyYXAARW51bWVyYXRlR3JvdXAAZ2V0X0VtcGxveWVlTnVtYmVy
+AHNldF9FbXBsb3llZU51bWJlcgBPdXRwdXQwQnVmZmVyAFBpcGVsaW5lQnVmZmVyAFNjcmlwdEJ1
+ZmZlcgBnZXRfUmVzb3VyY2VNYW5hZ2VyAERpcmVjdG9yeVNlYXJjaGVyAGdldF9QZXJmb3JtZXIA
+c2V0X1BlcmZvcm1lcgBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5SdW50aW1lLldyYXBwZXIAQ29t
+YmluZVVzZXIAc2V0X3BlcnNvbm5yAElFbnVtZXJhdG9yAEdldEVudW1lcmF0b3IALmN0b3IALmNj
+dG9yAE91dHB1dElEcwBTeXN0ZW0uRGlhZ25vc3RpY3MAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJT
+ZXJ2aWNlcwBTeXN0ZW0uRGlyZWN0b3J5U2VydmljZXMAU3lzdGVtLlJlc291cmNlcwBTQ185NDZj
+ODc2ODc1NWE0ZTZiYmIyNWMwOWYwYmY0MmViNS5Qcm9wZXJ0aWVzLlJlc291cmNlcy5yZXNvdXJj
+ZXMARGVidWdnaW5nTW9kZXMAU0NfOTQ2Yzg3Njg3NTVhNGU2YmJiMjVjMDlmMGJmNDJlYjUuUHJv
+cGVydGllcwBnZXRfUHJvcGVydGllcwBnZXRfUmVhZE9ubHlWYXJpYWJsZXMAZ2V0X1ZhbHVlcwBC
+dWZmZXJDb2x1bW5JbmRleGVzAEdldENvbHVtbkluZGV4ZXMAU2V0dGluZ3MAU3lzdGVtLkNvbGxl
+Y3Rpb25zAENvbm5lY3Rpb25zAEJ1ZmZlcnMAX3VzZXJzAEZpbmlzaE91dHB1dHMAQ3JlYXRlTmV3
+T3V0cHV0Um93cwBDb25jYXQARm9ybWF0AE9iamVjdABnZXRfQ29tYmluZUdyb3VwTXluZGlnaGV0
+AHNldF9teW5kaWdoZXQAU2V0RW5kT2ZSb3dzZXQAZ2V0X0RlZmF1bHQAU2VhcmNoUmVzdWx0AFVz
+ZXJDb21wb25lbnQAUGFyZW50Q29tcG9uZW50AFNjcmlwdENvbXBvbmVudABnZXRfQ3VycmVudABn
+ZXRfQ29tYmluZVNlYXJjaFJvb3QATWljcm9zb2Z0LlNxbFNlcnZlci5UeFNjcmlwdABDb252ZXJ0
+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuUGlwZWxpbmVIb3N0AHNldF9lcG9zdABQcmltZU91dHB1dABN
+b3ZlTmV4dABHZXRWYWx1ZVdpdGhDb250ZXh0AFNjcmlwdENvbXBvbmVudEV2YWxDb250ZXh0AGdl
+dF9FdmFsdWF0b3JDb250ZXh0AEFkZFJvdwBnZXRfVG9kYXkAQ29udGFpbnNLZXkAZ2V0X0Fzc2Vt
+Ymx5AERpcmVjdG9yeUVudHJ5AGdldF9NdW5pY2lwYWxpdHkAc2V0X011bmljaXBhbGl0eQAAAABL
+KAAmACgAbQBlAG0AYgBlAHIATwBmADoAMQAuADIALgA4ADQAMAAuADEAMQAzADUANQA2AC4AMQAu
+ADQALgAxADkANAAxADoAPQAAgScpACgAbwBiAGoAZQBjAHQAQwBsAGEAcwBzAD0AdQBzAGUAcgAp
+ACgAbwBiAGoAZQBjAHQAQwBhAHQAZQBnAG8AcgB5AD0AcABlAHIAcwBvAG4AKQAoAGUAbQBwAGwA
+bwB5AGUAZQBOAHUAbQBiAGUAcgA9ACoAKQAoAHUAcwBlAHIAUAByAGkAbgBjAGkAcABhAGwATgBh
+AG0AZQA9ACoAKQAoAGcAaQB2AGUAbgBOAGEAbQBlAD0AKgApACgAcwBuAD0AKgApACgAIQB1AHMA
+ZQByAEEAYwBjAG8AdQBuAHQAQwBvAG4AdAByAG8AbAA6ADEALgAyAC4AOAA0ADAALgAxADEAMwA1
+ADUANgAuADEALgA0AC4AOAAwADMAOgA9ADIAKQAAVygAfAAoAGEAYwBjAG8AdQBuAHQARQB4AHAA
+aQByAGUAcwA+AD0AewAwAH0AKQAoAGEAYwBjAG8AdQBuAHQARQB4AHAAaQByAGUAcwA9ADAAKQAp
+ACkAAB1lAG0AcABsAG8AeQBlAGUATgB1AG0AYgBlAHIAABNnAGkAdgBlAG4ATgBhAG0AZQAABXMA
+bgAAI3UAcwBlAHIAUAByAGkAbgBjAGkAcABhAGwATgBhAG0AZQAAD0wARABBAFAAOgAvAC8AAICb
+SQBzAE4AdQBsAGwAIABwAHIAbwBwAGUAcgB0AHkAIABjAGEAbgBuAG8AdAAgAGIAZQAgAHMAZQB0
+ACAAdABvACAARgBhAGwAcwBlAC4AIABBAHMAcwBpAGcAbgAgAGEAIAB2AGEAbAB1AGUAIAB0AG8A
+IAB0AGgAZQAgAGMAbwBsAHUAbQBuACAAaQBuAHMAdABlAGEAZAAuAAARTwB1AHQAcAB1AHQAIAAw
+AAArQwBvAG0AYgBpAG4AZQBHAHIAbwB1AHAATQB5AG4AZABpAGcAaABlAHQAAClDAG8AbQBiAGkA
+bgBlAEcAcgBvAHUAcABVAHQAZgBvAHIAYQByAGUAACNDAG8AbQBiAGkAbgBlAFMAZQBhAHIAYwBo
+AFIAbwBvAHQAAHFTAEMAXwA5ADQANgBjADgANwA2ADgANwA1ADUAYQA0AGUANgBiAGIAYgAyADUA
+YwAwADkAZgAwAGIAZgA0ADIAZQBiADUALgBQAHIAbwBwAGUAcgB0AGkAZQBzAC4AUgBlAHMAbwB1
+AHIAYwBlAHMAAAAAAG1E0UKdJa5Dps915wmY/NgABCABAQgDIAABBSABARERBCABAQ4GIAEBEYCJ
+FwcGFRFJARIIEggSCBIIFRFRAg4SCBIIBhUSRQESCAggABURSQETAAYVEUkBEggEIAATAAcVEkEC
+DhIIBSABAhMAByACARMAEwEDIAACCCACAhMAEBMBCiAAFRJNAhMAEwEHFRJNAg4SCAogABURUQIT
+ABMBBxURUQIOEggEIAATAQQAAQUCGAcKFRJFARIICg4dDhFVElkSXRJhEmUSaQQAABFVAyAACgUA
+Ag4OHAcABA4ODg4OBQACDg4OCCADARJZDh0OBSAAEoChBCAAEmEDIAAcBSAAEoClBiABEoCpDgQg
+ARwIBSABARMACSADARJxHQgSdQUgAgEIHAMHAQgGAAIIEnUOBSABHQgIBSAAEoC1BiABEoC5HAUA
+ABKAvQYgARwSgMEIAAESgMURgMkFIAASgM0HIAIBDhKAzQi3elxWGTTgiQiJhF3NgIDMkQiwP19/
+EdUKOgIGDgIGAggGFRJBAg4SCAMGEhgDBhIcAwYSEAMGEnkEBhKAgQQGEoCFAwYSJAMgAA4EIAEB
+AgkgARUSRQESCA4EIAEBBQsgBAEIHQgdEnESdQUgAQESeQUAABKAgQUAABKAhQYAAQESgIUEAAAS
+JAMAAAEDKAAOAygAAgMoAAUFCAASgIEFCAASgIUECAASJAgBAAgAAAAAAB4BAAEAVAIWV3JhcE5v
+bkV4Y2VwdGlvblRocm93cwEIAQACAAAAAAAoAQAjU0NfOTQ2Yzg3Njg3NTVhNGU2YmJiMjVjMDlm
+MGJmNDJlYjUAAAUBAAAAABYBABFDb3B5cmlnaHQgQCAgMjAxNwAASQEAGi5ORVRGcmFtZXdvcmss
+VmVyc2lvbj12NC42AQBUDhRGcmFtZXdvcmtEaXNwbGF5TmFtZRIuTkVUIEZyYW1ld29yayA0LjYE
+AQAAALQAAADOyu++AQAAAJEAAABsU3lzdGVtLlJlc291cmNlcy5SZXNvdXJjZVJlYWRlciwgbXNj
+b3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1i
+NzdhNWM1NjE5MzRlMDg5I1N5c3RlbS5SZXNvdXJjZXMuUnVudGltZVJlc291cmNlU2V0AgAAAAAA
+AAAAAAAAUEFEUEFEULQAAABMRAAAAAAAAAAAAABmRAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+WEQAAAAAAAAAAAAAAABfQ29yRGxsTWFpbgBtc2NvcmVlLmRsbAAAAAAA/yUAIAAQAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQAAAA
+GAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAASAAAAFhgAADs
+AwAAAAAAAAAAAADsAzQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAAAAAAvQTv/gAA
+AQAAAAEAAAAAAAAAAQAAAAAAPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQAAAABAFYAYQBy
+AEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBuAAAAAAAAALAE
+TAMAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAKAMAAAEAMAAwADAAMAAwADQAYgAw
+AAAAGgABAAEAQwBvAG0AbQBlAG4AdABzAAAAAAAAACIAAQABAEMAbwBtAHAAYQBuAHkATgBhAG0A
+ZQAAAAAAAAAAAHAAJAABAEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAAAABTAEMAXwA5
+ADQANgBjADgANwA2ADgANwA1ADUAYQA0AGUANgBiAGIAYgAyADUAYwAwADkAZgAwAGIAZgA0ADIA
+ZQBiADUAAAAwAAgAAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4AMAAuADAAAABw
+ACgAAQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAAAFMAQwBfADkANAA2AGMAOAA3ADYAOAA3ADUA
+NQBhADQAZQA2AGIAYgBiADIANQBjADAAOQBmADAAYgBmADQAMgBlAGIANQAuAGQAbABsAAAASAAS
+AAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAQwBvAHAAeQByAGkAZwBoAHQAIABAACAA
+IAAyADAAMQA3AAAAKgABAAEATABlAGcAYQBsAFQAcgBhAGQAZQBtAGEAcgBrAHMAAAAAAAAAAAB4
+ACgAAQBPAHIAaQBnAGkAbgBhAGwARgBpAGwAZQBuAGEAbQBlAAAAUwBDAF8AOQA0ADYAYwA4ADcA
+NgA4ADcANQA1AGEANABlADYAYgBiAGIAMgA1AGMAMAA5AGYAMABiAGYANAAyAGUAYgA1AC4AZABs
+AGwAAABoACQAAQBQAHIAbwBkAHUAYwB0AE4AYQBtAGUAAAAAAFMAQwBfADkANAA2AGMAOAA3ADYA
+OAA3ADUANQBhADQAZQA2AGIAYgBiADIANQBjADAAOQBmADAAYgBmADQAMgBlAGIANQAAADQACAAB
+AFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4AMAAuADAAAAA4AAgAAQBBAHMA
+cwBlAG0AYgBsAHkAIABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgAwAC4AMAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAMAAAAeDQAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                  name="VSTAProjectName"
+                  typeConverter="NOTBROWSABLE">SC_946c8768755a4e6bbb25c09f0bf42eb5</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the programming language used by the script."
+                  name="ScriptLanguage"
+                  typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages">CSharp</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read-only variables."
+                  name="ReadOnlyVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg">$Package::CombineGroupMyndighet,$Package::CombineGroupUtforare,$Package::CombineSearchRoot</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read/write variables."
+                  name="ReadWriteVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg"></property>
+                <property
+                  dataType="System.String"
+                  description="List of breakpoints present on the script."
+                  isArray="true"
+                  name="BreakpointCollection"
+                  typeConverter="NOTBROWSABLE">
+                  <arrayElements
+                    arrayElementCount="0" />
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum"
+                  typeConverter="NOTBROWSABLE">db36320224b2ee5b713980a1f7908d32</property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataShaChecksum"
+                  typeConverter="NOTBROWSABLE">aa0f21aa3cebf56c9ad0ea6d66e725a0030acbab</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ScriptComponentHost</property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum140"
+                  typeConverter="NOTBROWSABLE">E9</property>
+              </properties>
+              <outputs>
+                <output
+                  refId="Package\Stage\Script Component.Outputs[Output 0]"
+                  hasSideEffects="true"
+                  name="Output 0">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage\Script Component.Outputs[Output 0].Columns[personnr]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Stage\Script Component.Outputs[Output 0].Columns[personnr]"
+                      name="personnr" />
+                    <outputColumn
+                      refId="Package\Stage\Script Component.Outputs[Output 0].Columns[myndighet]"
+                      dataType="ui1"
+                      lineageId="Package\Stage\Script Component.Outputs[Output 0].Columns[myndighet]"
+                      name="myndighet" />
+                    <outputColumn
+                      refId="Package\Stage\Script Component.Outputs[Output 0].Columns[utforare]"
+                      dataType="ui1"
+                      lineageId="Package\Stage\Script Component.Outputs[Output 0].Columns[utforare]"
+                      name="utforare" />
+                    <outputColumn
+                      refId="Package\Stage\Script Component.Outputs[Output 0].Columns[fornamn]"
+                      dataType="wstr"
+                      length="64"
+                      lineageId="Package\Stage\Script Component.Outputs[Output 0].Columns[fornamn]"
+                      name="fornamn" />
+                    <outputColumn
+                      refId="Package\Stage\Script Component.Outputs[Output 0].Columns[efternamn]"
+                      dataType="wstr"
+                      length="64"
+                      lineageId="Package\Stage\Script Component.Outputs[Output 0].Columns[efternamn]"
+                      name="efternamn" />
+                    <outputColumn
+                      refId="Package\Stage\Script Component.Outputs[Output 0].Columns[epost]"
+                      dataType="wstr"
+                      length="1024"
+                      lineageId="Package\Stage\Script Component.Outputs[Output 0].Columns[epost]"
+                      name="epost" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage.Paths[Output 0]"
+              endId="Package\Stage\Row Count.Inputs[Row Count Input 1]"
+              name="Output 0"
+              startId="Package\Stage\Script Component.Outputs[Output 0]" />
+            <path
+              refId="Package\Stage.Paths[Row Count Output 1]"
+              endId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Stage\Row Count.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UpdateCombineDiff"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1B03682F-F04D-420D-8319-DE6857858AD2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UpdateCombineDiff"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{960414E8-E711-4D36-8345-2F97B1CA2813}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spUpdateCombineDiff" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{0223D4AB-5472-406F-956D-502EEB45DE2E}"
+      DTS:From="Package\PrepareCombineExport"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{8400F170-50CC-4398-8C6E-A97A90A82997}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::rowCount] &gt; 0"
+      DTS:From="Package\Stage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Commit" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{07E0DE01-C294-4D35-BE51-A58C83CE8B06}"
+      DTS:From="Package\Commit"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\UpdateCombineDiff" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{53FEDE8D-8D5C-40EC-9546-30636CDB84AE}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::rowCount] == 0"
+      DTS:From="Package\Stage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\FailPackage" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="117,42"
+          Id="Package\Commit"
+          TopLeft="41.5,209.5" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\FailPackage"
+          TopLeft="226.5,108.5" />
+        <NodeLayout
+          Size="194,42"
+          Id="Package\PrepareCombineExport"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Stage"
+          TopLeft="46,107.5" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\UpdateCombineDiff"
+          TopLeft="14,311.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="101.25,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="100,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,18.25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="100.75,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="154,129">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72.5,0"
+              Start="0,0"
+              End="65,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="65,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="24.5,5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Stage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Stage\Row Count"
+          TopLeft="26,107.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Stage\OLE DB Destination"
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Stage\Script Component"
+          TopLeft="9.50000000000001,5.5" />
+        <EdgeLayout
+          Id="Package\Stage.Paths[Row Count Output 1]"
+          TopLeft="91,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage.Paths[Output 0]"
+          TopLeft="91,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

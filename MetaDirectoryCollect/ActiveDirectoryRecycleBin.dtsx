@@ -1,0 +1,2054 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/4/2015 7:00:28 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName=""
+  DTS:CreatorName="KBA\admin.jonas"
+  DTS:DTSID="{4A05862B-BC49-4CE5-BD22-7DA22A1C6D2E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1053"
+  DTS:ObjectName="ActiveDirectoryRecycleBin"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{F13E02A9-5CBC-4D76-9D25-47E67E254354}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MetaDirectory]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{36E92C2F-AB1D-4616-8FA4-C4142E37EA08}"
+      DTS:ObjectName="MetaDirectory">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::MetaDirectoryConnectionString]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{1AFFEFEA-49CB-46D5-9C3C-D96278A1B929}"
+      DTS:ObjectName="ActiveDirectoryRoot"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{0B1AA157-91D2-4D6D-85DB-F123A52ECD0A}"
+      DTS:ObjectName="MetaDirectoryConnectionString"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Commit"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{02eb4576-a1be-4864-add9-fac78c81e2bb}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Commit"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{36E92C2F-AB1D-4616-8FA4-C4142E37EA08}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spCommitActiveDirectoryDeletedUser;&#xA;EXECUTE dbo.spCommitActiveDirectoryDeletedSmtpAddress;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:DTSID="{764f2f7e-16b2-4aa3-9dc5-6931b241a70f}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage\ActiveDirectoryRecycleBin"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Executes a custom script.;Microsoft Corporation; Microsoft SqlServer v10; © 2007 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Executes a custom script."
+              name="ActiveDirectoryRecycleBin"
+              version="11">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Stores the source code of the component"
+                  isArray="true"
+                  name="SourceCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="30">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_73e937d475164585b2752130bfe55f17.csproj")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_73e937d475164585b2752130bfe55f17.csproj")]
+[assembly: AssemblyCopyright("Copyright @  2012")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.0.0")]
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System;
+using System.DirectoryServices;
+
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent
+{
+    public override void CreateNewOutputRows()
+    {
+        string filter = "(&(objectClass=user)(isDeleted=TRUE))";
+        string[] attributes = {
+              "employeeNumber"
+            , "flags"
+            , "gidNumber"
+            , "msDS-cloudExtensionAttribute1"
+            , "msDS-cloudExtensionAttribute14"
+            , "objectClass"
+            , "objectGUID"
+            , "proxyAddresses"
+            , "sAMAccountName"
+            , "userPrincipalName"
+        };
+        using (var searchRoot = new DirectoryEntry(Variables.ActiveDirectoryRoot))
+        {
+            using (var searcher = new DirectorySearcher(searchRoot, filter, attributes))
+            {
+                searcher.PageSize = 1000;
+                searcher.ReferralChasing = ReferralChasingOption.None;
+                searcher.Tombstone = true;
+                using (var result = searcher.FindAll())
+                {
+                    foreach (SearchResult item in result)
+                    {
+                        if (item.Properties["objectClass"].Contains("computer"))
+                        {
+                            continue; // exclude computers
+                        }
+                        UserBuffer.AddRow();
+                        Guid objectGuid = new Guid((byte[])item.Properties["objectGUID"][0]);
+                        UserBuffer.employeeNumber = item.Properties["employeeNumber"].Count == 1 ? (string)item.Properties["employeeNumber"][0] : null;
+                        if (item.Properties["flags"].Count == 1)
+                        {
+                            UserBuffer.flags = (int)item.Properties["flags"][0];
+                        }
+                        else
+                        {
+                            UserBuffer.flags_IsNull = true;
+                        }
+                        if (item.Properties["gidNumber"].Count == 1)
+                        {
+                            UserBuffer.gidNumber = (int)item.Properties["gidNumber"][0];
+                        }
+                        else
+                        {
+                            UserBuffer.gidNumber_IsNull = true;
+                        }
+                        UserBuffer.msDScloudExtensionAttribute1 = item.Properties["msDS-cloudExtensionAttribute1"].Count == 1 ? (string)item.Properties["msDS-cloudExtensionAttribute1"][0] : null;
+                        UserBuffer.msDScloudExtensionAttribute14 = item.Properties["msDS-cloudExtensionAttribute14"].Count == 1 ? (string)item.Properties["msDS-cloudExtensionAttribute14"][0] : null;
+                        UserBuffer.objectGUID = objectGuid;
+                        UserBuffer.sAMAccountName = (string)item.Properties["sAMAccountName"][0];
+                        UserBuffer.seeAlso = item.Properties["seeAlso"].Count == 1 ? (string)item.Properties["seeAlso"][0] : null;
+                        UserBuffer.userPrincipalName = item.Properties["userPrincipalName"].Count == 1 ? (string)item.Properties["userPrincipalName"][0] : null;
+                        if (item.Properties["proxyAddresses"].Count > 0)
+                        {
+                            foreach (string address in item.Properties["proxyAddresses"])
+                            {
+                                if (address.StartsWith("smtp:", StringComparison.Ordinal))
+                                {
+                                    AddressBuffer.AddRow();
+                                    AddressBuffer.objectGUID = objectGuid;
+                                    AddressBuffer.address = address.Substring(5);
+                                    AddressBuffer.primary = false;
+                                }
+                                else if (address.StartsWith("SMTP:", StringComparison.Ordinal))
+                                {
+                                    AddressBuffer.AddRow();
+                                    AddressBuffer.objectGUID = objectGuid;
+                                    AddressBuffer.address = address.Substring(5);
+                                    AddressBuffer.primary = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        UserBuffer.SetEndOfRowset();
+        AddressBuffer.SetEndOfRowset();
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class UserBuffer: ScriptBuffer
+
+{
+    public UserBuffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public Guid objectGUID
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool objectGUID_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String sAMAccountName
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool sAMAccountName_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String userPrincipalName
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool userPrincipalName_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String employeeNumber
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool employeeNumber_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Int32 flags
+    {
+        set
+        {
+            this[4] = value;
+        }
+    }
+    public bool flags_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(4);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Int32 gidNumber
+    {
+        set
+        {
+            this[5] = value;
+        }
+    }
+    public bool gidNumber_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(5);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String seeAlso
+    {
+        set
+        {
+            this[6] = value;
+        }
+    }
+    public bool seeAlso_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(6);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String msDScloudExtensionAttribute1
+    {
+        set
+        {
+            this[7] = value;
+        }
+    }
+    public bool msDScloudExtensionAttribute1_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(7);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String msDScloudExtensionAttribute11
+    {
+        set
+        {
+            this[8] = value;
+        }
+    }
+    public bool msDScloudExtensionAttribute11_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(8);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String msDScloudExtensionAttribute14
+    {
+        set
+        {
+            this[9] = value;
+        }
+    }
+    public bool msDScloudExtensionAttribute14_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(9);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+
+public class AddressBuffer: ScriptBuffer
+
+{
+    public AddressBuffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public String address
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool address_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Guid objectGUID
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool objectGUID_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Boolean primary
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool primary_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public UserBuffer UserBuffer;
+
+    public AddressBuffer AddressBuffer;
+
+    public virtual void FinishOutputs()
+    {
+    }
+
+    private void MarkOutputsFinished()
+    {
+
+        if (null != UserBuffer)
+        {
+            UserBuffer.SetEndOfRowset();
+            UserBuffer = null;
+        }
+
+        if (null != AddressBuffer)
+        {
+            AddressBuffer.SetEndOfRowset();
+            AddressBuffer = null;
+        }
+
+    }
+
+    public override void PrimeOutput(int Outputs, int[] OutputIDs, PipelineBuffer[] Buffers, OutputNameMap OutputMap)
+    {
+       for(int Idx = 0; Idx < Outputs; Idx++)
+       {
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"User"))
+            {
+                UserBuffer = new UserBuffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"Address"))
+            {
+                AddressBuffer = new AddressBuffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+        }
+
+        CreateNewOutputRows();
+
+        FinishOutputs();
+        MarkOutputsFinished();
+
+    }
+
+    public virtual void CreateNewOutputRows()
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public String ActiveDirectoryRoot
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["ActiveDirectoryRoot"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[sc_73e937d475164585b2752130bfe55f17.csproj]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- This section defines project-level properties.
+
+       Configuration - Specifies whether the default configuration is Release or Debug.
+       Platform - Specifies what CPU the output of this project can run on.
+       OutputType - Must be "Library" for VSTA.
+       NoStandardLibraries - Set to "false" for VSTA.
+       RootNamespace - In C#, this specifies the namespace given to new files.
+                       In Visual Basic, all objects are wrapped in this namespace at runtime.
+       AssemblyName - Name of the output assembly.
+  -->
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <RootNamespace>SC_73e937d475164585b2752130bfe55f17.csproj</RootNamespace>
+    <AssemblyName>SC_D5B8EFDC421B4F7E822BE16B9BAF14B7</AssemblyName>
+    <ProjectGuid>{8018BB88-4872-4D98-AB15-F2F5089F3167}</ProjectGuid>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+ </PropertyGroup>
+  <!-- This section defines properties that are set when the "Debug" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <!-- This section defines properties that are set when the "Release" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- This section enables pre- and post-build steps. However,
+       it is recommended that MSBuild tasks be used instead of these properties.
+  -->
+  <PropertyGroup>
+    <PreBuildEvent></PreBuildEvent>
+    <PostBuildEvent></PostBuildEvent>
+  </PropertyGroup>
+  <!-- This sections specifies references for the project. -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <!-- This section defines the user source files that are part of the
+       project.
+
+       Compile - Specifies a source file to compile.
+       EmbeddedResource - Specifies a .resx file for embedded resources.
+       None - Specifies a file that is not to be passed to the compiler (for instance,
+              a text file or XML file).
+       AppDesigner - Specifies the directory where the application properties files can
+                     be found.
+  -->
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+    <Compile Include="main.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <!-- Include the default configuration information and metadata files for the add-in.
+         These files are copied to the build output directory when the project is
+         built, and the path to the configuration file is passed to the add-in on the command
+         line when debugging.
+    -->
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="SSIS_ScriptComponent" IconIndex="0" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC140</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Project]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>sc_73e937d475164585b2752130bfe55f17</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>sc_73e937d475164585b2752130bfe55f17</msb:DisplayName>
+    <msb:ProjectId>{C0128D03-33C2-42A6-ACDA-57206B5E17E0}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="sc_73e937d475164585b2752130bfe55f17.csproj" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+    <msb:File Include="BufferWrapper.cs" />
+    <msb:File Include="main.cs" />
+    <msb:File Include="ComponentWrapper.cs" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+  </msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "SC_73e937d475164585b2752130bfe55f17.csproj.Properties.Settings.get_Default():SC_73e937d475164585b2752130bfe55f17.csproj.Properties.Sett" +
+    "ings")]
+
+namespace SC_73e937d475164585b2752130bfe55f17.csproj.Properties
+{
+
+
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
+    {
+
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+
+        public static Settings Default
+        {
+            get
+            {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "SC_73e937d475164585b2752130bfe55f17.csproj.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "SC_73e937d475164585b2752130bfe55f17.csproj.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "SC_73e937d475164585b2752130bfe55f17.csproj.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_73e937d475164585b2752130bfe55f17.csproj.Properties
+{
+
+
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources
+    {
+
+        private static global::System.Resources.ResourceManager resourceMan;
+
+        private static global::System.Globalization.CultureInfo resourceCulture;
+
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources()
+        {
+        }
+
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if ((resourceMan == null))
+                {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_73e937d475164585b2752130bfe55f17.csproj.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
+                return resourceCulture;
+            }
+            set
+            {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Stores the binary representation of the component"
+                  isArray="true"
+                  name="BinaryCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="2">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_D5B8EFDC421B4F7E822BE16B9BAF14B7.dll]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[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
+gQAXALYhAAAAAIYAnQoGABgAviEAAAAAhgCCCQYAGADGIQAAAACGAIUJKwAYAFAgAAAAAIYYvQcb
+ABgAziEAAAAAhghNCRAAGwBqIAAAAACGCHsFgQAcANghAAAAAIYI0gAXAR0AiyAAAAAAhgjbBIEA
+HgDnIQAAAACGCLEKgQAfAKwgAAAAAIYIjgWBACAAtiEAAAAAhgCdCgYAIQC+IQAAAACGAIIJBgAh
+AMYhAAAAAIYAhQkrACEA9iEAAAAAhhi9BwYAIQAWIgAAAADGAVkJBgAhABgiAAAAAIEA9gAGACEA
+UCIAAAAAxgBECh0BIQAWIgAAAADGAWcJBgAlAM8iAAAAAIYYvQcpASUA3iIAAAAAhhi9BykBJgDt
+IgAAAACGCO4JLwEnABQjAAAAAMYAZwkGACcAFCgAAAAAhhi9BwYAJwAcKAAAAACDGL0HBgAnACQo
+AAAAAJMIVQczAScAUCgAAAAAkwisATgBJwBXKAAAAACTCLgBPQEnAF8oAAAAAJYIkQlDASgAZigA
+AAAAhhi9BwYAKABuKAAAAACRGMMHSAEoAAAAAQBOBwAAAgDlCAAAAwDSBgAAAQC+AwAAAQC+AwAA
+AQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+
+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQBOBwAA
+AgDlCAAAAwDSBgAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQC+AwAAAQBfCQAAAgDK
+BwAAAwBFCQAABADSBgAAAQDOCQAAAQDOCQAAAQC+AwkAvQcBABEAvQcGABkAvQcKACkAvQcQADEA
+vQcQADkAvQcQAEEAvQcQAEkAvQcQAFEAvQcQAFkAvQcQAGEAvQcQAJkAvQcGANEAvQcGAPEAvQcV
+AAEBvQcGAGkAvQcbAGkAsgUlAGkAoQUBAAkBvQcQAGkAnQoGAGkAggkGAGkAhQkrAIkAvQcGAIkA
+4QAzAIkA+Qg6AJEAvQcGAIkAzwhAACEBqQVGAIkAiApNACkBWQpTAKEAvQcQAKkAvQdxAKkAxAMB
+AKkA/AN6AKkAmQGBAKkAMQSGALEArweLALkA2AmQAMEAwAiUAFEBqQWaAFkBHQmhAFkBqQWmAIEA
+vQeuAGEB5Am0AGEBrweLAEEBEAS4AEEB8gPAALkAUAorAMkAAwIGAHEBPQHFAHEBpArOANkAvQfU
+APkAvQcGAC4ACwBsAS4AEwB1AS4AGwCUAS4AIwCdAS4AKwDNAS4AMwDNAS4AOwDNAS4AQwCdAS4A
+SwDTAS4AUwDNAS4AWwDqAeMAYwA0AgMBawA0AiEBewA0AokDcwCUAakDcwCUAS8AWgACAAEAAwAV
+AAYAGwAIABwACQAeAAAA1gBMAQAA3wRRAQAAaQFVAQAAEgVRAQAAUwFVAQAA9QRRAQAAEQdVAQAA
+VAVRAQAADglZAQAAbgVRAQAAAwdZAQAAPwVRAQAAvAZVAQAALAVRAQAAYABVAQAAjgRRAQAAPgBV
+AQAAZQRRAQAAhwBVAQAAtgRRAQAAUQlVAQAAfwVRAQAA1gBMAQAA3wRRAQAAtQpRAQAAkgVRAQAA
+8glVAQAAWQddAQAAzAFiAQAAlQlnAQEAAgADAAEAAwAFAAEABAAHAAEABQAJAAEABgALAAEABwAN
+AAEACAAPAAEACQARAAEACgATAAEACwAVAAEADAAXAAEADQAZAAEADgAbAAEADwAdAAEAEAAfAAEA
+EQAhAAEAEgAjAAEAEwAlAAEAFAAnAAEAFQApAAEAGgArAAEAGwAtAAEAHAAvAAEAHQAxAAEAHgAz
+AAEAHwA1AAIAKgA3AAIALgA5AAIALwA7AAEAMAA7AAIAMQA9AKsABIAAAAEAAAAAAAAAAAAAAAAA
+pQAAAAQAAAAAAAAAAAAAANwA7QAAAAAADgAAAAAAAAAAAAAA5QAGCgAAAAAOAAAAAAAAAAAAAADl
+ACMKAAAAAAQAAAAAAAAAAAAAAO4ABwgAAAAABAAAAAAAAAAAAAAA3AC7BQAAAAAOAAAAAAAAAAAA
+AADlANwGAAAAAAAAAAABAAAAMQgAAAAAAElEVFNWYXJpYWJsZTEwMABJRFRTVmFyaWFibGVzMTAw
+AElEVFNFdmFsdWF0b3JDb250ZXh0MTAwAHNldF9tc0RTY2xvdWRFeHRlbnNpb25BdHRyaWJ1dGUx
+MQBzZXRfbXNEU2Nsb3VkRXh0ZW5zaW9uQXR0cmlidXRlMQBJbnQzMgBzZXRfbXNEU2Nsb3VkRXh0
+ZW5zaW9uQXR0cmlidXRlMTQAU0NfRDVCOEVGREM0MjFCNEY3RTgyMkJFMTZCOUJBRjE0QjcAPE1v
+ZHVsZT4Ac2V0X29iamVjdEdVSUQAR2V0T3V0cHV0SUQAbXNjb3JsaWIATWFya091dHB1dHNGaW5p
+c2hlZABHdWlkAGRlZmF1bHRJbnN0YW5jZQBJRGlzcG9zYWJsZQBSdW50aW1lVHlwZUhhbmRsZQBH
+ZXRUeXBlRnJvbUhhbmRsZQBzZXRfdXNlclByaW5jaXBhbE5hbWUAc2V0X3NBTUFjY291bnROYW1l
+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlBpcGVsaW5lAHNldF9Ub21ic3RvbmUAVHlwZQBnZXRf
+Q3VsdHVyZQBzZXRfQ3VsdHVyZQByZXNvdXJjZUN1bHR1cmUAUmVhZE9ubHlDb2xsZWN0aW9uQmFz
+ZQBBcHBsaWNhdGlvblNldHRpbmdzQmFzZQBEaXNwb3NlAEVkaXRvckJyb3dzYWJsZVN0YXRlAENv
+bXBpbGVyR2VuZXJhdGVkQXR0cmlidXRlAERlYnVnZ2VyTm9uVXNlckNvZGVBdHRyaWJ1dGUARGVi
+dWdnYWJsZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVBdHRyaWJ1dGUAQXNzZW1ibHlUaXRsZUF0
+dHJpYnV0ZQBBc3NlbWJseVRyYWRlbWFya0F0dHJpYnV0ZQBUYXJnZXRGcmFtZXdvcmtBdHRyaWJ1
+dGUAQXNzZW1ibHlDb25maWd1cmF0aW9uQXR0cmlidXRlAEFzc2VtYmx5RGVzY3JpcHRpb25BdHRy
+aWJ1dGUAQ29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJpYnV0ZQBBc3NlbWJseVByb2R1Y3RBdHRy
+aWJ1dGUAQXNzZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUAU1NJU1NjcmlwdENvbXBvbmVudEVudHJ5
+UG9pbnRBdHRyaWJ1dGUAQXNzZW1ibHlDb21wYW55QXR0cmlidXRlAFJ1bnRpbWVDb21wYXRpYmls
+aXR5QXR0cmlidXRlAHZhbHVlAHNldF9QYWdlU2l6ZQBTeXN0ZW0uUnVudGltZS5WZXJzaW9uaW5n
+AFN0cmluZwBTdWJzdHJpbmcAc2V0X1JlZmVycmFsQ2hhc2luZwBTdGFydHNXaXRoAFN5c3RlbS5D
+b21wb25lbnRNb2RlbABGaW5kQWxsAFNDX0Q1QjhFRkRDNDIxQjRGN0U4MjJCRTE2QjlCQUYxNEI3
+LmRsbABzZXRfbXNEU2Nsb3VkRXh0ZW5zaW9uQXR0cmlidXRlMTFfSXNOdWxsAHNldF9tc0RTY2xv
+dWRFeHRlbnNpb25BdHRyaWJ1dGUxX0lzTnVsbABzZXRfbXNEU2Nsb3VkRXh0ZW5zaW9uQXR0cmli
+dXRlMTRfSXNOdWxsAHNldF9vYmplY3RHVUlEX0lzTnVsbABzZXRfdXNlclByaW5jaXBhbE5hbWVf
+SXNOdWxsAHNldF9zQU1BY2NvdW50TmFtZV9Jc051bGwAc2V0X3NlZUFsc29fSXNOdWxsAHNldF9n
+aWROdW1iZXJfSXNOdWxsAHNldF9lbXBsb3llZU51bWJlcl9Jc051bGwAc2V0X2ZsYWdzX0lzTnVs
+bABzZXRfYWRkcmVzc19Jc051bGwAc2V0X3ByaW1hcnlfSXNOdWxsAFNldE51bGwAZ2V0X0l0ZW0A
+c2V0X0l0ZW0AU3lzdGVtAHJlc291cmNlTWFuAEJvb2xlYW4AU2NyaXB0TWFpbgBTeXN0ZW0uQ29u
+ZmlndXJhdGlvbgBTeXN0ZW0uR2xvYmFsaXphdGlvbgBTeXN0ZW0uUmVmbGVjdGlvbgBSZXN1bHRQ
+cm9wZXJ0eVZhbHVlQ29sbGVjdGlvbgBTZWFyY2hSZXN1bHRDb2xsZWN0aW9uAFJlc3VsdFByb3Bl
+cnR5Q29sbGVjdGlvbgBSZWZlcnJhbENoYXNpbmdPcHRpb24ASW52YWxpZE9wZXJhdGlvbkV4Y2Vw
+dGlvbgBTdHJpbmdDb21wYXJpc29uAEN1bHR1cmVJbmZvAHNldF9zZWVBbHNvAE91dHB1dE5hbWVN
+YXAAT3V0cHV0TWFwAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRFRTUnVudGltZVdyYXAAc2V0X2dpZE51
+bWJlcgBzZXRfZW1wbG95ZWVOdW1iZXIAUGlwZWxpbmVCdWZmZXIAVXNlckJ1ZmZlcgBBZGRyZXNz
+QnVmZmVyAFNjcmlwdEJ1ZmZlcgBnZXRfUmVzb3VyY2VNYW5hZ2VyAERpcmVjdG9yeVNlYXJjaGVy
+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlJ1bnRpbWUuV3JhcHBlcgBJRW51bWVyYXRvcgBHZXRF
+bnVtZXJhdG9yAC5jdG9yAC5jY3RvcgBPdXRwdXRJRHMAU3lzdGVtLkRpYWdub3N0aWNzAFN5c3Rl
+bS5SdW50aW1lLkNvbXBpbGVyU2VydmljZXMAU3lzdGVtLkRpcmVjdG9yeVNlcnZpY2VzAFN5c3Rl
+bS5SZXNvdXJjZXMAU0NfNzNlOTM3ZDQ3NTE2NDU4NWIyNzUyMTMwYmZlNTVmMTcuY3Nwcm9qLlBy
+b3BlcnRpZXMuUmVzb3VyY2VzLnJlc291cmNlcwBEZWJ1Z2dpbmdNb2RlcwBTQ183M2U5MzdkNDc1
+MTY0NTg1YjI3NTIxMzBiZmU1NWYxNy5jc3Byb2ouUHJvcGVydGllcwBnZXRfUHJvcGVydGllcwBn
+ZXRfUmVhZE9ubHlWYXJpYWJsZXMAQnVmZmVyQ29sdW1uSW5kZXhlcwBHZXRDb2x1bW5JbmRleGVz
+AHNldF9mbGFncwBTZXR0aW5ncwBDb250YWlucwBTeXN0ZW0uQ29sbGVjdGlvbnMAQ29ubmVjdGlv
+bnMAQnVmZmVycwBzZXRfYWRkcmVzcwBGaW5pc2hPdXRwdXRzAENyZWF0ZU5ld091dHB1dFJvd3MA
+T2JqZWN0AFNldEVuZE9mUm93c2V0AGdldF9EZWZhdWx0AFNlYXJjaFJlc3VsdABVc2VyQ29tcG9u
+ZW50AFBhcmVudENvbXBvbmVudABTY3JpcHRDb21wb25lbnQAZ2V0X0N1cnJlbnQAZ2V0X0NvdW50
+AGdldF9BY3RpdmVEaXJlY3RvcnlSb290AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuVHhTY3JpcHQATWlj
+cm9zb2Z0LlNxbFNlcnZlci5QaXBlbGluZUhvc3QAUHJpbWVPdXRwdXQATW92ZU5leHQAR2V0VmFs
+dWVXaXRoQ29udGV4dABTY3JpcHRDb21wb25lbnRFdmFsQ29udGV4dABnZXRfRXZhbHVhdG9yQ29u
+dGV4dABBZGRSb3cAZ2V0X0Fzc2VtYmx5AHNldF9wcmltYXJ5AERpcmVjdG9yeUVudHJ5AACAm0kA
+cwBOAHUAbABsACAAcAByAG8AcABlAHIAdAB5ACAAYwBhAG4AbgBvAHQAIABiAGUAIABzAGUAdAAg
+AHQAbwAgAEYAYQBsAHMAZQAuACAAQQBzAHMAaQBnAG4AIABhACAAdgBhAGwAdQBlACAAdABvACAA
+dABoAGUAIABjAG8AbAB1AG0AbgAgAGkAbgBzAHQAZQBhAGQALgAACVUAcwBlAHIAAA9BAGQAZABy
+AGUAcwBzAAAnQQBjAHQAaQB2AGUARABpAHIAZQBjAHQAbwByAHkAUgBvAG8AdAAASygAJgAoAG8A
+YgBqAGUAYwB0AEMAbABhAHMAcwA9AHUAcwBlAHIAKQAoAGkAcwBEAGUAbABlAHQAZQBkAD0AVABS
+AFUARQApACkAAB1lAG0AcABsAG8AeQBlAGUATgB1AG0AYgBlAHIAAAtmAGwAYQBnAHMAABNnAGkA
+ZABOAHUAbQBiAGUAcgAAO20AcwBEAFMALQBjAGwAbwB1AGQARQB4AHQAZQBuAHMAaQBvAG4AQQB0
+AHQAcgBpAGIAdQB0AGUAMQABPW0AcwBEAFMALQBjAGwAbwB1AGQARQB4AHQAZQBuAHMAaQBvAG4A
+QQB0AHQAcgBpAGIAdQB0AGUAMQA0AAEXbwBiAGoAZQBjAHQAQwBsAGEAcwBzAAAVbwBiAGoAZQBj
+AHQARwBVAEkARAAAHXAAcgBvAHgAeQBBAGQAZAByAGUAcwBzAGUAcwAAHXMAQQBNAEEAYwBjAG8A
+dQBuAHQATgBhAG0AZQAAI3UAcwBlAHIAUAByAGkAbgBjAGkAcABhAGwATgBhAG0AZQAAEWMAbwBt
+AHAAdQB0AGUAcgAAD3MAZQBlAEEAbABzAG8AAAtzAG0AdABwADoAAAtTAE0AVABQADoAAH9TAEMA
+XwA3ADMAZQA5ADMANwBkADQANwA1ADEANgA0ADUAOAA1AGIAMgA3ADUAMgAxADMAMABiAGYAZQA1
+ADUAZgAxADcALgBjAHMAcAByAG8AagAuAFAAcgBvAHAAZQByAHQAaQBlAHMALgBSAGUAcwBvAHUA
+cgBjAGUAcwAAR/HDcGr3x0yi66pFUqxl9wAEIAEBCAMgAAEFIAEBEREEIAEBDgUgAQERdQkgAwES
+OR0IEj0FIAIBCBwDIAACAwcBCAYAAggSPQ4FIAEdCAgFIAASgJEGIAESgJUcBQAAEoCZBiABHBKA
+nRYHCw4dDhJRElUSWRJdEmERQRJdDhJlCCADARJRDh0OBiABARGApQQgAQECBCAAElkEIAASXQMg
+ABwFIAASgKkGIAESgK0OBCABAhwEIAEcCAIdBQUgAQEdBQMgAAgHIAICDhGAtQQgAQ4ICAABEoC5
+EYC9BSAAEoDBByACAQ4SgMEIt3pcVhk04IkIiYRdzYCAzJEIsD9ffxHVCjoDBhIUAwYSGAMGEggD
+BhIMAwYSRQMGEm0DBhJxAwYSJAUgAQERQQsgBAEIHQgdEjkSPQUgAQESRQMgAA4EAAASbQQAABJx
+BQABARJxBAAAEiQDAAABBCgAEUEDKAACAygADgMoAAgECAASbQQIABJxBAgAEiQIAQAIAAAAAAAe
+AQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBCAEAAgAAAAAALwEAKlNDXzczZTkzN2Q0NzUx
+NjQ1ODViMjc1MjEzMGJmZTU1ZjE3LmNzcHJvagAABQEAAAAAFgEAEUNvcHlyaWdodCBAICAyMDEy
+AABJAQAaLk5FVEZyYW1ld29yayxWZXJzaW9uPXY0LjUBAFQOFEZyYW1ld29ya0Rpc3BsYXlOYW1l
+Ei5ORVQgRnJhbWV3b3JrIDQuNQQBAAAAAAAAtAAAAM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3Vy
+Y2VzLlJlc291cmNlUmVhZGVyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5l
+dXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5S
+dW50aW1lUmVzb3VyY2VTZXQCAAAAAAAAAAAAAABQQURQQURQtAAAALhDAAAAAAAAAAAAANJDAAAA
+IAAAAAAAAAAAAAAAAAAAAAAAAAAAAADEQwAAAAAAAAAAAAAAAF9Db3JEbGxNYWluAG1zY29yZWUu
+ZGxsAAAAAAD/JQAgABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEAAA
+ABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAAAEgAAABYYAAA
+DAQAAAAAAAAAAAAADAQ0AAAAVgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8AAAAAAL0E7/4A
+AAEAAAABAAAAAAAAAAEAAAAAAD8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABEAAAAAQBWAGEA
+cgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8AbgAAAAAAAACw
+BGwDAAABAFMAdAByAGkAbgBnAEYAaQBsAGUASQBuAGYAbwAAAEgDAAABADAAMAAwADAAMAA0AGIA
+MAAAABoAAQABAEMAbwBtAG0AZQBuAHQAcwAAAAAAAAAiAAEAAQBDAG8AbQBwAGEAbgB5AE4AYQBt
+AGUAAAAAAAAAAAB+ACsAAQBGAGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAAAAAAUwBDAF8A
+NwAzAGUAOQAzADcAZAA0ADcANQAxADYANAA1ADgANQBiADIANwA1ADIAMQAzADAAYgBmAGUANQA1
+AGYAMQA3AC4AYwBzAHAAcgBvAGoAAAAAADAACAABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAA
+MQAuADAALgAwAC4AMAAAAHAAKAABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAAUwBDAF8ARAA1
+AEIAOABFAEYARABDADQAMgAxAEIANABGADcARQA4ADIAMgBCAEUAMQA2AEIAOQBCAEEARgAxADQA
+QgA3AC4AZABsAGwAAABIABIAAQBMAGUAZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQAAABDAG8AcAB5
+AHIAaQBnAGgAdAAgAEAAIAAgADIAMAAxADIAAAAqAAEAAQBMAGUAZwBhAGwAVAByAGEAZABlAG0A
+YQByAGsAcwAAAAAAAAAAAHgAKAABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4AYQBtAGUAAABT
+AEMAXwBEADUAQgA4AEUARgBEAEMANAAyADEAQgA0AEYANwBFADgAMgAyAEIARQAxADYAQgA5AEIA
+QQBGADEANABCADcALgBkAGwAbAAAAHYAKwABAFAAcgBvAGQAdQBjAHQATgBhAG0AZQAAAAAAUwBD
+AF8ANwAzAGUAOQAzADcAZAA0ADcANQAxADYANAA1ADgANQBiADIANwA1ADIAMQAzADAAYgBmAGUA
+NQA1AGYAMQA3AC4AYwBzAHAAcgBvAGoAAAAAADQACAABAFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBp
+AG8AbgAAADEALgAwAC4AMAAuADAAAAA4AAgAAQBBAHMAcwBlAG0AYgBsAHkAIABWAGUAcgBzAGkA
+bwBuAAAAMQAuADAALgAwAC4AMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAADAAAAOQzAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                  name="VSTAProjectName"
+                  typeConverter="NOTBROWSABLE">SC_d5b8efdc421b4f7e822be16b9baf14b7</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the programming language used by the script."
+                  name="ScriptLanguage"
+                  typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages">CSharp</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read-only variables."
+                  name="ReadOnlyVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg">$Package::ActiveDirectoryRoot</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read/write variables."
+                  name="ReadWriteVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg"></property>
+                <property
+                  dataType="System.String"
+                  description="List of breakpoints present on the script."
+                  isArray="true"
+                  name="BreakpointCollection"
+                  typeConverter="NOTBROWSABLE">
+                  <arrayElements
+                    arrayElementCount="0" />
+                </property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ScriptComponentHost</property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum"
+                  typeConverter="NOTBROWSABLE">c7fec896a2ee5c600612234dff7e5cc6</property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataShaChecksum"
+                  typeConverter="NOTBROWSABLE">b48bf2d9ae980badcf339f0b7a010c0dfcfa6c5a</property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum140"
+                  typeConverter="NOTBROWSABLE">A9</property>
+              </properties>
+              <outputs>
+                <output
+                  refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User]"
+                  hasSideEffects="true"
+                  name="User">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[objectGUID]"
+                      dataType="guid"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[objectGUID]"
+                      name="objectGUID" />
+                    <outputColumn
+                      refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[sAMAccountName]"
+                      dataType="wstr"
+                      length="256"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[sAMAccountName]"
+                      name="sAMAccountName" />
+                    <outputColumn
+                      refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[userPrincipalName]"
+                      dataType="wstr"
+                      length="1024"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[userPrincipalName]"
+                      name="userPrincipalName" />
+                    <outputColumn
+                      refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[employeeNumber]"
+                      dataType="wstr"
+                      length="512"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[employeeNumber]"
+                      name="employeeNumber" />
+                    <outputColumn
+                      refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[flags]"
+                      dataType="i4"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[flags]"
+                      name="flags" />
+                    <outputColumn
+                      refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[gidNumber]"
+                      dataType="i4"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[gidNumber]"
+                      name="gidNumber" />
+                    <outputColumn
+                      refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[seeAlso]"
+                      dataType="wstr"
+                      length="1024"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[seeAlso]"
+                      name="seeAlso" />
+                    <outputColumn
+                      refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[msDScloudExtensionAttribute1]"
+                      dataType="wstr"
+                      length="2048"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[msDScloudExtensionAttribute1]"
+                      name="msDScloudExtensionAttribute1" />
+                    <outputColumn
+                      refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[msDScloudExtensionAttribute11]"
+                      dataType="wstr"
+                      length="2048"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[msDScloudExtensionAttribute11]"
+                      name="msDScloudExtensionAttribute11" />
+                    <outputColumn
+                      refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[msDScloudExtensionAttribute14]"
+                      dataType="wstr"
+                      length="2048"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[msDScloudExtensionAttribute14]"
+                      name="msDScloudExtensionAttribute14" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[Address]"
+                  hasSideEffects="true"
+                  name="Address">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[Address].Columns[address]"
+                      dataType="wstr"
+                      length="1024"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[Address].Columns[address]"
+                      name="address" />
+                    <outputColumn
+                      refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[Address].Columns[objectGUID]"
+                      dataType="guid"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[Address].Columns[objectGUID]"
+                      name="objectGUID" />
+                    <outputColumn
+                      refId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[Address].Columns[primary]"
+                      dataType="bool"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[Address].Columns[primary]"
+                      name="primary" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage\DeletedSmtpAddress_stage"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DeletedSmtpAddress_stage"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[ActiveDirectoryDeletedSmtpAddress_stage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage\DeletedSmtpAddress_stage.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage\DeletedSmtpAddress_stage.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage\DeletedSmtpAddress_stage.Inputs[OLE DB Destination Input].Columns[address]"
+                      cachedDataType="wstr"
+                      cachedLength="1024"
+                      cachedName="address"
+                      externalMetadataColumnId="Package\Stage\DeletedSmtpAddress_stage.Inputs[OLE DB Destination Input].ExternalColumns[address]"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[Address].Columns[address]" />
+                    <inputColumn
+                      refId="Package\Stage\DeletedSmtpAddress_stage.Inputs[OLE DB Destination Input].Columns[objectGUID]"
+                      cachedDataType="guid"
+                      cachedName="objectGUID"
+                      externalMetadataColumnId="Package\Stage\DeletedSmtpAddress_stage.Inputs[OLE DB Destination Input].ExternalColumns[objectGUID]"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[Address].Columns[objectGUID]" />
+                    <inputColumn
+                      refId="Package\Stage\DeletedSmtpAddress_stage.Inputs[OLE DB Destination Input].Columns[primary]"
+                      cachedDataType="bool"
+                      cachedName="primary"
+                      externalMetadataColumnId="Package\Stage\DeletedSmtpAddress_stage.Inputs[OLE DB Destination Input].ExternalColumns[primary]"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[Address].Columns[primary]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage\DeletedSmtpAddress_stage.Inputs[OLE DB Destination Input].ExternalColumns[objectGUID]"
+                      dataType="guid"
+                      name="objectGUID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\DeletedSmtpAddress_stage.Inputs[OLE DB Destination Input].ExternalColumns[address]"
+                      dataType="wstr"
+                      length="1024"
+                      name="address" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\DeletedSmtpAddress_stage.Inputs[OLE DB Destination Input].ExternalColumns[primary]"
+                      dataType="bool"
+                      name="primary" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage\DeletedSmtpAddress_stage.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage\DeletedSmtpAddress_stage.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage\DeletedSmtpAddress_stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage\DeletedSmtpAddress_stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage\DeletedSmtpAddress_stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage\DeletedSmtpAddress_stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage\DeletedUser_stage"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DeletedUser_stage"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[ActiveDirectoryDeletedUser_stage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS,ROWS_PER_BATCH = 32767</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage\DeletedUser_stage.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].Columns[objectGUID]"
+                      cachedDataType="guid"
+                      cachedName="objectGUID"
+                      externalMetadataColumnId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[objectGUID]"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[objectGUID]" />
+                    <inputColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].Columns[sAMAccountName]"
+                      cachedDataType="wstr"
+                      cachedLength="256"
+                      cachedName="sAMAccountName"
+                      externalMetadataColumnId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[sAMAccountName]"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[sAMAccountName]" />
+                    <inputColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].Columns[userPrincipalName]"
+                      cachedDataType="wstr"
+                      cachedLength="1024"
+                      cachedName="userPrincipalName"
+                      externalMetadataColumnId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[userPrincipalName]"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[userPrincipalName]" />
+                    <inputColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].Columns[employeeNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="512"
+                      cachedName="employeeNumber"
+                      externalMetadataColumnId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[employeeNumber]"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[employeeNumber]" />
+                    <inputColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].Columns[seeAlso]"
+                      cachedDataType="wstr"
+                      cachedLength="1024"
+                      cachedName="seeAlso"
+                      externalMetadataColumnId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[seeAlso]"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[seeAlso]" />
+                    <inputColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].Columns[gidNumber]"
+                      cachedDataType="i4"
+                      cachedName="gidNumber"
+                      externalMetadataColumnId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[gidNumber]"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[gidNumber]" />
+                    <inputColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute1]"
+                      cachedDataType="wstr"
+                      cachedLength="2048"
+                      cachedName="msDScloudExtensionAttribute1"
+                      externalMetadataColumnId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute1]"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[msDScloudExtensionAttribute1]" />
+                    <inputColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute14]"
+                      cachedDataType="wstr"
+                      cachedLength="2048"
+                      cachedName="msDScloudExtensionAttribute14"
+                      externalMetadataColumnId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute14]"
+                      lineageId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User].Columns[msDScloudExtensionAttribute14]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[objectGUID]"
+                      dataType="guid"
+                      name="objectGUID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[sAMAccountName]"
+                      dataType="wstr"
+                      length="256"
+                      name="sAMAccountName" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[employeeNumber]"
+                      dataType="wstr"
+                      length="512"
+                      name="employeeNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[userPrincipalName]"
+                      dataType="wstr"
+                      length="1024"
+                      name="userPrincipalName" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[seeAlso]"
+                      dataType="wstr"
+                      length="1024"
+                      name="seeAlso" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[gidNumber]"
+                      dataType="i4"
+                      name="gidNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute1]"
+                      dataType="wstr"
+                      length="2048"
+                      name="msDScloudExtensionAttribute1" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute14]"
+                      dataType="wstr"
+                      length="2048"
+                      name="msDScloudExtensionAttribute14" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input].ExternalColumns[flags]"
+                      dataType="i4"
+                      name="flags" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage\DeletedUser_stage.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage\DeletedUser_stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage\DeletedUser_stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage\DeletedUser_stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage\DeletedUser_stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage.Paths[Address]"
+              endId="Package\Stage\DeletedSmtpAddress_stage.Inputs[OLE DB Destination Input]"
+              name="Address"
+              startId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[Address]" />
+            <path
+              refId="Package\Stage.Paths[User]"
+              endId="Package\Stage\DeletedUser_stage.Inputs[OLE DB Destination Input]"
+              name="User"
+              startId="Package\Stage\ActiveDirectoryRecycleBin.Outputs[User]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TruncateStage"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2A9CD403-B406-450A-9935-B44866E35EEB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TruncateStage"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{36E92C2F-AB1D-4616-8FA4-C4142E37EA08}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE MetaDirectory.dbo.ActiveDirectoryDeletedUser_stage&#xA;TRUNCATE TABLE MetaDirectory.dbo.ActiveDirectoryDeletedSmtpAddress_stage&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{9B065602-2D8A-45F5-8E71-87154F1D3A4B}"
+      DTS:From="Package\TruncateStage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C97A61C9-5B4D-40C1-91AC-02E16DDAE57C}"
+      DTS:From="Package\Stage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Commit" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="117,42"
+          Id="Package\Commit"
+          TopLeft="53,209.5" />
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Stage"
+          TopLeft="60.5,107.5" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\TruncateStage"
+          TopLeft="37,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="113.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="113,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Stage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Stage\DeletedUser_stage"
+          TopLeft="5.5,107.5" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\Stage\ActiveDirectoryRecycleBin"
+          TopLeft="114,11.5" />
+        <NodeLayout
+          Size="216,42"
+          Id="Package\Stage\DeletedSmtpAddress_stage"
+          TopLeft="233,107.5" />
+        <EdgeLayout
+          Id="Package\Stage.Paths[User]"
+          TopLeft="184.666666666667,53.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-92.6666666666667,54"
+              Start="0,0"
+              End="-92.6666666666667,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.8473282442748" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.8473282442748"
+                    Point2="0,21.8473282442748"
+                    Point3="-4,21.8473282442748" />
+                  <mssgle:LineSegment
+                    End="-88.6666666666667,21.8473282442748" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-88.6666666666667,21.8473282442748"
+                    Point2="-92.6666666666667,21.8473282442748"
+                    Point3="-92.6666666666667,25.8473282442748" />
+                  <mssgle:LineSegment
+                    End="-92.6666666666667,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-56.9259700520833,26.8473282442748,21.1852734375,9.421875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage.Paths[Address]"
+          TopLeft="251.333333333333,53.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="89.6666666666667,54"
+              Start="0,0"
+              End="89.6666666666667,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.8473282442748" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.8473282442748"
+                    Point2="0,21.8473282442748"
+                    Point3="4,21.8473282442748" />
+                  <mssgle:LineSegment
+                    End="85.6666666666667,21.8473282442748" />
+                  <mssgle:CubicBezierSegment
+                    Point1="85.6666666666667,21.8473282442748"
+                    Point2="89.6666666666667,21.8473282442748"
+                    Point3="89.6666666666667,25.8473282442748" />
+                  <mssgle:LineSegment
+                    End="89.6666666666667,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="26.4826888020833,26.8473282442748,36.7012890625,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage\DeletedUser_stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage\DeletedSmtpAddress_stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

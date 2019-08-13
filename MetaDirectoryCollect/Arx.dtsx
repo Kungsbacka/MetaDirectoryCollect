@@ -1,0 +1,3383 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/14/2019 10:50:25 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ADM-00720"
+  DTS:CreatorName="KBA\jonas.sjomark"
+  DTS:DTSID="{84DD93E4-4EC1-4D8A-BA46-291BB52A9AE9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1053"
+  DTS:ObjectName="ARX"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="48"
+  DTS:VersionGUID="{4C6206BF-B2FC-4E53-90D5-F777EA52302C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MetaDirectory]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6D0F1BA7-4B9F-4F8A-9B4E-30907ED0470D}"
+      DTS:ObjectName="MetaDirectory">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::MetaDirectoryConnectionString]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{CE94B042-9EE3-4442-BCAF-9B6393F1E01C}"
+      DTS:ObjectName="ArxApiExportUrl"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{F05F3EBA-2F82-4691-9448-9E4096F52086}"
+      DTS:ObjectName="ArxApiPassword"
+      DTS:Required="True"
+      DTS:Sensitive="True">
+      <DTS:Property
+        DTS:Name="ParameterValue">
+        <DTS:Property
+          DTS:DataType="0"
+          DTS:Name="ParameterValue"></DTS:Property>
+      </DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{D37320A0-B6F0-4FFD-BFF8-EAE786234603}"
+      DTS:ObjectName="ArxApiUserName"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{4089978B-9691-43BB-B6B4-03CEF7C1419A}"
+      DTS:ObjectName="MetaDirectoryConnectionString"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Commit"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{45E7543D-A81A-44E4-8BAE-B764526F7216}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Commit"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6D0F1BA7-4B9F-4F8A-9B4E-30907ED0470D}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spCommitArx" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Export from ARX"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{992D337F-D042-40B1-ACD6-D3AE12E19B47}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Export from ARX"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Export from ARX\Access"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Access"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Arx_access_stage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Export from ARX\Access.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input].Columns[personId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="personId"
+                      externalMetadataColumnId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input].ExternalColumns[personId]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[personId]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input].Columns[accessName]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="accessName"
+                      externalMetadataColumnId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input].ExternalColumns[accessName]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[accessName]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input].Columns[Copy of startDate]"
+                      cachedDataType="dbTime"
+                      cachedName="Copy of startDate"
+                      externalMetadataColumnId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input].ExternalColumns[startDate]"
+                      lineageId="Package\Export from ARX\Convert date.Outputs[Data Conversion Output].Columns[Copy of startDate]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input].Columns[Copy of endDate]"
+                      cachedDataType="dbTime"
+                      cachedName="Copy of endDate"
+                      externalMetadataColumnId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input].ExternalColumns[endDate]"
+                      lineageId="Package\Export from ARX\Convert date.Outputs[Data Conversion Output].Columns[Copy of endDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input].ExternalColumns[personId]"
+                      dataType="wstr"
+                      length="50"
+                      name="personId" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input].ExternalColumns[accessName]"
+                      dataType="wstr"
+                      length="150"
+                      name="accessName" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input].ExternalColumns[startDate]"
+                      dataType="dbTimeStamp"
+                      name="startDate" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input].ExternalColumns[endDate]"
+                      dataType="dbTimeStamp"
+                      name="endDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Export from ARX\Access.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Export from ARX\Access.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Export from ARX\Access.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Access.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Export from ARX\Access.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Export from ARX\Card"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Card"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Arx_card_stage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Export from ARX\Card.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input].Columns[cardNumber]"
+                      cachedDataType="ui8"
+                      cachedName="cardNumber"
+                      externalMetadataColumnId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input].ExternalColumns[cardNumber]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[CardOutput].Columns[cardNumber]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input].Columns[personId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="personId"
+                      externalMetadataColumnId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input].ExternalColumns[personId]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[CardOutput].Columns[personId]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input].Columns[formatName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="formatName"
+                      externalMetadataColumnId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input].ExternalColumns[formatName]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[CardOutput].Columns[formatName]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input].Columns[description]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="description"
+                      externalMetadataColumnId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[CardOutput].Columns[description]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input].ExternalColumns[cardNumber]"
+                      dataType="i8"
+                      name="cardNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input].ExternalColumns[personId]"
+                      dataType="wstr"
+                      length="50"
+                      name="personId" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input].ExternalColumns[formatName]"
+                      dataType="wstr"
+                      length="50"
+                      name="formatName" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      dataType="wstr"
+                      length="100"
+                      name="description" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Export from ARX\Card.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Export from ARX\Card.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Export from ARX\Card.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Card.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Export from ARX\Card.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Export from ARX\Convert date"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Convert date"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Export from ARX\Convert date.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Export from ARX\Convert date.Inputs[Data Conversion Input].Columns[startDate]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="startDate"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[startDate]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Convert date.Inputs[Data Conversion Input].Columns[endDate]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="endDate"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[endDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Export from ARX\Convert date.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Export from ARX\Convert date.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Export from ARX\Convert date.Outputs[Data Conversion Output].Columns[Copy of startDate]"
+                      dataType="dbTime"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Export from ARX\Convert date.Outputs[Data Conversion Output].Columns[Copy of startDate]"
+                      name="Copy of startDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[startDate]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Export from ARX\Convert date.Outputs[Data Conversion Output].Columns[Copy of endDate]"
+                      dataType="dbTime"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Export from ARX\Convert date.Outputs[Data Conversion Output].Columns[Copy of endDate]"
+                      name="Copy of endDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[endDate]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Export from ARX\Convert date.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Export from ARX\Convert date.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Export from ARX\Convert date.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Export from ARX\Convert date.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Convert date.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Export from ARX\Convert date.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Export from ARX\Person"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Person"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Arx_person_stage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Export from ARX\Person.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[firstName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="firstName"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[firstName]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[firstName]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[description]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="description"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[description]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[lastName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="lastName"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[lastName]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[lastName]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[extraAnsvarigChef]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="extraAnsvarigChef"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraAnsvarigChef]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraAnsvarigChef]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[extraTelefon]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="extraTelefon"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraTelefon]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraTelefon]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[extraForvaltning]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="extraForvaltning"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraForvaltning]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraForvaltning]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[extraBeredskapskort]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="extraBeredskapskort"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraBeredskapskort]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraBeredskapskort]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[extraEpost]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="extraEpost"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraEpost]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraEpost]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[extraVerksamhet]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="extraVerksamhet"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraVerksamhet]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraVerksamhet]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[extraEnhet]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="extraEnhet"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraEnhet]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraEnhet]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[extraKundnamn]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="extraKundnamn"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraKundnamn]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraKundnamn]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[extraAvdelning]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="extraAvdelning"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraAvdelning]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraAvdelning]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[personId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="personId"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[personId]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[personId]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[extraExtern]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="extraExtern"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraExtern]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraExtern]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[extraKlar]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="extraKlar"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraKlar]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraKlar]" />
+                    <inputColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].Columns[extraExtId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="extraExtId"
+                      externalMetadataColumnId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraExtId]"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraExtId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[firstName]"
+                      dataType="wstr"
+                      length="100"
+                      name="firstName" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[lastName]"
+                      dataType="wstr"
+                      length="100"
+                      name="lastName" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      dataType="wstr"
+                      length="200"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraAvdelning]"
+                      dataType="wstr"
+                      length="100"
+                      name="extraAvdelning" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraKundnamn]"
+                      dataType="wstr"
+                      length="100"
+                      name="extraKundnamn" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraEnhet]"
+                      dataType="wstr"
+                      length="100"
+                      name="extraEnhet" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraVerksamhet]"
+                      dataType="wstr"
+                      length="100"
+                      name="extraVerksamhet" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraEpost]"
+                      dataType="wstr"
+                      length="100"
+                      name="extraEpost" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraExtId]"
+                      dataType="wstr"
+                      length="50"
+                      name="extraExtId" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraForvaltning]"
+                      dataType="wstr"
+                      length="100"
+                      name="extraForvaltning" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraAnsvarigChef]"
+                      dataType="wstr"
+                      length="100"
+                      name="extraAnsvarigChef" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraTelefon]"
+                      dataType="wstr"
+                      length="100"
+                      name="extraTelefon" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraBeredskapskort]"
+                      dataType="wstr"
+                      length="100"
+                      name="extraBeredskapskort" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[personId]"
+                      dataType="wstr"
+                      length="50"
+                      name="personId" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraExtern]"
+                      dataType="wstr"
+                      length="50"
+                      name="extraExtern" />
+                    <externalMetadataColumn
+                      refId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input].ExternalColumns[extraKlar]"
+                      dataType="wstr"
+                      length="50"
+                      name="extraKlar" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Export from ARX\Person.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Export from ARX\Person.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Export from ARX\Person.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Person.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Export from ARX\Person.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Export from ARX\Script Component"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;10"
+              description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+              name="Script Component"
+              version="11">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Stores the source code of the component"
+                  isArray="true"
+                  name="SourceCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="36">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Helpers.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using Microsoft.SqlServer.Dts.Pipeline;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+static class Helpers
+{
+    public static void SetOutputBufferValue(this ScriptBuffer buffer, string bufferProp, object obj, string objProp)
+    {
+        var objType = obj.GetType();
+        var objInfo = objType.GetProperty(objProp);
+        var value = objInfo.GetValue(obj);
+        var bufferType = buffer.GetType();
+        if (!IsNull(value))
+        {
+            var bufferInfo = bufferType.GetProperty(bufferProp);
+            if (bufferInfo != null)
+            {
+                bufferInfo.SetValue(buffer, value, null);
+            }
+        }
+        else
+        {
+            var bufferInfo = bufferType.GetProperty($"{bufferProp}_IsNull");
+            if (bufferInfo != null)
+            {
+                bufferInfo.SetValue(buffer, true, null);
+            }
+        }
+    }
+
+
+    private static bool IsNull(object value)
+    {
+        if (value == null)
+        {
+            return true;
+        }
+        if (value is string && string.IsNullOrWhiteSpace((string)value))
+        {
+            return true;
+        }
+        return false;
+    }
+}
+
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+using System.IO;
+using System.Net;
+
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent
+{
+    public override void PreExecute()
+    {
+        base.PreExecute();
+    }
+
+    public override void PostExecute()
+    {
+        base.PostExecute();
+    }
+
+    private bool IsNull(object value)
+    {
+        if (value == null)
+        {
+            return true;
+        }
+        if (value is string && string.IsNullOrWhiteSpace((string)value))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public override void CreateNewOutputRows()
+    {
+        var fieldDict = new Dictionary<string, string>()
+        {
+            { "id",          "personId"    },
+            { "first_name",  "firstName"   },
+            { "last_name",   "lastName"    },
+            { "description", "description" }
+        };
+        var extraFieldDict = new Dictionary<string, string>()
+        {
+            { "Förvaltning",    "extraForvaltning"    },
+            { "Verksamhet",     "extraVerksamhet"     },
+            { "Enhet",          "extraEnhet"          },
+            { "Avdelning",      "extraAvdelning"      },
+            { "Ansvarig chef",  "extraAnsvarigChef"   },
+            { "Telefon",        "extraTelefon"        },
+            { "e-post",         "extraEpost"          },
+            { "Beredskapskort", "extraBeredskapskort" },
+            { "extid",          "extraExtId"          },
+            { "Kundnamn",       "extraKundnamn"       },
+            { "Extern",         "extraExtern"         },
+            { "Klar",           "extraKlar"           }
+        };
+        var cardFieldDict = new Dictionary<string, string>()
+        {
+            { "number",      "cardNumber"  },
+            { "person_id",   "personId"    },
+            { "format_name", "formatName"  },
+            { "description", "description" }
+        };
+        var accessFieldDict = new Dictionary<string, string>()
+        {
+            { "name",       "accessName" },
+            { "start_date", "startDate"  },
+            { "end_date",   "endDate"    }
+        };
+        ServicePointManager.ServerCertificateValidationCallback = delegate { return true; }; // Ignore certificate errors
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11; // Force TLS 1.1
+        arxdata data;
+        using (var wc = new WebClient())
+        {
+            wc.Credentials = new NetworkCredential(
+                Variables.ArxApiUserName,
+                Variables.ArxApiPassword);
+            var xs = new XmlSerializer(typeof(arxdata));
+            data = (arxdata)xs.Deserialize(wc.OpenRead(Variables.ArxApiExportUrl));
+        }
+        foreach (var person in data.persons)
+        {
+            PersonOutputBuffer.AddRow();
+            foreach (string propertyName in fieldDict.Keys)
+            {
+                PersonOutputBuffer.SetOutputBufferValue(fieldDict[propertyName], person, propertyName);
+            }
+            foreach (var extraField in person.extra_fields)
+            {
+                string propertyName;
+                if (extraFieldDict.TryGetValue(extraField.name, out propertyName))
+                {
+                    PersonOutputBuffer.SetOutputBufferValue(propertyName, extraField, "value");
+                }
+            }
+            foreach (var access in person.access_categories)
+            {
+                AccessOutputBuffer.AddRow();
+                AccessOutputBuffer.SetOutputBufferValue("personId", person, "id");
+                foreach (string propertyName in accessFieldDict.Keys)
+                {
+                    AccessOutputBuffer.SetOutputBufferValue(accessFieldDict[propertyName], access, propertyName);
+                }
+            }
+        }
+        foreach (arxdataCard card in data.cards)
+        {
+            CardOutputBuffer.AddRow();
+            foreach (string propertyName in cardFieldDict.Keys)
+            {
+                CardOutputBuffer.SetOutputBufferValue(cardFieldDict[propertyName], card, propertyName);
+            }
+        }
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class PersonOutputBuffer: ScriptBuffer
+
+{
+    public PersonOutputBuffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public String personId
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool personId_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String firstName
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool firstName_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String lastName
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool lastName_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String description
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool description_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extraForvaltning
+    {
+        set
+        {
+            this[4] = value;
+        }
+    }
+    public bool extraForvaltning_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(4);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extraVerksamhet
+    {
+        set
+        {
+            this[5] = value;
+        }
+    }
+    public bool extraVerksamhet_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(5);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extraEnhet
+    {
+        set
+        {
+            this[6] = value;
+        }
+    }
+    public bool extraEnhet_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(6);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extraAvdelning
+    {
+        set
+        {
+            this[7] = value;
+        }
+    }
+    public bool extraAvdelning_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(7);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extraAnsvarigChef
+    {
+        set
+        {
+            this[8] = value;
+        }
+    }
+    public bool extraAnsvarigChef_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(8);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extraTelefon
+    {
+        set
+        {
+            this[9] = value;
+        }
+    }
+    public bool extraTelefon_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(9);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extraEpost
+    {
+        set
+        {
+            this[10] = value;
+        }
+    }
+    public bool extraEpost_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(10);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extraBeredskapskort
+    {
+        set
+        {
+            this[11] = value;
+        }
+    }
+    public bool extraBeredskapskort_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(11);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extraExtId
+    {
+        set
+        {
+            this[12] = value;
+        }
+    }
+    public bool extraExtId_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(12);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extraKundnamn
+    {
+        set
+        {
+            this[13] = value;
+        }
+    }
+    public bool extraKundnamn_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(13);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extraExtern
+    {
+        set
+        {
+            this[14] = value;
+        }
+    }
+    public bool extraExtern_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(14);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extraKlar
+    {
+        set
+        {
+            this[15] = value;
+        }
+    }
+    public bool extraKlar_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(15);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+
+public class AccessOutputBuffer: ScriptBuffer
+
+{
+    public AccessOutputBuffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public String personId
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool personId_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String accessName
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool accessName_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String startDate
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool startDate_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String endDate
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool endDate_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+
+public class CardOutputBuffer: ScriptBuffer
+
+{
+    public CardOutputBuffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public UInt64 cardNumber
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool cardNumber_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String personId
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool personId_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String formatName
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool formatName_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String description
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool description_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public PersonOutputBuffer PersonOutputBuffer;
+
+    public AccessOutputBuffer AccessOutputBuffer;
+
+    public CardOutputBuffer CardOutputBuffer;
+
+    public virtual void FinishOutputs()
+    {
+    }
+
+    private void MarkOutputsFinished()
+    {
+
+        if (null != PersonOutputBuffer)
+        {
+            PersonOutputBuffer.SetEndOfRowset();
+            PersonOutputBuffer = null;
+        }
+
+        if (null != AccessOutputBuffer)
+        {
+            AccessOutputBuffer.SetEndOfRowset();
+            AccessOutputBuffer = null;
+        }
+
+        if (null != CardOutputBuffer)
+        {
+            CardOutputBuffer.SetEndOfRowset();
+            CardOutputBuffer = null;
+        }
+
+    }
+
+    public override void PrimeOutput(int Outputs, int[] OutputIDs, PipelineBuffer[] Buffers, OutputNameMap OutputMap)
+    {
+       for(int Idx = 0; Idx < Outputs; Idx++)
+       {
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"PersonOutput"))
+            {
+                PersonOutputBuffer = new PersonOutputBuffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"AccessOutput"))
+            {
+                AccessOutputBuffer = new AccessOutputBuffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"CardOutput"))
+            {
+                CardOutputBuffer = new CardOutputBuffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+        }
+
+        CreateNewOutputRows();
+
+        FinishOutputs();
+        MarkOutputsFinished();
+
+    }
+
+    public virtual void CreateNewOutputRows()
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public String ArxApiExportUrl
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["ArxApiExportUrl"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String ArxApiPassword
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["ArxApiPassword"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String ArxApiUserName
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["ArxApiUserName"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_78e66602e403432dac8270616b0b2efb.Properties.Settings.get_Default():SC_78e66602e403432dac8270616b0b2efb.Properties.Sett" +
+    "ings")]
+
+namespace SC_78e66602e403432dac8270616b0b2efb.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[arxdata.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[[System.SerializableAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+public class arxdata
+{
+
+    private arxdataPerson[] personsField;
+
+    private arxdataCard[] cardsField;
+
+    private string timestampField;
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("person", IsNullable = false)]
+    public arxdataPerson[] persons
+    {
+        get
+        {
+            return this.personsField;
+        }
+        set
+        {
+            this.personsField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("card", IsNullable = false)]
+    public arxdataCard[] cards
+    {
+        get
+        {
+            return this.cardsField;
+        }
+        set
+        {
+            this.cardsField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string timestamp
+    {
+        get
+        {
+            return this.timestampField;
+        }
+        set
+        {
+            this.timestampField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.SerializableAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+public partial class arxdataPerson
+{
+
+    private string idField;
+
+    private string first_nameField;
+
+    private string last_nameField;
+
+    private string descriptionField;
+
+    private string pin_codeField;
+
+    private string force_pin_changeField;
+
+    private arxdataPersonExtra_field[] extra_fieldsField;
+
+    private arxdataPersonAccess_category[] access_categoriesField;
+
+    /// <remarks/>
+    public string id
+    {
+        get
+        {
+            return this.idField;
+        }
+        set
+        {
+            this.idField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string first_name
+    {
+        get
+        {
+            return this.first_nameField;
+        }
+        set
+        {
+            this.first_nameField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string last_name
+    {
+        get
+        {
+            return this.last_nameField;
+        }
+        set
+        {
+            this.last_nameField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string description
+    {
+        get
+        {
+            return this.descriptionField;
+        }
+        set
+        {
+            this.descriptionField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string pin_code
+    {
+        get
+        {
+            return this.pin_codeField;
+        }
+        set
+        {
+            this.pin_codeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string force_pin_change
+    {
+        get
+        {
+            return this.force_pin_changeField;
+        }
+        set
+        {
+            this.force_pin_changeField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("extra_field", IsNullable = false)]
+    public arxdataPersonExtra_field[] extra_fields
+    {
+        get
+        {
+            return this.extra_fieldsField;
+        }
+        set
+        {
+            this.extra_fieldsField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("access_category", IsNullable = false)]
+    public arxdataPersonAccess_category[] access_categories
+    {
+        get
+        {
+            return this.access_categoriesField;
+        }
+        set
+        {
+            this.access_categoriesField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.SerializableAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+public partial class arxdataPersonExtra_field
+{
+
+    private string nameField;
+
+    private string valueField;
+
+    /// <remarks/>
+    public string name
+    {
+        get
+        {
+            return this.nameField;
+        }
+        set
+        {
+            this.nameField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string value
+    {
+        get
+        {
+            return this.valueField;
+        }
+        set
+        {
+            this.valueField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.SerializableAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+public partial class arxdataPersonAccess_category
+{
+
+    private string nameField;
+
+    private string start_dateField;
+
+    private string end_dateField;
+
+    /// <remarks/>
+    public string name
+    {
+        get
+        {
+            return this.nameField;
+        }
+        set
+        {
+            this.nameField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string start_date
+    {
+        get
+        {
+            return this.start_dateField;
+        }
+        set
+        {
+            this.start_dateField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string end_date
+    {
+        get
+        {
+            return this.end_dateField;
+        }
+        set
+        {
+            this.end_dateField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.SerializableAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+public partial class arxdataCard
+{
+
+    private uint numberField;
+
+    private string format_nameField;
+
+    private string descriptionField;
+
+    private string person_idField;
+
+    private object inhibitedField;
+
+    /// <remarks/>
+    public uint number
+    {
+        get
+        {
+            return this.numberField;
+        }
+        set
+        {
+            this.numberField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string format_name
+    {
+        get
+        {
+            return this.format_nameField;
+        }
+        set
+        {
+            this.format_nameField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string description
+    {
+        get
+        {
+            return this.descriptionField;
+        }
+        set
+        {
+            this.descriptionField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string person_id
+    {
+        get
+        {
+            return this.person_idField;
+        }
+        set
+        {
+            this.person_idField = value;
+        }
+    }
+
+    /// <remarks/>
+    public object inhibited
+    {
+        get
+        {
+            return this.inhibitedField;
+        }
+        set
+        {
+            this.inhibitedField = value;
+        }
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Project]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>SC_78e66602e403432dac8270616b0b2efb</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>SC_78e66602e403432dac8270616b0b2efb</msb:DisplayName>
+    <msb:ProjectId>{B4F1A1FA-2752-453F-B71B-57BF90E42D90}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="SC_78e66602e403432dac8270616b0b2efb.csproj" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+    <msb:File Include="main.cs" />
+    <msb:File Include="BufferWrapper.cs" />
+    <msb:File Include="arxdata.cs" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="Helpers.cs" />
+    <msb:File Include="ComponentWrapper.cs" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+  </msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_78e66602e403432dac8270616b0b2efb.csproj]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3D64B964-EB6E-43C4-A4DC-AB07E2B55771}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC_78e66602e403432dac8270616b0b2efb</RootNamespace>
+    <AssemblyName>SC_78e66602e403432dac8270616b0b2efb</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="arxdata.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="main.cs" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptComponent" IconIndex="0" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC140</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_78e66602e403432dac8270616b0b2efb")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_78e66602e403432dac8270616b0b2efb")]
+[assembly: AssemblyCopyright("Copyright @  2019")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.0.0")]
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_78e66602e403432dac8270616b0b2efb.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_78e66602e403432dac8270616b0b2efb.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_78e66602e403432dac8270616b0b2efb.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_78e66602e403432dac8270616b0b2efb.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_78e66602e403432dac8270616b0b2efb.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Stores the binary representation of the component"
+                  isArray="true"
+                  name="BinaryCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="2">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_78e66602e403432dac8270616b0b2efb.dll]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[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
+ywWwBwoA7gZICA4AiQVCCw4AxAZCCwYAkg/FCg4A5AVCCw4AmgVCCxIAmAwQBAYASQTFCgYA3wtb
+CxIAnQYQBAYAXwDjAAoA4g+ZD2MAbQsAAGsARA0AAAYADQWvDQoA6gcjEQYAsASjDgoA6wqjDgoA
+UA8jERYAiQwQBBIA7AsQBBIAChAQBAYAKAVmDQYA5wzPDQYA0wstCwoA+ARICAoAWQVICAoAdgQY
+CwYA3wfFCgYA2ArFCgoA9wyZDwoAMQSZDwoANgiZDwoA/w6ZDwYANAPFCg4AMw1CCwYArAqgAAYA
+KAPFCgYAewvFCgYAbADFChoAEQALDRoAAQALDY8AtBAAABoAIgALDQYA7xBbCwAAAACLAAAAAAAB
+AAEAASAQAKoAAABFAAEAAQABIBAAtQsAAEUABAAIAAEgEACJAgAARQAMABkAASAQAPgQAABFAA4A
+HgABIBAAogIAAEUAEQAlAIABEABIDwAARQAWADAAAQAQAOAKAAAwABYAMgABABAAtgwAAFEAFgA3
+AAEAEADJDAAAUQAWAFsAAQAQAKUMAABRABYAZwABABAA7A8AAI0AFgBzAAEAEAAcDwAARQAbAHgA
+AQAQAJkOAABFABwAeQAAABAA1g1eDkUAHQB9AAABEAD2Dl4OpQAfAIEAAyEQAN8AAABFACAAhAAB
+AHwCdgEBAFoCewEBAC0CgAEBAJcBgAEBAOMBgAEBANQBgAEBABwCgAEBAJ8BgAEBAK0BgAEBAEgC
+gwEBAGUCiAEBAOkBgAEBABECgAEBAOkBgAEBAAECgAEBAPMBgAEBADwCjQEBAMMBgAEBABwCgAEB
+AJABgAEBAIEBkAEGABwPkwEGAJkOlwEGALYMmwEGAMkMnwEGAKUMowEBAPoPpwEBAPoPpwERAMwK
+rAERAGYEsQERANQCtgE2AHMAugEWADoAvgFQIAAAAACGCCgPwgEBAFggAAAAAIYINA/IAQEAYSAA
+AAAAhgibDc8BAgBpIAAAAACGCKUN1QECAHIgAAAAAIYIJwzcAQMAeiAAAAAAhgg1DBAAAwCDIAAA
+AACGGE8NAQAEAIsgAAAAAIYIcwHcAQQAkyAAAAAAhgh6ARAABACcIAAAAACGCPID3AEFAKQgAAAA
+AIYIAQQQAAUArSAAAAAAhgjWA9wBBgC1IAAAAACGCOQDEAAGAL4gAAAAAIYIlQvcAQcAxiAAAAAA
+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
+AAABAHUHAAABAHUHAAABANUMAAACANEOAAADAPoLAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAAB
+AHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUH
+AAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAAB
+AHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABANUM
+AAACANEOAAADAPoLAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAAB
+AHUHAAABANUMAAACANEOAAADAPoLAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUHAAABAHUH
+AAABAHUHAAABAHUHAAABAGYPAAACAFwNAAADAEAPAAAEAPoLAAABABAQAAABABAQAAABAHUHAAAB
+AHcAAAACAHwAAAADAIEAAAAEAIYACQBPDQEAEQBPDQUAGQBPDQEAIQBPDQoAMQBPDRAAOQBPDRAA
+QQBPDRAASQBPDRAAUQBPDRAAWQBPDRAAYQBPDRAAaQBPDRAAcQBPDRAAeQBPDQEAgQBPDQEAkQBP
+DRAAmQBPDQEAuQBPDQEA4QBPDQEAIQFPDQEAQQFPDRUAiQBPDQEAiQBGBCYAqQA3ESsAsQBVBzEA
+sQAVETYAsQBeBz4AUQGLD0YAUQHBAkwAGQEmBwEAGQExBwEADABPDQEADAAjAZcA6QBPDZ8AYQEO
+CKUAYQGDCqsAyQBPDQEAcQFPDbIAyQAMD7gAqQBGA78AiQFPDccAyQAaAc0AiQF7B9QAmQGOBAEA
+DACCD9sAFABBDe0AHAAaEP8ADACzCgQBHACXEAsBDABSBw8BoQBPDRgBoQC8CiQBoQBwCgUAoQFP
+DRAAoQDkEAEAoQDHDwEAoQDKDwsBGQFPDQEAGQGUAC4BGQHlDjYBGQGNDjwBsQGzCkIBGQHPEEkB
+uQGgEE8BqQDrEFYBKQFPDVwBSQFPDQEAKQCDAKkDLgALAKMCLgATAKgCLgAbALECLgAjANACLgAr
+ANkCLgAzAAIDLgA7AAIDLgBDAAIDLgBLANkCLgBTAAgDLgBbAAIDLgBjAB8DQwBrAGkDQwBzAHMD
+QwB7AIkDSQCDAMMDYwBrAGkDYwBzAHMDaQCLAKMCgwBrAGkDgwBzAHMDowBrAGkDowBzAHMDwwBr
+AGkDwwBzAHMD4wALAKMCAwGTAKMCSQGDANsDaQGDAPoD4wGjAKMCIwKbAKMC4QObAKMCAAYLAKMC
+KQmrANACSQmrANACHABRACoBAgABAAMABAAEAAwABQAOAAYAEQAJABYACgA2AAsAPgAOAEYADwBJ
+ABAASwAAADgPZgIAAKkNbAIAADkMcgIAAH4BcgIAAAUEcgIAAOgDcgIAAKkLcgIAAPUCcgIAABcD
+cgIAAI4NdgIAAEwOfAIAAAsEcgIAAHUHcgIAAAsEcgIAAO0EcgIAANEEcgIAAIIMggIAALgDcgIA
+AKkLcgIAAGkBcgIAAE0BhgIAAAIBcgIAAIoIigIAAJoDcgIAAPQIigIAAI0DcgIAAOAIigIAAKkL
+cgIAALUJigIAAM4HcgIAAGgJigIAAKgPcgIAAA4KigIAALwPcgIAACkKigIAAKEHcgIAAE4JigIA
+AIsHcgIAADEJigIAAAsLcgIAAJ0JigIAAIAQcgIAAF4KigIAAEcQcgIAAD8KigIAAA8BcgIAAJ4I
+igIAAPkKcgIAAIQJigIAAMcLcgIAAMwJigIAAFoMcgIAAOMJigIAAAIBcgIAAIoIigIAAG8DcgIA
+ALQIigIAAKYEcgIAABwJigIAAJoEcgIAAAkJigIAAGgMjgIAAPgJigIAAAIBcgIAAIoIigIAAH4D
+cgIAAMoIigIAAKkLcgIAALUJigIAAJwKcgIAALICcgIAAFwDcgIAAOcMkgIAAG4EmAIAANoPngIC
+AAEAAwABAAIAAwACAAMABQABAAQABQACAAUABwABAAYABwACAAgACQABAAkACQACAAoACwABAAsA
+CwACAAwADQABAA0ADQACAA4ADwABAA8ADwACABAAEQABABEAEQACABIAEwABABMAEwACABQAFQAB
+ABUAFQACABYAFwABABcAFwACABkAGQABABoAGQACABsAGwABABwAGwACAB4AHQABAB8AHQACACAA
+HwABACEAHwACACIAIQABACMAIQACACUAIwABACYAIwACACcAJQABACgAJQACACkAJwABACoAJwAC
+ACsAKQABACwAKQACAC0AKwABAC4AKwABADgALQABADkALwABADoAMQABADsAMwABADwANQABAD0A
+NwABAD4AOQABAD8AOwABAEAAPQABAEEAPwABAEIAQQABAEMAQwABAEQARQABAEUARwABAEYASQAB
+AEcASwABAEgATQABAEkATwABAEoAUQABAEsAUwABAEwAVQABAE0AVwABAE4AWQABAE8AWwABAFAA
+XQABAFEAXwABAFIAYQABAFMAYwABAFQAZQABAFUAZwABAFYAaQABAFcAawABAFwAbQABAF0AbwAB
+AF4AcQABAF8AcwABAGAAdQABAGEAdwABAGIAeQABAGMAewABAGgAfQABAGkAfwABAGoAgQABAGsA
+gwABAGwAhQABAG0AhwABAG4AiQABAG8AiwACAHoAjQACAHsAjwACAHwAkQACAH4AkwACAH8AlQAB
+AIAAlQACAIEAlwCQAOYA+AAEgAAAAQAAAAAAAAAAAAAAAACyAAAABAAAAAAAAAAAAAAAZAHWAAAA
+AAAEAAAAAAAAAAAAAABkAcUKAAAAAAQAAAAAAAAAAAAAAGQBeAoAAAAADgAAAAAAAAAAAAAAbQEm
+EAAAAAAOAAAAAAAAAAAAAABtAVsQAAAAAA4AAAAAAAAAAAAAAG0BBAwAAAAAAAAAAAEAAADgDQAA
+EQAIAAAAAAAASURUU1ZhcmlhYmxlMTAwAElEVFNWYXJpYWJsZXMxMDAASURUU0V2YWx1YXRvckNv
+bnRleHQxMDAAPD45X18zXzAAPENyZWF0ZU5ld091dHB1dFJvd3M+Yl9fM18wAERpY3Rpb25hcnlg
+MgBVSW50NjQAPD45ADxwMD4APHAxPgA8cDI+ADxwMz4APE1vZHVsZT4AR2V0T3V0cHV0SUQAU3lz
+dGVtLklPAGFyeGRhdGEAU0NfNzhlNjY2MDJlNDAzNDMyZGFjODI3MDYxNmIwYjJlZmIAbXNjb3Js
+aWIAPD5jAFN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljAHNldF9wZXJzb25JZABzZXRfZXh0cmFF
+eHRJZABPcGVuUmVhZABBZGQATWFya091dHB1dHNGaW5pc2hlZABnZXRfaW5oaWJpdGVkAHNldF9p
+bmhpYml0ZWQAZ2V0X3BlcnNvbl9pZABzZXRfcGVyc29uX2lkAGdldF9pZABzZXRfaWQAaW5oaWJp
+dGVkRmllbGQAcGVyc29uX2lkRmllbGQAcGluX2NvZGVGaWVsZABmb3JjZV9waW5fY2hhbmdlRmll
+bGQAZm9ybWF0X25hbWVGaWVsZABsYXN0X25hbWVGaWVsZABmaXJzdF9uYW1lRmllbGQAZW5kX2Rh
+dGVGaWVsZABzdGFydF9kYXRlRmllbGQAdmFsdWVGaWVsZABkZXNjcmlwdGlvbkZpZWxkAHRpbWVz
+dGFtcEZpZWxkAG51bWJlckZpZWxkAGV4dHJhX2ZpZWxkc0ZpZWxkAGNhcmRzRmllbGQAYWNjZXNz
+X2NhdGVnb3JpZXNGaWVsZABwZXJzb25zRmllbGQAYXJ4ZGF0YVBlcnNvbkV4dHJhX2ZpZWxkAGFy
+eGRhdGFDYXJkAGdldF9BcnhBcGlQYXNzd29yZABJc051bGxPcldoaXRlU3BhY2UAZGVmYXVsdElu
+c3RhbmNlAGdldF9waW5fY29kZQBzZXRfcGluX2NvZGUAZ2V0X2ZvcmNlX3Bpbl9jaGFuZ2UAc2V0
+X2ZvcmNlX3Bpbl9jaGFuZ2UASURpc3Bvc2FibGUAUnVudGltZVR5cGVIYW5kbGUAR2V0VHlwZUZy
+b21IYW5kbGUAZ2V0X0FyeEFwaVVzZXJOYW1lAHNldF9hY2Nlc3NOYW1lAHNldF9mb3JtYXROYW1l
+AHNldF9sYXN0TmFtZQBzZXRfZmlyc3ROYW1lAGdldF9mb3JtYXRfbmFtZQBzZXRfZm9ybWF0X25h
+bWUAZ2V0X25hbWUAc2V0X25hbWUAZ2V0X2xhc3RfbmFtZQBzZXRfbGFzdF9uYW1lAGdldF9maXJz
+dF9uYW1lAHNldF9maXJzdF9uYW1lAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlBpcGVsaW5lAFNl
+Y3VyaXR5UHJvdG9jb2xUeXBlAEdldFR5cGUAZ2V0X0N1bHR1cmUAc2V0X0N1bHR1cmUAcmVzb3Vy
+Y2VDdWx0dXJlAEFwcGxpY2F0aW9uU2V0dGluZ3NCYXNlAERpc3Bvc2UAc2V0X2VuZERhdGUAc2V0
+X3N0YXJ0RGF0ZQBYNTA5Q2VydGlmaWNhdGUAZ2V0X2VuZF9kYXRlAHNldF9lbmRfZGF0ZQBnZXRf
+c3RhcnRfZGF0ZQBzZXRfc3RhcnRfZGF0ZQBFZGl0b3JCcm93c2FibGVTdGF0ZQBDb21waWxlckdl
+bmVyYXRlZEF0dHJpYnV0ZQBEZWJ1Z2dlck5vblVzZXJDb2RlQXR0cmlidXRlAERlYnVnZ2FibGVB
+dHRyaWJ1dGUARWRpdG9yQnJvd3NhYmxlQXR0cmlidXRlAEFzc2VtYmx5VGl0bGVBdHRyaWJ1dGUA
+WG1sVHlwZUF0dHJpYnV0ZQBYbWxBdHRyaWJ1dGVBdHRyaWJ1dGUAQXNzZW1ibHlUcmFkZW1hcmtB
+dHRyaWJ1dGUAVGFyZ2V0RnJhbWV3b3JrQXR0cmlidXRlAFhtbEFycmF5SXRlbUF0dHJpYnV0ZQBF
+eHRlbnNpb25BdHRyaWJ1dGUAQXNzZW1ibHlDb25maWd1cmF0aW9uQXR0cmlidXRlAEFzc2VtYmx5
+RGVzY3JpcHRpb25BdHRyaWJ1dGUAQ29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJpYnV0ZQBBc3Nl
+bWJseVByb2R1Y3RBdHRyaWJ1dGUAQXNzZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUAU1NJU1Njcmlw
+dENvbXBvbmVudEVudHJ5UG9pbnRBdHRyaWJ1dGUAWG1sUm9vdEF0dHJpYnV0ZQBBc3NlbWJseUNv
+bXBhbnlBdHRyaWJ1dGUARGVzaWduZXJDYXRlZ29yeUF0dHJpYnV0ZQBSdW50aW1lQ29tcGF0aWJp
+bGl0eUF0dHJpYnV0ZQBQcmVFeGVjdXRlAFBvc3RFeGVjdXRlAFNldE91dHB1dEJ1ZmZlclZhbHVl
+AFRyeUdldFZhbHVlAFNldFZhbHVlAGdldF92YWx1ZQBzZXRfdmFsdWUARGVzZXJpYWxpemUAc2V0
+X2V4dHJhQW5zdmFyaWdDaGVmAHNldF9leHRyYUF2ZGVsbmluZwBTeXN0ZW0uUnVudGltZS5WZXJz
+aW9uaW5nAHNldF9leHRyYUZvcnZhbHRuaW5nAFN0cmluZwBvYmoAUmVtb3RlQ2VydGlmaWNhdGVW
+YWxpZGF0aW9uQ2FsbGJhY2sAc2V0X1NlcnZlckNlcnRpZmljYXRlVmFsaWRhdGlvbkNhbGxiYWNr
+AE5ldHdvcmtDcmVkZW50aWFsAFN5c3RlbS5Db21wb25lbnRNb2RlbABTQ183OGU2NjYwMmU0MDM0
+MzJkYWM4MjcwNjE2YjBiMmVmYi5kbGwAc2V0X3BlcnNvbklkX0lzTnVsbABzZXRfZXh0cmFFeHRJ
+ZF9Jc051bGwAc2V0X2FjY2Vzc05hbWVfSXNOdWxsAHNldF9mb3JtYXROYW1lX0lzTnVsbABzZXRf
+bGFzdE5hbWVfSXNOdWxsAHNldF9maXJzdE5hbWVfSXNOdWxsAHNldF9lbmREYXRlX0lzTnVsbABz
+ZXRfc3RhcnREYXRlX0lzTnVsbABzZXRfZXh0cmFBbnN2YXJpZ0NoZWZfSXNOdWxsAHNldF9leHRy
+YUF2ZGVsbmluZ19Jc051bGwAc2V0X2V4dHJhRm9ydmFsdG5pbmdfSXNOdWxsAHNldF9leHRyYUt1
+bmRuYW1uX0lzTnVsbABzZXRfZXh0cmFUZWxlZm9uX0lzTnVsbABzZXRfZGVzY3JpcHRpb25fSXNO
+dWxsAHNldF9leHRyYUV4dGVybl9Jc051bGwAc2V0X2V4dHJhS2xhcl9Jc051bGwAc2V0X2NhcmRO
+dW1iZXJfSXNOdWxsAHNldF9leHRyYVZlcmtzYW1oZXRfSXNOdWxsAHNldF9leHRyYUVuaGV0X0lz
+TnVsbABzZXRfZXh0cmFCZXJlZHNrYXBza29ydF9Jc051bGwAc2V0X2V4dHJhRXBvc3RfSXNOdWxs
+AFNldE51bGwAU3lzdGVtLlhtbABzZXRfU2VjdXJpdHlQcm90b2NvbABnZXRfQXJ4QXBpRXhwb3J0
+VXJsAFN0cmVhbQBnZXRfSXRlbQBzZXRfSXRlbQBTeXN0ZW0AcmVzb3VyY2VNYW4AQm9vbGVhbgBT
+Y3JpcHRNYWluAFg1MDlDaGFpbgBzZXRfZXh0cmFLdW5kbmFtbgBzZXRfZXh0cmFUZWxlZm9uAFN5
+c3RlbS5Db25maWd1cmF0aW9uAFN5c3RlbS5HbG9iYWxpemF0aW9uAFN5c3RlbS5YbWwuU2VyaWFs
+aXphdGlvbgBTeXN0ZW0uUmVmbGVjdGlvbgBLZXlDb2xsZWN0aW9uAEludmFsaWRPcGVyYXRpb25F
+eGNlcHRpb24AZ2V0X2Rlc2NyaXB0aW9uAHNldF9kZXNjcmlwdGlvbgBhcnhkYXRhUGVyc29uAHNl
+dF9leHRyYUV4dGVybgBDdWx0dXJlSW5mbwBQcm9wZXJ0eUluZm8AT3V0cHV0TmFtZU1hcABPdXRw
+dXRNYXAATWljcm9zb2Z0LlNxbFNlcnZlci5EVFNSdW50aW1lV3JhcABnZXRfdGltZXN0YW1wAHNl
+dF90aW1lc3RhbXAAb2JqUHJvcABidWZmZXJQcm9wAHNldF9leHRyYUtsYXIAc2V0X2NhcmROdW1i
+ZXIAZ2V0X251bWJlcgBzZXRfbnVtYmVyAFBpcGVsaW5lQnVmZmVyAFNjcmlwdEJ1ZmZlcgBDYXJk
+T3V0cHV0QnVmZmVyAFBlcnNvbk91dHB1dEJ1ZmZlcgBBY2Nlc3NPdXRwdXRCdWZmZXIAYnVmZmVy
+AGdldF9SZXNvdXJjZU1hbmFnZXIAU2VydmljZVBvaW50TWFuYWdlcgBNaWNyb3NvZnQuU3FsU2Vy
+dmVyLkR0cy5SdW50aW1lLldyYXBwZXIAWG1sU2VyaWFsaXplcgBHZXRFbnVtZXJhdG9yAC5jdG9y
+AC5jY3RvcgBPdXRwdXRJRHMAU3lzdGVtLkRpYWdub3N0aWNzAGdldF9leHRyYV9maWVsZHMAc2V0
+X2V4dHJhX2ZpZWxkcwBnZXRfY2FyZHMAc2V0X2NhcmRzAFN5c3RlbS5SdW50aW1lLkNvbXBpbGVy
+U2VydmljZXMAU3lzdGVtLlJlc291cmNlcwBTQ183OGU2NjYwMmU0MDM0MzJkYWM4MjcwNjE2YjBi
+MmVmYi5Qcm9wZXJ0aWVzLlJlc291cmNlcy5yZXNvdXJjZXMARGVidWdnaW5nTW9kZXMAZ2V0X2Fj
+Y2Vzc19jYXRlZ29yaWVzAHNldF9hY2Nlc3NfY2F0ZWdvcmllcwBTQ183OGU2NjYwMmU0MDM0MzJk
+YWM4MjcwNjE2YjBiMmVmYi5Qcm9wZXJ0aWVzAGdldF9SZWFkT25seVZhcmlhYmxlcwBTeXN0ZW0u
+U2VjdXJpdHkuQ3J5cHRvZ3JhcGh5Llg1MDlDZXJ0aWZpY2F0ZXMAQnVmZmVyQ29sdW1uSW5kZXhl
+cwBHZXRDb2x1bW5JbmRleGVzAFNldHRpbmdzAElDcmVkZW50aWFscwBzZXRfQ3JlZGVudGlhbHMA
+Q29ubmVjdGlvbnMAZ2V0X3BlcnNvbnMAc2V0X3BlcnNvbnMAQnVmZmVycwBIZWxwZXJzAFNzbFBv
+bGljeUVycm9ycwBGaW5pc2hPdXRwdXRzAENyZWF0ZU5ld091dHB1dFJvd3MAZ2V0X0tleXMAQ29u
+Y2F0AE9iamVjdABTeXN0ZW0uTmV0AHNldF9leHRyYVZlcmtzYW1oZXQAc2V0X2V4dHJhRW5oZXQA
+U2V0RW5kT2ZSb3dzZXQAZ2V0X0RlZmF1bHQAV2ViQ2xpZW50AFVzZXJDb21wb25lbnQAUGFyZW50
+Q29tcG9uZW50AFNjcmlwdENvbXBvbmVudABnZXRfQ3VycmVudABNaWNyb3NvZnQuU3FsU2VydmVy
+LlR4U2NyaXB0AHNldF9leHRyYUJlcmVkc2thcHNrb3J0AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuUGlw
+ZWxpbmVIb3N0AHNldF9leHRyYUVwb3N0AFByaW1lT3V0cHV0AE1vdmVOZXh0AEdldFZhbHVlV2l0
+aENvbnRleHQAU2NyaXB0Q29tcG9uZW50RXZhbENvbnRleHQAZ2V0X0V2YWx1YXRvckNvbnRleHQA
+QWRkUm93AGdldF9Bc3NlbWJseQBhcnhkYXRhUGVyc29uQWNjZXNzX2NhdGVnb3J5AG9wX0luZXF1
+YWxpdHkAU3lzdGVtLk5ldC5TZWN1cml0eQBHZXRQcm9wZXJ0eQAAAA9fAEkAcwBOAHUAbABsAAAF
+aQBkAAARcABlAHIAcwBvAG4ASQBkAAAVZgBpAHIAcwB0AF8AbgBhAG0AZQAAE2YAaQByAHMAdABO
+AGEAbQBlAAATbABhAHMAdABfAG4AYQBtAGUAABFsAGEAcwB0AE4AYQBtAGUAABdkAGUAcwBjAHIA
+aQBwAHQAaQBvAG4AABdGAPYAcgB2AGEAbAB0AG4AaQBuAGcAASFlAHgAdAByAGEARgBvAHIAdgBh
+AGwAdABuAGkAbgBnAAAVVgBlAHIAawBzAGEAbQBoAGUAdAAAH2UAeAB0AHIAYQBWAGUAcgBrAHMA
+YQBtAGgAZQB0AAALRQBuAGgAZQB0AAAVZQB4AHQAcgBhAEUAbgBoAGUAdAAAE0EAdgBkAGUAbABu
+AGkAbgBnAAAdZQB4AHQAcgBhAEEAdgBkAGUAbABuAGkAbgBnAAAbQQBuAHMAdgBhAHIAaQBnACAA
+YwBoAGUAZgAAI2UAeAB0AHIAYQBBAG4AcwB2AGEAcgBpAGcAQwBoAGUAZgAAD1QAZQBsAGUAZgBv
+AG4AABllAHgAdAByAGEAVABlAGwAZQBmAG8AbgAADWUALQBwAG8AcwB0AAEVZQB4AHQAcgBhAEUA
+cABvAHMAdAAAHUIAZQByAGUAZABzAGsAYQBwAHMAawBvAHIAdAAAJ2UAeAB0AHIAYQBCAGUAcgBl
+AGQAcwBrAGEAcABzAGsAbwByAHQAAAtlAHgAdABpAGQAABVlAHgAdAByAGEARQB4AHQASQBkAAAR
+SwB1AG4AZABuAGEAbQBuAAAbZQB4AHQAcgBhAEsAdQBuAGQAbgBhAG0AbgAADUUAeAB0AGUAcgBu
+AAAXZQB4AHQAcgBhAEUAeAB0AGUAcgBuAAAJSwBsAGEAcgAAE2UAeAB0AHIAYQBLAGwAYQByAAAN
+bgB1AG0AYgBlAHIAABVjAGEAcgBkAE4AdQBtAGIAZQByAAATcABlAHIAcwBvAG4AXwBpAGQAABdm
+AG8AcgBtAGEAdABfAG4AYQBtAGUAABVmAG8AcgBtAGEAdABOAGEAbQBlAAAJbgBhAG0AZQAAFWEA
+YwBjAGUAcwBzAE4AYQBtAGUAABVzAHQAYQByAHQAXwBkAGEAdABlAAATcwB0AGEAcgB0AEQAYQB0
+AGUAABFlAG4AZABfAGQAYQB0AGUAAA9lAG4AZABEAGEAdABlAAALdgBhAGwAdQBlAACAm0kAcwBO
+AHUAbABsACAAcAByAG8AcABlAHIAdAB5ACAAYwBhAG4AbgBvAHQAIABiAGUAIABzAGUAdAAgAHQA
+bwAgAEYAYQBsAHMAZQAuACAAQQBzAHMAaQBnAG4AIABhACAAdgBhAGwAdQBlACAAdABvACAAdABo
+AGUAIABjAG8AbAB1AG0AbgAgAGkAbgBzAHQAZQBhAGQALgAAGVAAZQByAHMAbwBuAE8AdQB0AHAA
+dQB0AAAZQQBjAGMAZQBzAHMATwB1AHQAcAB1AHQAABVDAGEAcgBkAE8AdQB0AHAAdQB0AAAfQQBy
+AHgAQQBwAGkARQB4AHAAbwByAHQAVQByAGwAAB1BAHIAeABBAHAAaQBQAGEAcwBzAHcAbwByAGQA
+AB1BAHIAeABBAHAAaQBVAHMAZQByAE4AYQBtAGUAAHFTAEMAXwA3ADgAZQA2ADYANgAwADIAZQA0
+ADAAMwA0ADMAMgBkAGEAYwA4ADIANwAwADYAMQA2AGIAMABiADIAZQBmAGIALgBQAHIAbwBwAGUA
+cgB0AGkAZQBzAC4AUgBlAHMAbwB1AHIAYwBlAHMAAM9w32FcjgVGoEkOzOewGJQAAyAAAQQgAQEI
+BSABAREVBCABAQ4GIAEBEYCdCQcEHBJVElkSWQQgABJVBSABElkOBCABHBwHAAICElkSWQcgAwEc
+HB0cBQACDg4OBAABAg4+BxUVEmECDg4VEmECDg4VEmECDg4VEmECDg4SCBJlHRIMCBIMFRFtAg4O
+Dh0SEAgSEA4dEhQSFA4dEhgSGA4GFRJhAg4OByACARMAEwEFIAIBHBgFAAEBEnUGAAEBEYC1BSAC
+AQ4OBiABARKAvQcAARJVEYDBBSABARJVBiABEoDJDgYgARwSgMkKIAAVEmkCEwATAQYVEmkCDg4K
+IAAVEW0CEwATAQYVEW0CDg4EIAATAAYgARMBEwADIAACCCACAhMAEBMBCyADARKAhR0IEoCJBSAC
+AQgcAwcBCAcAAggSgIkOBSABHQgIBSAAEoDZBiABEoDdHAUAABKA4QYgARwSgOUFIAASgOkHIAIB
+DhKA6Qi3elxWGTTgiQiJhF3NgIDMkQQGHRIMBAYdEhgCBg4EBh0SEAQGHRIUAgYJAgYcAwYSNAMG
+EjgDBhIkAwYSKAMGEiwEBhKAjQQGEoCVBAYSgJkDBhJAAwYSRAMGEnUFIAAdEgwGIAEBHRIMBSAA
+HRIYBiABAR0SGAMgAA4FIAAdEhAGIAEBHRIQBSAAHRIUBiABAR0SFAMgAAkEIAEBCQMgABwEIAEB
+HAgABAESUQ4cDgQAAQIcBCABAhwEIAEBAgQgAQELDSAEAQgdCB0SgIUSgIkGIAEBEoCNBQAAEoCV
+BQAAEoCZBgABARKAmQQAABJAAwAAAQsgBAIcEnkSfRGAgQUoAB0SDAUoAB0SGAMoAA4FKAAdEhAF
+KAAdEhQDKAAJAygAHAMoAAIDKAALBQgAEoCVBQgAEoCZBAgAEkAEAQAAAAgBAAgAAAAAAB4BAAEA
+VAIWV3JhcE5vbkV4Y2VwdGlvblRocm93cwEIAQACAAAAAAAoAQAjU0NfNzhlNjY2MDJlNDAzNDMy
+ZGFjODI3MDYxNmIwYjJlZmIAAAUBAAAAABYBABFDb3B5cmlnaHQgQCAgMjAxOQAASQEAGi5ORVRG
+cmFtZXdvcmssVmVyc2lvbj12NC41AQBUDhRGcmFtZXdvcmtEaXNwbGF5TmFtZRIuTkVUIEZyYW1l
+d29yayA0LjUJAQAEY29kZQAAFQEAAQBUAg1Bbm9ueW1vdXNUeXBlAR8BAAIAVA4JTmFtZXNwYWNl
+AFQCCklzTnVsbGFibGUAGQEABnBlcnNvbgEAVAIKSXNOdWxsYWJsZQAXAQAEY2FyZAEAVAIKSXNO
+dWxsYWJsZQAeAQALZXh0cmFfZmllbGQBAFQCCklzTnVsbGFibGUAIgEAD2FjY2Vzc19jYXRlZ29y
+eQEAVAIKSXNOdWxsYWJsZQAAAAC0AAAAzsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVz
+b3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwg
+UHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVS
+ZXNvdXJjZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0AAAAhFsAAAAAAAAAAAAAnlsAAAAgAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAJBbAAAAAAAAAAAAAAAAX0NvckRsbE1haW4AbXNjb3JlZS5kbGwAAAAA
+AP8lACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEAAAABgAAIAAAAAAAAAA
+AAAAAAAAAAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAAAEgAAABYYAAA7AMAAAAAAAAAAAAA
+7AM0AAAAVgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8AAAAAAL0E7/4AAAEAAAABAAAAAAAA
+AAEAAAAAAD8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABEAAAAAQBWAGEAcgBGAGkAbABlAEkA
+bgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8AbgAAAAAAAACwBEwDAAABAFMAdABy
+AGkAbgBnAEYAaQBsAGUASQBuAGYAbwAAACgDAAABADAAMAAwADAAMAA0AGIAMAAAABoAAQABAEMA
+bwBtAG0AZQBuAHQAcwAAAAAAAAAiAAEAAQBDAG8AbQBwAGEAbgB5AE4AYQBtAGUAAAAAAAAAAABw
+ACQAAQBGAGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAAAAAAUwBDAF8ANwA4AGUANgA2ADYA
+MAAyAGUANAAwADMANAAzADIAZABhAGMAOAAyADcAMAA2ADEANgBiADAAYgAyAGUAZgBiAAAAMAAI
+AAEARgBpAGwAZQBWAGUAcgBzAGkAbwBuAAAAAAAxAC4AMAAuADAALgAwAAAAcAAoAAEASQBuAHQA
+ZQByAG4AYQBsAE4AYQBtAGUAAABTAEMAXwA3ADgAZQA2ADYANgAwADIAZQA0ADAAMwA0ADMAMgBk
+AGEAYwA4ADIANwAwADYAMQA2AGIAMABiADIAZQBmAGIALgBkAGwAbAAAAEgAEgABAEwAZQBnAGEA
+bABDAG8AcAB5AHIAaQBnAGgAdAAAAEMAbwBwAHkAcgBpAGcAaAB0ACAAQAAgACAAMgAwADEAOQAA
+ACoAAQABAEwAZQBnAGEAbABUAHIAYQBkAGUAbQBhAHIAawBzAAAAAAAAAAAAeAAoAAEATwByAGkA
+ZwBpAG4AYQBsAEYAaQBsAGUAbgBhAG0AZQAAAFMAQwBfADcAOABlADYANgA2ADAAMgBlADQAMAAz
+ADQAMwAyAGQAYQBjADgAMgA3ADAANgAxADYAYgAwAGIAMgBlAGYAYgAuAGQAbABsAAAAaAAkAAEA
+UAByAG8AZAB1AGMAdABOAGEAbQBlAAAAAABTAEMAXwA3ADgAZQA2ADYANgAwADIAZQA0ADAAMwA0
+ADMAMgBkAGEAYwA4ADIANwAwADYAMQA2AGIAMABiADIAZQBmAGIAAAA0AAgAAQBQAHIAbwBkAHUA
+YwB0AFYAZQByAHMAaQBvAG4AAAAxAC4AMAAuADAALgAwAAAAOAAIAAEAQQBzAHMAZQBtAGIAbAB5
+ACAAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4AMAAuADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAADAAAALA7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                  name="VSTAProjectName"
+                  typeConverter="NOTBROWSABLE">SC_78e66602e403432dac8270616b0b2efb</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the programming language used by the script."
+                  name="ScriptLanguage"
+                  typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages">CSharp</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read-only variables."
+                  name="ReadOnlyVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg">$Package::ArxApiExportUrl,$Package::ArxApiPassword,$Package::ArxApiUserName</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read/write variables."
+                  name="ReadWriteVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg"></property>
+                <property
+                  dataType="System.String"
+                  description="List of breakpoints present on the script."
+                  isArray="true"
+                  name="BreakpointCollection"
+                  typeConverter="NOTBROWSABLE">
+                  <arrayElements
+                    arrayElementCount="0" />
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum"
+                  typeConverter="NOTBROWSABLE">43f0869bd35489728713ae8b46fa0a10</property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataShaChecksum"
+                  typeConverter="NOTBROWSABLE">2832decfa8ac76a81e2acae2c46d92be7b3d9bf8</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ScriptComponentHost</property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum140"
+                  typeConverter="NOTBROWSABLE">EB</property>
+              </properties>
+              <outputs>
+                <output
+                  refId="Package\Export from ARX\Script Component.Outputs[PersonOutput]"
+                  hasSideEffects="true"
+                  name="PersonOutput">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[personId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[personId]"
+                      name="personId" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[firstName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[firstName]"
+                      name="firstName" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[lastName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[lastName]"
+                      name="lastName" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[description]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[description]"
+                      name="description" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraForvaltning]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraForvaltning]"
+                      name="extraForvaltning" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraVerksamhet]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraVerksamhet]"
+                      name="extraVerksamhet" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraEnhet]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraEnhet]"
+                      name="extraEnhet" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraAvdelning]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraAvdelning]"
+                      name="extraAvdelning" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraAnsvarigChef]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraAnsvarigChef]"
+                      name="extraAnsvarigChef" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraTelefon]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraTelefon]"
+                      name="extraTelefon" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraEpost]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraEpost]"
+                      name="extraEpost" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraBeredskapskort]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraBeredskapskort]"
+                      name="extraBeredskapskort" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraExtId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraExtId]"
+                      name="extraExtId" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraKundnamn]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraKundnamn]"
+                      name="extraKundnamn" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraExtern]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraExtern]"
+                      name="extraExtern" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraKlar]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[PersonOutput].Columns[extraKlar]"
+                      name="extraKlar" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Export from ARX\Script Component.Outputs[AccessOutput]"
+                  hasSideEffects="true"
+                  name="AccessOutput">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[personId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[personId]"
+                      name="personId" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[accessName]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[accessName]"
+                      name="accessName" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[startDate]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[startDate]"
+                      name="startDate" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[endDate]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[AccessOutput].Columns[endDate]"
+                      name="endDate" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Export from ARX\Script Component.Outputs[CardOutput]"
+                  hasSideEffects="true"
+                  name="CardOutput">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[CardOutput].Columns[cardNumber]"
+                      dataType="ui8"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[CardOutput].Columns[cardNumber]"
+                      name="cardNumber" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[CardOutput].Columns[personId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[CardOutput].Columns[personId]"
+                      name="personId" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[CardOutput].Columns[formatName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[CardOutput].Columns[formatName]"
+                      name="formatName" />
+                    <outputColumn
+                      refId="Package\Export from ARX\Script Component.Outputs[CardOutput].Columns[description]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Export from ARX\Script Component.Outputs[CardOutput].Columns[description]"
+                      name="description" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Export from ARX.Paths[AccessOutput]"
+              endId="Package\Export from ARX\Convert date.Inputs[Data Conversion Input]"
+              name="AccessOutput"
+              startId="Package\Export from ARX\Script Component.Outputs[AccessOutput]" />
+            <path
+              refId="Package\Export from ARX.Paths[CardOutput]"
+              endId="Package\Export from ARX\Card.Inputs[OLE DB Destination Input]"
+              name="CardOutput"
+              startId="Package\Export from ARX\Script Component.Outputs[CardOutput]" />
+            <path
+              refId="Package\Export from ARX.Paths[Data Conversion Output]"
+              endId="Package\Export from ARX\Access.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Export from ARX\Convert date.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Export from ARX.Paths[PersonOutput]"
+              endId="Package\Export from ARX\Person.Inputs[OLE DB Destination Input]"
+              name="PersonOutput"
+              startId="Package\Export from ARX\Script Component.Outputs[PersonOutput]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate destination"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0A369F86-7E7D-4174-B288-3CE820A9FC6F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate destination"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6D0F1BA7-4B9F-4F8A-9B4E-30907ED0470D}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.Arx_person_stage;&#xA;TRUNCATE TABLE dbo.Arx_card_stage;&#xA;TRUNCATE TABLE dbo.Arx_access_stage;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{4C7552CE-1C6E-440C-9EFC-0F7081F0C030}"
+      DTS:From="Package\Truncate destination"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Export from ARX" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{E6CE39A0-58A5-45B7-9C13-64069D447326}"
+      DTS:From="Package\Export from ARX"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Commit" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="117,42"
+          Id="Package\Commit"
+          TopLeft="36,209.5" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Export from ARX"
+          TopLeft="15,107.5" />
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Truncate destination"
+          TopLeft="5.50000000000001,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="95.25,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="95,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Export from ARX">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="114,42"
+          Id="Package\Export from ARX\Person"
+          TopLeft="367.5,107.5" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Export from ARX\Script Component"
+          TopLeft="155.5,5.5" />
+        <NodeLayout
+          Size="103,42"
+          Id="Package\Export from ARX\Card"
+          TopLeft="5.50000000000006,107.5" />
+        <NodeLayout
+          Size="114,42"
+          Id="Package\Export from ARX\Access"
+          TopLeft="182,209.5" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Export from ARX\Convert date"
+          TopLeft="167.5,107.5" />
+        <EdgeLayout
+          Id="Package\Export from ARX.Paths[AccessOutput]"
+          TopLeft="238.75,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-30.944453125,20.533203125,61.88890625,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Export from ARX.Paths[PersonOutput]"
+          TopLeft="278.75,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="145.75,60"
+              Start="0,0"
+              End="145.75,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.6286836935167" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.6286836935167"
+                    Point2="0,20.6286836935167"
+                    Point3="4,20.6286836935167" />
+                  <mssgle:LineSegment
+                    End="141.75,20.6286836935167" />
+                  <mssgle:CubicBezierSegment
+                    Point1="141.75,20.6286836935167"
+                    Point2="145.75,20.6286836935167"
+                    Point3="145.75,24.6286836935167" />
+                  <mssgle:LineSegment
+                    End="145.75,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="42.10361328125,25.6286836935167,61.5427734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Export from ARX.Paths[Data Conversion Output]"
+          TopLeft="238.75,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Export from ARX.Paths[CardOutput]"
+          TopLeft="199.25,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-142.25,60"
+              Start="0,0"
+              End="-142.25,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.6286836935167" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.6286836935167"
+                    Point2="0,20.6286836935167"
+                    Point3="-4,20.6286836935167" />
+                  <mssgle:LineSegment
+                    End="-138.25,20.6286836935167" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-138.25,20.6286836935167"
+                    Point2="-142.25,20.6286836935167"
+                    Point3="-142.25,24.6286836935167" />
+                  <mssgle:LineSegment
+                    End="-142.25,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-97.37890625,25.6286836935167,52.5078125,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Export from ARX\Card">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Export from ARX\Person">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Export from ARX\Access">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -12,8 +12,8 @@
   DTS:ObjectName="Combine"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="18"
-  DTS:VersionGUID="{F0C63E13-1CCE-481D-8867-AA76D2EC4EAF}">
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{BD0F1379-B78E-4E1A-8291-0757F6D9639B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1690,7 +1690,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
           Id="Package\Stage\OLE DB Destination"
           TopLeft="5.50000000000003,209.5" />
         <NodeLayout
-          Size="163,42"
+          Size="167,42"
           Id="Package\Stage\Script Component"
           TopLeft="9.50000000000001,5.5" />
         <EdgeLayout
@@ -1717,7 +1717,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage.Paths[Output 0]"
-          TopLeft="91,47.5">
+          TopLeft="92,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"

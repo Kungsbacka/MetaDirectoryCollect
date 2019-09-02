@@ -12,8 +12,8 @@
   DTS:ObjectName="Personec"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="75"
-  DTS:VersionGUID="{EFAB58EF-0206-4967-B49C-67F510F8C749}">
+  DTS:VersionBuild="84"
+  DTS:VersionGUID="{BC228C54-3799-46CB-8834-EC520C17E79D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -295,6 +295,19 @@
                       cachedName="ANSTTOM"
                       externalMetadataColumnId="Package\EmployeesCurrent\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ANSTTOM]"
                       lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[ANSTTOM]" />
+                    <inputColumn
+                      refId="Package\EmployeesCurrent\MetaDirectory.Inputs[OLE DB Destination Input].Columns[Copy of SEMGRP]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="Copy of SEMGRP"
+                      externalMetadataColumnId="Package\EmployeesCurrent\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[SEMGRP]"
+                      lineageId="Package\EmployeesCurrent\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of SEMGRP]" />
+                    <inputColumn
+                      refId="Package\EmployeesCurrent\MetaDirectory.Inputs[OLE DB Destination Input].Columns[ANSTGRP]"
+                      cachedDataType="i2"
+                      cachedName="ANSTGRP"
+                      externalMetadataColumnId="Package\EmployeesCurrent\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ANSTGRP]"
+                      lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[ANSTGRP]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -382,6 +395,15 @@
                       refId="Package\EmployeesCurrent\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ANSTTOM]"
                       dataType="i4"
                       name="ANSTTOM" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeesCurrent\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[SEMGRP]"
+                      dataType="wstr"
+                      length="3"
+                      name="SEMGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeesCurrent\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ANSTGRP]"
+                      dataType="i2"
+                      name="ANSTGRP" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -506,6 +528,13 @@
                       cachedLength="54"
                       cachedName="KONTO"
                       lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[KONTO]" />
+                    <inputColumn
+                      refId="Package\EmployeesCurrent\Non Unicode to Unicode.Inputs[Data Conversion Input].Columns[SEMGRP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SEMGRP"
+                      lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[SEMGRP]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -769,6 +798,27 @@
                           name="FastParse">false</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeesCurrent\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of SEMGRP]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\EmployeesCurrent\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of SEMGRP]"
+                      name="Copy of SEMGRP"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[SEMGRP]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -853,8 +903,10 @@
   ,KAT.KATTXTL AS BEFATTNING
   ,NULLIF(ANS.ANSTFORM, '') AS ANSTFORM
   ,NULLIF(ANS.ANSTTYP, '') AS ANSTTYP
+  ,ANS.ANSTGRP
   ,NULLIF(ANS.FOERMGRP, '') AS FOERMGRP
   ,NULLIF(ANS.AVTAL, '') AS AVTAL
+  ,NULLIF(ANS.SEMGRP, '') AS SEMGRP
 FROM dbo.OA0P0120 ANS
 INNER JOIN dbo.OA0P0123 KON ON (ANS.PERSOID = KON.PERSOID AND ANS.ANSTNR = KON.ANSTNR)
 INNER JOIN dbo.OA0P0100 PER ON ANS.PERSOID = PER.PERSOID
@@ -1077,6 +1129,26 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[ANSTTOM]"
                       name="ANSTTOM"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[SEMGRP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].ExternalColumns[SEMGRP]"
+                      length="3"
+                      lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[SEMGRP]"
+                      name="SEMGRP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[ANSTGRP]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].ExternalColumns[ANSTGRP]"
+                      lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[ANSTGRP]"
+                      name="ANSTGRP"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1172,6 +1244,16 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].ExternalColumns[ANSTTOM]"
                       dataType="i4"
                       name="ANSTTOM" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].ExternalColumns[SEMGRP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SEMGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].ExternalColumns[ANSTGRP]"
+                      dataType="i2"
+                      name="ANSTGRP" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1275,6 +1357,11 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Error Output].Columns[ANSTTYP]"
                       name="ANSTTYP" />
                     <outputColumn
+                      refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Error Output].Columns[ANSTGRP]"
+                      dataType="i2"
+                      lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Error Output].Columns[ANSTGRP]"
+                      name="ANSTGRP" />
+                    <outputColumn
                       refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Error Output].Columns[FOERMGRP]"
                       codePage="1252"
                       dataType="str"
@@ -1288,6 +1375,13 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       length="4"
                       lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Error Output].Columns[AVTAL]"
                       name="AVTAL" />
+                    <outputColumn
+                      refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Error Output].Columns[SEMGRP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Error Output].Columns[SEMGRP]"
+                      name="SEMGRP" />
                     <outputColumn
                       refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -2301,6 +2395,19 @@ where [refTable].[PERSOID] = ?</property>
                       cachedName="ANSTTOM"
                       externalMetadataColumnId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ANSTTOM]"
                       lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[ANSTTOM]" />
+                    <inputColumn
+                      refId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input].Columns[Copy of SEMGRP]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="Copy of SEMGRP"
+                      externalMetadataColumnId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[SEMGRP]"
+                      lineageId="Package\EmployeesFuture\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of SEMGRP]" />
+                    <inputColumn
+                      refId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input].Columns[ANSTGRP]"
+                      cachedDataType="i2"
+                      cachedName="ANSTGRP"
+                      externalMetadataColumnId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ANSTGRP]"
+                      lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[ANSTGRP]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2388,6 +2495,15 @@ where [refTable].[PERSOID] = ?</property>
                       refId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ANSTTOM]"
                       dataType="i4"
                       name="ANSTTOM" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[SEMGRP]"
+                      dataType="wstr"
+                      length="3"
+                      name="SEMGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ANSTGRP]"
+                      dataType="i2"
+                      name="ANSTGRP" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -2512,6 +2628,13 @@ where [refTable].[PERSOID] = ?</property>
                       cachedLength="54"
                       cachedName="KONTO"
                       lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[KONTO]" />
+                    <inputColumn
+                      refId="Package\EmployeesFuture\Non Unicode to Unicode.Inputs[Data Conversion Input].Columns[SEMGRP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SEMGRP"
+                      lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[SEMGRP]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -2775,6 +2898,27 @@ where [refTable].[PERSOID] = ?</property>
                           name="FastParse">false</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeesFuture\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of SEMGRP]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\EmployeesFuture\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of SEMGRP]"
+                      name="Copy of SEMGRP"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[SEMGRP]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -2858,8 +3002,10 @@ where [refTable].[PERSOID] = ?</property>
   ,KAT.KATTXTL AS BEFATTNING
   ,NULLIF(ANS.ANSTFORM, '') AS ANSTFORM
   ,NULLIF(ANS.ANSTTYP, '') AS ANSTTYP
+  ,ANSTGRP
   ,NULLIF(ANS.FOERMGRP, '') AS FOERMGRP
   ,NULLIF(ANS.AVTAL, '') AS AVTAL
+  ,NULLIF(ANS.SEMGRP, '') AS SEMGRP
 FROM dbo.OA0P0120 ANS
 INNER JOIN dbo.OA0P0123 KON ON (ANS.PERSOID = KON.PERSOID AND ANS.ANSTNR = KON.ANSTNR)
 INNER JOIN dbo.OA0P0100 PER ON ANS.PERSOID = PER.PERSOID
@@ -3081,6 +3227,26 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[ANSTTOM]"
                       name="ANSTTOM"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[SEMGRP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].ExternalColumns[SEMGRP]"
+                      length="3"
+                      lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[SEMGRP]"
+                      name="SEMGRP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[ANSTGRP]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].ExternalColumns[ANSTGRP]"
+                      lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[ANSTGRP]"
+                      name="ANSTGRP"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -3176,6 +3342,16 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].ExternalColumns[ANSTTOM]"
                       dataType="i4"
                       name="ANSTTOM" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].ExternalColumns[SEMGRP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SEMGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].ExternalColumns[ANSTGRP]"
+                      dataType="i2"
+                      name="ANSTGRP" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -3279,6 +3455,11 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Error Output].Columns[ANSTTYP]"
                       name="ANSTTYP" />
                     <outputColumn
+                      refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Error Output].Columns[ANSTGRP]"
+                      dataType="i2"
+                      lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Error Output].Columns[ANSTGRP]"
+                      name="ANSTGRP" />
+                    <outputColumn
                       refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Error Output].Columns[FOERMGRP]"
                       codePage="1252"
                       dataType="str"
@@ -3292,6 +3473,13 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       length="4"
                       lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Error Output].Columns[AVTAL]"
                       name="AVTAL" />
+                    <outputColumn
+                      refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Error Output].Columns[SEMGRP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Error Output].Columns[SEMGRP]"
+                      name="SEMGRP" />
                     <outputColumn
                       refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -3339,7 +3527,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="InsertMissingSerialNumber"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3572,6 +3760,15 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[ANSTTOM]"
                       dataType="i4"
                       name="ANSTTOM" />
+                    <externalMetadataColumn
+                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[ANSTGRP]"
+                      dataType="i2"
+                      name="ANSTGRP" />
+                    <externalMetadataColumn
+                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[SEMGRP]"
+                      dataType="wstr"
+                      length="3"
+                      name="SEMGRP" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -3639,7 +3836,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="PrioritizePersonecData"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3655,7 +3852,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="UpdatePersonecAllaAnstallningar"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3672,7 +3869,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="UpdatePersonecDiff"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3988,46 +4185,24 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="125,42"
+          Id="Package\EmployeesCurrent\Personec"
+          TopLeft="42,5.5" />
+        <NodeLayout
+          Size="148,42"
+          Id="Package\EmployeesCurrent\MetaDirectory"
+          TopLeft="30.5,311.5" />
+        <NodeLayout
           Size="133,42"
           Id="Package\EmployeesCurrent\Row Count"
-          TopLeft="36.5,209.5" />
+          TopLeft="38,209.5" />
         <NodeLayout
           Size="198,42"
           Id="Package\EmployeesCurrent\Non Unicode to Unicode"
           TopLeft="5.50000000000001,107.5" />
-        <NodeLayout
-          Size="125,42"
-          Id="Package\EmployeesCurrent\Personec"
-          TopLeft="41,5.5" />
-        <NodeLayout
-          Size="148,42"
-          Id="Package\EmployeesCurrent\MetaDirectory"
-          TopLeft="29,311.5" />
-        <EdgeLayout
-          Id="Package\EmployeesCurrent.Paths[Row Count Output 1]"
-          TopLeft="103,251.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\EmployeesCurrent.Paths[OLE DB Source Output]"
-          TopLeft="104,47.5">
+          TopLeft="104.5,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4049,7 +4224,29 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\EmployeesCurrent.Paths[Data Conversion Output]"
-          TopLeft="103.75,149.5">
+          TopLeft="104.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\EmployeesCurrent.Paths[Row Count Output 1]"
+          TopLeft="104.5,251.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4101,22 +4298,22 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         <NodeLayout
           Size="125,42"
           Id="Package\EmployeesFuture\Personec"
-          TopLeft="41,5.5" />
+          TopLeft="42,5.5" />
         <NodeLayout
           Size="148,42"
           Id="Package\EmployeesFuture\MetaDirectory"
-          TopLeft="29,311.5" />
+          TopLeft="30.5,311.5" />
         <NodeLayout
           Size="115,42"
           Id="Package\EmployeesFuture\Lookup"
-          TopLeft="45,209.5" />
+          TopLeft="47,209.5" />
         <NodeLayout
           Size="198,42"
           Id="Package\EmployeesFuture\Non Unicode to Unicode"
           TopLeft="5.50000000000001,107.5" />
         <EdgeLayout
           Id="Package\EmployeesFuture.Paths[OLE DB Source Output]"
-          TopLeft="104,47.5">
+          TopLeft="104.5,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4138,7 +4335,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\EmployeesFuture.Paths[Lookup No Match Output]"
-          TopLeft="102.75,251.5">
+          TopLeft="104.5,251.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4162,7 +4359,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\EmployeesFuture.Paths[Data Conversion Output]"
-          TopLeft="103.5,149.5">
+          TopLeft="104.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4203,6 +4400,16 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\EmployeesFuture\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

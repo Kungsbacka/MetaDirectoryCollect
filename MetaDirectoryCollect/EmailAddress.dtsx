@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{2B768AA2-E019-4175-AD26-7D96B8967C56}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LastModifiedProductVersion="15.0.1900.78"
   DTS:LocaleID="1053"
   DTS:ObjectName="EmailAddress"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="32"
-  DTS:VersionGUID="{5BACD33F-68FB-473B-924F-0BAB336B308A}">
+  DTS:VersionBuild="38"
+  DTS:VersionGUID="{E5778CD0-7B28-4774-BE72-64AF08C39C09}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -61,17 +61,6 @@
         <DTS:ConnectionManager />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[ProcapitaBoU]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{326C9D56-605F-4E61-88E7-3A514F9FAF7D}"
-      DTS:ObjectName="ProcapitaBoU">
-      <DTS:PropertyExpression
-        DTS:Name="ConnectionString">@[$Package::ProcapitaBoUConnectionString]</DTS:PropertyExpression>
-      <DTS:ObjectData>
-        <DTS:ConnectionManager />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:PackageParameters>
     <DTS:PackageParameter
@@ -112,17 +101,6 @@
       DTS:DataType="8"
       DTS:DTSID="{66ED7500-F3A7-43A7-8D63-4A0C5268BB04}"
       DTS:ObjectName="PersonecConnectionString"
-      DTS:Required="True">
-      <DTS:Property
-        DTS:DataType="8"
-        DTS:Name="ParameterValue"
-        xml:space="preserve"></DTS:Property>
-    </DTS:PackageParameter>
-    <DTS:PackageParameter
-      DTS:CreationName=""
-      DTS:DataType="8"
-      DTS:DTSID="{53A7804E-F128-4213-AED6-577DE50F0B08}"
-      DTS:ObjectName="ProcapitaBoUConnectionString"
       DTS:Required="True">
       <DTS:Property
         DTS:DataType="8"
@@ -622,6 +600,483 @@ FROM
               endId="Package\Medvind\Data Conversion.Inputs[Data Conversion Input]"
               name="OLE DB Source Output"
               startId="Package\Medvind\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Medvind private"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{705D7585-B539-4D50-9EA6-40497637ECB4}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Medvind private"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Medvind private\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Medvind private\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Medvind private\Data Conversion.Inputs[Data Conversion Input].Columns[sourcepid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="sourcepid"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]" />
+                    <inputColumn
+                      refId="Package\Medvind private\Data Conversion.Inputs[Data Conversion Input].Columns[mail]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="mail"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Medvind private\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sourcepid]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="15"
+                      lineageId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sourcepid]"
+                      name="Copy of sourcepid"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]"
+                      name="Copy of mail"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Medvind private\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Medvind private\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[ImportedEmailAddress_stage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Medvind private\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[sourcename]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="sourcename"
+                      externalMetadataColumnId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcename]"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]" />
+                    <inputColumn
+                      refId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[pid]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="pid"
+                      externalMetadataColumnId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[pid]"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[pid]" />
+                    <inputColumn
+                      refId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of sourcepid]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Copy of sourcepid"
+                      externalMetadataColumnId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcepid]"
+                      lineageId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sourcepid]" />
+                    <inputColumn
+                      refId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of mail]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of mail"
+                      externalMetadataColumnId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mail]"
+                      lineageId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcename]"
+                      dataType="wstr"
+                      length="30"
+                      name="sourcename" />
+                    <externalMetadataColumn
+                      refId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcepid]"
+                      dataType="wstr"
+                      length="50"
+                      name="sourcepid" />
+                    <externalMetadataColumn
+                      refId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[pid]"
+                      dataType="wstr"
+                      length="12"
+                      name="pid" />
+                    <externalMetadataColumn
+                      refId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mail]"
+                      dataType="wstr"
+                      length="256"
+                      name="mail" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Medvind private\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Medvind private\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Medvind private\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Medvind private\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Medvind private\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Medvind private\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE @year int
+SELECT @year = CAST(CONVERT(char(2), GETDATE(), 12) AS int)
+SELECT
+   N'Medvind_private' AS sourcename,
+   REALPNR AS sourcepid,
+   CASE
+      WHEN CAST(SUBSTRING(REALPNR, 1, 2) AS int) &gt; @year
+      THEN N'19' + SUBSTRING(REALPNR, 1, 6) + SUBSTRING(REALPNR, 8, 4)
+      ELSE N'20' + SUBSTRING(REALPNR, 1, 6) + SUBSTRING(REALPNR, 8, 4)
+   END AS pid,
+   NULLIF(EMAIL2, '') AS mail
+FROM
+   dbo.Person</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Medvind private\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Medvind]"
+                  connectionManagerRefId="Package.ConnectionManagers[Medvind]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcename]"
+                      length="30"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]"
+                      name="sourcename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcepid]"
+                      length="15"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]"
+                      name="sourcepid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[pid]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[pid]"
+                      length="12"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[pid]"
+                      name="pid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[mail]"
+                      length="50"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]"
+                      name="mail"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcename]"
+                      dataType="wstr"
+                      length="15"
+                      name="sourcename" />
+                    <externalMetadataColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcepid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="sourcepid" />
+                    <externalMetadataColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[pid]"
+                      dataType="wstr"
+                      length="12"
+                      name="pid" />
+                    <externalMetadataColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[mail]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="mail" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcename]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcename]"
+                      name="sourcename" />
+                    <outputColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcepid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcepid]"
+                      name="sourcepid" />
+                    <outputColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[pid]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[pid]"
+                      name="pid" />
+                    <outputColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[mail]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[mail]"
+                      name="mail" />
+                    <outputColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Medvind private.Paths[Data Conversion Output]"
+              endId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Medvind private.Paths[OLE DB Source Output]"
+              endId="Package\Medvind private\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -1428,7 +1883,7 @@ WHERE
    N'Personec' AS sourcename,
    a.PERSOID AS sourcepid,
    CAST(b.SEKEL AS nvarchar) + CAST(b.PNUMID AS nvarchar) AS pid,
-   a.EPOST AS mail
+   NULLIF(a.EPOST, ' ') AS mail
 FROM
    dbo.OA0P0112 a
 INNER JOIN
@@ -1606,13 +2061,13 @@ WHERE
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\ProcapitaBoU"
+      DTS:refId="Package\Personec private"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{de5dd567-d657-40f2-9f43-469974829e39}"
+      DTS:DTSID="{9473d442-edc7-4afc-b33c-c4f4ac02d388}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="ProcapitaBoU"
+      DTS:ObjectName="Personec private"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -1620,7 +2075,7 @@ WHERE
           version="1">
           <components>
             <component
-              refId="Package\ProcapitaBoU\Data Conversion"
+              refId="Package\Personec private\Data Conversion"
               componentClassID="Microsoft.DataConvert"
               contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Data Conversion"
@@ -1628,69 +2083,47 @@ WHERE
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\ProcapitaBoU\Data Conversion.Inputs[Data Conversion Input]"
+                  refId="Package\Personec private\Data Conversion.Inputs[Data Conversion Input]"
                   name="Data Conversion Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\ProcapitaBoU\Data Conversion.Inputs[Data Conversion Input].Columns[sourcepid]"
+                      refId="Package\Personec private\Data Conversion.Inputs[Data Conversion Input].Columns[pid]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="pid"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[pid]" />
+                    <inputColumn
+                      refId="Package\Personec private\Data Conversion.Inputs[Data Conversion Input].Columns[mail]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="mail"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]" />
+                    <inputColumn
+                      refId="Package\Personec private\Data Conversion.Inputs[Data Conversion Input].Columns[sourcepid]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="12"
                       cachedName="sourcepid"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]" />
-                    <inputColumn
-                      refId="Package\ProcapitaBoU\Data Conversion.Inputs[Data Conversion Input].Columns[pid]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="12"
-                      cachedName="pid"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[pid]" />
-                    <inputColumn
-                      refId="Package\ProcapitaBoU\Data Conversion.Inputs[Data Conversion Input].Columns[mail]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="100"
-                      cachedName="mail"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]" />
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Output]"
+                  refId="Package\Personec private\Data Conversion.Outputs[Data Conversion Output]"
                   exclusionGroup="1"
                   name="Data Conversion Output"
-                  synchronousInputId="Package\ProcapitaBoU\Data Conversion.Inputs[Data Conversion Input]">
+                  synchronousInputId="Package\Personec private\Data Conversion.Inputs[Data Conversion Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sourcepid]"
+                      refId="Package\Personec private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of pid]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       length="12"
-                      lineageId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sourcepid]"
-                      name="Copy of sourcepid"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of pid]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="12"
-                      lineageId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of pid]"
+                      lineageId="Package\Personec private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of pid]"
                       name="Copy of pid"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -1698,7 +2131,7 @@ WHERE
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[pid]}</property>
+                          name="SourceInputColumnLineageID">#{Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[pid]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -1706,12 +2139,12 @@ WHERE
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]"
+                      refId="Package\Personec private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      length="100"
-                      lineageId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]"
+                      length="255"
+                      lineageId="Package\Personec private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]"
                       name="Copy of mail"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -1719,7 +2152,28 @@ WHERE
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]}</property>
+                          name="SourceInputColumnLineageID">#{Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Personec private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sourcepid]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="12"
+                      lineageId="Package\Personec private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sourcepid]"
+                      name="Copy of sourcepid"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -1730,22 +2184,22 @@ WHERE
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Error Output]"
+                  refId="Package\Personec private\Data Conversion.Outputs[Data Conversion Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Data Conversion Error Output"
-                  synchronousInputId="Package\ProcapitaBoU\Data Conversion.Inputs[Data Conversion Input]">
+                  synchronousInputId="Package\Personec private\Data Conversion.Inputs[Data Conversion Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      refId="Package\Personec private\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Personec private\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      refId="Package\Personec private\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Personec private\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1754,7 +2208,7 @@ WHERE
               </outputs>
             </component>
             <component
-              refId="Package\ProcapitaBoU\OLE DB Destination"
+              refId="Package\Personec private\OLE DB Destination"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
@@ -1811,7 +2265,7 @@ WHERE
               </properties>
               <connections>
                 <connection
-                  refId="Package\ProcapitaBoU\OLE DB Destination.Connections[OleDbConnection]"
+                  refId="Package\Personec private\OLE DB Destination.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
                   connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
                   description="The OLE DB runtime connection used to access the database."
@@ -1819,60 +2273,60 @@ WHERE
               </connections>
               <inputs>
                 <input
-                  refId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[sourcename]"
-                      cachedDataType="wstr"
-                      cachedLength="17"
-                      cachedName="sourcename"
-                      externalMetadataColumnId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcename]"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]" />
-                    <inputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of pid]"
+                      refId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of pid]"
                       cachedDataType="wstr"
                       cachedLength="12"
                       cachedName="Copy of pid"
-                      externalMetadataColumnId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[pid]"
-                      lineageId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of pid]" />
+                      externalMetadataColumnId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[pid]"
+                      lineageId="Package\Personec private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of pid]" />
                     <inputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of mail]"
+                      refId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of mail]"
                       cachedDataType="wstr"
-                      cachedLength="100"
+                      cachedLength="255"
                       cachedName="Copy of mail"
-                      externalMetadataColumnId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mail]"
-                      lineageId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]" />
+                      externalMetadataColumnId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mail]"
+                      lineageId="Package\Personec private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]" />
                     <inputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of sourcepid]"
+                      refId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[sourcename]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="sourcename"
+                      externalMetadataColumnId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcename]"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]" />
+                    <inputColumn
+                      refId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of sourcepid]"
                       cachedDataType="wstr"
                       cachedLength="12"
                       cachedName="Copy of sourcepid"
-                      externalMetadataColumnId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcepid]"
-                      lineageId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sourcepid]" />
+                      externalMetadataColumnId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcepid]"
+                      lineageId="Package\Personec private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sourcepid]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[pid]"
+                      refId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[pid]"
                       dataType="wstr"
                       length="12"
                       name="pid" />
                     <externalMetadataColumn
-                      refId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mail]"
+                      refId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mail]"
                       dataType="wstr"
                       length="256"
                       name="mail" />
                     <externalMetadataColumn
-                      refId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcename]"
+                      refId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcename]"
                       dataType="wstr"
                       length="30"
                       name="sourcename" />
                     <externalMetadataColumn
-                      refId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcepid]"
+                      refId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcepid]"
                       dataType="wstr"
                       length="50"
                       name="sourcepid" />
@@ -1881,22 +2335,22 @@ WHERE
               </inputs>
               <outputs>
                 <output
-                  refId="Package\ProcapitaBoU\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Personec private\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Personec private\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\ProcapitaBoU\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Personec private\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Personec private\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\ProcapitaBoU\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Personec private\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1905,7 +2359,7 @@ WHERE
               </outputs>
             </component>
             <component
-              refId="Package\ProcapitaBoU\OLE DB Source"
+              refId="Package\Personec private\OLE DB Source"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
@@ -1929,19 +2383,19 @@ WHERE
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
-   N'ProcapitaBoU-Elev' AS sourcename,
-   a.PERSONNR AS sourcepid,
-   a.PERSONNR AS pid,
-   a.EPOSTARB AS mail
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+   N'Personec_private' AS sourcename,
+   a.PERSOID AS sourcepid,
+   CAST(b.SEKEL AS nvarchar) + CAST(b.PNUMID AS nvarchar) AS pid,
+   NULLIF(a.EPOST, ' ') AS mail,
+   a.GFOM,
+   a.GTOM
 FROM
-    PROCAPITA_KJ1.KJ1P0PER a
+   dbo.OA0P0101 a
 INNER JOIN
-    PROCAPITA_KJ1.KJ1P0PLK b
+   dbo.OA0P0100 b
 ON
-    a.PERSONNR = b.PERSONNR
-WHERE
-    b.DATUMTOM &gt; CONVERT(varchar(8), GETDATE(), 112)</property>
+   a.PERSOID = b.PERSOID</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1966,130 +2420,163 @@ WHERE
               </properties>
               <connections>
                 <connection
-                  refId="Package\ProcapitaBoU\OLE DB Source.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[ProcapitaBoU]"
-                  connectionManagerRefId="Package.ConnectionManagers[ProcapitaBoU]"
+                  refId="Package\Personec private\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[PersonecP]"
+                  connectionManagerRefId="Package.ConnectionManagers[PersonecP]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
               <outputs>
                 <output
-                  refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output]"
+                  refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]"
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[pid]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcename]"
-                      length="17"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]"
-                      name="sourcename"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcepid]"
-                      length="12"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]"
-                      name="sourcepid"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[pid]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[pid]"
-                      length="12"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[pid]"
+                      externalMetadataColumnId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[pid]"
+                      length="60"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[pid]"
                       name="pid"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]"
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[mail]"
-                      length="100"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]"
+                      externalMetadataColumnId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[mail]"
+                      length="255"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]"
                       name="mail"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcename]"
+                      length="30"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]"
+                      name="sourcename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcepid]"
+                      length="12"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]"
+                      name="sourcepid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[GFOM]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GFOM]"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[GFOM]"
+                      name="GFOM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[GTOM]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GTOM]"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[GTOM]"
+                      name="GTOM"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcename]"
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[pid]"
                       dataType="wstr"
-                      length="17"
+                      length="60"
+                      name="pid" />
+                    <externalMetadataColumn
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[mail]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="mail" />
+                    <externalMetadataColumn
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcename]"
+                      dataType="wstr"
+                      length="15"
                       name="sourcename" />
                     <externalMetadataColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcepid]"
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcepid]"
                       codePage="1252"
                       dataType="str"
                       length="12"
                       name="sourcepid" />
                     <externalMetadataColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[pid]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      name="pid" />
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GFOM]"
+                      dataType="i4"
+                      name="GFOM" />
                     <externalMetadataColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[mail]"
-                      codePage="1252"
-                      dataType="str"
-                      length="100"
-                      name="mail" />
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GTOM]"
+                      dataType="i4"
+                      name="GTOM" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcename]"
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcename]"
                       dataType="wstr"
-                      length="17"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcename]"
+                      length="15"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcename]"
                       name="sourcename" />
                     <outputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcepid]"
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcepid]"
                       codePage="1252"
                       dataType="str"
                       length="12"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcepid]"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcepid]"
                       name="sourcepid" />
                     <outputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[pid]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[pid]"
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[pid]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[pid]"
                       name="pid" />
                     <outputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[mail]"
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[mail]"
                       codePage="1252"
                       dataType="str"
-                      length="100"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[mail]"
+                      length="255"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[mail]"
                       name="mail" />
                     <outputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GFOM]"
                       dataType="i4"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GFOM]"
+                      name="GFOM" />
+                    <outputColumn
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GTOM]"
+                      dataType="i4"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GTOM]"
+                      name="GTOM" />
+                    <outputColumn
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -2100,15 +2587,15 @@ WHERE
           </components>
           <paths>
             <path
-              refId="Package\ProcapitaBoU.Paths[Data Conversion Output]"
-              endId="Package\ProcapitaBoU\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              refId="Package\Personec private.Paths[Data Conversion Output]"
+              endId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input]"
               name="Data Conversion Output"
-              startId="Package\ProcapitaBoU\Data Conversion.Outputs[Data Conversion Output]" />
+              startId="Package\Personec private\Data Conversion.Outputs[Data Conversion Output]" />
             <path
-              refId="Package\ProcapitaBoU.Paths[OLE DB Source Output]"
-              endId="Package\ProcapitaBoU\Data Conversion.Inputs[Data Conversion Input]"
+              refId="Package\Personec private.Paths[OLE DB Source Output]"
+              endId="Package\Personec private\Data Conversion.Inputs[Data Conversion Input]"
               name="OLE DB Source Output"
-              startId="Package\ProcapitaBoU\OLE DB Source.Outputs[OLE DB Source Output]" />
+              startId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -2151,27 +2638,35 @@ WHERE
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
-      DTS:DTSID="{CE8D10BE-B207-4FB6-940E-408D0C18135E}"
+      DTS:DTSID="{3E2645A8-2495-4E47-B3DB-B0ADAFE714F5}"
       DTS:From="Package\Personec"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
-      DTS:To="Package\Medvind" />
+      DTS:To="Package\Personec private" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
-      DTS:DTSID="{4D69D35E-0F14-4C6D-97D3-9561D287F9E1}"
+      DTS:DTSID="{6E9BEC0B-CBAA-4F21-86D4-7F35E7BBC68D}"
       DTS:From="Package\Medvind"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\ProcapitaBoU" />
+      DTS:To="Package\Medvind private" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
       DTS:CreationName=""
-      DTS:DTSID="{B690B189-5E84-47A6-81DC-F37EDFB586AE}"
-      DTS:From="Package\ProcapitaBoU"
+      DTS:DTSID="{5A8A4930-0D5D-40B5-A117-F1D925849287}"
+      DTS:From="Package\Medvind private"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
       DTS:To="Package\Commit" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{17B25E06-74EE-4D48-A800-7EC3D5A682A7}"
+      DTS:From="Package\Personec private"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Medvind" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -2188,30 +2683,34 @@ WHERE
         <NodeLayout
           Size="117,42"
           Id="Package\Commit"
-          TopLeft="22.5000000000001,515.5" />
+          TopLeft="27.5000000000001,617.5" />
         <NodeLayout
           Size="121,42"
           Id="Package\Medvind"
-          TopLeft="20.5,311.5" />
+          TopLeft="25.5000000000001,413.5" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Medvind private"
+          TopLeft="7.50000000000007,515.5" />
         <NodeLayout
           Size="121,42"
           Id="Package\Neptune"
-          TopLeft="20.5,107.5" />
+          TopLeft="25.5,107.5" />
         <NodeLayout
           Size="125,42"
           Id="Package\Personec"
-          TopLeft="18.5,209.5" />
+          TopLeft="23.5,209.5" />
         <NodeLayout
-          Size="147,42"
-          Id="Package\ProcapitaBoU"
-          TopLeft="10.0000000000001,413.5" />
+          Size="161,42"
+          Id="Package\Personec private"
+          TopLeft="5.50000000000004,311.5" />
         <NodeLayout
           Size="151,42"
           Id="Package\TruncateStage"
-          TopLeft="5.5,5.5" />
+          TopLeft="10.5,5.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="81,47.5">
+          TopLeft="86,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2233,7 +2732,7 @@ WHERE
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="81,149.5">
+          TopLeft="86,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2255,7 +2754,7 @@ WHERE
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="81,251.5">
+          TopLeft="86,251.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2277,7 +2776,7 @@ WHERE
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="82.2500000000001,353.5">
+          TopLeft="86.0000000000001,455.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2299,7 +2798,29 @@ WHERE
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="82.2500000000001,455.5">
+          TopLeft="86.0000000000001,557.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="86.0000000000001,353.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2408,6 +2929,91 @@ WHERE
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
+    design-time-name="Package\Medvind private">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Medvind private\OLE DB Source"
+          TopLeft="15.5,5.5" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Medvind private\OLE DB Destination"
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Medvind private\Data Conversion"
+          TopLeft="13.5,107.5" />
+        <EdgeLayout
+          Id="Package\Medvind private.Paths[OLE DB Source Output]"
+          TopLeft="94,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Medvind private.Paths[Data Conversion Output]"
+          TopLeft="94,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Medvind private\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Medvind private\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
     design-time-name="Package\Neptune">
     <LayoutInfo>
       <GraphLayout
@@ -2498,20 +3104,20 @@ WHERE
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="171,42"
+          Size="177,42"
           Id="Package\Personec\OLE DB Destination"
           TopLeft="5.50000000000003,209.5" />
         <NodeLayout
-          Size="150,42"
+          Size="157,42"
           Id="Package\Personec\OLE DB Source"
           TopLeft="16,5.5" />
         <NodeLayout
-          Size="156,42"
+          Size="161,42"
           Id="Package\Personec\Data Conversion"
           TopLeft="13,107.5" />
         <EdgeLayout
           Id="Package\Personec.Paths[OLE DB Source Output]"
-          TopLeft="91,47.5">
+          TopLeft="94,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2533,7 +3139,7 @@ WHERE
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Personec.Paths[Data Conversion Output]"
-          TopLeft="91,149.5">
+          TopLeft="93.75,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2578,25 +3184,25 @@ WHERE
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\ProcapitaBoU">
+    design-time-name="Package\Personec private">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="171,42"
-          Id="Package\ProcapitaBoU\OLE DB Destination"
+          Size="177,42"
+          Id="Package\Personec private\OLE DB Destination"
           TopLeft="5.50000000000003,209.5" />
         <NodeLayout
-          Size="150,42"
-          Id="Package\ProcapitaBoU\OLE DB Source"
+          Size="157,42"
+          Id="Package\Personec private\OLE DB Source"
           TopLeft="16,5.5" />
         <NodeLayout
-          Size="156,42"
-          Id="Package\ProcapitaBoU\Data Conversion"
+          Size="161,42"
+          Id="Package\Personec private\Data Conversion"
           TopLeft="13,107.5" />
         <EdgeLayout
-          Id="Package\ProcapitaBoU.Paths[OLE DB Source Output]"
-          TopLeft="91,47.5">
+          Id="Package\Personec private.Paths[OLE DB Source Output]"
+          TopLeft="94,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2617,8 +3223,8 @@ WHERE
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\ProcapitaBoU.Paths[Data Conversion Output]"
-          TopLeft="91,149.5">
+          Id="Package\Personec private.Paths[Data Conversion Output]"
+          TopLeft="93.75,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2642,20 +3248,7 @@ WHERE
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\ProcapitaBoU\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\ProcapitaBoU\OLE DB Source">
+    design-time-name="Package\Personec private\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

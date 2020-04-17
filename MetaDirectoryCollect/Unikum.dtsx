@@ -1,0 +1,3570 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/12/2018 11:36:27 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName=""
+  DTS:CreatorName="Jonas Sjömark"
+  DTS:DTSID="{7E5158B2-B74F-4097-8813-AC8C5DC0BF3B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.71"
+  DTS:LocaleID="1053"
+  DTS:ObjectName="Unikum"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="49"
+  DTS:VersionGUID="{2ED469A8-05B0-4EF8-A2DF-CD6F2E5F97C0}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MetaDirectory]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0970284E-21A0-47D0-9979-A25BD8B7E7A6}"
+      DTS:ObjectName="MetaDirectory">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::MetaDirectoryConnectionString]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{EB4102BF-1FA1-4F96-84BD-DEDA7685AFF9}"
+      DTS:ObjectName="MetaDirectoryConnectionString"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{F2E5FDF4-1ABE-4A0C-B3ED-EC48D7FA62C0}"
+      DTS:ObjectName="UnikumAPIURL"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{5DD81BAF-B2EE-414F-8D5C-8CCB53800CC6}"
+      DTS:ObjectName="UnikumClientID"
+      DTS:Required="True"
+      DTS:Sensitive="True">
+      <DTS:Property
+        DTS:Name="ParameterValue">
+        <DTS:Property
+          DTS:DataType="0"
+          DTS:Name="ParameterValue"></DTS:Property>
+      </DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{1DAC95FA-8397-42E4-8DE4-683BB18854F3}"
+      DTS:ObjectName="UnikumClientSecret"
+      DTS:Required="True"
+      DTS:Sensitive="True">
+      <DTS:Property
+        DTS:Name="ParameterValue">
+        <DTS:Property
+          DTS:DataType="0"
+          DTS:Name="ParameterValue"></DTS:Property>
+      </DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{488614B2-2DA4-4F77-83F3-454D6566D604}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ImportFromFile">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Commit"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B535AC57-6F34-456F-827E-204908AE1CF3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Commit"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0970284E-21A0-47D0-9979-A25BD8B7E7A6}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spCommitUnikum" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\FetchAndImport"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3DD5416E-DFD0-4E46-932E-A2FC4A4AE9E9}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FetchAndImport"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\FetchAndImport\Grupp"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Grupp"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[UnikumGrupp_stage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FetchAndImport\Grupp.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[unId]"
+                      cachedDataType="ui8"
+                      cachedName="unId"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[unId]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[unId]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[exportDatum]"
+                      cachedDataType="date"
+                      cachedName="exportDatum"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[exportDatum]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[exportDatum]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[namn]"
+                      cachedDataType="wstr"
+                      cachedLength="120"
+                      cachedName="namn"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[namn]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[namn]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[grupptyp]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="grupptyp"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[grupptyp]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[grupptyp]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[skoltyp]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="skoltyp"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[skoltyp]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[skoltyp]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[url]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="url"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[url]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[url]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[besoksadress]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="besoksadress"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[besoksadress]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[besoksadress]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[besoksort]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="besoksort"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[besoksort]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[besoksort]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[besokspostnummer]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="besokspostnummer"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[besokspostnummer]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[besokspostnummer]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[extraadress]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="extraadress"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[extraadress]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[extraadress]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[telefon]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="telefon"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[telefon]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[telefon]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[fax]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="fax"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[fax]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[fax]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[siskod]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="siskod"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[siskod]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[siskod]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[franAr]"
+                      cachedDataType="i4"
+                      cachedName="franAr"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[franAr]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[franAr]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[tillAr]"
+                      cachedDataType="i4"
+                      cachedName="tillAr"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[tillAr]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[tillAr]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[kurskod]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="kurskod"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[kurskod]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[kurskod]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].Columns[extId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="extId"
+                      externalMetadataColumnId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[extId]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[extId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[unId]"
+                      dataType="i8"
+                      name="unId" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[exportDatum]"
+                      dataType="dbTimeStamp"
+                      name="exportDatum" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[namn]"
+                      dataType="wstr"
+                      length="120"
+                      name="namn" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[grupptyp]"
+                      dataType="wstr"
+                      length="30"
+                      name="grupptyp" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[skoltyp]"
+                      dataType="wstr"
+                      length="15"
+                      name="skoltyp" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[url]"
+                      dataType="wstr"
+                      length="150"
+                      name="url" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[besoksadress]"
+                      dataType="wstr"
+                      length="50"
+                      name="besoksadress" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[besoksort]"
+                      dataType="wstr"
+                      length="20"
+                      name="besoksort" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[besokspostnummer]"
+                      dataType="wstr"
+                      length="10"
+                      name="besokspostnummer" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[extraadress]"
+                      dataType="wstr"
+                      length="50"
+                      name="extraadress" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[telefon]"
+                      dataType="wstr"
+                      length="100"
+                      name="telefon" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[fax]"
+                      dataType="wstr"
+                      length="30"
+                      name="fax" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[siskod]"
+                      dataType="wstr"
+                      length="10"
+                      name="siskod" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[franAr]"
+                      dataType="i4"
+                      name="franAr" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[tillAr]"
+                      dataType="i4"
+                      name="tillAr" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[kurskod]"
+                      dataType="wstr"
+                      length="15"
+                      name="kurskod" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input].ExternalColumns[extId]"
+                      dataType="wstr"
+                      length="50"
+                      name="extId" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FetchAndImport\Grupp.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FetchAndImport\Grupp.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FetchAndImport\Grupp.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Grupp.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FetchAndImport\Grupp.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FetchAndImport\Person"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Person"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[UnikumPerson_stage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FetchAndImport\Person.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].Columns[unId]"
+                      cachedDataType="ui8"
+                      cachedName="unId"
+                      externalMetadataColumnId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[unId]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[unId]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].Columns[exportDatum]"
+                      cachedDataType="date"
+                      cachedName="exportDatum"
+                      externalMetadataColumnId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[exportDatum]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[exportDatum]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].Columns[personnr]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="personnr"
+                      externalMetadataColumnId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[personnr]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].Columns[fornamn]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="fornamn"
+                      externalMetadataColumnId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[fornamn]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[fornamn]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].Columns[efternamn]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="efternamn"
+                      externalMetadataColumnId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[efternamn]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[efternamn]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].Columns[epost]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="epost"
+                      externalMetadataColumnId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[epost]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[epost]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].Columns[telefon]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="telefon"
+                      externalMetadataColumnId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[telefon]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[telefon]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].Columns[telefonArbete]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="telefonArbete"
+                      externalMetadataColumnId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[telefonArbete]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[telefonArbete]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].Columns[mobil]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="mobil"
+                      externalMetadataColumnId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[mobil]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[mobil]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].Columns[postadress]"
+                      cachedDataType="wstr"
+                      cachedLength="80"
+                      cachedName="postadress"
+                      externalMetadataColumnId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[postadress]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[postadress]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].Columns[postnummer]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="postnummer"
+                      externalMetadataColumnId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[postnummer]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[postnummer]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].Columns[postort]"
+                      cachedDataType="wstr"
+                      cachedLength="75"
+                      cachedName="postort"
+                      externalMetadataColumnId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[postort]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[postort]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].Columns[skolar]"
+                      cachedDataType="i4"
+                      cachedName="skolar"
+                      externalMetadataColumnId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[skolar]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[skolar]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[unId]"
+                      dataType="i8"
+                      name="unId" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[exportDatum]"
+                      dataType="dbTimeStamp"
+                      name="exportDatum" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
+                      dataType="wstr"
+                      length="12"
+                      name="personnr" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[fornamn]"
+                      dataType="wstr"
+                      length="50"
+                      name="fornamn" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[efternamn]"
+                      dataType="wstr"
+                      length="50"
+                      name="efternamn" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[epost]"
+                      dataType="wstr"
+                      length="100"
+                      name="epost" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[telefon]"
+                      dataType="wstr"
+                      length="150"
+                      name="telefon" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[telefonArbete]"
+                      dataType="wstr"
+                      length="150"
+                      name="telefonArbete" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[mobil]"
+                      dataType="wstr"
+                      length="150"
+                      name="mobil" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[postadress]"
+                      dataType="wstr"
+                      length="80"
+                      name="postadress" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[postnummer]"
+                      dataType="wstr"
+                      length="20"
+                      name="postnummer" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[postort]"
+                      dataType="wstr"
+                      length="75"
+                      name="postort" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input].ExternalColumns[skolar]"
+                      dataType="i4"
+                      name="skolar" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FetchAndImport\Person.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FetchAndImport\Person.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FetchAndImport\Person.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Person.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FetchAndImport\Person.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FetchAndImport\Relation"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Relation"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[UnikumRelation_stage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FetchAndImport\Relation.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input].Columns[unId]"
+                      cachedDataType="ui8"
+                      cachedName="unId"
+                      externalMetadataColumnId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input].ExternalColumns[unId]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Relation].Columns[unId]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input].Columns[relationUnId]"
+                      cachedDataType="ui8"
+                      cachedName="relationUnId"
+                      externalMetadataColumnId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input].ExternalColumns[relationUnId]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Relation].Columns[relationUnId]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input].Columns[roll]"
+                      cachedDataType="wstr"
+                      cachedLength="35"
+                      cachedName="roll"
+                      externalMetadataColumnId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input].ExternalColumns[roll]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Relation].Columns[roll]" />
+                    <inputColumn
+                      refId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input].Columns[startdatum]"
+                      cachedDataType="date"
+                      cachedName="startdatum"
+                      externalMetadataColumnId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input].ExternalColumns[startdatum]"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Relation].Columns[startdatum]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input].ExternalColumns[unId]"
+                      dataType="i8"
+                      name="unId" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input].ExternalColumns[relationUnId]"
+                      dataType="i8"
+                      name="relationUnId" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input].ExternalColumns[roll]"
+                      dataType="wstr"
+                      length="35"
+                      name="roll" />
+                    <externalMetadataColumn
+                      refId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input].ExternalColumns[startdatum]"
+                      dataType="dbTimeStamp"
+                      name="startdatum" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FetchAndImport\Relation.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FetchAndImport\Relation.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FetchAndImport\Relation.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Relation.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FetchAndImport\Relation.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FetchAndImport\Script Component"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;10"
+              description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+              name="Script Component"
+              version="11">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Stores the source code of the component"
+                  isArray="true"
+                  name="SourceCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="33">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_54f739976dc149f69e67a7fd606c6df6")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_54f739976dc149f69e67a7fd606c6df6")]
+[assembly: AssemblyCopyright("Copyright @  2018")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.0.0")]
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using Newtonsoft.Json;
+
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent
+{
+    private Unikum.RootObject data;
+    private HashSet<string> personHashSet = new HashSet<string>();
+    private HashSet<string> groupHashSet = new HashSet<string>();
+    private DateTime exportDate = DateTime.Now;
+
+    public override void PreExecute()
+    {
+        base.PreExecute();
+        if (!string.IsNullOrEmpty(Variables.ImportFromFile))
+        {
+            string json = File.ReadAllText(Variables.ImportFromFile);
+            data = JsonConvert.DeserializeObject<Unikum.RootObject>(json);
+        }
+        else
+        {
+            byte[] authHeader = Encoding.UTF8.GetBytes($"{Variables.UnikumClientID}:{Variables.UnikumClientSecret}");
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authHeader));
+            var jsonSerializer = new JsonSerializer();
+            using (var stream = httpClient.GetStreamAsync($"{Variables.UnikumAPIURL}/v1/export"))
+            {
+                using (var streamReader = new StreamReader(stream.Result))
+                using (var jsonTextReader = new JsonTextReader(streamReader))
+                {
+                    data = jsonSerializer.Deserialize<Unikum.RootObject>(jsonTextReader);
+                }
+            }
+        }
+    }
+
+    private void AddPerson(Unikum.Person person)
+    {
+        string unId = person.SourcedIds.First(id => id.Source.Equals("UNID", StringComparison.OrdinalIgnoreCase)).Id;
+        if (personHashSet.Add(unId))
+        {
+            PersonBuffer.AddRow();
+            PersonBuffer.unId = ulong.Parse(unId);
+            PersonBuffer.exportDatum = exportDate;
+            PersonBuffer.personnr = person?.SourcedId?.Id?.Replace("-", "");
+            PersonBuffer.fornamn = person?.Name?.Given;
+            PersonBuffer.efternamn = person?.Name?.Family;
+            PersonBuffer.epost = person?.Email;
+            PersonBuffer.telefon = person?.Tel?.Tel;
+            PersonBuffer.telefonArbete = person?.TelWork?.Tel;
+            PersonBuffer.mobil = person?.TelMobile?.Tel;
+            PersonBuffer.postadress = person?.Adr?.Street;
+            PersonBuffer.postnummer = person?.Adr?.Pcode;
+            PersonBuffer.postort = person?.Adr?.Street;
+            if (person.Extension?.SchoolYear == null)
+            {
+                PersonBuffer.skolar_IsNull = true;
+            }
+            else
+            {
+                PersonBuffer.skolar = person.Extension.SchoolYear;
+            }
+        }
+    }
+
+    private void AddGroup(Unikum.Group group)
+    {
+        string unId = group.SourcedIds.First(id => id.Source.Equals("UNID", StringComparison.OrdinalIgnoreCase)).Id;
+        if (groupHashSet.Add(unId))
+        {
+            string extId = group.SourcedIds.First(id => id.Source.Equals("EXTID", StringComparison.OrdinalIgnoreCase)).Id;
+            GruppBuffer.AddRow();
+            GruppBuffer.unId = ulong.Parse(unId);
+            GruppBuffer.exportDatum = exportDate;
+            GruppBuffer.extId = extId;
+            GruppBuffer.namn = group.Description.Short;
+            GruppBuffer.skoltyp = group.Extension?.SchoolType;
+            GruppBuffer.url = group?.Url;
+            GruppBuffer.besoksadress = group.Extension?.VisitingAddress?.Street;
+            GruppBuffer.besokspostnummer = group.Extension?.VisitingAddress?.Pcode;
+            GruppBuffer.besoksort = group.Extension?.VisitingAddress?.Locality;
+            GruppBuffer.extraadress = group.Extension?.ExtraAddress;
+            GruppBuffer.telefon = group.Extension?.Tel;
+            GruppBuffer.fax = group.Extension?.TelFax;
+            GruppBuffer.siskod = group.Extension?.SisSchoolUnitCode;
+            GruppBuffer.franAr = group.Extension.AgeRangeFrom;
+            GruppBuffer.tillAr = group.Extension.AgeRangeTo;
+            GruppBuffer.kurskod = group.Extension?.CourseCode;
+        }
+    }
+
+    private void AddRelation(string unId, string relationUnId, string roleType, DateTime startDate)
+    {
+        RelationBuffer.AddRow();
+        RelationBuffer.unId = ulong.Parse(unId);
+        RelationBuffer.relationUnId = ulong.Parse(relationUnId);
+        RelationBuffer.roll = roleType;
+        RelationBuffer.startdatum = startDate;
+    }
+
+    public override void CreateNewOutputRows()
+    {
+        var personDict = data.Persons
+            .Where(p => p.SourcedId != null && p.SourcedId.Source.Equals("PID", StringComparison.OrdinalIgnoreCase))
+            .ToDictionary(p => p.SourcedIds.First(id => id.Source.Equals("UNID", StringComparison.OrdinalIgnoreCase)).Id, p => p);
+
+        var groupDict = data.Groups
+            .Where(g => g.SourcedId != null && g.SourcedId.Source.Equals("EXTID", StringComparison.OrdinalIgnoreCase))
+            .ToDictionary(g => g.SourcedIds.First(id => id.Source.Equals("UNID", StringComparison.OrdinalIgnoreCase)).Id, g => g);
+
+        foreach (var membership in data.Memberships)
+        {
+            Unikum.Person person;
+            Unikum.Group group;
+            if (personDict.TryGetValue(membership.SourcedId.Id, out person))
+            {
+                AddPerson(person);
+                foreach (var relation in membership.Rel)
+                {
+                    Unikum.Person guardian;
+                    if (groupDict.TryGetValue(relation.Member.Id, out group))
+                    {
+                        AddGroup(group);
+                        AddRelation(membership.SourcedId.Id, relation.Member.Id, relation.RoleType, relation.StartDate);
+                    }
+                    else if (personDict.TryGetValue(relation.Member.Id, out guardian))
+                    {
+                        AddPerson(guardian);
+                        AddRelation(membership.SourcedId.Id, relation.Member.Id, relation.RoleType, relation.StartDate);
+                    }
+                }
+            }
+            else if (groupDict.TryGetValue(membership.SourcedId.Id, out group))
+            {
+                AddGroup(group);
+                foreach (var relation in membership.Rel)
+                {
+                    Unikum.Group subGroup;
+                    if (groupDict.TryGetValue(relation.Member.Id, out subGroup))
+                    {
+                        AddGroup(subGroup);
+                        AddRelation(membership.SourcedId.Id, relation.Member.Id, relation.RoleType, relation.StartDate);
+                    }
+                }
+            }
+        }
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class PersonBuffer: ScriptBuffer
+
+{
+    public PersonBuffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public UInt64 unId
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool unId_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public DateTime exportDatum
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool exportDatum_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String personnr
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool personnr_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String fornamn
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool fornamn_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String efternamn
+    {
+        set
+        {
+            this[4] = value;
+        }
+    }
+    public bool efternamn_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(4);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String epost
+    {
+        set
+        {
+            this[5] = value;
+        }
+    }
+    public bool epost_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(5);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String telefon
+    {
+        set
+        {
+            this[6] = value;
+        }
+    }
+    public bool telefon_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(6);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String telefonArbete
+    {
+        set
+        {
+            this[7] = value;
+        }
+    }
+    public bool telefonArbete_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(7);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String mobil
+    {
+        set
+        {
+            this[8] = value;
+        }
+    }
+    public bool mobil_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(8);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String postadress
+    {
+        set
+        {
+            this[9] = value;
+        }
+    }
+    public bool postadress_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(9);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String postnummer
+    {
+        set
+        {
+            this[10] = value;
+        }
+    }
+    public bool postnummer_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(10);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String postort
+    {
+        set
+        {
+            this[11] = value;
+        }
+    }
+    public bool postort_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(11);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Int32 skolar
+    {
+        set
+        {
+            this[12] = value;
+        }
+    }
+    public bool skolar_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(12);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+
+public class RelationBuffer: ScriptBuffer
+
+{
+    public RelationBuffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public UInt64 unId
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool unId_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public UInt64 relationUnId
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool relationUnId_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String roll
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool roll_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public DateTime startdatum
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool startdatum_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+
+public class GruppBuffer: ScriptBuffer
+
+{
+    public GruppBuffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public UInt64 unId
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool unId_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public DateTime exportDatum
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool exportDatum_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extId
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool extId_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String namn
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool namn_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String grupptyp
+    {
+        set
+        {
+            this[4] = value;
+        }
+    }
+    public bool grupptyp_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(4);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String skoltyp
+    {
+        set
+        {
+            this[5] = value;
+        }
+    }
+    public bool skoltyp_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(5);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String url
+    {
+        set
+        {
+            this[6] = value;
+        }
+    }
+    public bool url_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(6);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String besoksadress
+    {
+        set
+        {
+            this[7] = value;
+        }
+    }
+    public bool besoksadress_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(7);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String besoksort
+    {
+        set
+        {
+            this[8] = value;
+        }
+    }
+    public bool besoksort_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(8);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String besokspostnummer
+    {
+        set
+        {
+            this[9] = value;
+        }
+    }
+    public bool besokspostnummer_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(9);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String extraadress
+    {
+        set
+        {
+            this[10] = value;
+        }
+    }
+    public bool extraadress_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(10);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String telefon
+    {
+        set
+        {
+            this[11] = value;
+        }
+    }
+    public bool telefon_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(11);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String fax
+    {
+        set
+        {
+            this[12] = value;
+        }
+    }
+    public bool fax_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(12);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String siskod
+    {
+        set
+        {
+            this[13] = value;
+        }
+    }
+    public bool siskod_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(13);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Int32 franAr
+    {
+        set
+        {
+            this[14] = value;
+        }
+    }
+    public bool franAr_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(14);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Int32 tillAr
+    {
+        set
+        {
+            this[15] = value;
+        }
+    }
+    public bool tillAr_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(15);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String kurskod
+    {
+        set
+        {
+            this[16] = value;
+        }
+    }
+    public bool kurskod_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(16);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public PersonBuffer PersonBuffer;
+
+    public RelationBuffer RelationBuffer;
+
+    public GruppBuffer GruppBuffer;
+
+    public virtual void FinishOutputs()
+    {
+    }
+
+    private void MarkOutputsFinished()
+    {
+
+        if (null != PersonBuffer)
+        {
+            PersonBuffer.SetEndOfRowset();
+            PersonBuffer = null;
+        }
+
+        if (null != RelationBuffer)
+        {
+            RelationBuffer.SetEndOfRowset();
+            RelationBuffer = null;
+        }
+
+        if (null != GruppBuffer)
+        {
+            GruppBuffer.SetEndOfRowset();
+            GruppBuffer = null;
+        }
+
+    }
+
+    public override void PrimeOutput(int Outputs, int[] OutputIDs, PipelineBuffer[] Buffers, OutputNameMap OutputMap)
+    {
+       for(int Idx = 0; Idx < Outputs; Idx++)
+       {
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"Person"))
+            {
+                PersonBuffer = new PersonBuffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"Relation"))
+            {
+                RelationBuffer = new RelationBuffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"Grupp"))
+            {
+                GruppBuffer = new GruppBuffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+        }
+
+        CreateNewOutputRows();
+
+        FinishOutputs();
+        MarkOutputsFinished();
+
+    }
+
+    public virtual void CreateNewOutputRows()
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public String ImportFromFile
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["ImportFromFile"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String UnikumAPIURL
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["UnikumAPIURL"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String UnikumClientID
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["UnikumClientID"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String UnikumClientSecret
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["UnikumClientSecret"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_54f739976dc149f69e67a7fd606c6df6.csproj]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5A01E030-9422-482A-8C43-C2E739BC83EC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC_54f739976dc149f69e67a7fd606c6df6</RootNamespace>
+    <AssemblyName>SC_54f739976dc149f69e67a7fd606c6df6</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Unikum.cs" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Source\Tools\Json.NET\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="main.cs" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptComponent" IconIndex="0" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC140</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_54f739976dc149f69e67a7fd606c6df6.Properties.Settings.get_Default():SC_54f739976dc149f69e67a7fd606c6df6.Properties.Sett" +
+    "ings")]
+
+namespace SC_54f739976dc149f69e67a7fd606c6df6.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Project]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>SC_54f739976dc149f69e67a7fd606c6df6</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>SC_54f739976dc149f69e67a7fd606c6df6</msb:DisplayName>
+    <msb:ProjectId>{1726D06A-8FAB-41B0-8DFF-24679BAAB714}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="SC_54f739976dc149f69e67a7fd606c6df6.csproj" />
+    <msb:File Include="Unikum.cs" />
+    <msb:File Include="main.cs" />
+    <msb:File Include="BufferWrapper.cs" />
+    <msb:File Include="ComponentWrapper.cs" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+    <msb:Breakpoint Include="035e3a44852344458c43245d651831b4">
+      <msb:FileName>main.cs</msb:FileName>
+      <msb:ColumnNumber>9</msb:ColumnNumber>
+      <msb:Enabled>True</msb:Enabled>
+      <msb:LineNumber>23</msb:LineNumber>
+      <msb:Condition>
+      </msb:Condition>
+      <msb:ConditionType>1</msb:ConditionType>
+      <msb:Language>C#</msb:Language>
+      <msb:HitCountType>1</msb:HitCountType>
+      <msb:HitCountTarget>1</msb:HitCountTarget>
+    </msb:Breakpoint>
+  </msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Unikum.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System;
+
+namespace Unikum
+{
+    public class RootObject
+    {
+        public Statisticts _stats { get; set; }
+        public string ExportId { get; set; }
+        public Person[] Persons { get; set; }
+        public Group[] Groups { get; set; }
+        public Membership[] Memberships { get; set; }
+    }
+
+    public class Statisticts
+    {
+        public int FilteredPersons { get; set; }
+    }
+
+    public class Person
+    {
+        public SourcedId SourcedId { get; set; }
+        public SourcedId[] SourcedIds { get; set; }
+        public Name Name { get; set; }
+        public Telephone Tel { get; set; }
+        public Address Adr { get; set; }
+        public string Email { get; set; }
+        public PersonExtension Extension { get; set; }
+        public Telephone TelWork { get; set; }
+        public Telephone TelMobile { get; set; }
+    }
+
+    public class SourcedId
+    {
+        public string Source { get; set; }
+        public string Id { get; set; }
+    }
+
+    public class Name
+    {
+        public string Given { get; set; }
+        public string Family { get; set; }
+    }
+
+    public class Telephone
+    {
+        public string Tel { get; set; }
+        public string TelType { get; set; }
+    }
+
+    public class Address
+    {
+        public string Street { get; set; }
+        public string Pcode { get; set; }
+        public string Locality { get; set; }
+    }
+
+    public class PersonExtension
+    {
+        public bool HideContactDetails { get; set; }
+        public bool AllowNotificationMail { get; set; }
+        public bool AllowSchoolMail { get; set; }
+        public bool AllowNewsLetter { get; set; }
+        public int SchoolYear { get; set; }
+    }
+
+    public class Group
+    {
+        public SourcedId SourcedId { get; set; }
+        public SourcedId[] SourcedIds { get; set; }
+        public Description Description { get; set; }
+        public string GroupType { get; set; }
+        public GroupExtension Extension { get; set; }
+        public string Url { get; set; }
+    }
+
+    public class Description
+    {
+        public string Short { get; set; }
+        public string Long { get; set; }
+    }
+
+    public class GroupExtension
+    {
+        public string SchoolType { get; set; }
+        public VisitingAddress VisitingAddress { get; set; }
+        public string ExtraAddress { get; set; }
+        public string Tel { get; set; }
+        public string TelFax { get; set; }
+        public string SisSchoolUnitCode { get; set; }
+        public int AgeRangeFrom { get; set; }
+        public int AgeRangeTo { get; set; }
+        public string CourseCode { get; set; }
+    }
+
+    public class VisitingAddress
+    {
+        public string Street { get; set; }
+        public string Pcode { get; set; }
+        public string Locality { get; set; }
+    }
+
+    public class Membership
+    {
+        public SourcedId SourcedId { get; set; }
+        public Relation[] Rel { get; set; }
+    }
+
+    public class Relation
+    {
+        public Member Member { get; set; }
+        public string RoleType { get; set; }
+        public DateTime StartDate { get; set; }
+    }
+
+    public class Member
+    {
+        public string Source { get; set; }
+        public string Id { get; set; }
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_54f739976dc149f69e67a7fd606c6df6.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_54f739976dc149f69e67a7fd606c6df6.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_54f739976dc149f69e67a7fd606c6df6.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_54f739976dc149f69e67a7fd606c6df6.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_54f739976dc149f69e67a7fd606c6df6.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Stores the binary representation of the component"
+                  isArray="true"
+                  name="BinaryCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="2">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_54f739976dc149f69e67a7fd606c6df6.dll]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[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
+zAoiEQYA5wo6DAoAkAv4CA4A6AB3AgYA7wj2DxIArBNuEQYA4QAPFQYA3Q9bAgYAuRJbAhIA0RJu
+EQYAJAF3AgYAUAoQFAYABRf2DwYAHQH2DwoAFxP4CBYA4BL4CAoAyhH4CAoAoxf4CAYAawrfEwYA
+KBMwFAYAvhH7EBoAKQqtDBoAnAqtDBoA0gnmEAYAXAz2DwYAvAhbAhIA0BduEQYAMQxHGB4AehcQ
+Eh4A9RXdFQYA1Bf2Dx4A+QvdFQYA1RJbAhIAxhJuEQYAfgj2Dw4AcwhIEgYA0wB3AgYAVgH2DwYA
+NBH2DwYA8gD2DyIAEQBcEyIAAQBcE3MAcxgAACIAIgBcEwYAkwn2DwYAigj2DwYA1BgiEQYAfhH2
+DwAAAAAiAgAAAAABAAEAAQAQAGUQAAAYAAEAAQABABAA/hIAAGUABQAHAAEAEADvEgAAZQAFACUA
+AQAQAAsTAABlAAUAMQABABAAhRcAAHEABQBXAAEAEABbFQAAXQAKAFwAAQAQAM4UAABdAAsAXQAA
+ABAANxSTFF0ADABiAAABEAAGFZMUiQAOAGYAAQAQAAEXHxBdAA8AaQABABAAuhYfEF0AFAB0AAEA
+EACSER8QXQAVAHcAAQAQAMECHxBdAB4AigABABAA6ggfEF0AIACPAAEAEAAZCR8QXQAiAJQAAQAQ
+AJwWHxBdACQAmQABABAAuxAfEF0AJwCgAAEAEAAjEh8QXQAsAKsAAQAQAGIRHxBdADIAuAABABAA
+yxAfEF0ANAC9AAEAEACUFh8QXQA9ANAAAQAQAAUSHxBdAEAA1wABABAA3RAfEF0AQgDcAAEAEACy
+Eh8QXQBFAOMAAyEQAHMCAABdAEcA6AABAGUCOAIBAAwXPAIBABoXPAIBAB4KQwIGAFsVRwIGAM4U
+SwIGAP4STwIGAO8SUwIGAAsTVwIBAJMXWwIBAJMXWwIRAEUQXwIRAMIJYwIRAO8HZwIBAD8HawIB
+AFMDbwIBAJEGcgIBAOgGdwIBAMsGfAIBAKoGgQIBADgDhAIBAFEGiAIBAPYDjQIBANUEkQIBAAMG
+lQIBADIFbwIBAJMFmQIBAKcEkQIBANsDkQIBAG0DbwIBACQDbwIBAHwFbwIBAJ4HbwIBANUEbwIB
+ACYEbwIBAFcHbwIBAMQDbwIBALYHbwIBAG0GnQIBAAsFnQIBAOoEnQIBADAGnQIBAOcFgQIBADgD
+hAIBAFEGiAIBAK4FoAIBAFsEbwIBAJMFpAIBAEkFbwIBAG8HbwIBAJEEbwIBAD8EbwIBAB4HqAIB
+AAAHbwIBANUEbwIBAIYHbwIBAKEDbwIBAF4FgQIBAMsFgQIBAIUDbwIBAFcHbwIBAMQDbwIBALYH
+bwIBADgDhAIBAMAErAIBABgGsQIBAAwEbwIBAHYEQwIBAG0DbwIBACQDbwI2AB4CtQIWADoAuQIW
+AFUAuQIWAJQAuQIWAG8AwgIWAKcBuQIWAK4AywIWAPgA1AIWADEB3gIWAPABuQIWAF0B5wIWAIIB
+8AJQIAAAAADGAO4LBgABAHAhAAAAAIEAjxH6AgEAjCMAAAAAgQAgEgADAgDIJQAAAACBANoQBgMD
+ABwmAAAAAMYA1BYGAAcApCgAAAAAhhjIEwYABwDNKAAAAACGGMgTtgEHANgoAAAAAIYI3AIPAwoA
+5ygAAAAAhgiGDRQDCwD+KAAAAACGCCYQGQMMAA0pAAAAAIYIFQ4UAw0AJCkAAAAAhgi7ExAADgAu
+KQAAAACGCBwPFAMPAEUpAAAAAIYIhxAQABAATykAAAAAhghnDhQDEQBmKQAAAACGCHkQEAASAHAp
+AAAAAIYIUg4UAxMAhykAAAAAhggrGBAAFACRKQAAAACGCJ0PFAMVAKgpAAAAAIYIkxAQABYAsikA
+AAAAhgh6DhQDFwDJKQAAAACGCD4KEAAYANMpAAAAAIYIzA0UAxkA6ikAAAAAhggzDRAAGgD0KQAA
+AACGCOUNFAMbAAsqAAAAAIYISxYQABwAFioAAAAAhghfDxQDHQAuKgAAAACGCDgTEAAeADkqAAAA
+AIYI6g4UAx8AUSoAAAAAhgj+FxAAIABcKgAAAACGCIoPFAMhAHQqAAAAAIYIiBIBACIAhCoAAAAA
+hgjYDhQDIwCcKgAAAACGAKsYBgAkAKQqAAAAAIYAVBcGACQArCoAAAAAhgBXF8YBJADNKAAAAACG
+GMgTtgEkANgoAAAAAIYI3AIPAycA5ygAAAAAhgiGDRQDKAC0KgAAAACGCMsCDwMpAA0pAAAAAIYI
+bg0UAyoAJCkAAAAAhghlDRAAKwAuKQAAAACGCPYNFAMsAMMqAAAAAIYINhAZAy0ATykAAAAAhggs
+DhQDLgCcKgAAAACGAKsYBgAvAKQqAAAAAIYAVBcGAC8ArCoAAAAAhgBXF8YBLwDNKAAAAACGGMgT
+tgEvANgoAAAAAIYI3AIPAzIA5ygAAAAAhgiGDRQDMwD+KAAAAACGCCYQGQM0AA0pAAAAAIYIFQ4U
+AzUAJCkAAAAAhgj/AhAANgAuKQAAAACGCJYNFAM3AEUpAAAAAIYIcBAQADgATykAAAAAhghCDhQD
+OQBmKQAAAACGCDsSEAA6AHApAAAAAIYIoA4UAzsAhykAAAAAhggvEhAAPACRKQAAAACGCI0OFAM9
+AKgpAAAAAIYI1Q8QAD4AsikAAAAAhggGDhQDPwDJKQAAAACGCDoWEABAANMpAAAAAIYIRw8UA0EA
+6ikAAAAAhgjwFxAAQgD0KQAAAACGCHUPFANDAAsqAAAAAIYIRxMQAEQAFioAAAAAhggADxQDRQAu
+KgAAAACGCCoWEABGADkqAAAAAIYIMA8UA0cAUSoAAAAAhgiTEBAASABcKgAAAACGCHoOFANJANIq
+AAAAAIYIyBgQAEoAhCoAAAAAhgiuDxQDSwDdKgAAAACGCNAHEABMAOgqAAAAAIYIpw0UA00AACsA
+AAAAhghfEgEATgAQKwAAAACGCMYOFANPACgrAAAAAIYIVBIBAFAAOCsAAAAAhgi0DhQDUQBQKwAA
+AACGCNsHEABSAFsrAAAAAIYIuQ0UA1MAnCoAAAAAhgCrGAYAVACkKgAAAACGAFQXBgBUAKwqAAAA
+AIYAVxfGAVQAcysAAAAAhhjIEwYAVACTKwAAAADGAcYWBgBUAJgrAAAAAIEADQMGAFQA9CsAAAAA
+xgA7GB8DVACTKwAAAADGAdQWBgBYAKMsAAAAAIYYyBMrA1gAsiwAAAAAhhjIEysDWQDBLAAAAACG
+CK4IMQNaAOcsAAAAAIYISgIxA1oADS0AAAAAhggrAjEDWgAzLQAAAACGCD0XMQNaAFktAAAAAIMY
+yBMGAFoAYS0AAAAAkwgkEzUDWgCNLQAAAACTCKoJOgNaAJQtAAAAAJMItgk/A1oAnC0AAAAAlghj
+F0UDWwCjLQAAAACGGMgTBgBbAKstAAAAAJEYzhNKA1sAty0AAAAAhgikFk4DWwC/LQAAAACGCK8W
+UwNbAMgtAAAAAIYI5QIxA1wA0C0AAAAAhgjyAhAAXADZLQAAAACGCGcVWQNdAOEtAAAAAIYIcxVf
+A10A6i0AAAAAhgjHFWYDXgDyLQAAAACGCNIVbANeAPstAAAAAIYIpxVzA18AAy4AAAAAhgi3FXkD
+XwBZLQAAAACGGMgTBgBgAAwuAAAAAIYIfxWAA2AAFC4AAAAAhgiTFQEAYABZLQAAAACGGMgTBgBh
+AB0uAAAAAIYIrwKEA2EAJS4AAAAAhgi9AokDYQAuLgAAAACGCPITjwNiADYuAAAAAIYIARSVA2IA
+Py4AAAAAhgjdCJwDYwBHLgAAAACGCOYIoQNjAFAuAAAAAIYInQynA2QAWC4AAAAAhgilDKwDZABh
+LgAAAACGCJMSsgNlAGkuAAAAAIYImxK3A2UAci4AAAAAhggfDTEDZgB6LgAAAACGCCkNEABmAIMu
+AAAAAIYInxC9A2cAiy4AAAAAhgitEMIDZwCULgAAAACGCHUMpwNoAJwuAAAAAIYIgQysA2gApS4A
+AAAAhgjBCKcDaQCtLgAAAACGCM8IrANpAFktAAAAAIYYyBMGAGoAti4AAAAAhgj/BzEDagC+LgAA
+AACGCAoIEABqAMcuAAAAAIYIoQIxA2sAzy4AAAAAhgioAhAAawBZLQAAAACGGMgTBgBsANguAAAA
+AIYIURAxA2wA4C4AAAAAhghbEBAAbADpLgAAAACGCN0YMQNtAPEuAAAAAIYI6BgQAG0AWS0AAAAA
+hhjIEwYAbgD6LgAAAACGCJ0MMQNuAAIvAAAAAIYIpQwQAG4ACy8AAAAAhghGCTEDbwATLwAAAACG
+CFIJEABvAFktAAAAAIYYyBMGAHAAHC8AAAAAhggnFzEDcAAkLwAAAACGCDIXEABwAC0vAAAAAIYI
+XwgxA3EANS8AAAAAhghpCBAAcQA+LwAAAACGCAAZMQNyAEYvAAAAAIYIDRkQAHIAWS0AAAAAhhjI
+EwYAcwBPLwAAAACGCC0VxgFzAFcvAAAAAIYIRBUUA3MAYC8AAAAAhgjrDMYBdABoLwAAAACGCAUN
+FAN0AHEvAAAAAIYIwwzGAXUAeS8AAAAAhgjXDBQDdQCCLwAAAACGCIQTxgF2AIovAAAAAIYImBMU
+A3YAky8AAAAAhghqEoADdwCbLwAAAACGCHkSAQB3AFktAAAAAIYYyBMGAHgApC8AAAAAhgivAoQD
+eACsLwAAAACGCL0CiQN4ALUvAAAAAIYI8hOPA3kAvS8AAAAAhggBFJUDeQDGLwAAAACGCE4RyAN6
+AM4vAAAAAIYIXhHNA3oA1y8AAAAAhgh8CTEDewDfLwAAAACGCIoJEAB7AOgvAAAAAIYInxDTA3wA
+8C8AAAAAhgitENgDfAD5LwAAAACGCMUPMQN9AAEwAAAAAIYIzQ8QAH0AWS0AAAAAhhjIEwYAfgAK
+MAAAAACGCNwXMQN+ABIwAAAAAIYI5hcQAH4AGzAAAAAAhghjDDEDfwAjMAAAAACGCGwMEAB/AFkt
+AAAAAIYYyBMGAIAALDAAAAAAhgheCTEDgAA0MAAAAACGCG0JEACAAD0wAAAAAIYIfBbeA4EARTAA
+AAAAhgiQFuMDgQBOMAAAAACGCFoWMQOCAFYwAAAAAIYIaxYQAIIAXzAAAAAAhgidDDEDgwBnMAAA
+AACGCKUMEACDAHAwAAAAAIYIshgxA4QAeDAAAAAAhgi9GBAAhACBMAAAAACGCDMIMQOFAIkwAAAA
+AIYISQgQAIUAkjAAAAAAhgj9D4ADhgCaMAAAAACGCA4QAQCGAKMwAAAAAIYIoBGAA4cAqzAAAAAA
+hgivEQEAhwC0MAAAAACGCBUIMQOIALwwAAAAAIYIJAgQAIgAWS0AAAAAhhjIEwYAiQDFMAAAAACG
+CCcXMQOJAM0wAAAAAIYIMhcQAIkA1jAAAAAAhghfCDEDigDeMAAAAACGCGkIEACKAOcwAAAAAIYI
+ABkxA4sA7zAAAAAAhggNGRAAiwBZLQAAAACGGMgTBgCMAPgwAAAAAIYIrwKEA4wAADEAAAAAhgi9
+AokDjAAJMQAAAACGCI0M6QONABExAAAAAIYIlQzvA40AWS0AAAAAhhjIEwYAjgAaMQAAAACGCKMS
+9gOOACIxAAAAAIYIrhL7A44AKzEAAAAAhggjCTEDjwAzMQAAAACGCDAJEACPADwxAAAAAIYI+AkB
+BJAARDEAAAAAhggGChkDkABZLQAAAACGGMgTBgCRAE0xAAAAAIYI/wcxA5EAVTEAAAAAhggKCBAA
+kQBeMQAAAACGCKECMQOSAGYxAAAAAIYIqAIQAJIAWS0AAAAAhhjIEwYAkwBvMQAAAACRGM4TSgOT
+AFktAAAAAIYYyBMGAJMAezEAAAAAgwBDAAYEkwB7MQAAAACDAF4ABgSUAI4xAAAAAIMAnQAGBJUA
+oTEAAAAAgwB4AAwElgDDMQAAAACDALcAEgSXAHsxAAAAAIMAsAEGBJgA9DEAAAAAgwABARgEmQD3
+MQAAAACDADoBHwSaABkyAAAAAIMAZgElBJsAezEAAAAAgwD5AQYEnAD0MQAAAACDAIsBKwSdAAAA
+AQCZEQAAAQApEgAAAQDgAgAAAgDPAgAAAwA9CQAABAAUCgAAAQAdEwAAAgDhFAAAAwDYEQAAAQAf
+DAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAA
+AQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAf
+DAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAdEwAAAgDhFAAAAwDYEQAA
+AQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAdEwAAAgDh
+FAAAAwDYEQAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAA
+AQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAf
+DAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAA
+AQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQDMFgAAAgDVEwAAAwAi
+FgAABADYEQAAAQCpFwAAAQCpFwAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAA
+AQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAf
+DAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAA
+AQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAf
+DAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAA
+AQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAf
+DAAAAQAfDAAAAQAfDAAAAQAfDAAAAQAhAwAAAQAhAwAAAQAhAwAAAQBGEgAAAQBGEgAAAQAhAwAA
+AQBGEgAAAQBzDAAAAQBzDAAAAQAhAwAAAQBzDAkAyBMBABEAyBMGABkAyBMKACkAyBMQADEAyBMQ
+ADkAyBMQAEEAyBMQAEkAyBMQAFEAyBMQAFkAyBMQAGEAyBMQAGkAyBMGALEAyBMGAOkAyBMGAAkB
+yBMVAOEA7gsGABkBGhkuACEBUxgzACkB7xY4ADEBFQJEABkB6BZKADEB2BRRADkByBMGADkBCBZX
+AEkBVAxdAFEByBNjAEEBEBFpAIEAyBMGABkB6BZwADkBkgJ2AAwAbxeHAJkAyBOMAKEAyBOSAIEA
+JQyZAGkB6gkGABQAyBOuAHEBNRi0ABwACQPTAIEB8gnZABkB5wfeACQAyBOuAHEBmAkYASwAyBOu
+ADQAyBOuAHEB8xhHATwAyBOuAEQAyBOuAEwAyBOuAFQAEwygAVwAEwygARwAyBMGAHkAoxixAckA
+yBO2AckA7Q/AAckAvQ8BAIkByBMQAMkAqxgGAMkAVBcGAMkAVxfGAeEAyBMGAOEAPgLOAeEA9RTV
+AbkAyBMGAOEAwhTbAZkB5A/hAeEAjhjoAaEBXxjuAbkBnAj1AbkB0Bj+AfEAyBMEAhEByBMGABkB
+JhUMAi4ACwCmBC4AEwCvBC4AGwDOBC4AIwDXBC4AKwAABS4AMwAABS4AOwAABS4AQwDXBC4ASwAG
+BS4AUwAABS4AWwAdBUMAYwBnBSMBcwBnBcEBawBnBeEBawBnBQECawBnBSECawBnBUECawBnBWEC
+awBnBYECawBnBaECawBnBcECawBnBeECawBnBQEDawBnBSEDawBnBUEDawBnBUMDawBnBWEDawBn
+BYEDawBnBaEDawBnBcEDawBnBeEDawBnBQEEawBnBSEEawBnBUEEawBnBWEEawBnBYEEawBnBaEE
+awBnBcEEawBnBeEEawBnBQEFawBnBSEFawBnBUEFawBnBWEFawBnBYEFawBnBaEFawBnBcEFawBn
+BeEFawBnBQEGawBnBSEGawBnBUEGawBnBWEGawBnBYEGawBnBaEGawBnBcEGawBnBeEGawBnBQEH
+awBnBSEHawBnBUEHawBnBWEHawBnBYEHawBnBaEHawBnBcEHawBnBeEHawBnBQEIawBnBSEIawBn
+BUEIawBnBWEIawBnBYEIawBnBaEIawBnBcEIawBnBSkJewDOBEkJewDOBCANawBnBUANawBnBWAN
+awBnBYANawBnBaANawBnBcANawBnBeANawBnBQAOawBnBSAOawBnBUAOawBnBYAOawBnBaAOawBn
+BeAOawBnBQAPawBnBSAPawBnBUAPawBnBWAPawBnBYAPawBnBaAPawBnBcAPawBnBeAPawBnBQAQ
+awBnBSAQawBnBUAQawBnBWAQawBnBYAQawBnBaAQawBnBcAQawBnBeAQawBnBQARawBnBUARawBn
+BWARawBnBYARawBnBaARawBnBeARawBnBQASawBnBSASawBnBUASawBnBYASawBnBaASawBnBcAS
+awBnBeASawBnBSATawBnBUATawBnBWATawBnBYATawBnBaATawBnBcATawBnBQAUawBnBSAUawBn
+BUAUawBnBWAUawBnBYAUawBnBaAUawBnBcAUawBnBeAUawBnBQAVawBnBSAVawBnBWAVawBnBYAV
+awBnBaAVawBnBcAVawBnBeAVawBnBQAWawBnBSAWawBnBUAWawBnBWAWawBnBYAWawBnBaAWawBn
+BcAWawBnBQAXawBnBSAXawBnBUAXawBnBWAXawBnBaAXawBnBcAXawBnBeAXawBnBQAYawBnBSAY
+awBnBUAYawBnBWAYawBnBYAYawBnBaAYawBnBcAYawBnBeAYawBnBQAZawBnBSAZawBnBUAZawBn
+BWAZawBnBYAZawBnBaAZawBnBcAZawBnBQAaawBnBSAaawBnBUAaawBnBWAaawBnBYAaawBnBaAa
+awBnBeAaawBnBQAbawBnBSAbawBnBUAbawBnBYAbawBnBaAbawBnBcAbawBnBeAbawBnBQAcawBn
+BSAcawBnBWAcawBnBYAcawBnBaAcawBnBcAcawBnBRwAogDkAOkAygEDAAEABAAbAAUAIwAIAEUA
+CQBJAAoASwALAEwADABRAA0AUgAOAFsADwBdABAAXwARAGEAEgBkABMAaQAUAG8AFQBxABYAegAX
+AH0AGAB/ABkAggAAAOACMgQAAIoNNgQAACoQOgQAABkONgQAAL8TPwQAACAPNgQAAIsQPwQAAGsO
+NgQAAH0QPwQAAFYONgQAAC8YPwQAAKEPNgQAAJcQPwQAAH4ONgQAAEIKPwQAANANNgQAADcNPwQA
+AOkNNgQAAE8WPwQAAGMPNgQAAFETPwQAAAoPNgQAAAIYPwQAAI4PNgQAAIwSQwQAANwONgQAAOAC
+MgQAAIoNNgQAAM8CMgQAAHINNgQAAGkNPwQAAPoNNgQAADoQOgQAADAONgQAAOACMgQAAIoNNgQA
+ACoQOgQAABkONgQAAAMDPwQAAJoNNgQAAI4QPwQAAG4ONgQAAD8SPwQAAKQONgQAADMSPwQAAJEO
+NgQAANkPPwQAAAoONgQAAD4WPwQAAEsPNgQAAPQXPwQAAHkPNgQAAEsTPwQAAAQPNgQAAC4WPwQA
+ADQPNgQAAJcQPwQAAH4ONgQAAMwYPwQAALIPNgQAANQHPwQAAKsNNgQAAGMSQwQAAMoONgQAAFgS
+QwQAALgONgQAAN8HPwQAAL0NNgQAALIIPwQAAE4CPwQAAC8CPwQAAEEXPwQAACgTRwQAAMoJTAQA
+AGcXUQQAALMWVgQAAPYCPwQAAJ8VWwQAANYVYQQAALsVZwQAAJcVQwQAAMECbQQAAAUUcgQAAOoI
+eAQAAKkMfQQAAJ8SggQAAC0NPwQAANAQhwQAAIUMfQQAANMIfQQAAA4IPwQAAAYDPwQAAF8QPwQA
+AOwYPwQAAKkMPwQAAFYJPwQAADYXPwQAAG0IPwQAABEZPwQAAEgVNgQAAAkNNgQAANsMNgQAAJwT
+NgQAAH0SQwQAAMECbQQAAAUUcgQAAGIRjAQAAI4JPwQAANAQkQQAANEPPwQAAOoXPwQAAHAMPwQA
+AHEJPwQAAJQWlgQAAG8WPwQAAKkMPwQAAMEYPwQAAE0IPwQAABIQQwQAALMRQwQAACgIPwQAADYX
+PwQAAG0IPwQAABEZPwQAAMECbQQAAJkMmwQAALISoQQAADQJPwQAAAoKOgQAAA4IPwQAAAYDPwQB
+AAgAAwABAAkABQABAAoABwABAAsACQABAAwACwABAA0ADQABAA4ADwABAA8AEQABABAAEwABABEA
+FQABABIAFwABABMAGQABABQAGwABABUAHQABABYAHwABABcAIQABABgAIwABABkAJQABABoAJwAB
+ABsAKQABABwAKwABAB0ALQABAB4ALwABAB8AMQABACAAMwABACEANQABACYANwABACcAOQABACgA
+OwABACkAPQABACoAPwABACsAQQABACwAQwABAC0ARQABADIARwABADMASQABADQASwABADUATQAB
+ADYATwABADcAUQABADgAUwABADkAVQABADoAVwABADsAWQABADwAWwABAD0AXQABAD4AXwABAD8A
+YQABAEAAYwABAEEAZQABAEIAZwABAEMAaQABAEQAawABAEUAbQABAEYAbwABAEcAcQABAEgAcwAB
+AEkAdQABAEoAdwABAEsAeQABAEwAewABAE0AfQABAE4AfwABAE8AgQABAFAAgwABAFEAhQABAFIA
+hwABAFMAiQACAF4AiwACAF8AjQACAGAAjwACAGEAkQACAGMAkwACAGQAlQABAGUAlQACAGYAlwAC
+AGkAmQABAGoAmQACAGsAmwABAGwAmwACAG0AnQABAG4AnQACAG8AnwABAHAAnwACAHEAoQABAHIA
+oQACAHQAowABAHUAowACAHcApQABAHgApQACAHkApwABAHoApwACAHsAqQABAHwAqQACAH0AqwAB
+AH4AqwACAH8ArQABAIAArQACAIEArwABAIIArwACAIMAsQABAIQAsQACAIUAswABAIYAswACAIcA
+tQABAIgAtQACAIoAtwABAIsAtwACAIwAuQABAI0AuQACAI8AuwABAJAAuwACAJEAvQABAJIAvQAC
+AJQAvwABAJUAvwACAJYAwQABAJcAwQACAJkAwwABAJoAwwACAJsAxQABAJwAxQACAJ0AxwABAJ4A
+xwACAKAAyQABAKEAyQACAKIAywABAKMAywACAKQAzQABAKUAzQACAKYAzwABAKcAzwACAKgA0QAB
+AKkA0QACAKsA0wABAKwA0wACAK0A1QABAK4A1QACAK8A1wABALAA1wACALEA2QABALIA2QACALMA
+2wABALQA2wACALUA3QABALYA3QACALgA3wABALkA3wACALoA4QABALsA4QACAL0A4wABAL4A4wAC
+AL8A5QABAMAA5QACAMEA5wABAMIA5wACAMMA6QABAMQA6QACAMUA6wABAMYA6wACAMcA7QABAMgA
+7QACAMkA7wABAMoA7wACAMsA8QABAMwA8QACAM0A8wABAM4A8wACANAA9QABANEA9QACANIA9wAB
+ANMA9wACANQA+QABANUA+QACANcA+wABANgA+wACANkA/QABANoA/QACANwA/wABAN0A/wACAN4A
+AQEBAN8AAQECAOAAAwEBAOEAAwECAOMABQEBAOQABQECAOUABwEBAOYABwGAAKYAzQAQATYBPgFy
+AX8BhwGYAakBBIAAAAEAAAAAAAAAAAAAAAAAzAEAAAQAAAAAAAAAAAAAABQCagIAAAAADgAAAAAA
+AAAAAAAAHQKzFwAAAAAEAAAAAAAAAAAAAAAUAp4JAAAAAAsAAAAAAAAAAAAAACYCbhEAAAAADgAA
+AAAAAAAAAAAAHQIKGAAAAAAEAAAAAAAAAAAAAAAUAvYPAAAAAAQAAAAAAAAAAAAAAC8CEBIAAAAA
+DgAAAAAAAAAAAAAAHQLiEQAAAAAAAAAAAQAAAEEUAAAaAAIAJwA/AEUAPwBLAMgAVQAxAVsAagFV
+AHoBWwCQAQAAAElEVFNWYXJpYWJsZTEwMABJRFRTVmFyaWFibGVzMTAwAElEVFNFdmFsdWF0b3JD
+b250ZXh0MTAwADw+OV9fNV8wADxBZGRQZXJzb24+Yl9fNV8wADw+OV9fNl8wADxBZGRHcm91cD5i
+X182XzAAPD45X184XzAAPENyZWF0ZU5ld091dHB1dFJvd3M+Yl9fOF8wADw+OV9fNl8xADxBZGRH
+cm91cD5iX182XzEAPD45X184XzEAPENyZWF0ZU5ld091dHB1dFJvd3M+Yl9fOF8xAElFbnVtZXJh
+YmxlYDEAVGFza2AxAEhhc2hTZXRgMQBJbnQzMgA8PjlfXzhfMgA8Q3JlYXRlTmV3T3V0cHV0Um93
+cz5iX184XzIARnVuY2AyAERpY3Rpb25hcnlgMgA8PjlfXzhfMwA8Q3JlYXRlTmV3T3V0cHV0Um93
+cz5iX184XzMAVUludDY0ADw+OV9fOF80ADxDcmVhdGVOZXdPdXRwdXRSb3dzPmJfXzhfNAA8Pjlf
+XzhfNQA8Q3JlYXRlTmV3T3V0cHV0Um93cz5iX184XzUAPD45X184XzYAPENyZWF0ZU5ld091dHB1
+dFJvd3M+Yl9fOF82AFNDXzU0ZjczOTk3NmRjMTQ5ZjY5ZTY3YTdmZDYwNmM2ZGY2ADw+OV9fOF83
+ADxDcmVhdGVOZXdPdXRwdXRSb3dzPmJfXzhfNwBnZXRfVVRGOAA8PjkAPE1vZHVsZT4AZ2V0X1Vu
+aWt1bUNsaWVudElEAEdldE91dHB1dElEAGdldF9VbmlrdW1BUElVUkwAU3lzdGVtLklPAGRhdGEA
+bXNjb3JsaWIAPD5jAFN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljAEdldFN0cmVhbUFzeW5jAGdl
+dF9JZABzZXRfSWQAZ2V0X1NvdXJjZWRJZABzZXRfU291cmNlZElkAHNldF9yZWxhdGlvblVuSWQA
+c2V0X3VuSWQAZ2V0X0V4cG9ydElkAHNldF9FeHBvcnRJZABzZXRfZXh0SWQAQWRkAE1hcmtPdXRw
+dXRzRmluaXNoZWQAaWQAPElkPmtfX0JhY2tpbmdGaWVsZAA8U291cmNlZElkPmtfX0JhY2tpbmdG
+aWVsZAA8RXhwb3J0SWQ+a19fQmFja2luZ0ZpZWxkADxTb3VyY2U+a19fQmFja2luZ0ZpZWxkADxD
+b3Vyc2VDb2RlPmtfX0JhY2tpbmdGaWVsZAA8U2lzU2Nob29sVW5pdENvZGU+a19fQmFja2luZ0Zp
+ZWxkADxQY29kZT5rX19CYWNraW5nRmllbGQAPFRlbE1vYmlsZT5rX19CYWNraW5nRmllbGQAPE5h
+bWU+a19fQmFja2luZ0ZpZWxkADxSb2xlVHlwZT5rX19CYWNraW5nRmllbGQAPFRlbFR5cGU+a19f
+QmFja2luZ0ZpZWxkADxTY2hvb2xUeXBlPmtfX0JhY2tpbmdGaWVsZAA8R3JvdXBUeXBlPmtfX0Jh
+Y2tpbmdGaWVsZAA8U3RhcnREYXRlPmtfX0JhY2tpbmdGaWVsZAA8TG9uZz5rX19CYWNraW5nRmll
+bGQAPFRlbFdvcms+a19fQmFja2luZ0ZpZWxkADxSZWw+a19fQmFja2luZ0ZpZWxkADxUZWw+a19f
+QmFja2luZ0ZpZWxkADxBbGxvd1NjaG9vbE1haWw+a19fQmFja2luZ0ZpZWxkADxBbGxvd05vdGlm
+aWNhdGlvbk1haWw+a19fQmFja2luZ0ZpZWxkADxFbWFpbD5rX19CYWNraW5nRmllbGQAPFVybD5r
+X19CYWNraW5nRmllbGQAPEFnZVJhbmdlRnJvbT5rX19CYWNraW5nRmllbGQAPEdpdmVuPmtfX0Jh
+Y2tpbmdGaWVsZAA8RXh0ZW5zaW9uPmtfX0JhY2tpbmdGaWVsZAA8RGVzY3JpcHRpb24+a19fQmFj
+a2luZ0ZpZWxkADxBZ2VSYW5nZVRvPmtfX0JhY2tpbmdGaWVsZAA8U2Nob29sWWVhcj5rX19CYWNr
+aW5nRmllbGQAPEFkcj5rX19CYWNraW5nRmllbGQAPE1lbWJlcj5rX19CYWNraW5nRmllbGQAPEFs
+bG93TmV3c0xldHRlcj5rX19CYWNraW5nRmllbGQAPFNvdXJjZWRJZHM+a19fQmFja2luZ0ZpZWxk
+ADxIaWRlQ29udGFjdERldGFpbHM+a19fQmFja2luZ0ZpZWxkADxQZXJzb25zPmtfX0JhY2tpbmdG
+aWVsZAA8RmlsdGVyZWRQZXJzb25zPmtfX0JhY2tpbmdGaWVsZAA8TWVtYmVyc2hpcHM+a19fQmFj
+a2luZ0ZpZWxkADxHcm91cHM+a19fQmFja2luZ0ZpZWxkADxFeHRyYUFkZHJlc3M+a19fQmFja2lu
+Z0ZpZWxkADxWaXNpdGluZ0FkZHJlc3M+a19fQmFja2luZ0ZpZWxkADxfc3RhdHM+a19fQmFja2lu
+Z0ZpZWxkADxTdHJlZXQ+a19fQmFja2luZ0ZpZWxkADxTaG9ydD5rX19CYWNraW5nRmllbGQAPFRl
+bEZheD5rX19CYWNraW5nRmllbGQAPEZhbWlseT5rX19CYWNraW5nRmllbGQAPExvY2FsaXR5Pmtf
+X0JhY2tpbmdGaWVsZABzZXRfc2lza29kAHNldF9rdXJza29kAFJlcGxhY2UAZGVmYXVsdEluc3Rh
+bmNlAGdldF9Tb3VyY2UAc2V0X1NvdXJjZQBnZXRfQ291cnNlQ29kZQBzZXRfQ291cnNlQ29kZQBn
+ZXRfU2lzU2Nob29sVW5pdENvZGUAc2V0X1Npc1NjaG9vbFVuaXRDb2RlAGdldF9QY29kZQBzZXRf
+UGNvZGUARW51bWVyYWJsZQBJRGlzcG9zYWJsZQBSdW50aW1lVHlwZUhhbmRsZQBHZXRUeXBlRnJv
+bUhhbmRsZQBnZXRfSW1wb3J0RnJvbUZpbGUAZ2V0X1RlbE1vYmlsZQBzZXRfVGVsTW9iaWxlAGdl
+dF9OYW1lAHNldF9OYW1lAERhdGVUaW1lAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlBpcGVsaW5l
+AFRlbGVwaG9uZQBnZXRfUm9sZVR5cGUAc2V0X1JvbGVUeXBlAHJvbGVUeXBlAGdldF9UZWxUeXBl
+AHNldF9UZWxUeXBlAGdldF9TY2hvb2xUeXBlAHNldF9TY2hvb2xUeXBlAGdldF9Hcm91cFR5cGUA
+c2V0X0dyb3VwVHlwZQBXaGVyZQBTeXN0ZW0uQ29yZQBnZXRfQ3VsdHVyZQBzZXRfQ3VsdHVyZQBy
+ZXNvdXJjZUN1bHR1cmUAQXBwbGljYXRpb25TZXR0aW5nc0Jhc2UARGlzcG9zZQBQYXJzZQBnZXRf
+U3RhcnREYXRlAHNldF9TdGFydERhdGUAc3RhcnREYXRlAGV4cG9ydERhdGUARWRpdG9yQnJvd3Nh
+YmxlU3RhdGUAc2V0X3RlbGVmb25BcmJldGUAQ29tcGlsZXJHZW5lcmF0ZWRBdHRyaWJ1dGUARGVi
+dWdnZXJOb25Vc2VyQ29kZUF0dHJpYnV0ZQBEZWJ1Z2dhYmxlQXR0cmlidXRlAEVkaXRvckJyb3dz
+YWJsZUF0dHJpYnV0ZQBBc3NlbWJseVRpdGxlQXR0cmlidXRlAEFzc2VtYmx5VHJhZGVtYXJrQXR0
+cmlidXRlAFRhcmdldEZyYW1ld29ya0F0dHJpYnV0ZQBBc3NlbWJseUNvbmZpZ3VyYXRpb25BdHRy
+aWJ1dGUAQXNzZW1ibHlEZXNjcmlwdGlvbkF0dHJpYnV0ZQBDb21waWxhdGlvblJlbGF4YXRpb25z
+QXR0cmlidXRlAEFzc2VtYmx5UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJseUNvcHlyaWdodEF0dHJp
+YnV0ZQBTU0lTU2NyaXB0Q29tcG9uZW50RW50cnlQb2ludEF0dHJpYnV0ZQBBc3NlbWJseUNvbXBh
+bnlBdHRyaWJ1dGUAUnVudGltZUNvbXBhdGliaWxpdHlBdHRyaWJ1dGUAUHJlRXhlY3V0ZQBBdXRo
+ZW50aWNhdGlvbkhlYWRlclZhbHVlAFRyeUdldFZhbHVlAHZhbHVlAERlc2VyaWFsaXplAEVuY29k
+aW5nAFN5c3RlbS5SdW50aW1lLlZlcnNpb25pbmcAVG9CYXNlNjRTdHJpbmcAZ2V0X0xvbmcAc2V0
+X0xvbmcAZ2V0X1RlbFdvcmsAc2V0X1RlbFdvcmsAZ2V0X1JlbABzZXRfUmVsAGdldF9UZWwAc2V0
+X1RlbABTeXN0ZW0uQ29tcG9uZW50TW9kZWwAZ2V0X0FsbG93U2Nob29sTWFpbABzZXRfQWxsb3dT
+Y2hvb2xNYWlsAGdldF9BbGxvd05vdGlmaWNhdGlvbk1haWwAc2V0X0FsbG93Tm90aWZpY2F0aW9u
+TWFpbABnZXRfRW1haWwAc2V0X0VtYWlsAHNldF9tb2JpbABTQ181NGY3Mzk5NzZkYzE0OWY2OWU2
+N2E3ZmQ2MDZjNmRmNi5kbGwAc2V0X3JvbGwAc2V0X3JlbGF0aW9uVW5JZF9Jc051bGwAc2V0X3Vu
+SWRfSXNOdWxsAHNldF9leHRJZF9Jc051bGwAc2V0X3Npc2tvZF9Jc051bGwAc2V0X2t1cnNrb2Rf
+SXNOdWxsAHNldF90ZWxlZm9uQXJiZXRlX0lzTnVsbABzZXRfbW9iaWxfSXNOdWxsAHNldF9yb2xs
+X0lzTnVsbABzZXRfdXJsX0lzTnVsbABzZXRfZXhwb3J0RGF0dW1fSXNOdWxsAHNldF9zdGFydGRh
+dHVtX0lzTnVsbABzZXRfbmFtbl9Jc051bGwAc2V0X2VmdGVybmFtbl9Jc051bGwAc2V0X2Zvcm5h
+bW5fSXNOdWxsAHNldF90ZWxlZm9uX0lzTnVsbABzZXRfc2tvbHR5cF9Jc051bGwAc2V0X2dydXBw
+dHlwX0lzTnVsbABzZXRfdGlsbEFyX0lzTnVsbABzZXRfZnJhbkFyX0lzTnVsbABzZXRfc2tvbGFy
+X0lzTnVsbABzZXRfcG9zdG51bW1lcl9Jc051bGwAc2V0X2Jlc29rc3Bvc3RudW1tZXJfSXNOdWxs
+AHNldF9wZXJzb25ucl9Jc051bGwAc2V0X2V4dHJhYWRyZXNzX0lzTnVsbABzZXRfYmVzb2tzYWRy
+ZXNzX0lzTnVsbABzZXRfcG9zdGFkcmVzc19Jc051bGwAc2V0X2Jlc29rc29ydF9Jc051bGwAc2V0
+X3Bvc3RvcnRfSXNOdWxsAHNldF9lcG9zdF9Jc051bGwAc2V0X2ZheF9Jc051bGwAU2V0TnVsbABn
+ZXRfVXJsAHNldF9VcmwAc2V0X3VybABTdHJlYW0AZ2V0X0l0ZW0Ac2V0X0l0ZW0AU3lzdGVtAGdl
+dF9BZ2VSYW5nZUZyb20Ac2V0X0FnZVJhbmdlRnJvbQBVbmlrdW0Ac2V0X2V4cG9ydERhdHVtAHNl
+dF9zdGFydGRhdHVtAHJlc291cmNlTWFuAGdldF9HaXZlbgBzZXRfR2l2ZW4AU2NyaXB0TWFpbgBz
+ZXRfbmFtbgBzZXRfZWZ0ZXJuYW1uAHNldF9mb3JuYW1uAHNldF90ZWxlZm9uAGdldF9FeHRlbnNp
+b24Ac2V0X0V4dGVuc2lvbgBQZXJzb25FeHRlbnNpb24AR3JvdXBFeHRlbnNpb24AQWRkUmVsYXRp
+b24AU3lzdGVtLkNvbmZpZ3VyYXRpb24AU3lzdGVtLkdsb2JhbGl6YXRpb24Ac2V0X0F1dGhvcml6
+YXRpb24AU3lzdGVtLlJlZmxlY3Rpb24ASW52YWxpZE9wZXJhdGlvbkV4Y2VwdGlvbgBnZXRfRGVz
+Y3JpcHRpb24Ac2V0X0Rlc2NyaXB0aW9uAE5ld3RvbnNvZnQuSnNvbgBTdHJpbmdDb21wYXJpc29u
+AEFkZFBlcnNvbgBwZXJzb24AZ2V0X0FnZVJhbmdlVG8Ac2V0X0FnZVJhbmdlVG8AQ3VsdHVyZUlu
+Zm8AT3V0cHV0TmFtZU1hcABPdXRwdXRNYXAATWljcm9zb2Z0LlNxbFNlcnZlci5EVFNSdW50aW1l
+V3JhcABNZW1iZXJzaGlwAFN5c3RlbS5OZXQuSHR0cABBZGRHcm91cABncm91cABzZXRfc2tvbHR5
+cABzZXRfZ3J1cHB0eXAAU3lzdGVtLkxpbnEAc2V0X3RpbGxBcgBzZXRfZnJhbkFyAGdldF9TY2hv
+b2xZZWFyAHNldF9TY2hvb2xZZWFyAHNldF9za29sYXIAZ2V0X0FkcgBzZXRfQWRyAGdldF9NZW1i
+ZXIAc2V0X01lbWJlcgBTdHJlYW1SZWFkZXIASnNvblJlYWRlcgBKc29uVGV4dFJlYWRlcgBQaXBl
+bGluZUJ1ZmZlcgBSZWxhdGlvbkJ1ZmZlcgBQZXJzb25CdWZmZXIAR3J1cHBCdWZmZXIAU2NyaXB0
+QnVmZmVyAGdldF9SZXNvdXJjZU1hbmFnZXIAc2V0X3Bvc3RudW1tZXIAc2V0X2Jlc29rc3Bvc3Ru
+dW1tZXIATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuUnVudGltZS5XcmFwcGVyAGdldF9BbGxvd05l
+d3NMZXR0ZXIAc2V0X0FsbG93TmV3c0xldHRlcgBKc29uU2VyaWFsaXplcgBzZXRfcGVyc29ubnIA
+LmN0b3IALmNjdG9yAE91dHB1dElEcwBTeXN0ZW0uRGlhZ25vc3RpY3MAZ2V0X1NvdXJjZWRJZHMA
+c2V0X1NvdXJjZWRJZHMAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVz
+b3VyY2VzAFNDXzU0ZjczOTk3NmRjMTQ5ZjY5ZTY3YTdmZDYwNmM2ZGY2LlByb3BlcnRpZXMuUmVz
+b3VyY2VzLnJlc291cmNlcwBEZWJ1Z2dpbmdNb2RlcwBTQ181NGY3Mzk5NzZkYzE0OWY2OWU2N2E3
+ZmQ2MDZjNmRmNi5Qcm9wZXJ0aWVzAGdldF9SZWFkT25seVZhcmlhYmxlcwBHZXRCeXRlcwBCdWZm
+ZXJDb2x1bW5JbmRleGVzAEdldENvbHVtbkluZGV4ZXMAU2V0dGluZ3MAU3lzdGVtLlRocmVhZGlu
+Zy5UYXNrcwBFcXVhbHMAZ2V0X0hpZGVDb250YWN0RGV0YWlscwBzZXRfSGlkZUNvbnRhY3REZXRh
+aWxzAENvbm5lY3Rpb25zAGdldF9QZXJzb25zAHNldF9QZXJzb25zAGdldF9GaWx0ZXJlZFBlcnNv
+bnMAc2V0X0ZpbHRlcmVkUGVyc29ucwBnZXRfTWVtYmVyc2hpcHMAc2V0X01lbWJlcnNoaXBzAGdl
+dF9Hcm91cHMAc2V0X0dyb3VwcwBTeXN0ZW0uTmV0Lkh0dHAuSGVhZGVycwBIdHRwUmVxdWVzdEhl
+YWRlcnMAZ2V0X0RlZmF1bHRSZXF1ZXN0SGVhZGVycwBCdWZmZXJzAHNldF9leHRyYWFkcmVzcwBz
+ZXRfYmVzb2tzYWRyZXNzAHNldF9wb3N0YWRyZXNzAGdldF9FeHRyYUFkZHJlc3MAc2V0X0V4dHJh
+QWRkcmVzcwBnZXRfVmlzaXRpbmdBZGRyZXNzAHNldF9WaXNpdGluZ0FkZHJlc3MAZ2V0X19zdGF0
+cwBzZXRfX3N0YXRzAFN0YXRpc3RpY3RzAEZpbmlzaE91dHB1dHMAQ3JlYXRlTmV3T3V0cHV0Um93
+cwBDb25jYXQARGVzZXJpYWxpemVPYmplY3QAUm9vdE9iamVjdABwZXJzb25IYXNoU2V0AGdyb3Vw
+SGFzaFNldABnZXRfU3RyZWV0AHNldF9TdHJlZXQAZ2V0X1VuaWt1bUNsaWVudFNlY3JldABTZXRF
+bmRPZlJvd3NldABnZXRfRGVmYXVsdABnZXRfUmVzdWx0AEh0dHBDbGllbnQAVXNlckNvbXBvbmVu
+dABQYXJlbnRDb21wb25lbnQAU2NyaXB0Q29tcG9uZW50AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuVHhT
+Y3JpcHQASnNvbkNvbnZlcnQAZ2V0X1Nob3J0AHNldF9TaG9ydABzZXRfYmVzb2tzb3J0AHNldF9w
+b3N0b3J0AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuUGlwZWxpbmVIb3N0AHNldF9lcG9zdABGaXJzdABQ
+cmltZU91dHB1dABTeXN0ZW0uVGV4dABSZWFkQWxsVGV4dABHZXRWYWx1ZVdpdGhDb250ZXh0AFNj
+cmlwdENvbXBvbmVudEV2YWxDb250ZXh0AGdldF9FdmFsdWF0b3JDb250ZXh0AGdldF9Ob3cAQWRk
+Um93AGdldF9UZWxGYXgAc2V0X1RlbEZheABzZXRfZmF4AGdldF9Bc3NlbWJseQBnZXRfRmFtaWx5
+AHNldF9GYW1pbHkAVG9EaWN0aW9uYXJ5AGdldF9Mb2NhbGl0eQBzZXRfTG9jYWxpdHkASXNOdWxs
+T3JFbXB0eQAAAzoAAAtCAGEAcwBpAGMAABUvAHYAMQAvAGUAeABwAG8AcgB0AAADLQABAQCAm0kA
+cwBOAHUAbABsACAAcAByAG8AcABlAHIAdAB5ACAAYwBhAG4AbgBvAHQAIABiAGUAIABzAGUAdAAg
+AHQAbwAgAEYAYQBsAHMAZQAuACAAQQBzAHMAaQBnAG4AIABhACAAdgBhAGwAdQBlACAAdABvACAA
+dABoAGUAIABjAG8AbAB1AG0AbgAgAGkAbgBzAHQAZQBhAGQALgAADVAAZQByAHMAbwBuAAARUgBl
+AGwAYQB0AGkAbwBuAAALRwByAHUAcABwAAAdSQBtAHAAbwByAHQARgByAG8AbQBGAGkAbABlAAAZ
+VQBuAGkAawB1AG0AQQBQAEkAVQBSAEwAAB1VAG4AaQBrAHUAbQBDAGwAaQBlAG4AdABJAEQAACVV
+AG4AaQBrAHUAbQBDAGwAaQBlAG4AdABTAGUAYwByAGUAdAAAcVMAQwBfADUANABmADcAMwA5ADkA
+NwA2AGQAYwAxADQAOQBmADYAOQBlADYANwBhADcAZgBkADYAMAA2AGMANgBkAGYANgAuAFAAcgBv
+AHAAZQByAHQAaQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAACVUATgBJAEQAAAtFAFgAVABJAEQA
+AAdQAEkARAAAAADb0QTVN2QVRJbQG8X4lGnPAAQgAQEIAyAAAQUgAQEREQQgAQEOBiABARGAgREH
+Bg4dBRJBFRJFARJJEk0SUQQAAQIOBAABDg4GEAEBHgAOBAoBEiwFAAASgJkGAAMODg4OBSABHQUO
+BSAAEoChBQABDh0FBSACAQ4OBiABARKAqQUAAg4ODgkgARUSRQESSQ4GFRJFARJJBCAAEwAFIAEB
+EkkGIAEBEoCtCDABAR4AEoCxAwcBDgcVEmECEjgCBSACARwYExABAh4AFRKAvQEeABUSYQIeAAIE
+CgESOAUVEjkBDgUgAQITAAQAAQsOBSACDg4OBAcCDg4mBw0VElUCDhI0FRJVAg4STB0SXAgSXBI0
+EkwdEmAIEmASNBJgEkwHFRJhAhI0AhgQAQIVEoC9AR4AFRKAvQEeABUSYQIeAAIECgESNAcVEmEC
+EjQOCBUSYQISNBI0IhADAxUSVQIeAR4CFRKAvQEeABUSYQIeAB4BFRJhAh4AHgIHCgMSNA4SNAcV
+EmECEkwCBAoBEkwHFRJhAhJMDggVEmECEkwSTAcKAxJMDhJMBxUSVQIOEjQIIAICEwAQEwEHFRJV
+Ag4STAQAABE9CSADARJpHQgSbQUgAgEIHAMgAAIDBwEIBgACCBJtDgUgAR0ICAUgABKAzQYgARKA
+0RwFAAASgNUGIAEcEoDZCAABEoDdEYDhBSAAEoDlByACAQ4SgOUHIAICDhGA6Qi3elxWGTTgiQiJ
+hF3NgIDMkQgwrU/msqau7QiwP19/EdUKOgMGEiwGBhUSOQEOAwYRPQMGEhwDBhIgAwYSDAMGEhAD
+BhIUAwYScQMGEnkDBhJ9AwYSKAMGEjACBg4EBh0SNAQGHRJMBAYdElwCBggDBhI4BAYdEjgDBhI8
+AwYSQAMGEkQDBhJIAgYCAwYSUAMGElQDBhJYBAYdEmADBhJkAwYSaAgGFRJhAhI4AggGFRJhAhI0
+AggGFRJhAhI0DgkGFRJhAhI0EjQIBhUSYQISTAIIBhUSYQISTA4JBhUSYQISTBJMBSABARI0BSAB
+ARJMCCAEAQ4ODhE9BCABAQsEIAEBAgUgAQERPQsgBAEIHQgdEmkSbQUgAQEScQMgAA4EAAASeQQA
+ABJ9BQABARJ9BAAAEigDAAABBCAAEjAFIAEBEjAFIAAdEjQGIAEBHRI0BSAAHRJMBiABAR0STAUg
+AB0SXAYgAQEdElwDIAAIBCAAEjgFIAEBEjgFIAAdEjgGIAEBHRI4BCAAEjwFIAEBEjwEIAASQAUg
+AQESQAQgABJEBSABARJEBCAAEkgFIAEBEkgEIAASUAUgAQESUAQgABJUBSABARJUBCAAElgFIAEB
+ElgFIAAdEmAGIAEBHRJgBCAAEmQFIAEBEmQEIAARPQUgAQISOAUgAQISNAUgAQ4SNAYgARI0EjQF
+IAECEkwFIAEOEkwGIAESTBJMAygACwMoAAIEKAARPQMoAA4DKAAIBAgAEnkECAASfQQIABIoBCgA
+EjAFKAAdEjQFKAAdEkwFKAAdElwEKAASOAUoAB0SOAQoABI8BCgAEkAEKAASRAQoABJIBCgAElAE
+KAASVAQoABJYBSgAHRJgBCgAEmQIAQAIAAAAAAAeAQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJv
+d3MBCAEAAgAAAAAAKAEAI1NDXzU0ZjczOTk3NmRjMTQ5ZjY5ZTY3YTdmZDYwNmM2ZGY2AAAFAQAA
+AAAWAQARQ29weXJpZ2h0IEAgIDIwMTgAAEkBABouTkVURnJhbWV3b3JrLFZlcnNpb249djQuNQEA
+VA4URnJhbWV3b3JrRGlzcGxheU5hbWUSLk5FVCBGcmFtZXdvcmsgNC41BAEAAAC0AAAAzsrvvgEA
+AACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJzaW9u
+PTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4
+OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0
+AAAAPHkAAAAAAAAAAAAAVnkAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEh5AAAAAAAAAAAAAAAA
+X0NvckRsbE1haW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEAAAABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAAADAA
+AIAAAAAAAAAAAAAAAAAAAAEAAAAAAEgAAABYgAAA7AMAAAAAAAAAAAAA7AM0AAAAVgBTAF8AVgBF
+AFIAUwBJAE8ATgBfAEkATgBGAE8AAAAAAL0E7/4AAAEAAAABAAAAAAAAAAEAAAAAAD8AAAAAAAAA
+BAAAAAIAAAAAAAAAAAAAAAAAAABEAAAAAQBWAGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAA
+AFQAcgBhAG4AcwBsAGEAdABpAG8AbgAAAAAAAACwBEwDAAABAFMAdAByAGkAbgBnAEYAaQBsAGUA
+SQBuAGYAbwAAACgDAAABADAAMAAwADAAMAA0AGIAMAAAABoAAQABAEMAbwBtAG0AZQBuAHQAcwAA
+AAAAAAAiAAEAAQBDAG8AbQBwAGEAbgB5AE4AYQBtAGUAAAAAAAAAAABwACQAAQBGAGkAbABlAEQA
+ZQBzAGMAcgBpAHAAdABpAG8AbgAAAAAAUwBDAF8ANQA0AGYANwAzADkAOQA3ADYAZABjADEANAA5
+AGYANgA5AGUANgA3AGEANwBmAGQANgAwADYAYwA2AGQAZgA2AAAAMAAIAAEARgBpAGwAZQBWAGUA
+cgBzAGkAbwBuAAAAAAAxAC4AMAAuADAALgAwAAAAcAAoAAEASQBuAHQAZQByAG4AYQBsAE4AYQBt
+AGUAAABTAEMAXwA1ADQAZgA3ADMAOQA5ADcANgBkAGMAMQA0ADkAZgA2ADkAZQA2ADcAYQA3AGYA
+ZAA2ADAANgBjADYAZABmADYALgBkAGwAbAAAAEgAEgABAEwAZQBnAGEAbABDAG8AcAB5AHIAaQBn
+AGgAdAAAAEMAbwBwAHkAcgBpAGcAaAB0ACAAQAAgACAAMgAwADEAOAAAACoAAQABAEwAZQBnAGEA
+bABUAHIAYQBkAGUAbQBhAHIAawBzAAAAAAAAAAAAeAAoAAEATwByAGkAZwBpAG4AYQBsAEYAaQBs
+AGUAbgBhAG0AZQAAAFMAQwBfADUANABmADcAMwA5ADkANwA2AGQAYwAxADQAOQBmADYAOQBlADYA
+NwBhADcAZgBkADYAMAA2AGMANgBkAGYANgAuAGQAbABsAAAAaAAkAAEAUAByAG8AZAB1AGMAdABO
+AGEAbQBlAAAAAABTAEMAXwA1ADQAZgA3ADMAOQA5ADcANgBkAGMAMQA0ADkAZgA2ADkAZQA2ADcA
+YQA3AGYAZAA2ADAANgBjADYAZABmADYAAAA0AAgAAQBQAHIAbwBkAHUAYwB0AFYAZQByAHMAaQBv
+AG4AAAAxAC4AMAAuADAALgAwAAAAOAAIAAEAQQBzAHMAZQBtAGIAbAB5ACAAVgBlAHIAcwBpAG8A
+bgAAADEALgAwAC4AMAAuADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAcAAADAAAAGg5AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAA==]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                  name="VSTAProjectName"
+                  typeConverter="NOTBROWSABLE">SC_54f739976dc149f69e67a7fd606c6df6</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the programming language used by the script."
+                  name="ScriptLanguage"
+                  typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages">CSharp</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read-only variables."
+                  name="ReadOnlyVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg">User::ImportFromFile,$Package::UnikumAPIURL,$Package::UnikumClientID,$Package::UnikumClientSecret</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read/write variables."
+                  name="ReadWriteVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg"></property>
+                <property
+                  dataType="System.String"
+                  description="List of breakpoints present on the script."
+                  isArray="true"
+                  name="BreakpointCollection"
+                  typeConverter="NOTBROWSABLE">
+                  <arrayElements
+                    arrayElementCount="1">
+                    <arrayElement
+                      dataType="System.String">&lt;SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"&gt;
+&lt;SOAP-ENV:Body&gt;
+&lt;a1:ScriptBreakpointInfo id="ref-1" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Microsoft.SqlServer.VSTAHosting/Microsoft.SqlServer.VSTAScriptingLib%2C%20Version%3D14.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3D89845dcd8080cc91"&gt;
+&lt;Enabled&gt;true&lt;/Enabled&gt;
+&lt;File id="ref-3"&gt;main.cs&lt;/File&gt;
+&lt;FileLine&gt;23&lt;/FileLine&gt;
+&lt;FileColumn&gt;9&lt;/FileColumn&gt;
+&lt;/a1:ScriptBreakpointInfo&gt;
+&lt;/SOAP-ENV:Body&gt;
+&lt;/SOAP-ENV:Envelope&gt;
+</arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum"
+                  typeConverter="NOTBROWSABLE">f0308acd812f18f67e102ad39a088cbc</property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataShaChecksum"
+                  typeConverter="NOTBROWSABLE">2e36b17c542e9c1199d6108637e217ae09a5cd7b</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ScriptComponentHost</property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum140"
+                  typeConverter="NOTBROWSABLE">48</property>
+              </properties>
+              <outputs>
+                <output
+                  refId="Package\FetchAndImport\Script Component.Outputs[Person]"
+                  hasSideEffects="true"
+                  name="Person">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[unId]"
+                      dataType="ui8"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[unId]"
+                      name="unId" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[exportDatum]"
+                      dataType="date"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[exportDatum]"
+                      name="exportDatum" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[personnr]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[personnr]"
+                      name="personnr" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[fornamn]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[fornamn]"
+                      name="fornamn" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[efternamn]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[efternamn]"
+                      name="efternamn" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[epost]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[epost]"
+                      name="epost" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[telefon]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[telefon]"
+                      name="telefon" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[telefonArbete]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[telefonArbete]"
+                      name="telefonArbete" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[mobil]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[mobil]"
+                      name="mobil" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[postadress]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[postadress]"
+                      name="postadress" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[postnummer]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[postnummer]"
+                      name="postnummer" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[postort]"
+                      dataType="wstr"
+                      length="75"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[postort]"
+                      name="postort" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[skolar]"
+                      dataType="i4"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Person].Columns[skolar]"
+                      name="skolar" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FetchAndImport\Script Component.Outputs[Relation]"
+                  hasSideEffects="true"
+                  name="Relation">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Relation].Columns[unId]"
+                      dataType="ui8"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Relation].Columns[unId]"
+                      name="unId" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Relation].Columns[relationUnId]"
+                      dataType="ui8"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Relation].Columns[relationUnId]"
+                      name="relationUnId" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Relation].Columns[roll]"
+                      dataType="wstr"
+                      length="35"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Relation].Columns[roll]"
+                      name="roll" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Relation].Columns[startdatum]"
+                      dataType="date"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Relation].Columns[startdatum]"
+                      name="startdatum" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FetchAndImport\Script Component.Outputs[Grupp]"
+                  hasSideEffects="true"
+                  name="Grupp">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[unId]"
+                      dataType="ui8"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[unId]"
+                      name="unId" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[exportDatum]"
+                      dataType="date"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[exportDatum]"
+                      name="exportDatum" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[extId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[extId]"
+                      name="extId" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[namn]"
+                      dataType="wstr"
+                      length="120"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[namn]"
+                      name="namn" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[grupptyp]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[grupptyp]"
+                      name="grupptyp" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[skoltyp]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[skoltyp]"
+                      name="skoltyp" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[url]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[url]"
+                      name="url" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[besoksadress]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[besoksadress]"
+                      name="besoksadress" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[besoksort]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[besoksort]"
+                      name="besoksort" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[besokspostnummer]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[besokspostnummer]"
+                      name="besokspostnummer" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[extraadress]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[extraadress]"
+                      name="extraadress" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[telefon]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[telefon]"
+                      name="telefon" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[fax]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[fax]"
+                      name="fax" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[siskod]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[siskod]"
+                      name="siskod" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[franAr]"
+                      dataType="i4"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[franAr]"
+                      name="franAr" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[tillAr]"
+                      dataType="i4"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[tillAr]"
+                      name="tillAr" />
+                    <outputColumn
+                      refId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[kurskod]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\FetchAndImport\Script Component.Outputs[Grupp].Columns[kurskod]"
+                      name="kurskod" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\FetchAndImport.Paths[Grupp]"
+              endId="Package\FetchAndImport\Grupp.Inputs[OLE DB Destination Input]"
+              name="Grupp"
+              startId="Package\FetchAndImport\Script Component.Outputs[Grupp]" />
+            <path
+              refId="Package\FetchAndImport.Paths[Person]"
+              endId="Package\FetchAndImport\Person.Inputs[OLE DB Destination Input]"
+              name="Person"
+              startId="Package\FetchAndImport\Script Component.Outputs[Person]" />
+            <path
+              refId="Package\FetchAndImport.Paths[Relation]"
+              endId="Package\FetchAndImport\Relation.Inputs[OLE DB Destination Input]"
+              name="Relation"
+              startId="Package\FetchAndImport\Script Component.Outputs[Relation]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Prepare import"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7BAE4D6C-90C8-460E-BED4-E0744AB98390}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Prepare import"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0970284E-21A0-47D0-9979-A25BD8B7E7A6}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.UnikumPerson_stage;&#xA;TRUNCATE TABLE dbo.UnikumGrupp_stage;&#xA;TRUNCATE TABLE dbo.UnikumRelation_stage;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{69596676-7F0D-4DE2-A9B4-812E4F0F1DF9}"
+      DTS:From="Package\Prepare import"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\FetchAndImport" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{2FCD4FC8-9E41-431F-94A5-3FBA32063AF9}"
+      DTS:From="Package\FetchAndImport"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Commit" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="117,42"
+          Id="Package\Commit"
+          TopLeft="25.5,209.5" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\FetchAndImport"
+          TopLeft="5.50000000000003,107.5" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Prepare import"
+          TopLeft="8.50000000000001,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="84.25,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="84,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\FetchAndImport">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="119,42"
+          Id="Package\FetchAndImport\Relation"
+          TopLeft="287.5,123.5" />
+        <NodeLayout
+          Size="114,42"
+          Id="Package\FetchAndImport\Person"
+          TopLeft="24.5,121.5" />
+        <NodeLayout
+          Size="110,42"
+          Id="Package\FetchAndImport\Grupp"
+          TopLeft="158.5,123.5" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\FetchAndImport\Script Component"
+          TopLeft="138.5,20.4999999999999" />
+        <EdgeLayout
+          Id="Package\FetchAndImport.Paths[Relation]"
+          TopLeft="261.75,62.4999999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="85.25,61.0000000000001"
+              Start="0,0"
+              End="85.25,53.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.9724950884087" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.9724950884087"
+                    Point2="0,20.9724950884087"
+                    Point3="4,20.9724950884087" />
+                  <mssgle:LineSegment
+                    End="81.25,20.9724950884087" />
+                  <mssgle:CubicBezierSegment
+                    Point1="81.25,20.9724950884087"
+                    Point2="85.25,20.9724950884087"
+                    Point3="85.25,24.9724950884087" />
+                  <mssgle:LineSegment
+                    End="85.25,53.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="24.48306640625,25.9724950884087,36.2838671875,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FetchAndImport.Paths[Person]"
+          TopLeft="182.25,62.4999999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-100.75,59.0000000000001"
+              Start="0,0"
+              End="-100.75,51.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.2848722986248" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.2848722986248"
+                    Point2="0,20.2848722986248"
+                    Point3="-4,20.2848722986248" />
+                  <mssgle:LineSegment
+                    End="-96.75,20.2848722986248" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-96.75,20.2848722986248"
+                    Point2="-100.75,20.2848722986248"
+                    Point3="-100.75,24.2848722986248" />
+                  <mssgle:LineSegment
+                    End="-100.75,51.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-65.61193359375,25.2848722986248,30.4738671875,9.421875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FetchAndImport.Paths[Grupp]"
+          TopLeft="222,62.4999999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-8.5,61.0000000000001"
+              Start="0,0"
+              End="-8.5,53.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5000000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.5000000000001"
+                    Point2="0,30.5000000000001"
+                    Point3="-4,30.5000000000001" />
+                  <mssgle:LineSegment
+                    End="-4.5,30.5000000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4.5,30.5000000000001"
+                    Point2="-8.5,30.5000000000001"
+                    Point3="-8.5,34.5000000000001" />
+                  <mssgle:LineSegment
+                    End="-8.5,53.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-18.39849609375,35.5000000000001,28.2969921875,11.4140625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\FetchAndImport\Relation">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FetchAndImport\Person">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FetchAndImport\Grupp">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -3,17 +3,17 @@
   DTS:refId="Package"
   DTS:CreationDate="2/14/2019 10:50:25 AM"
   DTS:CreationName="Microsoft.Package"
-  DTS:CreatorComputerName="ADM-00720"
-  DTS:CreatorName="KBA\jonas.sjomark"
+  DTS:CreatorComputerName=""
+  DTS:CreatorName=""
   DTS:DTSID="{84DD93E4-4EC1-4D8A-BA46-291BB52A9AE9}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LastModifiedProductVersion="15.0.1900.73"
   DTS:LocaleID="1053"
   DTS:ObjectName="ARX"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="48"
-  DTS:VersionGUID="{4C6206BF-B2FC-4E53-90D5-F777EA52302C}">
+  DTS:VersionBuild="50"
+  DTS:VersionGUID="{30502EC8-4C92-44F4-B50A-F5F24F182476}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -3140,7 +3140,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==]]></arrayElement>
           Id="Package\Commit"
           TopLeft="36,209.5" />
         <NodeLayout
-          Size="161,42"
+          Size="157,42"
           Id="Package\Export from ARX"
           TopLeft="15,107.5" />
         <NodeLayout
@@ -3149,7 +3149,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==]]></arrayElement>
           TopLeft="5.50000000000001,5.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="95.25,47.5">
+          TopLeft="94.25,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3171,7 +3171,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="95,149.5">
+          TopLeft="94,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3219,30 +3219,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==]]></arrayElement>
           Size="142,42"
           Id="Package\Export from ARX\Convert date"
           TopLeft="167.5,107.5" />
-        <EdgeLayout
-          Id="Package\Export from ARX.Paths[AccessOutput]"
-          TopLeft="238.75,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-30.944453125,20.533203125,61.88890625,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\Export from ARX.Paths[PersonOutput]"
           TopLeft="278.75,47.5">
@@ -3334,6 +3310,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==]]></arrayElement>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
               BoundingBox="-97.37890625,25.6286836935167,52.5078125,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Export from ARX.Paths[AccessOutput]"
+          TopLeft="238.75,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-30.944453125,20.533203125,61.88890625,11.43359375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>

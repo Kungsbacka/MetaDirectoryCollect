@@ -12,8 +12,8 @@
   DTS:ObjectName="LicenseGroup"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{332C77B9-FA9A-4AB4-9CBA-BDD46C9150C9}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{E6074EF1-820E-43C1-8EE8-48A58113C742}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>

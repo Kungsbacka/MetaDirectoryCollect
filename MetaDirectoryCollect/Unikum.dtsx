@@ -12,8 +12,8 @@
   DTS:ObjectName="Unikum"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="60"
-  DTS:VersionGUID="{BDE950B2-8C17-4D4D-B4EC-5A547D521640}">
+  DTS:VersionBuild="72"
+  DTS:VersionGUID="{B69C798C-179D-40EC-912C-7B5ADD4B3B5D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -68,14 +68,11 @@
       DTS:DataType="8"
       DTS:DTSID="{1DAC95FA-8397-42E4-8DE4-683BB18854F3}"
       DTS:ObjectName="UnikumClientSecret"
-      DTS:Required="True"
-      DTS:Sensitive="True">
+      DTS:Required="True">
       <DTS:Property
-        DTS:Name="ParameterValue">
-        <DTS:Property
-          DTS:DataType="0"
-          DTS:Name="ParameterValue"></DTS:Property>
-      </DTS:Property>
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
     </DTS:PackageParameter>
   </DTS:PackageParameters>
   <DTS:Variables>
@@ -86,7 +83,8 @@
       DTS:Namespace="User"
       DTS:ObjectName="ImportFromFile">
       <DTS:VariableValue
-        DTS:DataType="8">C:\Temp\unikum.json</DTS:VariableValue>
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
@@ -2185,7 +2183,7 @@ public class Variables
     <Compile Include="Unikum.cs" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Source\Tools\Json.NET\Newtonsoft.Json.dll</HintPath>
+      <HintPath>C:\Program Files\UnikumLibrary\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -2281,7 +2279,7 @@ namespace SC_54f739976dc149f69e67a7fd606c6df6.Properties {
     <msb:CodeName>SC_54f739976dc149f69e67a7fd606c6df6</msb:CodeName>
     <msb:Language>msBuild</msb:Language>
     <msb:DisplayName>SC_54f739976dc149f69e67a7fd606c6df6</msb:DisplayName>
-    <msb:ProjectId>{E8CE6B18-91AF-4B1A-8DB2-C0B86F3EBB15}</msb:ProjectId>
+    <msb:ProjectId>{7F578B71-17D2-4A9E-9C80-697E1677E10C}</msb:ProjectId>
   </msb:PropertyGroup>
   <msb:ItemGroup>
     <msb:Project Include="SC_54f739976dc149f69e67a7fd606c6df6.csproj" />
@@ -2521,7 +2519,7 @@ namespace SC_54f739976dc149f69e67a7fd606c6df6.Properties {
                     <arrayElement
                       dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
-ZGUuDQ0KJAAAAAAAAABQRQAATAEDAB+dqV4AAAAAAAAAAOAAIiALATAAAFwAAAAIAAAAAAAAKnoA
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAGnsr14AAAAAAAAAAOAAIiALATAAAFwAAAAIAAAAAAAAKnoA
 AAAgAAAAgAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAADAAAAAAgAAAAAAAAMAYIUAABAA
 ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAANh5AABPAAAAAIAAAEgEAAAAAAAAAAAAAAAAAAAA
 AAAAAKAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -2903,7 +2901,7 @@ AGkAawB1AG0AQQBQAEkAVQBSAEwAAB1VAG4AaQBrAHUAbQBDAGwAaQBlAG4AdABJAEQAACVVAG4A
 aQBrAHUAbQBDAGwAaQBlAG4AdABTAGUAYwByAGUAdAAAcVMAQwBfADUANABmADcAMwA5ADkANwA2
 AGQAYwAxADQAOQBmADYAOQBlADYANwBhADcAZgBkADYAMAA2AGMANgBkAGYANgAuAFAAcgBvAHAA
 ZQByAHQAaQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAACVUATgBJAEQAAAtFAFgAVABJAEQAAAdQ
-AEkARAAAAADdDmyMHe+5RaIvF+8RhHc4AAQgAQEIAyAAAQUgAQEREQQgAQEOBiABARGAgRMHBw4d
+AEkARAAAAADSCOOSh14CTprpj4fD4j1/AAQgAQEIAyAAAQUgAQEREQQgAQEOBiABARGAgRMHBw4d
 BRJBEkUVEUkBEkUSTRJRBAABAg4EAAEODgYQAQEeAA4ECgESLAUAABKAmQYAAw4ODg4FIAEdBQ4G
 AAEBEYClBSAAEoCpBQABDh0FBSACAQ4OBiABARKAsQUAAg4ODgogARUSgLUBEkUOBxUSgLUBEkUI
 IAAVEUkBEwAGFRFJARJFBCAAEwAFIAEBEkUGIAEBEoC5CDABAR4AEoC9AwcBDgcVEmECEjgCBSAC

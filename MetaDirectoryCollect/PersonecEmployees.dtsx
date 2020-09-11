@@ -5,22 +5,22 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName=""
   DTS:CreatorName="Jonas Sjömark"
-  DTS:DTSID="{90DB8505-0E1A-4CA4-BA04-197F78BE8183}"
+  DTS:DTSID="{BB78EF6E-9746-4A20-951E-C34C778813BD}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="15.0.2000.128"
   DTS:LocaleID="1053"
-  DTS:ObjectName="Personec"
+  DTS:ObjectName="PersonecEmployees"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="86"
-  DTS:VersionGUID="{41E9552C-B951-490B-B920-640B54791F81}">
+  DTS:VersionBuild="99"
+  DTS:VersionGUID="{66C02C18-09C3-4D0F-B207-C6DDDD4BEA08}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Cache]"
       DTS:CreationName="CACHE"
-      DTS:DTSID="{2B4932B3-4B0B-4D94-B2CF-799B4BC4B2C9}"
+      DTS:DTSID="{608D85EC-85F6-49AD-B4B5-B84135176E11}"
       DTS:ObjectName="Cache">
       <DTS:ObjectData>
         <DTS:ConnectionManager>
@@ -30,7 +30,7 @@
               DTS:Length="12"
               DTS:IndexPosition="1"
               DTS:ObjectName="PERSOID"
-              DTS:DTSID="{ABBB084C-9C34-4071-BA41-FD8154149D94}"
+              DTS:DTSID="{927BDE63-8A55-417E-9BE3-FDCA8BDE071F}"
               DTS:CreationName="" />
           </DTS:CacheColumns>
         </DTS:ConnectionManager>
@@ -39,7 +39,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[MetaDirectory]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{A4DCB03C-382C-4779-9C6F-CD8D63FFD124}"
+      DTS:DTSID="{6D3FE86D-79CA-4839-B5DC-FF6701F2F35E}"
       DTS:ObjectName="MetaDirectory">
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[$Package::MetaDirectoryConnectionString]</DTS:PropertyExpression>
@@ -50,7 +50,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[PersonecP]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{3BE31028-42F5-4420-93B9-C455EE0AEBEE}"
+      DTS:DTSID="{0C90612A-B04A-4C92-B6DA-B720301219B8}"
       DTS:ObjectName="PersonecP">
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[$Package::PersonecConnectionString]</DTS:PropertyExpression>
@@ -63,7 +63,7 @@
     <DTS:PackageParameter
       DTS:CreationName=""
       DTS:DataType="8"
-      DTS:DTSID="{3D450D7A-9734-4D4E-BDE4-76A32A6F2EED}"
+      DTS:DTSID="{AE90CF96-5A73-4C9A-9647-B3AED0F02987}"
       DTS:ObjectName="MetaDirectoryConnectionString"
       DTS:Required="True">
       <DTS:Property
@@ -74,7 +74,7 @@
     <DTS:PackageParameter
       DTS:CreationName=""
       DTS:DataType="8"
-      DTS:DTSID="{C0E743F6-9903-44E6-917F-33246A7C7EAA}"
+      DTS:DTSID="{CA454B8C-6E97-40FD-ACBA-9A838B2A795C}"
       DTS:ObjectName="PersonecConnectionString"
       DTS:Required="True">
       <DTS:Property
@@ -86,7 +86,7 @@
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{AA6EB1EB-A8D3-440D-87C7-AEDAB2414608}"
+      DTS:DTSID="{8A26E51D-BA68-4351-B88D-DF733272A67F}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="rowCount">
@@ -96,10 +96,1198 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
+      DTS:refId="Package\EmployeeHistory"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{45e955ec-02ca-402f-ae0b-190eda86a4f1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EmployeeHistory"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\EmployeeHistory\Convert to Unicode"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Convert to Unicode"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input].Columns[PERSONNR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="PERSONNR"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input].Columns[PERSOID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="PERSOID"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSOID]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input].Columns[FOERNAMN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="FOERNAMN"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOERNAMN]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input].Columns[EFTERNAMN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="EFTERNAMN"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[EFTERNAMN]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input].Columns[OID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="OID"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[OID]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input].Columns[ANSTFORM]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="ANSTFORM"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTFORM]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input].Columns[ANSTTYP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="ANSTTYP"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTTYP]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input].Columns[FOERMGRP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="FOERMGRP"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOERMGRP]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input].Columns[SEMGRP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SEMGRP"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEMGRP]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input].Columns[BEFATTNING]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="24"
+                      cachedName="BEFATTNING"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEFATTNING]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input].Columns[AVTAL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="AVTAL"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[AVTAL]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of PERSONNR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="12"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of PERSONNR]"
+                      name="Copy of PERSONNR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of PERSOID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="12"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of PERSOID]"
+                      name="Copy of PERSOID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSOID]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of FOERNAMN]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of FOERNAMN]"
+                      name="Copy of FOERNAMN"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOERNAMN]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of EFTERNAMN]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of EFTERNAMN]"
+                      name="Copy of EFTERNAMN"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[EFTERNAMN]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of OID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="12"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of OID]"
+                      name="Copy of OID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[OID]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of ANSTFORM]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of ANSTFORM]"
+                      name="Copy of ANSTFORM"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTFORM]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of ANSTTYP]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of ANSTTYP]"
+                      name="Copy of ANSTTYP"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTTYP]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of FOERMGRP]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of FOERMGRP]"
+                      name="Copy of FOERMGRP"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOERMGRP]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of SEMGRP]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of SEMGRP]"
+                      name="Copy of SEMGRP"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEMGRP]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of BEFATTNING]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="24"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of BEFATTNING]"
+                      name="Copy of BEFATTNING"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEFATTNING]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of AVTAL]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of AVTAL]"
+                      name="Copy of AVTAL"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[AVTAL]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\EmployeeHistory\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[PersonecGamlaAnstallningar_stage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS,ROWS_PER_BATCH = 32767</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\EmployeeHistory\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ANSTNR]"
+                      cachedDataType="i4"
+                      cachedName="ANSTNR"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ANSTNR]"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTNR]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[GFOM]"
+                      cachedDataType="i4"
+                      cachedName="GFOM"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GFOM]"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[GFOM]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[GTOM]"
+                      cachedDataType="i4"
+                      cachedName="GTOM"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GTOM]"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[GTOM]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ANSTTOM]"
+                      cachedDataType="i4"
+                      cachedName="ANSTTOM"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ANSTTOM]"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTTOM]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SSGPROCENT]"
+                      cachedDataType="i4"
+                      cachedName="SSGPROCENT"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SSGPROCENT]"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[SSGPROCENT]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of PERSONNR]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Copy of PERSONNR"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERSONNR]"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of PERSONNR]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of PERSOID]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Copy of PERSOID"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERSOID]"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of PERSOID]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of FOERNAMN]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Copy of FOERNAMN"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FOERNAMN]"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of FOERNAMN]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of EFTERNAMN]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of EFTERNAMN"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EFTERNAMN]"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of EFTERNAMN]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of OID]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Copy of OID"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OID]"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of OID]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of BEFATTNING]"
+                      cachedDataType="wstr"
+                      cachedLength="24"
+                      cachedName="Copy of BEFATTNING"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BEFATTNING]"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of BEFATTNING]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of ANSTFORM]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="Copy of ANSTFORM"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ANSTFORM]"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of ANSTFORM]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of ANSTTYP]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="Copy of ANSTTYP"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ANSTTYP]"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of ANSTTYP]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ANSTGRP]"
+                      cachedDataType="i2"
+                      cachedName="ANSTGRP"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ANSTGRP]"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTGRP]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of FOERMGRP]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="Copy of FOERMGRP"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FOERMGRP]"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of FOERMGRP]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of AVTAL]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="Copy of AVTAL"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AVTAL]"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of AVTAL]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of SEMGRP]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="Copy of SEMGRP"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEMGRP]"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of SEMGRP]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
+                      dataType="i4"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERSONNR]"
+                      dataType="wstr"
+                      length="12"
+                      name="PERSONNR" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERSOID]"
+                      dataType="wstr"
+                      length="12"
+                      name="PERSOID" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FOERNAMN]"
+                      dataType="wstr"
+                      length="20"
+                      name="FOERNAMN" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EFTERNAMN]"
+                      dataType="wstr"
+                      length="255"
+                      name="EFTERNAMN" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OID]"
+                      dataType="wstr"
+                      length="12"
+                      name="OID" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ANSTNR]"
+                      dataType="i4"
+                      name="ANSTNR" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GFOM]"
+                      dataType="i4"
+                      name="GFOM" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GTOM]"
+                      dataType="i4"
+                      name="GTOM" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ANSTTOM]"
+                      dataType="i4"
+                      name="ANSTTOM" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SSGPROCENT]"
+                      dataType="i4"
+                      name="SSGPROCENT" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BEFATTNING]"
+                      dataType="wstr"
+                      length="24"
+                      name="BEFATTNING" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ANSTFORM]"
+                      dataType="wstr"
+                      length="2"
+                      name="ANSTFORM" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ANSTTYP]"
+                      dataType="wstr"
+                      length="2"
+                      name="ANSTTYP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ANSTGRP]"
+                      dataType="i2"
+                      name="ANSTGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FOERMGRP]"
+                      dataType="wstr"
+                      length="2"
+                      name="FOERMGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AVTAL]"
+                      dataType="wstr"
+                      length="4"
+                      name="AVTAL" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEMGRP]"
+                      dataType="wstr"
+                      length="3"
+                      name="SEMGRP" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\EmployeeHistory\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\EmployeeHistory\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\EmployeeHistory\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\EmployeeHistory\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+   CAST(PER.SEKEL AS varchar) + PER.PNUMID AS PERSONNR
+  ,ANS.PERSOID
+  ,PER.FOERNAMN
+  ,PER.EFTERNAMN
+  ,ANS.OID
+  ,ANS.ANSTNR
+  ,ANS.GFOM
+  ,ANS.GTOM
+  ,NULLIF(ANS.ANSTTOM, 0) AS ANSTTOM
+  ,CASE
+     WHEN ANS.ARBHEL &gt; 0 AND ANS.ARBDEL &gt; 0 THEN CAST(ROUND(ANS.ARBDEL / ANS.ARBHEL * 100, 0) AS int)
+     WHEN ANS.ARBHEL &gt; 0 AND (
+        SELECT
+           SUM(ARBDEL)
+        FROM
+           OA0P0120
+        WHERE
+           PERSOID = ANS.PERSOID
+        AND
+           GFOM &lt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)
+        AND
+           GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)
+        AND VILANST = 0
+        ) = 0 THEN 100
+     ELSE 0
+   END AS SSGPROCENT
+  ,KAT.KATTXTL AS BEFATTNING
+  ,NULLIF(ANS.ANSTFORM, '') AS ANSTFORM
+  ,NULLIF(ANS.ANSTTYP, '') AS ANSTTYP
+  ,ANS.ANSTGRP
+  ,NULLIF(ANS.FOERMGRP, '') AS FOERMGRP
+  ,NULLIF(ANS.AVTAL, '') AS AVTAL
+  ,NULLIF(ANS.SEMGRP, '') AS SEMGRP
+FROM dbo.OA0P0120 ANS
+INNER JOIN dbo.OA0P0100 PER ON ANS.PERSOID = PER.PERSOID
+INNER JOIN dbo.OA0P0806 KAT ON ANS.KATKOD = KAT.KAT
+WHERE ANS.GFOM &lt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)
+AND ANS.GTOM &lt; CAST(CONVERT(varchar, GETDATE(), 112) AS int)
+AND ANS.GTOM &gt; CAST(CONVERT(varchar, DATEADD(yy, -1, GETDATE()), 112) AS int)
+AND ANS.VILANST = 0
+AND PER.ANONYM = 0</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\EmployeeHistory\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[PersonecP]"
+                  connectionManagerRefId="Package.ConnectionManagers[PersonecP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERSONNR]"
+                      length="40"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]"
+                      name="PERSONNR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSOID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERSOID]"
+                      length="12"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSOID]"
+                      name="PERSOID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOERNAMN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FOERNAMN]"
+                      length="20"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOERNAMN]"
+                      name="FOERNAMN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[EFTERNAMN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EFTERNAMN]"
+                      length="255"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[EFTERNAMN]"
+                      name="EFTERNAMN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[OID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OID]"
+                      length="12"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[OID]"
+                      name="OID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTNR]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ANSTNR]"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTNR]"
+                      name="ANSTNR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[GFOM]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GFOM]"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[GFOM]"
+                      name="GFOM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[GTOM]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GTOM]"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[GTOM]"
+                      name="GTOM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTTOM]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ANSTTOM]"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTTOM]"
+                      name="ANSTTOM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[SSGPROCENT]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SSGPROCENT]"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[SSGPROCENT]"
+                      name="SSGPROCENT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEFATTNING]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BEFATTNING]"
+                      length="24"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEFATTNING]"
+                      name="BEFATTNING"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTFORM]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ANSTFORM]"
+                      length="2"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTFORM]"
+                      name="ANSTFORM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTTYP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ANSTTYP]"
+                      length="2"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTTYP]"
+                      name="ANSTTYP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTGRP]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ANSTGRP]"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[ANSTGRP]"
+                      name="ANSTGRP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOERMGRP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FOERMGRP]"
+                      length="2"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOERMGRP]"
+                      name="FOERMGRP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[AVTAL]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AVTAL]"
+                      length="4"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[AVTAL]"
+                      name="AVTAL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEMGRP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEMGRP]"
+                      length="3"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEMGRP]"
+                      name="SEMGRP"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERSONNR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="PERSONNR" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERSOID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="PERSOID" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FOERNAMN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="FOERNAMN" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EFTERNAMN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="EFTERNAMN" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="OID" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ANSTNR]"
+                      dataType="i4"
+                      name="ANSTNR" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GFOM]"
+                      dataType="i4"
+                      name="GFOM" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GTOM]"
+                      dataType="i4"
+                      name="GTOM" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ANSTTOM]"
+                      dataType="i4"
+                      name="ANSTTOM" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SSGPROCENT]"
+                      dataType="i4"
+                      name="SSGPROCENT" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BEFATTNING]"
+                      codePage="1252"
+                      dataType="str"
+                      length="24"
+                      name="BEFATTNING" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ANSTFORM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="ANSTFORM" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ANSTTYP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="ANSTTYP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ANSTGRP]"
+                      dataType="i2"
+                      name="ANSTGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FOERMGRP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="FOERMGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AVTAL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="AVTAL" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEMGRP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SEMGRP" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERSONNR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERSONNR]"
+                      name="PERSONNR" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERSOID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERSOID]"
+                      name="PERSOID" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FOERNAMN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FOERNAMN]"
+                      name="FOERNAMN" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EFTERNAMN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EFTERNAMN]"
+                      name="EFTERNAMN" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OID]"
+                      name="OID" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ANSTNR]"
+                      dataType="i4"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ANSTNR]"
+                      name="ANSTNR" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GFOM]"
+                      dataType="i4"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GFOM]"
+                      name="GFOM" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GTOM]"
+                      dataType="i4"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GTOM]"
+                      name="GTOM" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ANSTTOM]"
+                      dataType="i4"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ANSTTOM]"
+                      name="ANSTTOM" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SSGPROCENT]"
+                      dataType="i4"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SSGPROCENT]"
+                      name="SSGPROCENT" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BEFATTNING]"
+                      codePage="1252"
+                      dataType="str"
+                      length="24"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BEFATTNING]"
+                      name="BEFATTNING" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ANSTFORM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ANSTFORM]"
+                      name="ANSTFORM" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ANSTTYP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ANSTTYP]"
+                      name="ANSTTYP" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ANSTGRP]"
+                      dataType="i2"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ANSTGRP]"
+                      name="ANSTGRP" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FOERMGRP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FOERMGRP]"
+                      name="FOERMGRP" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AVTAL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AVTAL]"
+                      name="AVTAL" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEMGRP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEMGRP]"
+                      name="SEMGRP" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\EmployeeHistory.Paths[Data Conversion Output]"
+              endId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\EmployeeHistory.Paths[OLE DB Source Output]"
+              endId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\EmployeesCurrent"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{D2F6905B-A9E5-41E5-BEDB-64BA5333AFEC}"
+      DTS:DTSID="{27373F2E-0E1B-49BA-992C-2BBA2B2680C9}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="EmployeesCurrent"
@@ -871,7 +2059,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT -- Ibland finns det fler konteringar för samma 
    CAST(PER.SEKEL AS varchar) + PER.PNUMID AS PERSONNR
   ,ANS.PERSOID
   ,PER.FOERNAMN
@@ -1453,7 +2641,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       DTS:refId="Package\EmployeesCurrent_FAIL"
       DTS:CreationName="Microsoft.ScriptTask"
       DTS:Description="Script Task"
-      DTS:DTSID="{dbcb7009-8314-47ac-9329-1aed4b712e3a}"
+      DTS:DTSID="{C21C020C-F161-4458-A440-BA2C48952B3C}"
       DTS:ExecutableType="Microsoft.ScriptTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="EmployeesCurrent_FAIL"
@@ -1466,14 +2654,35 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           VSTAMinorVersion="0"
           Language="CSharp">
           <ProjectItem
-            Name="Properties\Settings.settings"
-            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+            Name="Properties\AssemblyInfo.cs"
+            Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyCopyright("Copyright @  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1844,35 +3053,14 @@ namespace ST_69c0ff1828b745a69068061730c369ae.Properties {
     }
 }]]></ProjectItem>
           <ProjectItem
-            Name="Properties\AssemblyInfo.cs"
-            Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyCopyright("Copyright @  2016")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+            Name="Properties\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.Designer.cs"
             Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -2057,7 +3245,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       DTS:refId="Package\EmployeesFuture"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{091bf0fa-2f69-46f0-bec1-90cf03ec7668}"
+      DTS:DTSID="{D611475F-B8A4-42C1-B33A-C4B8E4B91CEB}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="EmployeesFuture"
@@ -2067,148 +3255,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         <pipeline
           version="1">
           <components>
-            <component
-              refId="Package\EmployeesFuture\Lookup"
-              componentClassID="Microsoft.Lookup"
-              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
-              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup"
-              usesDispositions="true"
-              version="6">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Specifies the SQL statement that generates the lookup table."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[ARBETSTIDER]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
-                  expressionType="Notify"
-                  name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[ARBETSTIDER]) [refTable]
-where [refTable].[PERSOID] = ?</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the type of connection used to access the reference dataset."
-                  name="ConnectionType"
-                  typeConverter="LookupConnectionType">1</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the cache type of the lookup table."
-                  name="CacheType"
-                  typeConverter="CacheType">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
-                  name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">1</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
-                  name="NoMatchCachePercentage">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
-                  name="MaxMemoryUsage">25</property>
-                <property
-                  dataType="System.Int64"
-                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
-                  name="MaxMemoryUsage64">25</property>
-                <property
-                  dataType="System.String"
-                  description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="PERSOID" dataType="DT_WSTR" length="12" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
-                <property
-                  containsID="true"
-                  dataType="System.String"
-                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\EmployeesFuture\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of PERSOID]};</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
-                  name="TreatDuplicateKeysAsError">false</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\EmployeesFuture\Lookup.Connections[CacheConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Cache]"
-                  connectionManagerRefId="Package.ConnectionManagers[Cache]"
-                  description="Connection manager used to access lookup data."
-                  name="CacheConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\EmployeesFuture\Lookup.Inputs[Lookup Input]"
-                  name="Lookup Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\EmployeesFuture\Lookup.Inputs[Lookup Input].Columns[Copy of PERSOID]"
-                      cachedDataType="wstr"
-                      cachedLength="12"
-                      cachedName="Copy of PERSOID"
-                      lineageId="Package\EmployeesFuture\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of PERSOID]">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table that a column joins."
-                          name="JoinToReferenceColumn">PERSOID</property>
-                        <property
-                          dataType="System.Null"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn" />
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\EmployeesFuture\Lookup.Outputs[Lookup Match Output]"
-                  errorOrTruncationOperation="Lookup"
-                  exclusionGroup="1"
-                  name="Lookup Match Output"
-                  synchronousInputId="Package\EmployeesFuture\Lookup.Inputs[Lookup Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\EmployeesFuture\Lookup.Outputs[Lookup No Match Output]"
-                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
-                  exclusionGroup="1"
-                  name="Lookup No Match Output"
-                  synchronousInputId="Package\EmployeesFuture\Lookup.Inputs[Lookup Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\EmployeesFuture\Lookup.Outputs[Lookup Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Lookup Error Output"
-                  synchronousInputId="Package\EmployeesFuture\Lookup.Inputs[Lookup Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\EmployeesFuture\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\EmployeesFuture\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\EmployeesFuture\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\EmployeesFuture\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
             <component
               refId="Package\EmployeesFuture\MetaDirectory"
               componentClassID="Microsoft.OLEDBDestination"
@@ -2971,7 +4017,7 @@ where [refTable].[PERSOID] = ?</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT -- Ibland finns det fler konteringar för samma anställning
    CAST(PER.SEKEL AS varchar) + PER.PNUMID AS PERSONNR
   ,ANS.PERSOID
   ,PER.FOERNAMN
@@ -3501,14 +4547,9 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           <paths>
             <path
               refId="Package\EmployeesFuture.Paths[Data Conversion Output]"
-              endId="Package\EmployeesFuture\Lookup.Inputs[Lookup Input]"
+              endId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input]"
               name="Data Conversion Output"
               startId="Package\EmployeesFuture\Non Unicode to Unicode.Outputs[Data Conversion Output]" />
-            <path
-              refId="Package\EmployeesFuture.Paths[Lookup No Match Output]"
-              endId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input]"
-              name="Lookup No Match Output"
-              startId="Package\EmployeesFuture\Lookup.Outputs[Lookup No Match Output]" />
             <path
               refId="Package\EmployeesFuture.Paths[OLE DB Source Output]"
               endId="Package\EmployeesFuture\Non Unicode to Unicode.Inputs[Data Conversion Input]"
@@ -3522,7 +4563,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       DTS:refId="Package\InsertMissingSerialNumber"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{900B8189-C1D1-4C3E-B761-4B5CC4F9A76E}"
+      DTS:DTSID="{AAAA7E44-EA58-44A1-BEF4-1BFD0B4EAF7B}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="InsertMissingSerialNumber"
@@ -3531,290 +4572,15 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{A4DCB03C-382C-4779-9C6F-CD8D63FFD124}"
-          SQLTask:SqlStatementSource="EXEC dbo.spInsertMissingSerialNumber" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\PopulateEmployeeCache"
-      DTS:CreationName="Microsoft.Pipeline"
-      DTS:Description="Data Flow Task"
-      DTS:DTSID="{31B57033-521A-4461-9D62-FCE27D0CBD2B}"
-      DTS:ExecutableType="Microsoft.Pipeline"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="PopulateEmployeeCache"
-      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <pipeline
-          version="1">
-          <components>
-            <component
-              refId="Package\PopulateEmployeeCache\Cache Transform"
-              componentClassID="Microsoft.Cache"
-              contactInfo="Cache Transform;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
-              description="Writes data to a cache (a .caw file) with the Cache Connection Manager. Reuse the cache between multiple Lookup transforms to reduce database load. Share the cache to reduce memory usage. Note: cache data is stored in clear text and not recommended for sensitive data."
-              name="Cache Transform"
-              version="1">
-              <properties>
-                <property
-                  dataType="System.Boolean"
-                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
-                  name="TreatDuplicateKeysAsError">false</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\PopulateEmployeeCache\Cache Transform.Connections[CacheConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Cache]"
-                  connectionManagerRefId="Package.ConnectionManagers[Cache]"
-                  description="The connection used to access the cache."
-                  name="CacheConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\PopulateEmployeeCache\Cache Transform.Inputs[Cache Input]"
-                  hasSideEffects="true"
-                  name="Cache Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\PopulateEmployeeCache\Cache Transform.Inputs[Cache Input].Columns[PERSOID]"
-                      cachedDataType="wstr"
-                      cachedLength="12"
-                      cachedName="PERSOID"
-                      lineageId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].Columns[PERSOID]">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="The cache column associated with the input column."
-                          name="CacheColumnName">PERSOID</property>
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\PopulateEmployeeCache\Cache Transform.Outputs[Cache Output]"
-                  name="Cache Output"
-                  synchronousInputId="Package\PopulateEmployeeCache\Cache Transform.Inputs[Cache Input]">
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\PopulateEmployeeCache\MetaDirectory"
-              componentClassID="Microsoft.OLEDBSource"
-              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-              description="OLE DB Source"
-              name="MetaDirectory"
-              usesDispositions="true"
-              version="7">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[PersonecExport]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
-                <property
-                  dataType="System.String"
-                  description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">0</property>
-                <property
-                  dataType="System.String"
-                  description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\PopulateEmployeeCache\MetaDirectory.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
-                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <outputs>
-                <output
-                  refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output]"
-                  name="OLE DB Source Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].Columns[PERSOID]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[PERSOID]"
-                      length="12"
-                      lineageId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].Columns[PERSOID]"
-                      name="PERSOID"
-                      truncationRowDisposition="FailComponent" />
-                  </outputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[ID]"
-                      dataType="i4"
-                      name="ID" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[PERSONNR]"
-                      dataType="wstr"
-                      length="12"
-                      name="PERSONNR" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[PERSOID]"
-                      dataType="wstr"
-                      length="12"
-                      name="PERSOID" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[FOERNAMN]"
-                      dataType="wstr"
-                      length="20"
-                      name="FOERNAMN" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[EFTERNAMN]"
-                      dataType="wstr"
-                      length="255"
-                      name="EFTERNAMN" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[OID]"
-                      dataType="wstr"
-                      length="12"
-                      name="OID" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[ANSTNR]"
-                      dataType="i4"
-                      name="ANSTNR" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[GFOM]"
-                      dataType="i4"
-                      name="GFOM" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[GTOM]"
-                      dataType="i4"
-                      name="GTOM" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[KSTAELLE]"
-                      dataType="wstr"
-                      length="4"
-                      name="KSTAELLE" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[BEFATTNING]"
-                      dataType="wstr"
-                      length="24"
-                      name="BEFATTNING" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[ANSTFORM]"
-                      dataType="wstr"
-                      length="2"
-                      name="ANSTFORM" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[ANSTTYP]"
-                      dataType="wstr"
-                      length="2"
-                      name="ANSTTYP" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[FOERMGRP]"
-                      dataType="wstr"
-                      length="2"
-                      name="FOERMGRP" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[AVTAL]"
-                      dataType="wstr"
-                      length="4"
-                      name="AVTAL" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[KONTO]"
-                      dataType="wstr"
-                      length="54"
-                      name="KONTO" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[SSGPROCENT]"
-                      dataType="i4"
-                      name="SSGPROCENT" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[ANSTTOM]"
-                      dataType="i4"
-                      name="ANSTTOM" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[ANSTGRP]"
-                      dataType="i2"
-                      name="ANSTGRP" />
-                    <externalMetadataColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output].ExternalColumns[SEMGRP]"
-                      dataType="wstr"
-                      length="3"
-                      name="SEMGRP" />
-                  </externalMetadataColumns>
-                </output>
-                <output
-                  refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Error Output]"
-                  isErrorOut="true"
-                  name="OLE DB Source Error Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                    <outputColumn
-                      refId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Error Output].Columns[PERSOID]"
-                      dataType="wstr"
-                      length="12"
-                      lineageId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Error Output].Columns[PERSOID]"
-                      name="PERSOID" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-          </components>
-          <paths>
-            <path
-              refId="Package\PopulateEmployeeCache.Paths[OLE DB Source Output]"
-              endId="Package\PopulateEmployeeCache\Cache Transform.Inputs[Cache Input]"
-              name="OLE DB Source Output"
-              startId="Package\PopulateEmployeeCache\MetaDirectory.Outputs[OLE DB Source Output]" />
-          </paths>
-        </pipeline>
+          SQLTask:Connection="{6D3FE86D-79CA-4839-B5DC-FF6701F2F35E}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spInsertMissingSerialNumber" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\PrepareExport"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{70D779F6-53DA-474D-942A-130816BC64F3}"
+      DTS:DTSID="{D7E49E7D-ADA4-46B8-B5E2-717DD8AE71FA}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="PrepareExport"
@@ -3823,15 +4589,15 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{A4DCB03C-382C-4779-9C6F-CD8D63FFD124}"
-          SQLTask:SqlStatementSource="dbo.spPreparePersonecExport" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:Connection="{6D3FE86D-79CA-4839-B5DC-FF6701F2F35E}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spPreparePersonecExport" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\PrioritizePersonecData"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{44AA4F59-F242-41C3-B61B-D248C7EA4ADF}"
+      DTS:DTSID="{C5CB19BC-8349-4DCE-BADD-A72EE610DB37}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="PrioritizePersonecData"
@@ -3840,15 +4606,15 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{A4DCB03C-382C-4779-9C6F-CD8D63FFD124}"
-          SQLTask:SqlStatementSource="dbo.spPrioritizePersonecData" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:Connection="{6D3FE86D-79CA-4839-B5DC-FF6701F2F35E}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spPrioritizePersonecData" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\UpdatePersonecAllaAnstallningar"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{914ACAD2-02DA-42CA-93A4-3E1042A516B3}"
+      DTS:DTSID="{4389E570-40DA-4B47-8710-EA2CA0871435}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="UpdatePersonecAllaAnstallningar"
@@ -3856,7 +4622,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{A4DCB03C-382C-4779-9C6F-CD8D63FFD124}"
+          SQLTask:Connection="{6D3FE86D-79CA-4839-B5DC-FF6701F2F35E}"
           SQLTask:SqlStatementSource="EXECUTE dbo.spUpdatePersonecAllaAnstallningar" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3864,7 +4630,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       DTS:refId="Package\UpdatePersonecDiff"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{8185DB1A-1196-46C8-B55C-81C26B80DC72}"
+      DTS:DTSID="{710D77E5-B8C3-469F-987F-C84D7B9FB83B}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="UpdatePersonecDiff"
@@ -3873,7 +4639,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{A4DCB03C-382C-4779-9C6F-CD8D63FFD124}"
+          SQLTask:Connection="{6D3FE86D-79CA-4839-B5DC-FF6701F2F35E}"
           SQLTask:SqlStatementSource="EXECUTE dbo.spUpdatePersonecDiff" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3882,7 +4648,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{AC9AF3B5-55DF-4A91-BB77-00391A80F885}"
+      DTS:DTSID="{67938B57-FBDF-4A9C-8865-92A299A355FA}"
       DTS:From="Package\PrepareExport"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -3890,7 +4656,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{20B2C125-ED71-4785-85DA-B7FA638CA9CA}"
+      DTS:DTSID="{D9ABB7C4-BD65-4770-B81B-F29C25B0DC2E}"
       DTS:From="Package\InsertMissingSerialNumber"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
@@ -3898,7 +4664,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
       DTS:CreationName=""
-      DTS:DTSID="{5DE16124-34B1-4621-8DBF-4E65FF8D00C7}"
+      DTS:DTSID="{7E991F0F-2458-47AF-BFA4-A40AAFFA565F}"
       DTS:EvalOp="3"
       DTS:Expression="@[User::rowCount] == 0"
       DTS:From="Package\EmployeesCurrent"
@@ -3908,7 +4674,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
-      DTS:DTSID="{FBADADCD-93F0-4689-B40A-5D635231786E}"
+      DTS:DTSID="{E1AD8D65-530B-45A0-9695-7639389FFE77}"
       DTS:From="Package\PrioritizePersonecData"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
@@ -3916,37 +4682,35 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
-      DTS:DTSID="{F42376DF-4E9A-481D-BCCE-561588F8B87A}"
-      DTS:EvalOp="3"
-      DTS:Expression="@[User::rowCount] &gt; 0"
+      DTS:DTSID="{DF8CF9B9-5643-4E60-8660-FA887162BA71}"
       DTS:From="Package\EmployeesCurrent"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\PopulateEmployeeCache" />
+      DTS:To="Package\EmployeesFuture" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
       DTS:CreationName=""
-      DTS:DTSID="{9CAD9686-8380-436A-84F2-0D1578FD9D99}"
+      DTS:DTSID="{CB8C5379-C015-4C2F-9530-6ABF8BEBBA4C}"
       DTS:From="Package\EmployeesFuture"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
-      DTS:To="Package\PrioritizePersonecData" />
+      DTS:To="Package\EmployeeHistory" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
       DTS:CreationName=""
-      DTS:DTSID="{88BE234D-8F3A-455B-8E14-99F12B90821E}"
+      DTS:DTSID="{A5F04B0F-88E6-4C30-9B24-76453C6175D8}"
       DTS:From="Package\UpdatePersonecAllaAnstallningar"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 5"
       DTS:To="Package\InsertMissingSerialNumber" />
     <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
       DTS:CreationName=""
-      DTS:DTSID="{6616AEEA-8298-485D-B5DC-D9DFDC16BEE5}"
-      DTS:From="Package\PopulateEmployeeCache"
+      DTS:DTSID="{F22BF7D8-24B0-4305-B35B-47AA87155AB0}"
+      DTS:From="Package\EmployeeHistory"
       DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 7"
-      DTS:To="Package\EmployeesFuture" />
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\PrioritizePersonecData" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -3961,55 +4725,55 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="162,42"
+          Id="Package\EmployeeHistory"
+          TopLeft="45.3750000000001,320.5" />
+        <NodeLayout
           Size="170,42"
           Id="Package\EmployeesCurrent"
-          TopLeft="56.25,115" />
+          TopLeft="41.3750000000001,116.5" />
         <NodeLayout
           Size="199,42"
           Id="Package\EmployeesCurrent_FAIL"
-          TopLeft="273.5,115" />
+          TopLeft="285.5,115.5" />
         <NodeLayout
           Size="165,42"
           Id="Package\EmployeesFuture"
-          TopLeft="58.75,318.5" />
+          TopLeft="43.8750000000001,218.5" />
         <NodeLayout
           Size="211,42"
           Id="Package\InsertMissingSerialNumber"
-          TopLeft="36.75,624.5" />
-        <NodeLayout
-          Size="203,42"
-          Id="Package\PopulateEmployeeCache"
-          TopLeft="41.75,216.5" />
+          TopLeft="20.8750000000001,626.5" />
         <NodeLayout
           Size="150,42"
           Id="Package\PrepareExport"
-          TopLeft="65.75,12.5" />
+          TopLeft="51.3750000000001,14.5" />
         <NodeLayout
           Size="192,42"
           Id="Package\PrioritizePersonecData"
-          TopLeft="46.75,420.5" />
+          TopLeft="30.3750000000001,422.5" />
         <NodeLayout
           Size="243,42"
           Id="Package\UpdatePersonecAllaAnstallningar"
-          TopLeft="22.25,522.5" />
+          TopLeft="4.87500000000006,524.5" />
         <NodeLayout
           Size="177,42"
           Id="Package\UpdatePersonecDiff"
-          TopLeft="53.25,726.5" />
+          TopLeft="37.8750000000001,728.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="141,54.5">
+          TopLeft="126.375,56.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60.5"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,53">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,53" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4020,7 +4784,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="142,666.5">
+          TopLeft="126.375,668.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4042,31 +4806,31 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 10]"
-          TopLeft="226.25,136">
+          TopLeft="211.375,137">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="47.25,0"
+              EndConnector="74.1249999999999,0"
               Start="0,0"
-              End="39.75,0">
+              End="66.6249999999999,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="39.75,0" />
+                    End="66.6249999999999,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="11.875,5,16,16"
+              BoundingBox="25.3125,5,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="143.25,462.5">
+          TopLeft="126.375,464.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4088,31 +4852,29 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="142.25,157">
+          TopLeft="126.375,158.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,59.5"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,52">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-8,18,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="142,360.5">
+          TopLeft="126.375,260.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4134,7 +4896,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="143,564.5">
+          TopLeft="126.375,566.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4155,8 +4917,8 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="142.25,258.5">
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="126.375,362.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4179,6 +4941,91 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       </GraphLayout>
     </LayoutInfo>
   </Package>
+  <TaskHost
+    design-time-name="Package\EmployeeHistory">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\EmployeeHistory\OLE DB Source"
+          TopLeft="15.5,5.5" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\EmployeeHistory\OLE DB Destination"
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\EmployeeHistory\Convert to Unicode"
+          TopLeft="7.50000000000003,107.5" />
+        <EdgeLayout
+          Id="Package\EmployeeHistory.Paths[Data Conversion Output]"
+          TopLeft="94,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\EmployeeHistory.Paths[OLE DB Source Output]"
+          TopLeft="94,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\EmployeeHistory\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\EmployeeHistory\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\EmployeesCurrent">
     <LayoutInfo>
@@ -4294,26 +5141,22 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
     design-time-name="Package\EmployeesFuture">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="125,42"
           Id="Package\EmployeesFuture\Personec"
           TopLeft="42,5.5" />
         <NodeLayout
-          Size="148,42"
-          Id="Package\EmployeesFuture\MetaDirectory"
-          TopLeft="30.5,311.5" />
-        <NodeLayout
-          Size="115,42"
-          Id="Package\EmployeesFuture\Lookup"
-          TopLeft="47,209.5" />
-        <NodeLayout
           Size="198,42"
           Id="Package\EmployeesFuture\Non Unicode to Unicode"
-          TopLeft="5.50000000000001,107.5" />
+          TopLeft="5.50000000000003,107.5" />
+        <NodeLayout
+          Size="148,42"
+          Id="Package\EmployeesFuture\MetaDirectory"
+          TopLeft="30.5,209.5" />
         <EdgeLayout
-          Id="Package\EmployeesFuture.Paths[OLE DB Source Output]"
-          TopLeft="104.5,47.5">
+          Id="Package\EmployeesFuture.Paths[Data Conversion Output]"
+          TopLeft="104.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4334,32 +5177,8 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\EmployeesFuture.Paths[Lookup No Match Output]"
-          TopLeft="104.5,251.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-55.80638671875,20.4453125,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\EmployeesFuture.Paths[Data Conversion Output]"
-          TopLeft="104.5,149.5">
+          Id="Package\EmployeesFuture.Paths[OLE DB Source Output]"
+          TopLeft="104.5,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4392,67 +5211,6 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\EmployeesFuture\MetaDirectory">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\EmployeesFuture\Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\PopulateEmployeeCache">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="148,42"
-          Id="Package\PopulateEmployeeCache\MetaDirectory"
-          TopLeft="12.5,5.5" />
-        <NodeLayout
-          Size="164,42"
-          Id="Package\PopulateEmployeeCache\Cache Transform"
-          TopLeft="5.50000000000001,107.5" />
-        <EdgeLayout
-          Id="Package\PopulateEmployeeCache.Paths[OLE DB Source Output]"
-          TopLeft="87,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\PopulateEmployeeCache\MetaDirectory">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

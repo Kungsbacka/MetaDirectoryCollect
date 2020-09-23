@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{7E5158B2-B74F-4097-8813-AC8C5DC0BF3B}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.94"
+  DTS:LastModifiedProductVersion="15.0.2000.128"
   DTS:LocaleID="1053"
   DTS:ObjectName="Unikum"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="72"
-  DTS:VersionGUID="{B69C798C-179D-40EC-912C-7B5ADD4B3B5D}">
+  DTS:VersionBuild="73"
+  DTS:VersionGUID="{AEAD40B1-6BCC-473A-82AD-A27F08C92777}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -68,11 +68,14 @@
       DTS:DataType="8"
       DTS:DTSID="{1DAC95FA-8397-42E4-8DE4-683BB18854F3}"
       DTS:ObjectName="UnikumClientSecret"
-      DTS:Required="True">
+      DTS:Required="True"
+      DTS:Sensitive="True">
       <DTS:Property
-        DTS:DataType="8"
-        DTS:Name="ParameterValue"
-        xml:space="preserve"></DTS:Property>
+        DTS:Name="ParameterValue">
+        <DTS:Property
+          DTS:DataType="0"
+          DTS:Name="ParameterValue"></DTS:Property>
+      </DTS:Property>
     </DTS:PackageParameter>
   </DTS:PackageParameters>
   <DTS:Variables>

@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{BB78EF6E-9746-4A20-951E-C34C778813BD}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.128"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
   DTS:LocaleID="1053"
   DTS:ObjectName="PersonecEmployees"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="99"
-  DTS:VersionGUID="{66C02C18-09C3-4D0F-B207-C6DDDD4BEA08}">
+  DTS:VersionBuild="103"
+  DTS:VersionGUID="{FA5BD9E7-2F7C-4879-94E7-EB31774D8603}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -95,6 +95,22 @@
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\CommitEmployeeHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CEEBC601-CEA3-4336-BCAD-9F70E7E489CB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CommitEmployeeHistory"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6D3FE86D-79CA-4839-B5DC-FF6701F2F35E}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spCommitPersonecGamlaAnstallningar" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\EmployeeHistory"
       DTS:CreationName="Microsoft.Pipeline"
@@ -2654,35 +2670,14 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           VSTAMinorVersion="0"
           Language="CSharp">
           <ProjectItem
-            Name="Properties\AssemblyInfo.cs"
-            Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyCopyright("Copyright @  2016")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+            Name="Properties\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -3053,14 +3048,35 @@ namespace ST_69c0ff1828b745a69068061730c369ae.Properties {
     }
 }]]></ProjectItem>
           <ProjectItem
-            Name="Properties\Settings.settings"
-            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+            Name="Properties\AssemblyInfo.cs"
+            Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyCopyright("Copyright @  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.Designer.cs"
             Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -4706,10 +4722,18 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
       DTS:CreationName=""
-      DTS:DTSID="{F22BF7D8-24B0-4305-B35B-47AA87155AB0}"
+      DTS:DTSID="{584D5D56-DA78-493B-B02B-4266A67E2854}"
       DTS:From="Package\EmployeeHistory"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 6"
+      DTS:To="Package\CommitEmployeeHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{9D071FD3-69A6-40FC-8E08-D17963C69E6C}"
+      DTS:From="Package\CommitEmployeeHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
       DTS:To="Package\PrioritizePersonecData" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
@@ -4725,44 +4749,48 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="200,42"
+          Id="Package\CommitEmployeeHistory"
+          TopLeft="35.0000000000001,421.5" />
+        <NodeLayout
           Size="162,42"
           Id="Package\EmployeeHistory"
-          TopLeft="45.3750000000001,320.5" />
+          TopLeft="54.0000000000001,319.5" />
         <NodeLayout
           Size="170,42"
           Id="Package\EmployeesCurrent"
-          TopLeft="41.3750000000001,116.5" />
+          TopLeft="49,115.5" />
         <NodeLayout
           Size="199,42"
           Id="Package\EmployeesCurrent_FAIL"
-          TopLeft="285.5,115.5" />
+          TopLeft="297.5,118.5" />
         <NodeLayout
           Size="165,42"
           Id="Package\EmployeesFuture"
-          TopLeft="43.8750000000001,218.5" />
+          TopLeft="52.5000000000001,217.5" />
         <NodeLayout
           Size="211,42"
           Id="Package\InsertMissingSerialNumber"
-          TopLeft="20.8750000000001,626.5" />
+          TopLeft="29.5000000000001,727.5" />
         <NodeLayout
           Size="150,42"
           Id="Package\PrepareExport"
-          TopLeft="51.3750000000001,14.5" />
+          TopLeft="59,13.5" />
         <NodeLayout
           Size="192,42"
           Id="Package\PrioritizePersonecData"
-          TopLeft="30.3750000000001,422.5" />
+          TopLeft="39.0000000000001,523.5" />
         <NodeLayout
           Size="243,42"
           Id="Package\UpdatePersonecAllaAnstallningar"
-          TopLeft="4.87500000000006,524.5" />
+          TopLeft="13.5000000000001,625.5" />
         <NodeLayout
           Size="177,42"
           Id="Package\UpdatePersonecDiff"
-          TopLeft="37.8750000000001,728.5" />
+          TopLeft="46.5000000000001,829.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="126.375,56.5">
+          TopLeft="134,55.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4784,7 +4812,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="126.375,668.5">
+          TopLeft="135,769.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4806,31 +4834,31 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 10]"
-          TopLeft="211.375,137">
+          TopLeft="219,138">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="74.1249999999999,0"
+              EndConnector="78.5,0"
               Start="0,0"
-              End="66.6249999999999,0">
+              End="71,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="66.6249999999999,0" />
+                    End="71,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="25.3125,5,16,16"
+              BoundingBox="27.5,5,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="126.375,464.5">
+          TopLeft="135,565.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4852,7 +4880,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="126.375,158.5">
+          TopLeft="134.5,157.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4874,7 +4902,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="126.375,260.5">
+          TopLeft="135,259.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4896,7 +4924,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="126.375,566.5">
+          TopLeft="135,667.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4918,7 +4946,29 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="126.375,362.5">
+          TopLeft="135,361.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="135,463.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4945,7 +4995,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
     design-time-name="Package\EmployeeHistory">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="157,42"
           Id="Package\EmployeeHistory\OLE DB Source"
@@ -4958,28 +5008,6 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           Size="173,42"
           Id="Package\EmployeeHistory\Convert to Unicode"
           TopLeft="7.50000000000003,107.5" />
-        <EdgeLayout
-          Id="Package\EmployeeHistory.Paths[Data Conversion Output]"
-          TopLeft="94,149.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\EmployeeHistory.Paths[OLE DB Source Output]"
           TopLeft="94,47.5">
@@ -4999,7 +5027,33 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\EmployeeHistory.Paths[Data Conversion Output]"
+          TopLeft="94,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5141,7 +5195,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
     design-time-name="Package\EmployeesFuture">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="125,42"
           Id="Package\EmployeesFuture\Personec"
@@ -5173,7 +5227,9 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -5195,7 +5251,9 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

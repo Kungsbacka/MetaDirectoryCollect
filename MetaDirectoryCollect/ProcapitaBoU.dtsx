@@ -12,8 +12,8 @@
   DTS:ObjectName="ProcapitaBoU"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="116"
-  DTS:VersionGUID="{E6AB7903-8E20-44AF-8E0C-D385C6C67A88}">
+  DTS:VersionBuild="119"
+  DTS:VersionGUID="{5796FAF9-0F52-437B-A6AD-BADF52007AC0}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -119,14 +119,35 @@
           VSTAMinorVersion="0"
           Language="CSharp">
           <ProjectItem
-            Name="Properties\Settings.settings"
-            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+            Name="Properties\AssemblyInfo.cs"
+            Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_9226f808f12b458d935c46d178bfd974")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_9226f808f12b458d935c46d178bfd974")]
+[assembly: AssemblyCopyright("Copyright @  2014")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -496,35 +517,14 @@ namespace ST_9226f808f12b458d935c46d178bfd974.Properties {
     }
 }]]></ProjectItem>
           <ProjectItem
-            Name="Properties\AssemblyInfo.cs"
-            Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_9226f808f12b458d935c46d178bfd974")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_9226f808f12b458d935c46d178bfd974")]
-[assembly: AssemblyCopyright("Copyright @  2014")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+            Name="Properties\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.Designer.cs"
             Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -780,6 +780,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       cachedLength="12"
                       cachedName="PERSONNR"
                       lineageId="Package\Stage rektorsenheter\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]" />
+                    <inputColumn
+                      refId="Package\Stage rektorsenheter\Data Conversion.Inputs[Data Conversion Input].Columns[SKOLENHETSKOD]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="SKOLENHETSKOD"
+                      lineageId="Package\Stage rektorsenheter\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHETSKOD]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -869,6 +876,27 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
                           name="SourceInputColumnLineageID">#{Package\Stage rektorsenheter\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage rektorsenheter\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHETSKOD]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\Stage rektorsenheter\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHETSKOD]"
+                      name="Copy of SKOLENHETSKOD"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Stage rektorsenheter\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHETSKOD]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -1002,6 +1030,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       cachedName="Copy of PERSONNR"
                       externalMetadataColumnId="Package\Stage rektorsenheter\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
                       lineageId="Package\Stage rektorsenheter\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERSONNR]" />
+                    <inputColumn
+                      refId="Package\Stage rektorsenheter\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of SKOLENHETSKOD]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Copy of SKOLENHETSKOD"
+                      externalMetadataColumnId="Package\Stage rektorsenheter\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[skolenhetskod]"
+                      lineageId="Package\Stage rektorsenheter\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHETSKOD]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1025,6 +1060,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       dataType="wstr"
                       length="12"
                       name="personnr" />
+                    <externalMetadataColumn
+                      refId="Package\Stage rektorsenheter\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[skolenhetskod]"
+                      dataType="wstr"
+                      length="20"
+                      name="skolenhetskod" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1082,7 +1122,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     a.PERSONNR,
     a.SKOLENHET,
     a.REKTORSENHET,
-    b.REKTORSENHET_NAMN
+    b.REKTORSENHET_NAMN,
+    b.SKOLENHETSKOD
 FROM
     PROCAPITA_KJ1.KJGP0EKL a
 LEFT OUTER JOIN
@@ -1174,6 +1215,17 @@ AND
                       lineageId="Package\Stage rektorsenheter\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]"
                       name="PERSONNR"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage rektorsenheter\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHETSKOD]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage rektorsenheter\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SKOLENHETSKOD]"
+                      length="20"
+                      lineageId="Package\Stage rektorsenheter\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHETSKOD]"
+                      name="SKOLENHETSKOD"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1201,6 +1253,12 @@ AND
                       dataType="str"
                       length="12"
                       name="PERSONNR" />
+                    <externalMetadataColumn
+                      refId="Package\Stage rektorsenheter\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SKOLENHETSKOD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="SKOLENHETSKOD" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1236,6 +1294,13 @@ AND
                       length="100"
                       lineageId="Package\Stage rektorsenheter\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REKTORSENHET_NAMN]"
                       name="REKTORSENHET_NAMN" />
+                    <outputColumn
+                      refId="Package\Stage rektorsenheter\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SKOLENHETSKOD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Stage rektorsenheter\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SKOLENHETSKOD]"
+                      name="SKOLENHETSKOD" />
                     <outputColumn
                       refId="Package\Stage rektorsenheter\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -1500,6 +1565,10 @@ AND
           Id="Package\Stage rektorsenheter\OLE DB Destination"
           TopLeft="5.50000000000003,311.5" />
         <NodeLayout
+          Size="161,42"
+          Id="Package\Stage rektorsenheter\Data Conversion"
+          TopLeft="13.5,107.5" />
+        <NodeLayout
           Size="157,42"
           Id="Package\Stage rektorsenheter\OLE DB Source"
           TopLeft="15.5,5.5" />
@@ -1525,10 +1594,6 @@ AND
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="161,42"
-          Id="Package\Stage rektorsenheter\Data Conversion"
-          TopLeft="13.5,107.5" />
         <EdgeLayout
           Id="Package\Stage rektorsenheter.Paths[OLE DB Source Output]"
           TopLeft="94,47.5">

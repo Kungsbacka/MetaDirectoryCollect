@@ -12,8 +12,8 @@
   DTS:ObjectName="ProcapitaBoU"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="134"
-  DTS:VersionGUID="{319EF6A3-5E2E-4063-A488-A798BEB7C914}">
+  DTS:VersionBuild="135"
+  DTS:VersionGUID="{324BFAAD-F806-4193-9607-5F813940C0BC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -90,7 +90,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{A4DCB03C-382C-4779-9C6F-CD8D63FFD124}"
-          SQLTask:SqlStatementSource="EXECUTE dbo.spCommitEregProcapitaGymnasieRektorsenhet" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="EXECUTE dbo.spCommitEregProcapitaAuxiliary" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -2720,9 +2720,7 @@ WHERE
     ,NULLIF(RTRIM(SCBKOD), '') AS SCBKOD
     ,NULLIF(RTRIM(HUVUDMAN), '') AS HUVUDMAN
 FROM
-    PROCAPITA_KJ1.KJGP0SRE
-WHERE
-    AKTIV = '1'</property>
+    PROCAPITA_KJ1.KJGP0SRE</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -2970,1251 +2968,6 @@ WHERE
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Stage rektorsenheter elever"
-      DTS:CreationName="Microsoft.Pipeline"
-      DTS:Description="Data Flow Task"
-      DTS:DTSID="{72de303d-d273-4f45-b312-373130fa1ac7}"
-      DTS:ExecutableType="Microsoft.Pipeline"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Stage rektorsenheter elever"
-      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <pipeline
-          version="1">
-          <components>
-            <component
-              refId="Package\Stage rektorsenheter elever\Data Conversion"
-              componentClassID="Microsoft.DataConvert"
-              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Data Conversion"
-              name="Data Conversion"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\Stage rektorsenheter elever\Data Conversion.Inputs[Data Conversion Input]"
-                  name="Data Conversion Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter elever\Data Conversion.Inputs[Data Conversion Input].Columns[SKOLENHET]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="4"
-                      cachedName="SKOLENHET"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHET]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter elever\Data Conversion.Inputs[Data Conversion Input].Columns[REKTORSENHET]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="4"
-                      cachedName="REKTORSENHET"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter elever\Data Conversion.Inputs[Data Conversion Input].Columns[REKTORSENHET_NAMN]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="100"
-                      cachedName="REKTORSENHET_NAMN"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET_NAMN]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter elever\Data Conversion.Inputs[Data Conversion Input].Columns[PERSONNR]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="12"
-                      cachedName="PERSONNR"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter elever\Data Conversion.Inputs[Data Conversion Input].Columns[SKOLENHETSKOD]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="20"
-                      cachedName="SKOLENHETSKOD"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHETSKOD]" />
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output]"
-                  exclusionGroup="1"
-                  name="Data Conversion Output"
-                  synchronousInputId="Package\Stage rektorsenheter elever\Data Conversion.Inputs[Data Conversion Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHET]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="4"
-                      lineageId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHET]"
-                      name="Copy of SKOLENHET"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHET]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of REKTORSENHET]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="4"
-                      lineageId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of REKTORSENHET]"
-                      name="Copy of REKTORSENHET"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of REKTORSENHET_NAMN]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="100"
-                      lineageId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of REKTORSENHET_NAMN]"
-                      name="Copy of REKTORSENHET_NAMN"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET_NAMN]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERSONNR]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="12"
-                      lineageId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERSONNR]"
-                      name="Copy of PERSONNR"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHETSKOD]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="20"
-                      lineageId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHETSKOD]"
-                      name="Copy of SKOLENHETSKOD"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHETSKOD]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Data Conversion Error Output"
-                  synchronousInputId="Package\Stage rektorsenheter elever\Data Conversion.Inputs[Data Conversion Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Stage rektorsenheter elever\OLE DB Destination"
-              componentClassID="Microsoft.OLEDBDestination"
-              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
-              description="OLE DB Destination"
-              name="OLE DB Destination"
-              usesDispositions="true"
-              version="4">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[EregProcapitaGymnasieRektorsenhet_stage]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">3</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS,ROWS_PER_BATCH = 32767</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
-                  name="FastLoadMaxInsertCommitSize">2147483647</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Stage rektorsenheter elever\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
-                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input]"
-                  errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Destination Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of SKOLENHET]"
-                      cachedDataType="wstr"
-                      cachedLength="4"
-                      cachedName="Copy of SKOLENHET"
-                      externalMetadataColumnId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[skolenhet]"
-                      lineageId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHET]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of REKTORSENHET]"
-                      cachedDataType="wstr"
-                      cachedLength="4"
-                      cachedName="Copy of REKTORSENHET"
-                      externalMetadataColumnId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rektorsenhet]"
-                      lineageId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of REKTORSENHET]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of REKTORSENHET_NAMN]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="Copy of REKTORSENHET_NAMN"
-                      externalMetadataColumnId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rektorsenhet_namn]"
-                      lineageId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of REKTORSENHET_NAMN]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of PERSONNR]"
-                      cachedDataType="wstr"
-                      cachedLength="12"
-                      cachedName="Copy of PERSONNR"
-                      externalMetadataColumnId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
-                      lineageId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERSONNR]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of SKOLENHETSKOD]"
-                      cachedDataType="wstr"
-                      cachedLength="20"
-                      cachedName="Copy of SKOLENHETSKOD"
-                      externalMetadataColumnId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[skolenhetskod]"
-                      lineageId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHETSKOD]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[skolenhet]"
-                      dataType="wstr"
-                      length="4"
-                      name="skolenhet" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rektorsenhet]"
-                      dataType="wstr"
-                      length="4"
-                      name="rektorsenhet" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rektorsenhet_namn]"
-                      dataType="wstr"
-                      length="100"
-                      name="rektorsenhet_namn" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
-                      dataType="wstr"
-                      length="12"
-                      name="personnr" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[skolenhetskod]"
-                      dataType="wstr"
-                      length="20"
-                      name="skolenhetskod" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Stage rektorsenheter elever\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Stage rektorsenheter elever\OLE DB Source"
-              componentClassID="Microsoft.OLEDBSource"
-              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-              description="OLE DB Source"
-              name="OLE DB Source"
-              usesDispositions="true"
-              version="7">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset"></property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
-    a.PERSONNR,
-    a.SKOLENHET,
-    a.REKTORSENHET,
-    b.REKTORSENHET_NAMN,
-    b.SKOLENHETSKOD
-FROM
-    PROCAPITA_KJ1.KJGP0EKL a
-LEFT OUTER JOIN
-    PROCAPITA_KJ1.KJGP0SRE b
-ON
-    a.REKTORSENHET = b.REKTORSENHET
-WHERE
-    a.PERIOD = ?
-AND
-    a.SKOLENHET IN ('ARXX','LIXX','BEDA')
-AND
-    GETDATE() BETWEEN FROMDAT AND TOMDAT</property>
-                <property
-                  dataType="System.String"
-                  description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">2</property>
-                <property
-                  dataType="System.String"
-                  description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping">"Parameter0:Input",{62BD20B4-EC7B-446F-B3BA-01A42681F132};</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Stage rektorsenheter elever\OLE DB Source.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[ProcapitaBoU]"
-                  connectionManagerRefId="Package.ConnectionManagers[ProcapitaBoU]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <outputs>
-                <output
-                  refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output]"
-                  name="OLE DB Source Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHET]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SKOLENHET]"
-                      length="4"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHET]"
-                      name="SKOLENHET"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REKTORSENHET]"
-                      length="4"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET]"
-                      name="REKTORSENHET"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET_NAMN]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REKTORSENHET_NAMN]"
-                      length="100"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET_NAMN]"
-                      name="REKTORSENHET_NAMN"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERSONNR]"
-                      length="12"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]"
-                      name="PERSONNR"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHETSKOD]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SKOLENHETSKOD]"
-                      length="20"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHETSKOD]"
-                      name="SKOLENHETSKOD"
-                      truncationRowDisposition="FailComponent" />
-                  </outputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SKOLENHET]"
-                      codePage="1252"
-                      dataType="str"
-                      length="4"
-                      name="SKOLENHET" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REKTORSENHET]"
-                      codePage="1252"
-                      dataType="str"
-                      length="4"
-                      name="REKTORSENHET" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REKTORSENHET_NAMN]"
-                      codePage="1252"
-                      dataType="str"
-                      length="100"
-                      name="REKTORSENHET_NAMN" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERSONNR]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      name="PERSONNR" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SKOLENHETSKOD]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="SKOLENHETSKOD" />
-                  </externalMetadataColumns>
-                </output>
-                <output
-                  refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output]"
-                  isErrorOut="true"
-                  name="OLE DB Source Error Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERSONNR]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERSONNR]"
-                      name="PERSONNR" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SKOLENHET]"
-                      codePage="1252"
-                      dataType="str"
-                      length="4"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SKOLENHET]"
-                      name="SKOLENHET" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REKTORSENHET]"
-                      codePage="1252"
-                      dataType="str"
-                      length="4"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REKTORSENHET]"
-                      name="REKTORSENHET" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REKTORSENHET_NAMN]"
-                      codePage="1252"
-                      dataType="str"
-                      length="100"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REKTORSENHET_NAMN]"
-                      name="REKTORSENHET_NAMN" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SKOLENHETSKOD]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SKOLENHETSKOD]"
-                      name="SKOLENHETSKOD" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-          </components>
-          <paths>
-            <path
-              refId="Package\Stage rektorsenheter elever.Paths[Data Conversion Output]"
-              endId="Package\Stage rektorsenheter elever\OLE DB Destination.Inputs[OLE DB Destination Input]"
-              name="Data Conversion Output"
-              startId="Package\Stage rektorsenheter elever\Data Conversion.Outputs[Data Conversion Output]" />
-            <path
-              refId="Package\Stage rektorsenheter elever.Paths[OLE DB Source Output]"
-              endId="Package\Stage rektorsenheter elever\Data Conversion.Inputs[Data Conversion Input]"
-              name="OLE DB Source Output"
-              startId="Package\Stage rektorsenheter elever\OLE DB Source.Outputs[OLE DB Source Output]" />
-          </paths>
-        </pipeline>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Stage rektorsenheter personal"
-      DTS:CreationName="Microsoft.Pipeline"
-      DTS:Description="Data Flow Task"
-      DTS:DTSID="{319a82d3-7adb-44e0-b1ce-ec8ea1076c8b}"
-      DTS:ExecutableType="Microsoft.Pipeline"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Stage rektorsenheter personal"
-      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <pipeline
-          version="1">
-          <components>
-            <component
-              refId="Package\Stage rektorsenheter personal\Data Conversion"
-              componentClassID="Microsoft.DataConvert"
-              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Data Conversion"
-              name="Data Conversion"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\Stage rektorsenheter personal\Data Conversion.Inputs[Data Conversion Input]"
-                  name="Data Conversion Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter personal\Data Conversion.Inputs[Data Conversion Input].Columns[SKOLENHET]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="4"
-                      cachedName="SKOLENHET"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHET]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter personal\Data Conversion.Inputs[Data Conversion Input].Columns[REKTORSENHET]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="4"
-                      cachedName="REKTORSENHET"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter personal\Data Conversion.Inputs[Data Conversion Input].Columns[REKTORSENHET_NAMN]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="100"
-                      cachedName="REKTORSENHET_NAMN"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET_NAMN]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter personal\Data Conversion.Inputs[Data Conversion Input].Columns[PERSONNR]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="12"
-                      cachedName="PERSONNR"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter personal\Data Conversion.Inputs[Data Conversion Input].Columns[SKOLENHETSKOD]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="20"
-                      cachedName="SKOLENHETSKOD"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHETSKOD]" />
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output]"
-                  exclusionGroup="1"
-                  name="Data Conversion Output"
-                  synchronousInputId="Package\Stage rektorsenheter personal\Data Conversion.Inputs[Data Conversion Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHET]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="4"
-                      lineageId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHET]"
-                      name="Copy of SKOLENHET"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHET]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of REKTORSENHET]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="4"
-                      lineageId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of REKTORSENHET]"
-                      name="Copy of REKTORSENHET"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of REKTORSENHET_NAMN]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="100"
-                      lineageId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of REKTORSENHET_NAMN]"
-                      name="Copy of REKTORSENHET_NAMN"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET_NAMN]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERSONNR]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="12"
-                      lineageId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERSONNR]"
-                      name="Copy of PERSONNR"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHETSKOD]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="20"
-                      lineageId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHETSKOD]"
-                      name="Copy of SKOLENHETSKOD"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHETSKOD]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Data Conversion Error Output"
-                  synchronousInputId="Package\Stage rektorsenheter personal\Data Conversion.Inputs[Data Conversion Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Stage rektorsenheter personal\OLE DB Destination"
-              componentClassID="Microsoft.OLEDBDestination"
-              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
-              description="OLE DB Destination"
-              name="OLE DB Destination"
-              usesDispositions="true"
-              version="4">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[EregProcapitaGymnasieRektorsenhetPersonal_stage]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">3</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS,ROWS_PER_BATCH = 32767</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
-                  name="FastLoadMaxInsertCommitSize">2147483647</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Stage rektorsenheter personal\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
-                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input]"
-                  errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Destination Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of SKOLENHET]"
-                      cachedDataType="wstr"
-                      cachedLength="4"
-                      cachedName="Copy of SKOLENHET"
-                      externalMetadataColumnId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[skolenhet]"
-                      lineageId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHET]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of REKTORSENHET]"
-                      cachedDataType="wstr"
-                      cachedLength="4"
-                      cachedName="Copy of REKTORSENHET"
-                      externalMetadataColumnId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rektorsenhet]"
-                      lineageId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of REKTORSENHET]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of REKTORSENHET_NAMN]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="Copy of REKTORSENHET_NAMN"
-                      externalMetadataColumnId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rektorsenhet_namn]"
-                      lineageId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of REKTORSENHET_NAMN]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of PERSONNR]"
-                      cachedDataType="wstr"
-                      cachedLength="12"
-                      cachedName="Copy of PERSONNR"
-                      externalMetadataColumnId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
-                      lineageId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERSONNR]" />
-                    <inputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of SKOLENHETSKOD]"
-                      cachedDataType="wstr"
-                      cachedLength="20"
-                      cachedName="Copy of SKOLENHETSKOD"
-                      externalMetadataColumnId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[skolenhetskod]"
-                      lineageId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SKOLENHETSKOD]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[skolenhet]"
-                      dataType="wstr"
-                      length="4"
-                      name="skolenhet" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rektorsenhet]"
-                      dataType="wstr"
-                      length="4"
-                      name="rektorsenhet" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rektorsenhet_namn]"
-                      dataType="wstr"
-                      length="100"
-                      name="rektorsenhet_namn" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
-                      dataType="wstr"
-                      length="12"
-                      name="personnr" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[skolenhetskod]"
-                      dataType="wstr"
-                      length="20"
-                      name="skolenhetskod" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Stage rektorsenheter personal\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Stage rektorsenheter personal\OLE DB Source"
-              componentClassID="Microsoft.OLEDBSource"
-              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-              description="OLE DB Source"
-              name="OLE DB Source"
-              usesDispositions="true"
-              version="7">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset"></property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
-    pak.PERSONNR,
-    ekl.SKOLENHET,
-    ekl.REKTORSENHET,
-    sre.REKTORSENHET_NAMN,
-    sre.SKOLENHETSKOD
-FROM
-    PROCAPITA_KJ1.KJGP0PAK pak
-INNER JOIN
-    PROCAPITA_KJ1.KJGP0EKL ekl
-ON
-    pak.KLASS = ekl.KLASS AND pak.SKOLENHET = ekl.SKOLENHET
-INNER JOIN
-    PROCAPITA_KJ1.KJGP0SRE sre
-ON
-    ekl.REKTORSENHET = sre.REKTORSENHET AND ekl.SKOLENHET = sre.SKOLENHET
-WHERE
-    ekl.REKTORSENHET LIKE 'ARA%' OR ekl.REKTORSENHET LIKE 'ELO%' OR ekl.REKTORSENHET LIKE 'BED%'
-AND
-    pak.PERIOD = ?
-
-UNION
-
-SELECT
-    pak.PERSONNR,
-    ekl.SKOLENHET,
-    ekl.REKTORSENHET,
-    sre.REKTORSENHET_NAMN,
-    sre.SKOLENHETSKOD
-FROM
-    PROCAPITA_KJ1.KJGP0PAK pak
-INNER JOIN
-    PROCAPITA_KJ1.KJGP0EVG evg
-ON
-    pak.GRUPP = evg.GRUPP AND pak.SKOLENHET = evg.SKOLENHET
-INNER JOIN
-    PROCAPITA_KJ1.KJGP0EKL ekl
-ON
-    evg.PERSONNR = ekl.PERSONNR AND evg.SKOLENHET = ekl.SKOLENHET
-INNER JOIN
-    PROCAPITA_KJ1.KJGP0SRE sre
-ON
-    ekl.REKTORSENHET = sre.REKTORSENHET AND ekl.SKOLENHET = sre.SKOLENHET
-WHERE
-    (ekl.REKTORSENHET LIKE 'ARA%' OR ekl.REKTORSENHET LIKE 'ELO%' OR ekl.REKTORSENHET LIKE 'BED%')
-AND
-    pak.PERIOD = ?</property>
-                <property
-                  dataType="System.String"
-                  description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">2</property>
-                <property
-                  dataType="System.String"
-                  description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping">"Parameter0:Input",{62BD20B4-EC7B-446F-B3BA-01A42681F132};"Parameter1:Input",{62BD20B4-EC7B-446F-B3BA-01A42681F132};"Parameter2:Input",{62BD20B4-EC7B-446F-B3BA-01A42681F132};"Parameter3:Input",{62BD20B4-EC7B-446F-B3BA-01A42681F132};"Parameter4:Input",{62BD20B4-EC7B-446F-B3BA-01A42681F132};"Parameter5:Input",{62BD20B4-EC7B-446F-B3BA-01A42681F132};</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Stage rektorsenheter personal\OLE DB Source.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[ProcapitaBoU]"
-                  connectionManagerRefId="Package.ConnectionManagers[ProcapitaBoU]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <outputs>
-                <output
-                  refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output]"
-                  name="OLE DB Source Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REKTORSENHET]"
-                      length="4"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET]"
-                      name="REKTORSENHET"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERSONNR]"
-                      length="12"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERSONNR]"
-                      name="PERSONNR"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHET]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SKOLENHET]"
-                      length="4"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHET]"
-                      name="SKOLENHET"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET_NAMN]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REKTORSENHET_NAMN]"
-                      length="100"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[REKTORSENHET_NAMN]"
-                      name="REKTORSENHET_NAMN"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHETSKOD]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SKOLENHETSKOD]"
-                      length="20"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].Columns[SKOLENHETSKOD]"
-                      name="SKOLENHETSKOD"
-                      truncationRowDisposition="FailComponent" />
-                  </outputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REKTORSENHET]"
-                      codePage="1252"
-                      dataType="str"
-                      length="4"
-                      name="REKTORSENHET" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERSONNR]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      name="PERSONNR" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SKOLENHET]"
-                      codePage="1252"
-                      dataType="str"
-                      length="4"
-                      name="SKOLENHET" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REKTORSENHET_NAMN]"
-                      codePage="1252"
-                      dataType="str"
-                      length="100"
-                      name="REKTORSENHET_NAMN" />
-                    <externalMetadataColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SKOLENHETSKOD]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="SKOLENHETSKOD" />
-                  </externalMetadataColumns>
-                </output>
-                <output
-                  refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output]"
-                  isErrorOut="true"
-                  name="OLE DB Source Error Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERSONNR]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERSONNR]"
-                      name="PERSONNR" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SKOLENHET]"
-                      codePage="1252"
-                      dataType="str"
-                      length="4"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SKOLENHET]"
-                      name="SKOLENHET" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REKTORSENHET]"
-                      codePage="1252"
-                      dataType="str"
-                      length="4"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REKTORSENHET]"
-                      name="REKTORSENHET" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REKTORSENHET_NAMN]"
-                      codePage="1252"
-                      dataType="str"
-                      length="100"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REKTORSENHET_NAMN]"
-                      name="REKTORSENHET_NAMN" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SKOLENHETSKOD]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SKOLENHETSKOD]"
-                      name="SKOLENHETSKOD" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-          </components>
-          <paths>
-            <path
-              refId="Package\Stage rektorsenheter personal.Paths[Data Conversion Output]"
-              endId="Package\Stage rektorsenheter personal\OLE DB Destination.Inputs[OLE DB Destination Input]"
-              name="Data Conversion Output"
-              startId="Package\Stage rektorsenheter personal\Data Conversion.Outputs[Data Conversion Output]" />
-            <path
-              refId="Package\Stage rektorsenheter personal.Paths[OLE DB Source Output]"
-              endId="Package\Stage rektorsenheter personal\Data Conversion.Inputs[Data Conversion Input]"
-              name="OLE DB Source Output"
-              startId="Package\Stage rektorsenheter personal\OLE DB Source.Outputs[OLE DB Source Output]" />
-          </paths>
-        </pipeline>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
       DTS:refId="Package\Truncate stage"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
@@ -4228,7 +2981,7 @@ AND
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{A4DCB03C-382C-4779-9C6F-CD8D63FFD124}"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.EregProcapitaGymnasieRektorsenhet_stage;&#xA;TRUNCATE TABLE dbo.EregProcapitaGymnasieRektorsenhetPersonal_stage;&#xA;TRUNCATE TABLE dbo.EregProcapitaKJGP0EKL_stage;&#xA;TRUNCATE TABLE dbo.EregProcapitaKJGP0EVG_stage;&#xA;TRUNCATE TABLE dbo.EregProcapitaKJGP0PAK_stage;&#xA;TRUNCATE TABLE dbo.EregProcapitaKJGP0SRE_stage;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.EregProcapitaKJGP0EKL_stage;&#xA;TRUNCATE TABLE dbo.EregProcapitaKJGP0EVG_stage;&#xA;TRUNCATE TABLE dbo.EregProcapitaKJGP0PAK_stage;&#xA;TRUNCATE TABLE dbo.EregProcapitaKJGP0SRE_stage;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -4244,26 +2997,10 @@ AND
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{32D5181A-E6FD-42F6-9F49-91E5DE0FB0F9}"
-      DTS:From="Package\Stage rektorsenheter elever"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Stage rektorsenheter personal" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
-      DTS:CreationName=""
-      DTS:DTSID="{D4221106-FF9E-4678-8BDA-2C3325049428}"
+      DTS:DTSID="{425DDEC7-60BE-4678-A4B1-DC253D7B7106}"
       DTS:From="Package\Get current period"
       DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 2"
-      DTS:To="Package\Stage rektorsenheter elever" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
-      DTS:CreationName=""
-      DTS:DTSID="{12085565-DFA6-4488-8070-E6E920C4F15F}"
-      DTS:From="Package\Stage rektorsenheter personal"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 3"
+      DTS:ObjectName="Constraint 1"
       DTS:To="Package\KJGP0EVG" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
@@ -4309,112 +3046,38 @@ AND
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="117,42"
           Id="Package\Commit"
-          TopLeft="60.5000000000001,821.5" />
+          TopLeft="30.5000000000001,617.5" />
         <NodeLayout
           Size="167,42"
           Id="Package\Get current period"
-          TopLeft="35.5,107.5" />
-        <NodeLayout
-          Size="215,42"
-          Id="Package\Stage rektorsenheter elever"
-          TopLeft="11.5,209.5" />
-        <NodeLayout
-          Size="227,42"
-          Id="Package\Stage rektorsenheter personal"
-          TopLeft="5.50000000000004,311.5" />
-        <NodeLayout
-          Size="152,42"
-          Id="Package\Truncate stage"
-          TopLeft="43,5.5" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="119,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="119,149.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="119,251.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="137,42"
-          Id="Package\KJGP0EVG"
-          TopLeft="50.5000000000001,413.5" />
+          TopLeft="5.50000000000001,107.5" />
         <NodeLayout
           Size="135,42"
           Id="Package\KJGP0EKL"
-          TopLeft="51.5000000000001,515.5" />
+          TopLeft="21.5,311.5" />
+        <NodeLayout
+          Size="137,42"
+          Id="Package\KJGP0EVG"
+          TopLeft="20.5,209.5" />
         <NodeLayout
           Size="136,42"
           Id="Package\KJGP0PAK"
-          TopLeft="51.0000000000001,617.5" />
+          TopLeft="21.0000000000001,413.5" />
         <NodeLayout
           Size="136,42"
           Id="Package\KJGP0SRE"
-          TopLeft="51.0000000000001,719.5" />
+          TopLeft="21.0000000000001,515.5" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Truncate stage"
+          TopLeft="13,5.5" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="119,353.5">
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="89,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4436,7 +3099,7 @@ AND
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="119,455.5">
+          TopLeft="89,251.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4458,7 +3121,7 @@ AND
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="119,557.5">
+          TopLeft="89.0000000000001,353.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4480,7 +3143,7 @@ AND
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="119,659.5">
+          TopLeft="89.0000000000001,455.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4502,7 +3165,29 @@ AND
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="119,761.5">
+          TopLeft="89.0000000000001,557.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="89,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4526,24 +3211,24 @@ AND
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Stage rektorsenheter elever">
+    design-time-name="Package\KJGP0EKL">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="157,42"
-          Id="Package\Stage rektorsenheter elever\OLE DB Source"
-          TopLeft="15.5,5.5" />
-        <NodeLayout
           Size="161,42"
-          Id="Package\Stage rektorsenheter elever\Data Conversion"
+          Id="Package\KJGP0EKL\Data Conversion"
           TopLeft="13.5,107.5" />
         <NodeLayout
           Size="177,42"
-          Id="Package\Stage rektorsenheter elever\OLE DB Destination"
+          Id="Package\KJGP0EKL\OLE DB Destination"
           TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\KJGP0EKL\OLE DB Source"
+          TopLeft="15.5,5.5" />
         <EdgeLayout
-          Id="Package\Stage rektorsenheter elever.Paths[OLE DB Source Output]"
+          Id="Package\KJGP0EKL.Paths[OLE DB Source Output]"
           TopLeft="94,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -4565,7 +3250,7 @@ AND
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage rektorsenheter elever.Paths[Data Conversion Output]"
+          Id="Package\KJGP0EKL.Paths[Data Conversion Output]"
           TopLeft="94,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -4590,15 +3275,7 @@ AND
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage rektorsenheter elever\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage rektorsenheter elever\OLE DB Destination">
+    design-time-name="Package\KJGP0EKL\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -4610,88 +3287,11 @@ AND
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\Stage rektorsenheter personal">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="157,42"
-          Id="Package\Stage rektorsenheter personal\OLE DB Source"
-          TopLeft="15.5,5.5" />
-        <NodeLayout
-          Size="161,42"
-          Id="Package\Stage rektorsenheter personal\Data Conversion"
-          TopLeft="13.5,107.5" />
-        <NodeLayout
-          Size="177,42"
-          Id="Package\Stage rektorsenheter personal\OLE DB Destination"
-          TopLeft="5.50000000000003,209.5" />
-        <EdgeLayout
-          Id="Package\Stage rektorsenheter personal.Paths[OLE DB Source Output]"
-          TopLeft="94,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage rektorsenheter personal.Paths[Data Conversion Output]"
-          TopLeft="94,149.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage rektorsenheter personal\OLE DB Source">
+    design-time-name="Package\KJGP0EKL\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage rektorsenheter personal\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -4781,91 +3381,6 @@ AND
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\KJGP0EKL">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="161,42"
-          Id="Package\KJGP0EKL\Data Conversion"
-          TopLeft="13.5,107.5" />
-        <NodeLayout
-          Size="177,42"
-          Id="Package\KJGP0EKL\OLE DB Destination"
-          TopLeft="5.50000000000003,209.5" />
-        <NodeLayout
-          Size="157,42"
-          Id="Package\KJGP0EKL\OLE DB Source"
-          TopLeft="15.5,5.5" />
-        <EdgeLayout
-          Id="Package\KJGP0EKL.Paths[OLE DB Source Output]"
-          TopLeft="94,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\KJGP0EKL.Paths[Data Conversion Output]"
-          TopLeft="94,149.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\KJGP0EKL\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\KJGP0EKL\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
     design-time-name="Package\KJGP0PAK">
     <LayoutInfo>
       <GraphLayout
@@ -4930,6 +3445,14 @@ AND
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
+    design-time-name="Package\KJGP0PAK\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\KJGP0PAK\OLE DB Destination">
     <Properties>
       <Property>
@@ -4942,19 +3465,15 @@ AND
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\KJGP0PAK\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\KJGP0SRE">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\KJGP0SRE\OLE DB Source"
+          TopLeft="15.5,5.5" />
         <NodeLayout
           Size="161,42"
           Id="Package\KJGP0SRE\Data Conversion"
@@ -4963,10 +3482,6 @@ AND
           Size="177,42"
           Id="Package\KJGP0SRE\OLE DB Destination"
           TopLeft="5.50000000000003,209.5" />
-        <NodeLayout
-          Size="157,42"
-          Id="Package\KJGP0SRE\OLE DB Source"
-          TopLeft="15.5,5.5" />
         <EdgeLayout
           Id="Package\KJGP0SRE.Paths[OLE DB Source Output]"
           TopLeft="94,47.5">
@@ -5015,6 +3530,14 @@ AND
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
+    design-time-name="Package\KJGP0SRE\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\KJGP0SRE\OLE DB Destination">
     <Properties>
       <Property>
@@ -5024,14 +3547,6 @@ AND
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\KJGP0SRE\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

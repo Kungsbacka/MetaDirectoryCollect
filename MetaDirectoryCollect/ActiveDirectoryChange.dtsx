@@ -3,17 +3,17 @@
   DTS:refId="Package"
   DTS:CreationDate="5/13/2019 9:21:17 PM"
   DTS:CreationName="Microsoft.Package"
-  DTS:CreatorComputerName="ADM-00720"
-  DTS:CreatorName="KBA\jonas.sjomark"
+  DTS:CreatorComputerName=""
+  DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{277BC17E-277F-4EF4-8754-E03EDF21DEFE}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LastModifiedProductVersion="15.0.2000.152"
   DTS:LocaleID="1053"
   DTS:ObjectName="ActiveDirectoryChange"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="40"
-  DTS:VersionGUID="{83A8C4F3-ECAA-48F9-9405-4CF6692E5BB5}">
+  DTS:VersionBuild="47"
+  DTS:VersionGUID="{B36FE288-9A1E-49C1-96C7-78DAD6B83C3C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -87,13 +87,50 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Changes"
+      DTS:refId="Package\Apply changes"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{02A3E6ED-779F-4F40-9FCB-47BF463FC134}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Apply changes"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7E591C2A-3946-4E6B-8489-8E5AD8FDC4A2}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spApplyActiveDirectoryChanges" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Calculate max uSNChanged"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{DFD261E3-2729-40B5-BB37-0A57851EFCD7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Calculate max uSNChanged"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7E591C2A-3946-4E6B-8489-8E5AD8FDC4A2}"
+          SQLTask:SqlStatementSource="SELECT MAX(uSNChanged) + 1 AS maxUSN FROM dbo.ActiveDirectoryUser"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="maxUSN"
+            SQLTask:DtsVariableName="User::maxUsnChanged" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get changes from AD"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:DTSID="{8aaf309f-a116-41ca-abcf-c31fc363636f}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Changes"
+      DTS:ObjectName="Get changes from AD"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -103,7 +140,7 @@
           version="1">
           <components>
             <component
-              refId="Package\Changes\ActiveDirectory"
+              refId="Package\Get changes from AD\ActiveDirectory"
               componentClassID="Microsoft.ManagedComponentHost"
               contactInfo="Executes a custom script.;Microsoft Corporation; Microsoft SqlServer v10; © 2007 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="Executes a custom script."
@@ -3290,451 +3327,451 @@ AAAAAA==]]></arrayElement>
               </properties>
               <outputs>
                 <output
-                  refId="Package\Changes\ActiveDirectory.Outputs[User]"
+                  refId="Package\Get changes from AD\ActiveDirectory.Outputs[User]"
                   hasSideEffects="true"
                   name="User">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[change]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[change]"
                       dataType="wstr"
                       length="3"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[change]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[change]"
                       name="change" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[objectGUID]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[objectGUID]"
                       dataType="guid"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[objectGUID]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[objectGUID]"
                       name="objectGUID" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[sAMAccountName]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[sAMAccountName]"
                       dataType="wstr"
                       length="256"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[sAMAccountName]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[sAMAccountName]"
                       name="sAMAccountName" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[mail]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[mail]"
                       dataType="wstr"
                       length="256"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[mail]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[mail]"
                       name="mail" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[sn]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[sn]"
                       dataType="wstr"
                       length="64"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[sn]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[sn]"
                       name="sn" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[givenName]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[givenName]"
                       dataType="wstr"
                       length="64"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[givenName]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[givenName]"
                       name="givenName" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[initials]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[initials]"
                       dataType="wstr"
                       length="6"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[initials]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[initials]"
                       name="initials" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[displayName]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[displayName]"
                       dataType="wstr"
                       length="256"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[displayName]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[displayName]"
                       name="displayName" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[description]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[description]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[description]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[description]"
                       name="description" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[department]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[department]"
                       dataType="wstr"
                       length="64"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[department]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[department]"
                       name="department" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[company]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[company]"
                       dataType="wstr"
                       length="64"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[company]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[company]"
                       name="company" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[physicalDeliveryOfficeName]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[physicalDeliveryOfficeName]"
                       dataType="wstr"
                       length="128"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[physicalDeliveryOfficeName]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[physicalDeliveryOfficeName]"
                       name="physicalDeliveryOfficeName" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[departmentNumber]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[departmentNumber]"
                       dataType="wstr"
                       length="64"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[departmentNumber]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[departmentNumber]"
                       name="departmentNumber" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[telephoneNumber]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[telephoneNumber]"
                       dataType="wstr"
                       length="64"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[telephoneNumber]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[telephoneNumber]"
                       name="telephoneNumber" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[title]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[title]"
                       dataType="wstr"
                       length="128"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[title]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[title]"
                       name="title" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[userPrincipalName]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[userPrincipalName]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[userPrincipalName]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[userPrincipalName]"
                       name="userPrincipalName" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[distinguishedName]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[distinguishedName]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[distinguishedName]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[distinguishedName]"
                       name="distinguishedName" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[whenCreated]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[whenCreated]"
                       dataType="dbTimeStamp"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[whenCreated]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[whenCreated]"
                       name="whenCreated" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[whenChanged]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[whenChanged]"
                       dataType="dbTimeStamp"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[whenChanged]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[whenChanged]"
                       name="whenChanged" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[uSNCreated]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[uSNCreated]"
                       dataType="i8"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[uSNCreated]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[uSNCreated]"
                       name="uSNCreated" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[uSNChanged]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[uSNChanged]"
                       dataType="i8"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[uSNChanged]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[uSNChanged]"
                       name="uSNChanged" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[manager]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[manager]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[manager]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[manager]"
                       name="manager" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[employeeType]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[employeeType]"
                       dataType="wstr"
                       length="256"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[employeeType]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[employeeType]"
                       name="employeeType" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[employeeNumber]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[employeeNumber]"
                       dataType="wstr"
                       length="512"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[employeeNumber]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[employeeNumber]"
                       name="employeeNumber" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute1]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute1]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute1]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute1]"
                       name="extensionAttribute1" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute2]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute2]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute2]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute2]"
                       name="extensionAttribute2" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute3]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute3]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute3]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute3]"
                       name="extensionAttribute3" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute4]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute4]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute4]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute4]"
                       name="extensionAttribute4" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute5]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute5]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute5]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute5]"
                       name="extensionAttribute5" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute6]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute6]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute6]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute6]"
                       name="extensionAttribute6" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute7]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute7]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute7]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute7]"
                       name="extensionAttribute7" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute8]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute8]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute8]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute8]"
                       name="extensionAttribute8" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute9]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute9]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute9]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute9]"
                       name="extensionAttribute9" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute10]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute10]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute10]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute10]"
                       name="extensionAttribute10" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute11]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute11]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute11]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute11]"
                       name="extensionAttribute11" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute12]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute12]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute12]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute12]"
                       name="extensionAttribute12" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute13]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute13]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute13]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute13]"
                       name="extensionAttribute13" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute14]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute14]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute14]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute14]"
                       name="extensionAttribute14" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute15]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute15]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute15]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute15]"
                       name="extensionAttribute15" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[userAccountControl]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[userAccountControl]"
                       dataType="i4"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[userAccountControl]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[userAccountControl]"
                       name="userAccountControl" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[accountExpires]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[accountExpires]"
                       dataType="dbTimeStamp"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[accountExpires]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[accountExpires]"
                       name="accountExpires" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[seeAlso]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[seeAlso]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[seeAlso]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[seeAlso]"
                       name="seeAlso" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[lastLogonTimestamp]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[lastLogonTimestamp]"
                       dataType="dbTimeStamp"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[lastLogonTimestamp]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[lastLogonTimestamp]"
                       name="lastLogonTimestamp" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[gidNumber]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[gidNumber]"
                       dataType="i4"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[gidNumber]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[gidNumber]"
                       name="gidNumber" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[flags]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[flags]"
                       dataType="i4"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[flags]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[flags]"
                       name="flags" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msExchRecipientDisplayType]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msExchRecipientDisplayType]"
                       dataType="i4"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msExchRecipientDisplayType]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msExchRecipientDisplayType]"
                       name="msExchRecipientDisplayType" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msExchRecipientTypeDetails]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msExchRecipientTypeDetails]"
                       dataType="i8"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msExchRecipientTypeDetails]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msExchRecipientTypeDetails]"
                       name="msExchRecipientTypeDetails" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msExchRemoteRecipientType]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msExchRemoteRecipientType]"
                       dataType="i8"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msExchRemoteRecipientType]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msExchRemoteRecipientType]"
                       name="msExchRemoteRecipientType" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute1]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute1]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute1]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute1]"
                       name="msDScloudExtensionAttribute1" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute2]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute2]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute2]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute2]"
                       name="msDScloudExtensionAttribute2" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute3]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute3]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute3]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute3]"
                       name="msDScloudExtensionAttribute3" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute4]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute4]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute4]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute4]"
                       name="msDScloudExtensionAttribute4" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute5]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute5]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute5]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute5]"
                       name="msDScloudExtensionAttribute5" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute6]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute6]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute6]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute6]"
                       name="msDScloudExtensionAttribute6" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute7]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute7]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute7]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute7]"
                       name="msDScloudExtensionAttribute7" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute8]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute8]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute8]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute8]"
                       name="msDScloudExtensionAttribute8" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute9]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute9]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute9]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute9]"
                       name="msDScloudExtensionAttribute9" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute10]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute10]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute10]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute10]"
                       name="msDScloudExtensionAttribute10" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute11]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute11]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute11]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute11]"
                       name="msDScloudExtensionAttribute11" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute12]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute12]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute12]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute12]"
                       name="msDScloudExtensionAttribute12" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute13]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute13]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute13]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute13]"
                       name="msDScloudExtensionAttribute13" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute14]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute14]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute14]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute14]"
                       name="msDScloudExtensionAttribute14" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute15]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute15]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute15]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute15]"
                       name="msDScloudExtensionAttribute15" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute16]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute16]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute16]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute16]"
                       name="msDScloudExtensionAttribute16" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute17]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute17]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute17]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute17]"
                       name="msDScloudExtensionAttribute17" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute18]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute18]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute18]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute18]"
                       name="msDScloudExtensionAttribute18" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute19]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute19]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute19]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute19]"
                       name="msDScloudExtensionAttribute19" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute20]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute20]"
                       dataType="wstr"
                       length="2048"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute20]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute20]"
                       name="msDScloudExtensionAttribute20" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[domainController]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[domainController]"
                       dataType="wstr"
                       length="24"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[domainController]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[domainController]"
                       name="domainController" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[User].Columns[cn]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[cn]"
                       dataType="wstr"
                       length="64"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[cn]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[cn]"
                       name="cn" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Changes\ActiveDirectory.Outputs[Address]"
+                  refId="Package\Get changes from AD\ActiveDirectory.Outputs[Address]"
                   hasSideEffects="true"
                   name="Address">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[change]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[change]"
                       dataType="wstr"
                       length="3"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[change]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[change]"
                       name="change" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[objectGUID]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[objectGUID]"
                       dataType="guid"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[objectGUID]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[objectGUID]"
                       name="objectGUID" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[address]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[address]"
                       dataType="wstr"
                       length="1024"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[address]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[address]"
                       name="address" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[uSNChanged]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[uSNChanged]"
                       dataType="i8"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[uSNChanged]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[uSNChanged]"
                       name="uSNChanged" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[primary]"
+                      refId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[primary]"
                       dataType="bool"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[primary]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[primary]"
                       name="primary" />
                   </outputColumns>
                   <externalMetadataColumns />
@@ -3742,7 +3779,7 @@ AAAAAA==]]></arrayElement>
               </outputs>
             </component>
             <component
-              refId="Package\Changes\ActiveDirectorySmtpAddressChange"
+              refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
@@ -3799,7 +3836,7 @@ AAAAAA==]]></arrayElement>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Changes\ActiveDirectorySmtpAddressChange.Connections[OleDbConnection]"
+                  refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
                   connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
                   description="The OLE DB runtime connection used to access the database."
@@ -3807,71 +3844,71 @@ AAAAAA==]]></arrayElement>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input]"
+                  refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].Columns[change]"
+                      refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].Columns[change]"
                       cachedDataType="wstr"
                       cachedLength="3"
                       cachedName="change"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[change]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[change]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[change]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[change]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].Columns[objectGUID]"
+                      refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].Columns[objectGUID]"
                       cachedDataType="guid"
                       cachedName="objectGUID"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[objectGUID]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[objectGUID]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[objectGUID]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[objectGUID]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].Columns[address]"
+                      refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].Columns[address]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="address"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[address]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[address]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[address]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[address]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].Columns[primary]"
+                      refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].Columns[primary]"
                       cachedDataType="bool"
                       cachedName="primary"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[primary]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[primary]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[primary]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[primary]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].Columns[uSNChanged]"
+                      refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].Columns[uSNChanged]"
                       cachedDataType="i8"
                       cachedName="uSNChanged"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[uSNChanged]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[Address].Columns[uSNChanged]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[uSNChanged]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[Address].Columns[uSNChanged]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[rowID]"
+                      refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[rowID]"
                       dataType="i4"
                       name="rowID" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[change]"
+                      refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[change]"
                       dataType="wstr"
                       length="3"
                       name="change" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[objectGUID]"
+                      refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[objectGUID]"
                       dataType="guid"
                       name="objectGUID" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[address]"
+                      refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[address]"
                       dataType="wstr"
                       length="1024"
                       name="address" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[primary]"
+                      refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[primary]"
                       dataType="bool"
                       name="primary" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[uSNChanged]"
+                      refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input].ExternalColumns[uSNChanged]"
                       dataType="i8"
                       name="uSNChanged" />
                   </externalMetadataColumns>
@@ -3879,22 +3916,22 @@ AAAAAA==]]></arrayElement>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Changes\ActiveDirectorySmtpAddressChange.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectorySmtpAddressChange.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Changes\ActiveDirectorySmtpAddressChange.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectorySmtpAddressChange.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Changes\ActiveDirectorySmtpAddressChange.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -3903,7 +3940,7 @@ AAAAAA==]]></arrayElement>
               </outputs>
             </component>
             <component
-              refId="Package\Changes\ActiveDirectoryUserChange"
+              refId="Package\Get changes from AD\ActiveDirectoryUserChange"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
@@ -3960,7 +3997,7 @@ AAAAAA==]]></arrayElement>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Changes\ActiveDirectoryUserChange.Connections[OleDbConnection]"
+                  refId="Package\Get changes from AD\ActiveDirectoryUserChange.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
                   connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
                   description="The OLE DB runtime connection used to access the database."
@@ -3968,830 +4005,830 @@ AAAAAA==]]></arrayElement>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input]"
+                  refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[objectGUID]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[objectGUID]"
                       cachedDataType="guid"
                       cachedName="objectGUID"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[objectGUID]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[objectGUID]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[objectGUID]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[objectGUID]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[sAMAccountName]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[sAMAccountName]"
                       cachedDataType="wstr"
                       cachedLength="256"
                       cachedName="sAMAccountName"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[sAMAccountName]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[sAMAccountName]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[sAMAccountName]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[sAMAccountName]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[mail]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[mail]"
                       cachedDataType="wstr"
                       cachedLength="256"
                       cachedName="mail"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[mail]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[mail]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[mail]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[mail]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[sn]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[sn]"
                       cachedDataType="wstr"
                       cachedLength="64"
                       cachedName="sn"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[sn]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[sn]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[sn]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[sn]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[givenName]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[givenName]"
                       cachedDataType="wstr"
                       cachedLength="64"
                       cachedName="givenName"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[givenName]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[givenName]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[givenName]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[givenName]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[initials]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[initials]"
                       cachedDataType="wstr"
                       cachedLength="6"
                       cachedName="initials"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[initials]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[initials]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[initials]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[initials]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[displayName]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[displayName]"
                       cachedDataType="wstr"
                       cachedLength="256"
                       cachedName="displayName"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[displayName]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[displayName]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[displayName]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[displayName]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[description]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[description]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="description"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[description]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[description]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[description]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[department]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[department]"
                       cachedDataType="wstr"
                       cachedLength="64"
                       cachedName="department"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[department]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[department]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[department]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[department]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[company]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[company]"
                       cachedDataType="wstr"
                       cachedLength="64"
                       cachedName="company"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[company]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[company]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[company]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[company]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[physicalDeliveryOfficeName]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[physicalDeliveryOfficeName]"
                       cachedDataType="wstr"
                       cachedLength="128"
                       cachedName="physicalDeliveryOfficeName"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[physicalDeliveryOfficeName]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[physicalDeliveryOfficeName]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[physicalDeliveryOfficeName]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[physicalDeliveryOfficeName]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[departmentNumber]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[departmentNumber]"
                       cachedDataType="wstr"
                       cachedLength="64"
                       cachedName="departmentNumber"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[departmentNumber]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[departmentNumber]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[departmentNumber]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[departmentNumber]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[telephoneNumber]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[telephoneNumber]"
                       cachedDataType="wstr"
                       cachedLength="64"
                       cachedName="telephoneNumber"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[telephoneNumber]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[telephoneNumber]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[telephoneNumber]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[telephoneNumber]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[title]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[title]"
                       cachedDataType="wstr"
                       cachedLength="128"
                       cachedName="title"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[title]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[title]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[title]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[title]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[userPrincipalName]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[userPrincipalName]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="userPrincipalName"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[userPrincipalName]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[userPrincipalName]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[userPrincipalName]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[userPrincipalName]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[distinguishedName]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[distinguishedName]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="distinguishedName"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[distinguishedName]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[distinguishedName]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[distinguishedName]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[distinguishedName]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[whenCreated]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[whenCreated]"
                       cachedDataType="dbTimeStamp"
                       cachedName="whenCreated"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[whenCreated]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[whenCreated]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[whenCreated]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[whenCreated]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[whenChanged]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[whenChanged]"
                       cachedDataType="dbTimeStamp"
                       cachedName="whenChanged"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[whenChanged]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[whenChanged]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[whenChanged]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[whenChanged]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[uSNCreated]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[uSNCreated]"
                       cachedDataType="i8"
                       cachedName="uSNCreated"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[uSNCreated]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[uSNCreated]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[uSNCreated]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[uSNCreated]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[uSNChanged]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[uSNChanged]"
                       cachedDataType="i8"
                       cachedName="uSNChanged"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[uSNChanged]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[uSNChanged]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[uSNChanged]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[uSNChanged]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[manager]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[manager]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="manager"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[manager]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[manager]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[manager]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[manager]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[employeeNumber]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[employeeNumber]"
                       cachedDataType="wstr"
                       cachedLength="512"
                       cachedName="employeeNumber"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[employeeNumber]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[employeeNumber]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[employeeNumber]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[employeeNumber]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[employeeType]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[employeeType]"
                       cachedDataType="wstr"
                       cachedLength="256"
                       cachedName="employeeType"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[employeeType]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[employeeType]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[employeeType]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[employeeType]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute15]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute15]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="extensionAttribute15"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute15]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute15]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute15]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute15]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[seeAlso]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[seeAlso]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="seeAlso"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[seeAlso]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[seeAlso]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[seeAlso]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[seeAlso]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute13]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute13]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="extensionAttribute13"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute13]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute13]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute13]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute13]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute14]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute14]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="extensionAttribute14"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute14]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute14]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute14]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute14]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[accountExpires]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[accountExpires]"
                       cachedDataType="dbTimeStamp"
                       cachedName="accountExpires"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[accountExpires]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[accountExpires]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[accountExpires]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[accountExpires]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute1]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute1]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="extensionAttribute1"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute1]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute1]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute1]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute1]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute2]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute2]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="extensionAttribute2"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute2]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute2]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute2]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute2]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute3]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute3]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="extensionAttribute3"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute3]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute3]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute3]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute3]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute4]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute4]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="extensionAttribute4"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute4]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute4]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute4]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute4]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute5]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute5]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="extensionAttribute5"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute5]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute5]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute5]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute5]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute6]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute6]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="extensionAttribute6"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute6]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute6]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute6]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute6]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute7]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute7]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="extensionAttribute7"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute7]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute7]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute7]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute7]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute8]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute8]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="extensionAttribute8"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute8]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute8]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute8]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute8]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute9]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute9]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="extensionAttribute9"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute9]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute9]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute9]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute9]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute10]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute10]"
                       cachedDataType="wstr"
                       cachedLength="1024"
                       cachedName="extensionAttribute10"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute10]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute10]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute10]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute10]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute11]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute11]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="extensionAttribute11"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute11]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute11]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute11]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute11]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute12]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[extensionAttribute12]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="extensionAttribute12"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute12]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[extensionAttribute12]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute12]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[extensionAttribute12]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[userAccountControl]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[userAccountControl]"
                       cachedDataType="i4"
                       cachedName="userAccountControl"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[userAccountControl]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[userAccountControl]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[userAccountControl]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[userAccountControl]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[lastLogonTimestamp]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[lastLogonTimestamp]"
                       cachedDataType="dbTimeStamp"
                       cachedName="lastLogonTimestamp"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[lastLogonTimestamp]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[lastLogonTimestamp]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[lastLogonTimestamp]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[lastLogonTimestamp]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[gidNumber]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[gidNumber]"
                       cachedDataType="i4"
                       cachedName="gidNumber"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[gidNumber]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[gidNumber]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[gidNumber]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[gidNumber]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msExchRecipientDisplayType]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msExchRecipientDisplayType]"
                       cachedDataType="i4"
                       cachedName="msExchRecipientDisplayType"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msExchRecipientDisplayType]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msExchRecipientDisplayType]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msExchRecipientDisplayType]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msExchRecipientDisplayType]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msExchRecipientTypeDetails]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msExchRecipientTypeDetails]"
                       cachedDataType="i8"
                       cachedName="msExchRecipientTypeDetails"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msExchRecipientTypeDetails]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msExchRecipientTypeDetails]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msExchRecipientTypeDetails]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msExchRecipientTypeDetails]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msExchRemoteRecipientType]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msExchRemoteRecipientType]"
                       cachedDataType="i8"
                       cachedName="msExchRemoteRecipientType"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msExchRemoteRecipientType]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msExchRemoteRecipientType]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msExchRemoteRecipientType]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msExchRemoteRecipientType]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute1]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute1]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute1"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute1]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute1]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute1]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute1]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute2]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute2]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute2"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute2]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute2]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute2]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute2]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute3]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute3]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute3"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute3]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute3]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute3]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute3]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute4]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute4]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute4"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute4]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute4]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute4]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute4]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute5]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute5]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute5"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute5]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute5]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute5]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute5]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute6]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute6]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute6"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute6]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute6]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute6]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute6]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute7]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute7]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute7"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute7]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute7]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute7]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute7]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute8]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute8]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute8"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute8]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute8]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute8]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute8]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute9]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute9]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute9"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute9]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute9]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute9]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute9]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute10]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute10]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute10"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute10]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute10]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute10]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute10]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute11]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute11]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute11"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute11]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute11]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute11]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute11]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute12]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute12]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute12"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute12]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute12]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute12]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute12]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute13]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute13]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute13"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute13]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute13]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute13]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute13]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute14]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute14]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute14"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute14]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute14]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute14]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute14]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute15]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute15]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute15"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute15]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute15]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute15]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute15]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute16]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute16]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute16"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute16]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute16]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute16]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute16]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute17]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute17]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute17"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute17]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute17]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute17]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute17]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute18]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute18]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute18"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute18]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute18]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute18]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute18]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute19]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute19]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute19"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute19]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute19]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute19]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute19]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute20]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[msDScloudExtensionAttribute20]"
                       cachedDataType="wstr"
                       cachedLength="2048"
                       cachedName="msDScloudExtensionAttribute20"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute20]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute20]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute20]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[msDScloudExtensionAttribute20]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[flags]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[flags]"
                       cachedDataType="i4"
                       cachedName="flags"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[flags]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[flags]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[flags]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[flags]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[domainController]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[domainController]"
                       cachedDataType="wstr"
                       cachedLength="24"
                       cachedName="domainController"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[domainController]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[domainController]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[domainController]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[domainController]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[change]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[change]"
                       cachedDataType="wstr"
                       cachedLength="3"
                       cachedName="change"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[change]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[change]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[change]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[change]" />
                     <inputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[cn]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].Columns[cn]"
                       cachedDataType="wstr"
                       cachedLength="64"
                       cachedName="cn"
-                      externalMetadataColumnId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[cn]"
-                      lineageId="Package\Changes\ActiveDirectory.Outputs[User].Columns[cn]" />
+                      externalMetadataColumnId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[cn]"
+                      lineageId="Package\Get changes from AD\ActiveDirectory.Outputs[User].Columns[cn]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[objectGUID]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[objectGUID]"
                       dataType="guid"
                       name="objectGUID" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[sAMAccountName]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[sAMAccountName]"
                       dataType="wstr"
                       length="256"
                       name="sAMAccountName" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[mail]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[mail]"
                       dataType="wstr"
                       length="256"
                       name="mail" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[sn]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[sn]"
                       dataType="wstr"
                       length="64"
                       name="sn" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[givenName]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[givenName]"
                       dataType="wstr"
                       length="64"
                       name="givenName" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[initials]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[initials]"
                       dataType="wstr"
                       length="6"
                       name="initials" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[displayName]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[displayName]"
                       dataType="wstr"
                       length="256"
                       name="displayName" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[description]"
                       dataType="wstr"
                       length="1024"
                       name="description" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[department]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[department]"
                       dataType="wstr"
                       length="64"
                       name="department" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[company]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[company]"
                       dataType="wstr"
                       length="64"
                       name="company" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[physicalDeliveryOfficeName]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[physicalDeliveryOfficeName]"
                       dataType="wstr"
                       length="128"
                       name="physicalDeliveryOfficeName" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[departmentNumber]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[departmentNumber]"
                       dataType="wstr"
                       length="64"
                       name="departmentNumber" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[telephoneNumber]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[telephoneNumber]"
                       dataType="wstr"
                       length="64"
                       name="telephoneNumber" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[manager]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[manager]"
                       dataType="wstr"
                       length="1024"
                       name="manager" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[employeeNumber]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[employeeNumber]"
                       dataType="wstr"
                       length="512"
                       name="employeeNumber" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[title]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[title]"
                       dataType="wstr"
                       length="128"
                       name="title" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[userPrincipalName]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[userPrincipalName]"
                       dataType="wstr"
                       length="1024"
                       name="userPrincipalName" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[distinguishedName]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[distinguishedName]"
                       dataType="wstr"
                       length="1024"
                       name="distinguishedName" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[whenCreated]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[whenCreated]"
                       dataType="dbTimeStamp"
                       name="whenCreated" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[whenChanged]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[whenChanged]"
                       dataType="dbTimeStamp"
                       name="whenChanged" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[uSNCreated]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[uSNCreated]"
                       dataType="i8"
                       name="uSNCreated" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[uSNChanged]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[uSNChanged]"
                       dataType="i8"
                       name="uSNChanged" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[employeeType]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[employeeType]"
                       dataType="wstr"
                       length="256"
                       name="employeeType" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute15]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute15]"
                       dataType="wstr"
                       length="2048"
                       name="extensionAttribute15" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[seeAlso]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[seeAlso]"
                       dataType="wstr"
                       length="1024"
                       name="seeAlso" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute13]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute13]"
                       dataType="wstr"
                       length="2048"
                       name="extensionAttribute13" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute14]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute14]"
                       dataType="wstr"
                       length="2048"
                       name="extensionAttribute14" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[accountExpires]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[accountExpires]"
                       dataType="dbTimeStamp"
                       name="accountExpires" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute1]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute1]"
                       dataType="wstr"
                       length="1024"
                       name="extensionAttribute1" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute2]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute2]"
                       dataType="wstr"
                       length="1024"
                       name="extensionAttribute2" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute3]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute3]"
                       dataType="wstr"
                       length="1024"
                       name="extensionAttribute3" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute4]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute4]"
                       dataType="wstr"
                       length="1024"
                       name="extensionAttribute4" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute5]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute5]"
                       dataType="wstr"
                       length="1024"
                       name="extensionAttribute5" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute6]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute6]"
                       dataType="wstr"
                       length="1024"
                       name="extensionAttribute6" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute7]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute7]"
                       dataType="wstr"
                       length="1024"
                       name="extensionAttribute7" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute8]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute8]"
                       dataType="wstr"
                       length="1024"
                       name="extensionAttribute8" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute9]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute9]"
                       dataType="wstr"
                       length="1024"
                       name="extensionAttribute9" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute10]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute10]"
                       dataType="wstr"
                       length="1024"
                       name="extensionAttribute10" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute11]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute11]"
                       dataType="wstr"
                       length="2048"
                       name="extensionAttribute11" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute12]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[extensionAttribute12]"
                       dataType="wstr"
                       length="2048"
                       name="extensionAttribute12" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[userAccountControl]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[userAccountControl]"
                       dataType="i4"
                       name="userAccountControl" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[lastLogonTimestamp]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[lastLogonTimestamp]"
                       dataType="dbTimeStamp"
                       name="lastLogonTimestamp" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[gidNumber]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[gidNumber]"
                       dataType="i4"
                       name="gidNumber" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msExchRecipientDisplayType]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msExchRecipientDisplayType]"
                       dataType="i4"
                       name="msExchRecipientDisplayType" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msExchRecipientTypeDetails]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msExchRecipientTypeDetails]"
                       dataType="i8"
                       name="msExchRecipientTypeDetails" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msExchRemoteRecipientType]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msExchRemoteRecipientType]"
                       dataType="i8"
                       name="msExchRemoteRecipientType" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute1]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute1]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute1" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute2]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute2]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute2" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute3]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute3]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute3" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute4]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute4]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute4" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute5]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute5]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute5" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute6]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute6]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute6" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute7]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute7]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute7" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute8]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute8]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute8" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute9]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute9]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute9" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute10]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute10]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute10" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute11]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute11]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute11" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute12]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute12]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute12" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute13]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute13]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute13" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute14]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute14]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute14" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute15]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute15]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute15" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute16]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute16]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute16" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute17]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute17]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute17" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute18]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute18]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute18" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute19]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute19]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute19" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute20]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[msDScloudExtensionAttribute20]"
                       dataType="wstr"
                       length="2048"
                       name="msDScloudExtensionAttribute20" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[flags]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[flags]"
                       dataType="i4"
                       name="flags" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[domainController]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[domainController]"
                       dataType="wstr"
                       length="50"
                       name="domainController" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[rowID]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[rowID]"
                       dataType="i4"
                       name="rowID" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[change]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[change]"
                       dataType="wstr"
                       length="3"
                       name="change" />
                     <externalMetadataColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[cn]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input].ExternalColumns[cn]"
                       dataType="wstr"
                       length="64"
                       name="cn" />
@@ -4800,22 +4837,22 @@ AAAAAA==]]></arrayElement>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Changes\ActiveDirectoryUserChange.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Get changes from AD\ActiveDirectoryUserChange.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Changes\ActiveDirectoryUserChange.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Get changes from AD\ActiveDirectoryUserChange.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Changes\ActiveDirectoryUserChange.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Get changes from AD\ActiveDirectoryUserChange.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Changes\ActiveDirectoryUserChange.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Get changes from AD\ActiveDirectoryUserChange.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -4826,27 +4863,27 @@ AAAAAA==]]></arrayElement>
           </components>
           <paths>
             <path
-              refId="Package\Changes.Paths[Address]"
-              endId="Package\Changes\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input]"
+              refId="Package\Get changes from AD.Paths[Address]"
+              endId="Package\Get changes from AD\ActiveDirectorySmtpAddressChange.Inputs[OLE DB Destination Input]"
               name="Address"
-              startId="Package\Changes\ActiveDirectory.Outputs[Address]" />
+              startId="Package\Get changes from AD\ActiveDirectory.Outputs[Address]" />
             <path
-              refId="Package\Changes.Paths[User]"
-              endId="Package\Changes\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input]"
+              refId="Package\Get changes from AD.Paths[User]"
+              endId="Package\Get changes from AD\ActiveDirectoryUserChange.Inputs[OLE DB Destination Input]"
               name="User"
-              startId="Package\Changes\ActiveDirectory.Outputs[User]" />
+              startId="Package\Get changes from AD\ActiveDirectory.Outputs[User]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Domain Controller"
+      DTS:refId="Package\Get domain controller"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{A548A9B0-B550-4B45-8814-A8DC2C1A1352}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Domain Controller"
+      DTS:ObjectName="Get domain controller"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -4861,24 +4898,19 @@ AAAAAA==]]></arrayElement>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Max USN"
+      DTS:refId="Package\Truncate change tables"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{DFD261E3-2729-40B5-BB37-0A57851EFCD7}"
+      DTS:DTSID="{B20A2163-1973-41B1-9316-9CF60B9F2347}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Max USN"
+      DTS:ObjectName="Truncate change tables"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{7E591C2A-3946-4E6B-8489-8E5AD8FDC4A2}"
-          SQLTask:SqlStatementSource="SELECT MAX(m) + 1 AS maxUSN FROM (SELECT MAX(uSNChanged) AS m FROM dbo.ActiveDirectoryUser UNION SELECT MAX(uSNChanged) AS m FROM dbo.ActiveDirectoryUserChange) a"
-          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-          <SQLTask:ResultBinding
-            SQLTask:ResultName="maxUSN"
-            SQLTask:DtsVariableName="User::maxUsnChanged" />
-        </SQLTask:SqlTaskData>
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.ActiveDirectoryUserChange;&#xA;TRUNCATE TABLE dbo.ActiveDirectorySmtpAddressChange;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -4887,18 +4919,34 @@ AAAAAA==]]></arrayElement>
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
       DTS:DTSID="{56851621-EF80-4EF9-8A03-702AFDA19CCD}"
-      DTS:From="Package\Max USN"
+      DTS:From="Package\Calculate max uSNChanged"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Changes" />
+      DTS:To="Package\Get changes from AD" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
       DTS:DTSID="{46472D82-AA6C-4653-A455-32DD71C1835A}"
-      DTS:From="Package\Domain Controller"
+      DTS:From="Package\Get domain controller"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Max USN" />
+      DTS:To="Package\Calculate max uSNChanged" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{20071C40-D53F-4A16-87C5-C3BCBEBDA2BE}"
+      DTS:From="Package\Truncate change tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Get domain controller" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{A0C3F321-88BB-48AD-B343-E528C52F4D27}"
+      DTS:From="Package\Get changes from AD"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Apply changes" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -4911,33 +4959,33 @@ AAAAAA==]]></arrayElement>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="123,42"
-          Id="Package\Changes"
-          TopLeft="80.0000000000001,189" />
+          Size="184,42"
+          Id="Package\Get changes from AD"
+          TopLeft="22.5,311.5" />
         <NodeLayout
-          Size="168,42"
-          Id="Package\Domain Controller"
-          TopLeft="59.5,5.5" />
+          Size="184,42"
+          Id="Package\Get domain controller"
+          TopLeft="22.5,107.5" />
         <NodeLayout
-          Size="126,42"
-          Id="Package\Max USN"
-          TopLeft="77.5,100.5" />
+          Size="218,42"
+          Id="Package\Calculate max uSNChanged"
+          TopLeft="5.50000000000003,209.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="141,142.5">
+          TopLeft="114.5,251.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,46.5"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,39">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,39" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4948,18 +4996,70 @@ AAAAAA==]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="142,47.5">
+          TopLeft="114.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,53"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,45.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,45.5" />
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Apply changes"
+          TopLeft="39,413.5" />
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Truncate change tables"
+          TopLeft="17.5,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="114.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="114.5,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4972,24 +5072,24 @@ AAAAAA==]]></arrayElement>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Changes">
+    design-time-name="Package\Get changes from AD">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="258,42"
-          Id="Package\Changes\ActiveDirectorySmtpAddressChange"
-          TopLeft="299.5,189.5" />
-        <NodeLayout
           Size="215,42"
-          Id="Package\Changes\ActiveDirectoryUserChange"
+          Id="Package\Get changes from AD\ActiveDirectoryUserChange"
           TopLeft="52.5,189.5" />
         <NodeLayout
           Size="153,42"
-          Id="Package\Changes\ActiveDirectory"
+          Id="Package\Get changes from AD\ActiveDirectory"
           TopLeft="205.5,25.5" />
+        <NodeLayout
+          Size="258,42"
+          Id="Package\Get changes from AD\ActiveDirectorySmtpAddressChange"
+          TopLeft="299.5,189.5" />
         <EdgeLayout
-          Id="Package\Changes.Paths[User]"
+          Id="Package\Get changes from AD.Paths[User]"
           TopLeft="257.833333333333,67.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5025,7 +5125,7 @@ AAAAAA==]]></arrayElement>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Changes.Paths[Address]"
+          Id="Package\Get changes from AD.Paths[Address]"
           TopLeft="306.166666666667,67.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5056,7 +5156,7 @@ AAAAAA==]]></arrayElement>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="42.8160221354167,54.5575679172057,36.7012890625,9.7490234375"
+              BoundingBox="42.8160221354165,54.5575679172057,36.7012890625,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -5064,7 +5164,7 @@ AAAAAA==]]></arrayElement>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Changes\ActiveDirectorySmtpAddressChange">
+    design-time-name="Package\Get changes from AD\ActiveDirectoryUserChange">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -5077,7 +5177,7 @@ AAAAAA==]]></arrayElement>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Changes\ActiveDirectoryUserChange">
+    design-time-name="Package\Get changes from AD\ActiveDirectorySmtpAddressChange">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

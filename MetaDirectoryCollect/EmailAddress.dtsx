@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{2B768AA2-E019-4175-AD26-7D96B8967C56}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.1900.78"
+  DTS:LastModifiedProductVersion="15.0.2000.152"
   DTS:LocaleID="1053"
   DTS:ObjectName="EmailAddress"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="38"
-  DTS:VersionGUID="{E5778CD0-7B28-4774-BE72-64AF08C39C09}">
+  DTS:VersionBuild="40"
+  DTS:VersionGUID="{3E7D1F35-C78F-4982-9479-FCF0DA3AB050}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -157,7 +157,7 @@
                       refId="Package\Medvind\Data Conversion.Inputs[Data Conversion Input].Columns[mail]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="50"
+                      cachedLength="255"
                       cachedName="mail"
                       lineageId="Package\Medvind\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]" />
                     <inputColumn
@@ -488,7 +488,7 @@ FROM
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Medvind\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[mail]"
-                      length="50"
+                      length="255"
                       lineageId="Package\Medvind\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]"
                       name="mail"
                       truncationRowDisposition="FailComponent" />
@@ -525,7 +525,7 @@ FROM
                       refId="Package\Medvind\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[mail]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="255"
                       name="mail" />
                     <externalMetadataColumn
                       refId="Package\Medvind\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcename]"
@@ -568,7 +568,7 @@ FROM
                       refId="Package\Medvind\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[mail]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="255"
                       lineageId="Package\Medvind\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[mail]"
                       name="mail" />
                     <outputColumn
@@ -641,7 +641,7 @@ FROM
                       refId="Package\Medvind private\Data Conversion.Inputs[Data Conversion Input].Columns[mail]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="50"
+                      cachedLength="255"
                       cachedName="mail"
                       lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]" />
                   </inputColumns>
@@ -799,7 +799,7 @@ FROM
                     <inputColumn
                       refId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[sourcename]"
                       cachedDataType="wstr"
-                      cachedLength="30"
+                      cachedLength="15"
                       cachedName="sourcename"
                       externalMetadataColumnId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcename]"
                       lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]" />
@@ -954,7 +954,7 @@ FROM
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcename]"
-                      length="30"
+                      length="15"
                       lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]"
                       name="sourcename"
                       truncationRowDisposition="FailComponent" />
@@ -986,7 +986,7 @@ FROM
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[mail]"
-                      length="50"
+                      length="255"
                       lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]"
                       name="mail"
                       truncationRowDisposition="FailComponent" />
@@ -1013,7 +1013,7 @@ FROM
                       refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[mail]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="255"
                       name="mail" />
                   </externalMetadataColumns>
                 </output>
@@ -1045,7 +1045,7 @@ FROM
                       refId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[mail]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="255"
                       lineageId="Package\Medvind private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[mail]"
                       name="mail" />
                     <outputColumn
@@ -2296,7 +2296,7 @@ WHERE
                     <inputColumn
                       refId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[sourcename]"
                       cachedDataType="wstr"
-                      cachedLength="30"
+                      cachedLength="16"
                       cachedName="sourcename"
                       externalMetadataColumnId="Package\Personec private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcename]"
                       lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]" />
@@ -2458,7 +2458,7 @@ ON
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcename]"
-                      length="30"
+                      length="16"
                       lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]"
                       name="sourcename"
                       truncationRowDisposition="FailComponent" />
@@ -2508,7 +2508,7 @@ ON
                     <externalMetadataColumn
                       refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcename]"
                       dataType="wstr"
-                      length="15"
+                      length="16"
                       name="sourcename" />
                     <externalMetadataColumn
                       refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcepid]"
@@ -2534,7 +2534,7 @@ ON
                     <outputColumn
                       refId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcename]"
                       dataType="wstr"
-                      length="15"
+                      length="16"
                       lineageId="Package\Personec private\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcename]"
                       name="sourcename" />
                     <outputColumn

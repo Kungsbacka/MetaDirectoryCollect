@@ -7,35 +7,16 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{BB78EF6E-9746-4A20-951E-C34C778813BD}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.132"
+  DTS:LastModifiedProductVersion="15.0.2000.152"
   DTS:LocaleID="1053"
   DTS:ObjectName="PersonecEmployees"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="104"
-  DTS:VersionGUID="{F3A5B365-F8E6-41CA-A8E8-6A1567EFF307}">
+  DTS:VersionBuild="110"
+  DTS:VersionGUID="{8C942257-F077-464D-B5B7-5D5CAC68072E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Cache]"
-      DTS:CreationName="CACHE"
-      DTS:DTSID="{608D85EC-85F6-49AD-B4B5-B84135176E11}"
-      DTS:ObjectName="Cache">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager>
-          <DTS:CacheColumns>
-            <DTS:CacheColumn
-              DTS:DataType="130"
-              DTS:Length="12"
-              DTS:IndexPosition="1"
-              DTS:ObjectName="PERSOID"
-              DTS:DTSID="{927BDE63-8A55-417E-9BE3-FDCA8BDE071F}"
-              DTS:CreationName="" />
-          </DTS:CacheColumns>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[MetaDirectory]"
       DTS:CreationName="OLEDB"
@@ -214,6 +195,13 @@
                       cachedLength="4"
                       cachedName="AVTAL"
                       lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[AVTAL]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Inputs[Data Conversion Input].Columns[YRKESERF]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="YRKESERF"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[YRKESERF]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -456,6 +444,27 @@
                           name="FastParse">false</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of YRKESERF]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of YRKESERF]"
+                      name="Copy of YRKESERF"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[YRKESERF]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -668,6 +677,13 @@
                       cachedName="Copy of SEMGRP"
                       externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEMGRP]"
                       lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of SEMGRP]" />
+                    <inputColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of YRKESERF]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="Copy of YRKESERF"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[YRKESERF]"
+                      lineageId="Package\EmployeeHistory\Convert to Unicode.Outputs[Data Conversion Output].Columns[Copy of YRKESERF]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -754,6 +770,11 @@
                       dataType="wstr"
                       length="3"
                       name="SEMGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[YRKESERF]"
+                      dataType="wstr"
+                      length="2"
+                      name="YRKESERF" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -841,6 +862,7 @@
   ,NULLIF(ANS.FOERMGRP, '') AS FOERMGRP
   ,NULLIF(ANS.AVTAL, '') AS AVTAL
   ,NULLIF(ANS.SEMGRP, '') AS SEMGRP
+  ,NULLIF(ANS.YRKESERF, '') AS YRKESERF
 FROM dbo.OA0P0120 ANS
 INNER JOIN dbo.OA0P0100 PER ON ANS.PERSOID = PER.PERSOID
 INNER JOIN dbo.OA0P0806 KAT ON ANS.KATKOD = KAT.KAT
@@ -1059,6 +1081,17 @@ AND PER.ANONYM = 0</property>
                       lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEMGRP]"
                       name="SEMGRP"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[YRKESERF]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[YRKESERF]"
+                      length="2"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].Columns[YRKESERF]"
+                      name="YRKESERF"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1152,6 +1185,12 @@ AND PER.ANONYM = 0</property>
                       dataType="str"
                       length="3"
                       name="SEMGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[YRKESERF]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="YRKESERF" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1267,6 +1306,13 @@ AND PER.ANONYM = 0</property>
                       lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEMGRP]"
                       name="SEMGRP" />
                     <outputColumn
+                      refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[YRKESERF]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[YRKESERF]"
+                      name="YRKESERF" />
+                    <outputColumn
                       refId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
                       lineageId="Package\EmployeeHistory\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
@@ -1329,7 +1375,7 @@ AND PER.ANONYM = 0</property>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[PersonecExport]</property>
+                  name="OpenRowset">[dbo].[Personec_stage]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1512,6 +1558,13 @@ AND PER.ANONYM = 0</property>
                       cachedName="ANSTGRP"
                       externalMetadataColumnId="Package\EmployeesCurrent\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ANSTGRP]"
                       lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[ANSTGRP]" />
+                    <inputColumn
+                      refId="Package\EmployeesCurrent\MetaDirectory.Inputs[OLE DB Destination Input].Columns[Copy of YRKESERF]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="Copy of YRKESERF"
+                      externalMetadataColumnId="Package\EmployeesCurrent\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[YRKESERF]"
+                      lineageId="Package\EmployeesCurrent\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of YRKESERF]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1608,6 +1661,11 @@ AND PER.ANONYM = 0</property>
                       refId="Package\EmployeesCurrent\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ANSTGRP]"
                       dataType="i2"
                       name="ANSTGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeesCurrent\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[YRKESERF]"
+                      dataType="wstr"
+                      length="2"
+                      name="YRKESERF" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1739,6 +1797,13 @@ AND PER.ANONYM = 0</property>
                       cachedLength="3"
                       cachedName="SEMGRP"
                       lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[SEMGRP]" />
+                    <inputColumn
+                      refId="Package\EmployeesCurrent\Non Unicode to Unicode.Inputs[Data Conversion Input].Columns[YRKESERF]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="YRKESERF"
+                      lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[YRKESERF]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -2023,6 +2088,27 @@ AND PER.ANONYM = 0</property>
                           name="FastParse">false</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeesCurrent\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of YRKESERF]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\EmployeesCurrent\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of YRKESERF]"
+                      name="Copy of YRKESERF"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[YRKESERF]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -2111,6 +2197,7 @@ AND PER.ANONYM = 0</property>
   ,NULLIF(ANS.FOERMGRP, '') AS FOERMGRP
   ,NULLIF(ANS.AVTAL, '') AS AVTAL
   ,NULLIF(ANS.SEMGRP, '') AS SEMGRP
+  ,NULLIF(ANS.YRKESERF, '') AS YRKESERF
 FROM dbo.OA0P0120 ANS
 INNER JOIN dbo.OA0P0123 KON ON (ANS.PERSOID = KON.PERSOID AND ANS.ANSTNR = KON.ANSTNR)
 INNER JOIN dbo.OA0P0100 PER ON ANS.PERSOID = PER.PERSOID
@@ -2353,6 +2440,17 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[ANSTGRP]"
                       name="ANSTGRP"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[YRKESERF]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].ExternalColumns[YRKESERF]"
+                      length="2"
+                      lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].Columns[YRKESERF]"
+                      name="YRKESERF"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2458,6 +2556,12 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].ExternalColumns[ANSTGRP]"
                       dataType="i2"
                       name="ANSTGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Output].ExternalColumns[YRKESERF]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="YRKESERF" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -2587,6 +2691,13 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Error Output].Columns[SEMGRP]"
                       name="SEMGRP" />
                     <outputColumn
+                      refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Error Output].Columns[YRKESERF]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Error Output].Columns[YRKESERF]"
+                      name="YRKESERF" />
+                    <outputColumn
                       refId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
                       lineageId="Package\EmployeesCurrent\Personec.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
@@ -2669,36 +2780,6 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           VSTAMajorVersion="15"
           VSTAMinorVersion="0"
           Language="CSharp">
-          <ProjectItem
-            Name="Properties\AssemblyInfo.cs"
-            Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyCopyright("Copyright @  2016")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -2818,6 +2899,35 @@ using System.Runtime.CompilerServices;
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 </root>]]></ProjectItem>
+          <ProjectItem
+            Name="Properties\Settings.Designer.cs"
+            Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_69c0ff1828b745a69068061730c369ae.Properties.Settings.get_Default():ST_69c0ff1828b745a69068061730c369ae.Properties.Sett" +
+    "ings")]
+
+namespace ST_69c0ff1828b745a69068061730c369ae.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
           <ProjectItem
             Name="ScriptMain.cs"
             Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
@@ -3040,34 +3150,35 @@ namespace ST_69c0ff1828b745a69068061730c369ae
   </msb:ItemGroup>
 </c:Project>]]></ProjectItem>
           <ProjectItem
-            Name="Properties\Settings.Designer.cs"
-            Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
+            Name="Properties\AssemblyInfo.cs"
+            Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
 //
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyCopyright("Copyright @  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
 
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_69c0ff1828b745a69068061730c369ae.Properties.Settings.get_Default():ST_69c0ff1828b745a69068061730c369ae.Properties.Sett" +
-    "ings")]
-
-namespace ST_69c0ff1828b745a69068061730c369ae.Properties {
-    
-    
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-        
-        public static Settings Default {
-            get {
-                return defaultInstance;
-            }
-        }
-    }
-}]]></ProjectItem>
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
           <ProjectItem
             Name="Properties\Settings.settings"
             Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
@@ -3287,7 +3398,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[PersonecExport]</property>
+                  name="OpenRowset">[dbo].[Personec_stage]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -3470,6 +3581,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       cachedName="ANSTGRP"
                       externalMetadataColumnId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ANSTGRP]"
                       lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[ANSTGRP]" />
+                    <inputColumn
+                      refId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input].Columns[Copy of YRKESERF]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="Copy of YRKESERF"
+                      externalMetadataColumnId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[YRKESERF]"
+                      lineageId="Package\EmployeesFuture\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of YRKESERF]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -3566,6 +3684,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       refId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ANSTGRP]"
                       dataType="i2"
                       name="ANSTGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeesFuture\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[YRKESERF]"
+                      dataType="wstr"
+                      length="2"
+                      name="YRKESERF" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -3697,6 +3820,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       cachedLength="3"
                       cachedName="SEMGRP"
                       lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[SEMGRP]" />
+                    <inputColumn
+                      refId="Package\EmployeesFuture\Non Unicode to Unicode.Inputs[Data Conversion Input].Columns[YRKESERF]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="YRKESERF"
+                      lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[YRKESERF]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -3981,6 +4111,27 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                           name="FastParse">false</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\EmployeesFuture\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of YRKESERF]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\EmployeesFuture\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of YRKESERF]"
+                      name="Copy of YRKESERF"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[YRKESERF]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -4068,6 +4219,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
   ,NULLIF(ANS.FOERMGRP, '') AS FOERMGRP
   ,NULLIF(ANS.AVTAL, '') AS AVTAL
   ,NULLIF(ANS.SEMGRP, '') AS SEMGRP
+  ,NULLIF(ANS.YRKESERF, '') AS YRKESERF
 FROM dbo.OA0P0120 ANS
 INNER JOIN dbo.OA0P0123 KON ON (ANS.PERSOID = KON.PERSOID AND ANS.ANSTNR = KON.ANSTNR)
 INNER JOIN dbo.OA0P0100 PER ON ANS.PERSOID = PER.PERSOID
@@ -4309,6 +4461,17 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[ANSTGRP]"
                       name="ANSTGRP"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[YRKESERF]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].ExternalColumns[YRKESERF]"
+                      length="2"
+                      lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].Columns[YRKESERF]"
+                      name="YRKESERF"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -4414,6 +4577,12 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].ExternalColumns[ANSTGRP]"
                       dataType="i2"
                       name="ANSTGRP" />
+                    <externalMetadataColumn
+                      refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Output].ExternalColumns[YRKESERF]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="YRKESERF" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -4542,6 +4711,13 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                       length="3"
                       lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Error Output].Columns[SEMGRP]"
                       name="SEMGRP" />
+                    <outputColumn
+                      refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Error Output].Columns[YRKESERF]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Error Output].Columns[YRKESERF]"
+                      name="YRKESERF" />
                     <outputColumn
                       refId="Package\EmployeesFuture\Personec.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -4995,7 +5171,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
     design-time-name="Package\EmployeeHistory">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="157,42"
           Id="Package\EmployeeHistory\OLE DB Source"
@@ -5027,9 +5203,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -5051,9 +5225,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5195,7 +5367,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
     design-time-name="Package\EmployeesFuture">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="125,42"
           Id="Package\EmployeesFuture\Personec"
@@ -5227,9 +5399,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -5251,9 +5421,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

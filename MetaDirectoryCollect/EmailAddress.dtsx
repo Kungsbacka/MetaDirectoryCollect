@@ -12,8 +12,8 @@
   DTS:ObjectName="EmailAddress"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="40"
-  DTS:VersionGUID="{3E7D1F35-C78F-4982-9479-FCF0DA3AB050}">
+  DTS:VersionBuild="45"
+  DTS:VersionGUID="{261DED1E-79FB-46ED-B744-2F49483363A9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -183,7 +183,7 @@
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      length="50"
+                      length="255"
                       lineageId="Package\Medvind\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]"
                       name="Copy of mail"
                       truncationRowDisposition="FailComponent">
@@ -329,7 +329,7 @@
                     <inputColumn
                       refId="Package\Medvind\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of mail]"
                       cachedDataType="wstr"
-                      cachedLength="50"
+                      cachedLength="255"
                       cachedName="Copy of mail"
                       externalMetadataColumnId="Package\Medvind\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mail]"
                       lineageId="Package\Medvind\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]" />
@@ -681,7 +681,7 @@ FROM
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      length="50"
+                      length="255"
                       lineageId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]"
                       name="Copy of mail"
                       truncationRowDisposition="FailComponent">
@@ -820,7 +820,7 @@ FROM
                     <inputColumn
                       refId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of mail]"
                       cachedDataType="wstr"
-                      cachedLength="50"
+                      cachedLength="255"
                       cachedName="Copy of mail"
                       externalMetadataColumnId="Package\Medvind private\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mail]"
                       lineageId="Package\Medvind private\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]" />
@@ -3187,7 +3187,7 @@ ON
     design-time-name="Package\Personec private">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="177,42"
           Id="Package\Personec private\OLE DB Destination"
@@ -3219,7 +3219,9 @@ ON
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3241,7 +3243,9 @@ ON
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

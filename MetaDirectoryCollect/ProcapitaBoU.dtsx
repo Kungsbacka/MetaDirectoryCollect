@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{5AF21349-0C44-4086-8F2C-FB37C36F598A}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.152"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
   DTS:LocaleID="1053"
   DTS:ObjectName="ProcapitaBoU"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="139"
-  DTS:VersionGUID="{5BC0B6E8-0F9C-4397-B683-1D23D95C461F}">
+  DTS:VersionBuild="141"
+  DTS:VersionGUID="{92051D3F-AE20-4838-BA90-FAEE66C703C9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,9 @@
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[$Package::MetaDirectoryConnectionString]</DTS:PropertyExpression>
       <DTS:ObjectData>
-        <DTS:ConnectionManager />
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -36,7 +38,9 @@
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[$Package::ProcapitaBoUConnectionString]</DTS:PropertyExpression>
       <DTS:ObjectData>
-        <DTS:ConnectionManager />
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -638,7 +642,12 @@
 FROM
     PROCAPITA_KJ1.KJGP0EKL
 WHERE
-    PERIOD = ?</property>
+    PERIOD = ?
+AND
+    GETDATE() BETWEEN
+        CONVERT(DATETIME, (CASE WHEN FROMDAT = '00000101' THEN '19000101' ELSE FROMDAT END))
+    AND
+        CONVERT(DATETIME, (CASE WHEN TOMDAT = '00000101' THEN '19000101' ELSE TOMDAT END))</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1351,7 +1360,12 @@ WHERE
 FROM 
     PROCAPITA_KJ1.KJGP0EVG
 WHERE
-    PERIOD = ?</property>
+    PERIOD = ?
+AND
+    GETDATE() BETWEEN
+        CONVERT(DATETIME, (CASE WHEN FROMDAT = '00000101' THEN '19000101' ELSE FROMDAT END))
+    AND
+        CONVERT(DATETIME, (CASE WHEN TOMDAT = '00000101' THEN '19000101' ELSE TOMDAT END))</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -2016,7 +2030,12 @@ WHERE
 FROM
     PROCAPITA_KJ1.KJGP0PAK
 WHERE
-    PERIOD = ?</property>
+    PERIOD = ?
+AND
+    GETDATE() BETWEEN
+        CONVERT(DATETIME, (CASE WHEN FROMDAT = '00000101' THEN '19000101' ELSE FROMDAT END))
+    AND
+        CONVERT(DATETIME, (CASE WHEN TOMDAT = '00000101' THEN '19000101' ELSE TOMDAT END))</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -3214,7 +3233,7 @@ FROM
     design-time-name="Package\KJGP0EKL">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="177,42"
           Id="Package\KJGP0EKL\OLE DB Destination"
@@ -3246,9 +3265,7 @@ FROM
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3270,9 +3287,7 @@ FROM
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3388,7 +3403,7 @@ FROM
     design-time-name="Package\KJGP0PAK">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="157,42"
           Id="Package\KJGP0PAK\OLE DB Source"
@@ -3420,9 +3435,7 @@ FROM
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3444,9 +3457,7 @@ FROM
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3477,7 +3488,7 @@ FROM
     design-time-name="Package\KJGP0SRE">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="157,42"
           Id="Package\KJGP0SRE\OLE DB Source"
@@ -3509,9 +3520,7 @@ FROM
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3533,9 +3542,7 @@ FROM
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

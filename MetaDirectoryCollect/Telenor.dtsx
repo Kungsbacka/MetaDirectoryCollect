@@ -12,8 +12,8 @@
   DTS:ObjectName="Telenor"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="51"
-  DTS:VersionGUID="{D42A10B9-9B2F-4E2C-845B-228008E638C0}">
+  DTS:VersionBuild="53"
+  DTS:VersionGUID="{D9C1E6D1-0D3F-4956-9593-1D253092C07F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -41,7 +41,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Efternamn"
-              DTS:DTSID="{35D83685-2A46-41BC-8808-C30C15B25733}"
+              DTS:DTSID="{E1D63BAF-F0E5-47E0-927B-F0592CA9E9A8}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -50,7 +50,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Förnamn"
-              DTS:DTSID="{A2E8E89B-6A7B-4CD8-8B1F-8C5F4A9F7E81}"
+              DTS:DTSID="{0A999830-2FCB-4AC4-AFB2-7987DFBD9F14}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -59,7 +59,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Titel"
-              DTS:DTSID="{7330747D-9E35-4E5C-974C-A9D3077B8136}"
+              DTS:DTSID="{792C24A2-FBAD-49A7-9A8C-A5C06C80A49C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -68,7 +68,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Avdelning"
-              DTS:DTSID="{AC8F3E3B-C953-4D53-B9EF-232B2103A5FE}"
+              DTS:DTSID="{FCDA12EB-4112-4CAF-9CB1-B7CFD7D603DB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -77,7 +77,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Bolag"
-              DTS:DTSID="{A2306AE5-BFD4-4756-B397-C74F72589A1B}"
+              DTS:DTSID="{263CD681-FCD4-488B-B23B-D2402522F99C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -86,7 +86,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Mobiltelefon"
-              DTS:DTSID="{33A7FF15-AD84-47C6-AAEA-AB5E247F0FFD}"
+              DTS:DTSID="{3E595C5A-E1FD-4B16-84F8-38C479244EF4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -95,7 +95,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Fastnätsnummer"
-              DTS:DTSID="{86B70828-898A-4616-8D0A-3E7A72B6F846}"
+              DTS:DTSID="{B9760E36-0311-403D-987A-9E9E7F6F3132}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -104,7 +104,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Epost"
-              DTS:DTSID="{6FA60633-AE99-4CBD-88CD-101CF4D7EF36}"
+              DTS:DTSID="{D393E492-73BA-4BA6-9F85-6F032C8B56D0}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -113,7 +113,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Plats"
-              DTS:DTSID="{B3479A27-0C9A-4DB4-8A0F-9DD6C41FDAF0}"
+              DTS:DTSID="{7667EF1A-B855-4A66-9248-31608E3976EC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -122,7 +122,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="C O Adress"
-              DTS:DTSID="{1AA848C3-A1CD-464D-9D9E-D5131DFFF3B9}"
+              DTS:DTSID="{CCC581EA-B621-4285-8FDC-82B1B494EBE6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -131,7 +131,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Postnummer"
-              DTS:DTSID="{3B1CB785-C451-4AA3-9A11-EAD2A0635830}"
+              DTS:DTSID="{627F4F91-1658-425E-8B57-A540B10A77FA}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -140,7 +140,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Ort"
-              DTS:DTSID="{68C03CCF-2842-4744-BE27-C173F5874CF7}"
+              DTS:DTSID="{1E14DD46-C7C8-47CA-BFA6-B2DEFCCBD20B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -149,7 +149,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Land"
-              DTS:DTSID="{644025BA-9F2E-4414-8ADD-496F1C19FF1E}"
+              DTS:DTSID="{6E9A091D-63B0-4FBF-98B3-D04F2B3BA4C1}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -158,7 +158,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Kontakttyp"
-              DTS:DTSID="{811090D2-CB5C-4CB8-9C50-D7078CD36173}"
+              DTS:DTSID="{8DEFE147-C62C-4219-BE6C-14EBEF1136A6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -167,7 +167,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Dold"
-              DTS:DTSID="{1584A78F-4FC3-45F4-B3A9-67E281BF2B43}"
+              DTS:DTSID="{5898EC06-E8B4-42FD-8B5B-C27D411E7A55}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -176,7 +176,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Sökord"
-              DTS:DTSID="{3BFF0EEE-FCE8-4BA5-8F59-6B8D99B665A7}"
+              DTS:DTSID="{E1FA2150-ADA3-4EE6-A9C8-AC50970DE1AE}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -185,7 +185,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="External-ID"
-              DTS:DTSID="{D4DA1DEF-1706-4566-83E1-4874FD1BE23D}"
+              DTS:DTSID="{A2C6FA45-AB24-441E-BFA1-FC6A188EBF2E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -194,7 +194,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Chef"
-              DTS:DTSID="{CCF6332C-F9FF-4C4C-A37E-EC12CF5BD360}"
+              DTS:DTSID="{33450466-E685-460C-B620-F54BBE9EF1F1}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -203,7 +203,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Förvaltning"
-              DTS:DTSID="{047F1955-B284-41FB-BC17-E46E51B64963}"
+              DTS:DTSID="{55A8E25C-6E31-4ABA-B8E9-520B11EAFC18}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -212,16 +212,16 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Tips"
-              DTS:DTSID="{1742C44E-B50B-48D4-A22D-2298B8616493}"
+              DTS:DTSID="{7A906B76-DB42-444D-8D3B-79B07C203285}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x000D__x000A_"
-              DTS:MaximumWidth="125"
+              DTS:MaximumWidth="600"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Fonetisk"
-              DTS:DTSID="{1A024B86-80F3-4D08-997D-5A46D2E0F57B}"
+              DTS:DTSID="{2527BC66-150E-47B9-9342-8E38F2EF1FDB}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -773,7 +773,7 @@
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Fonetisk]"
-                          length="125"
+                          length="600"
                           lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[Fonetisk]"
                           name="Fonetisk"
                           truncationRowDisposition="FailComponent">
@@ -910,7 +910,7 @@
                         <externalMetadataColumn
                           refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Fonetisk]"
                           dataType="wstr"
-                          length="125"
+                          length="600"
                           name="Fonetisk" />
                         <externalMetadataColumn
                           refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Dold]"
@@ -1148,7 +1148,7 @@
                         <inputColumn
                           refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Fonetisk]"
                           cachedDataType="wstr"
-                          cachedLength="125"
+                          cachedLength="600"
                           cachedName="Fonetisk"
                           externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fonetisk]"
                           lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[Fonetisk]" />
@@ -1270,7 +1270,7 @@
                         <externalMetadataColumn
                           refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fonetisk]"
                           dataType="wstr"
-                          length="125"
+                          length="600"
                           name="fonetisk" />
                         <externalMetadataColumn
                           refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[dold]"
@@ -2325,6 +2325,15 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
               Language="CSharp"
               ReadOnlyVariables="User::CurrentFile">
               <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
 <root>
@@ -2443,35 +2452,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 </root>]]></ProjectItem>
-              <ProjectItem
-                Name="Properties\Settings.Designer.cs"
-                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
-//
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_80cc72251a1c46569e985bf7ae3de31d.Properties.Settings.get_Default():ST_80cc72251a1c46569e985bf7ae3de31d.Properties.Sett" +
-    "ings")]
-
-namespace ST_80cc72251a1c46569e985bf7ae3de31d.Properties {
-    
-    
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-        
-        public static Settings Default {
-            get {
-                return defaultInstance;
-            }
-        }
-    }
-}]]></ProjectItem>
               <ProjectItem
                 Name="ScriptMain.cs"
                 Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
@@ -2643,35 +2623,34 @@ namespace ST_80cc72251a1c46569e985bf7ae3de31d
   </msb:ItemGroup>
 </c:Project>]]></ProjectItem>
               <ProjectItem
-                Name="Properties\AssemblyInfo.cs"
-                Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
 
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_80cc72251a1c46569e985bf7ae3de31d")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_80cc72251a1c46569e985bf7ae3de31d")]
-[assembly: AssemblyCopyright("Copyright @  2021")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_80cc72251a1c46569e985bf7ae3de31d.Properties.Settings.get_Default():ST_80cc72251a1c46569e985bf7ae3de31d.Properties.Sett" +
+    "ings")]
 
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+namespace ST_80cc72251a1c46569e985bf7ae3de31d.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
               <ProjectItem
                 Name="ST_80cc72251a1c46569e985bf7ae3de31d.csproj"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -2759,14 +2738,35 @@ using System.Runtime.CompilerServices;
   </ProjectExtensions>
 </Project>]]></ProjectItem>
               <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_80cc72251a1c46569e985bf7ae3de31d")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_80cc72251a1c46569e985bf7ae3de31d")]
+[assembly: AssemblyCopyright("Copyright @  2021")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -3047,6 +3047,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           Id="Package\Foreach Loop Container\Delete file"
           TopLeft="49,437.5" />
         <NodeLayout
+          Size="119,42"
+          Id="Package\Foreach Loop Container\Preflight"
+          TopLeft="53.5,29.5" />
+        <NodeLayout
           Size="152,42"
           Id="Package\Foreach Loop Container\Truncate stage"
           TopLeft="37,131.5" />
@@ -3116,10 +3120,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="119,42"
-          Id="Package\Foreach Loop Container\Preflight"
-          TopLeft="53.5,29.5" />
         <EdgeLayout
           Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 3]"
           TopLeft="113,71.5">

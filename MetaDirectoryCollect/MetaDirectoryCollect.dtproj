@@ -4054,10 +4054,10 @@
                 <SSIS:Property SSIS:Name="Name">Skolplatsen</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">68</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">74</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{36079AC2-1208-4FC2-9CD0-6C7B797DD5AE}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{F422097B-2048-4A9A-9809-4282BBF10FB1}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>

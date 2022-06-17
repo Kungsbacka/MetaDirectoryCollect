@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{5AF21349-0C44-4086-8F2C-FB37C36F598A}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LastModifiedProductVersion="15.0.2000.180"
   DTS:LocaleID="1053"
   DTS:ObjectName="ProcapitaBoU"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="141"
-  DTS:VersionGUID="{92051D3F-AE20-4838-BA90-FAEE66C703C9}">
+  DTS:VersionBuild="153"
+  DTS:VersionGUID="{28F8819B-3878-4657-B986-E4F00762145B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -67,8 +67,29 @@
         DTS:Name="ParameterValue"
         xml:space="preserve"></DTS:Property>
     </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{A7D13336-3C41-4940-BBE3-133B68A15CC6}"
+      DTS:ObjectName="ProcapitaBoUExportDate"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
   </DTS:PackageParameters>
   <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{63C0653E-AE53-4FC7-B0FF-B1BD663A9ED5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="datum">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{62BD20B4-EC7B-446F-B3BA-01A42681F132}"
@@ -644,10 +665,7 @@ FROM
 WHERE
     PERIOD = ?
 AND
-    GETDATE() BETWEEN
-        CONVERT(DATETIME, (CASE WHEN FROMDAT = '00000101' THEN '19000101' ELSE FROMDAT END))
-    AND
-        CONVERT(DATETIME, (CASE WHEN TOMDAT = '00000101' THEN '19000101' ELSE TOMDAT END))</property>
+    ? BETWEEN FROMDAT AND TOMDAT</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -668,7 +686,7 @@ AND
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping">"Parameter0:Input",{62BD20B4-EC7B-446F-B3BA-01A42681F132};</property>
+                  name="ParameterMapping">"Parameter0:Input",{62BD20B4-EC7B-446F-B3BA-01A42681F132};"Parameter1:Input",{63C0653E-AE53-4FC7-B0FF-B1BD663A9ED5};</property>
               </properties>
               <connections>
                 <connection
@@ -1362,10 +1380,7 @@ FROM
 WHERE
     PERIOD = ?
 AND
-    GETDATE() BETWEEN
-        CONVERT(DATETIME, (CASE WHEN FROMDAT = '00000101' THEN '19000101' ELSE FROMDAT END))
-    AND
-        CONVERT(DATETIME, (CASE WHEN TOMDAT = '00000101' THEN '19000101' ELSE TOMDAT END))</property>
+    ? BETWEEN FROMDAT AND TOMDAT</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1386,7 +1401,7 @@ AND
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping">"Parameter0:Input",{62BD20B4-EC7B-446F-B3BA-01A42681F132};</property>
+                  name="ParameterMapping">"Parameter0:Input",{62BD20B4-EC7B-446F-B3BA-01A42681F132};"Parameter1:Input",{63C0653E-AE53-4FC7-B0FF-B1BD663A9ED5};</property>
               </properties>
               <connections>
                 <connection
@@ -2032,10 +2047,7 @@ FROM
 WHERE
     PERIOD = ?
 AND
-    GETDATE() BETWEEN
-        CONVERT(DATETIME, (CASE WHEN FROMDAT = '00000101' THEN '19000101' ELSE FROMDAT END))
-    AND
-        CONVERT(DATETIME, (CASE WHEN TOMDAT = '00000101' THEN '19000101' ELSE TOMDAT END))</property>
+    ? BETWEEN FROMDAT AND TOMDAT</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -2056,7 +2068,7 @@ AND
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping">"Parameter0:Input",{62BD20B4-EC7B-446F-B3BA-01A42681F132};</property>
+                  name="ParameterMapping">"Parameter0:Input",{62BD20B4-EC7B-446F-B3BA-01A42681F132};"Parameter1:Input",{63C0653E-AE53-4FC7-B0FF-B1BD663A9ED5};</property>
               </properties>
               <connections>
                 <connection
@@ -2987,6 +2999,39 @@ FROM
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Set date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0EF6DCD9-A549-4C96-8F77-CC16A6F46552}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set date"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A4DCB03C-382C-4779-9C6F-CD8D63FFD124}"
+          SQLTask:SqlStatementSource="SELECT CASE WHEN LEN(?) &gt; 0 THEN ? ELSE '2020' END AS datum"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::datum" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::ProcapitaBoUExportDate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="$Package::ProcapitaBoUExportDate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Truncate stage"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
@@ -3016,10 +3061,18 @@ FROM
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{425DDEC7-60BE-4678-A4B1-DC253D7B7106}"
+      DTS:DTSID="{24917147-95AC-487C-922D-181BD3583E2F}"
       DTS:From="Package\Get current period"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Set date" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{D968336A-6C1E-4B54-AD1E-1D5D31D7A56E}"
+      DTS:From="Package\Set date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
       DTS:To="Package\KJGP0EVG" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
@@ -3069,7 +3122,7 @@ FROM
         <NodeLayout
           Size="117,42"
           Id="Package\Commit"
-          TopLeft="30.5000000000001,617.5" />
+          TopLeft="30.5000000000001,719.5" />
         <NodeLayout
           Size="167,42"
           Id="Package\Get current period"
@@ -3077,19 +3130,19 @@ FROM
         <NodeLayout
           Size="135,42"
           Id="Package\KJGP0EKL"
-          TopLeft="21.5,311.5" />
+          TopLeft="21.5000000000001,413.5" />
         <NodeLayout
           Size="137,42"
           Id="Package\KJGP0EVG"
-          TopLeft="20.5,209.5" />
+          TopLeft="20.5,311.5" />
         <NodeLayout
           Size="136,42"
           Id="Package\KJGP0PAK"
-          TopLeft="21.0000000000001,413.5" />
+          TopLeft="21.0000000000001,515.5" />
         <NodeLayout
           Size="136,42"
           Id="Package\KJGP0SRE"
-          TopLeft="21.0000000000001,515.5" />
+          TopLeft="21.0000000000001,617.5" />
         <NodeLayout
           Size="152,42"
           Id="Package\Truncate stage"
@@ -3117,6 +3170,98 @@ FROM
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="89.0000000000001,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="89.0000000000001,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="89.0000000000001,557.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="89.0000000000001,659.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="120,42"
+          Id="Package\Set date"
+          TopLeft="29,209.5" />
+        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="89,149.5">
           <EdgeLayout.Curve>
@@ -3139,74 +3284,8 @@ FROM
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 4]"
+          Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="89,251.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="89.0000000000001,353.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="89.0000000000001,455.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="89.0000000000001,557.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"

@@ -12,8 +12,8 @@
   DTS:ObjectName="ProcapitaBoU"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="153"
-  DTS:VersionGUID="{28F8819B-3878-4657-B986-E4F00762145B}">
+  DTS:VersionBuild="158"
+  DTS:VersionGUID="{A0AAED33-4B02-46DF-ADA6-F76B0D7A35C6}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -3011,7 +3011,7 @@ FROM
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{A4DCB03C-382C-4779-9C6F-CD8D63FFD124}"
-          SQLTask:SqlStatementSource="SELECT CASE WHEN LEN(?) &gt; 0 THEN ? ELSE '2020' END AS datum"
+          SQLTask:SqlStatementSource="SELECT CASE WHEN LEN(?) &gt; 0 THEN ? ELSE CONVERT(nvarchar, GETDATE(), 23) END AS datum"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"

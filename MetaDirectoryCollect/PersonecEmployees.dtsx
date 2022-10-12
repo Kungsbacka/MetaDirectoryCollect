@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{BB78EF6E-9746-4A20-951E-C34C778813BD}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LastModifiedProductVersion="16.0.845.0"
   DTS:LocaleID="1053"
   DTS:ObjectName="PersonecEmployees"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="119"
-  DTS:VersionGUID="{62323213-9597-4266-BC1B-6ED357FF9832}">
+  DTS:VersionBuild="120"
+  DTS:VersionGUID="{04223F7D-E63F-4A2E-A468-BC5642C26474}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -119,7 +119,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -896,7 +896,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
    CAST(PER.SEKEL AS varchar) + PER.PNUMID AS PERSONNR
   ,ANS.PERSOID
   ,PER.FOERNAMN
@@ -937,12 +937,12 @@ FROM dbo.OA0P0120 ANS
 INNER JOIN dbo.OA0P0123 KON ON (ANS.PERSOID = KON.PERSOID AND ANS.ANSTNR = KON.ANSTNR)
 INNER JOIN dbo.OA0P0100 PER ON ANS.PERSOID = PER.PERSOID
 INNER JOIN dbo.OA0P0806 KAT ON ANS.KATKOD = KAT.KAT
-WHERE ANS.GFOM &lt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)
-AND ANS.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)
+WHERE CAST(CONVERT(varchar, GETDATE(), 112) AS int) BETWEEN ANS.GFOM AND ANS.GTOM
 AND ANS.VILANST = 0
 AND PER.ANONYM = 0
 AND KON.HUVUDKONTO = 1
-AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
+AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)
+AND (ANS.ANSTTOM = 0 OR ANS.ANSTTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int))</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1516,36 +1516,6 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           VSTAMinorVersion="0"
           Language="CSharp">
           <ProjectItem
-            Name="Properties\AssemblyInfo.cs"
-            Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyCopyright("Copyright @  2016")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
-          <ProjectItem
             Name="Properties\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
 <root>
@@ -1664,6 +1634,35 @@ using System.Runtime.CompilerServices;
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 </root>]]></ProjectItem>
+          <ProjectItem
+            Name="Properties\Settings.Designer.cs"
+            Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_69c0ff1828b745a69068061730c369ae.Properties.Settings.get_Default():ST_69c0ff1828b745a69068061730c369ae.Properties.Sett" +
+    "ings")]
+
+namespace ST_69c0ff1828b745a69068061730c369ae.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
           <ProjectItem
             Name="ScriptMain.cs"
             Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
@@ -1886,34 +1885,35 @@ namespace ST_69c0ff1828b745a69068061730c369ae
   </msb:ItemGroup>
 </c:Project>]]></ProjectItem>
           <ProjectItem
-            Name="Properties\Settings.Designer.cs"
-            Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
+            Name="Properties\AssemblyInfo.cs"
+            Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
 //
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyCopyright("Copyright @  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
 
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_69c0ff1828b745a69068061730c369ae.Properties.Settings.get_Default():ST_69c0ff1828b745a69068061730c369ae.Properties.Sett" +
-    "ings")]
-
-namespace ST_69c0ff1828b745a69068061730c369ae.Properties {
-    
-    
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-        
-        public static Settings Default {
-            get {
-                return defaultInstance;
-            }
-        }
-    }
-}]]></ProjectItem>
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
           <ProjectItem
             Name="Properties\Settings.settings"
             Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
@@ -2528,7 +2528,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -2839,7 +2839,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
    CAST(PER.SEKEL AS varchar) + PER.PNUMID AS PERSONNR
   ,ANS.PERSOID
   ,PER.FOERNAMN
@@ -2878,8 +2878,20 @@ FROM dbo.OA0P0120 ANS
 INNER JOIN dbo.OA0P0100 PER ON ANS.PERSOID = PER.PERSOID
 INNER JOIN dbo.OA0P0806 KAT ON ANS.KATKOD = KAT.KAT
 WHERE ANS.GFOM &lt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)
-AND ANS.GTOM &lt; CAST(CONVERT(varchar, GETDATE(), 112) AS int)
-AND ANS.GTOM &gt; CAST(CONVERT(varchar, DATEADD(yy, -1, GETDATE()), 112) AS int)
+AND (
+        (
+                ANS.GTOM &lt; CAST(CONVERT(varchar, GETDATE(), 112) AS int)
+            AND
+                ANS.GTOM &gt; CAST(CONVERT(varchar, DATEADD(yy, -1, GETDATE()), 112) AS int)
+        )
+    OR
+        (
+                ANS.ANSTTOM &lt; CAST(CONVERT(varchar, GETDATE(), 112) AS int)
+            AND
+                ANS.ANSTTOM &gt; CAST(CONVERT(varchar, DATEADD(yy, -1, GETDATE()), 112) AS int)
+
+        )
+)
 AND ANS.VILANST = 0
 AND PER.ANONYM = 0</property>
                 <property
@@ -3395,7 +3407,7 @@ AND PER.ANONYM = 0</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -4172,7 +4184,7 @@ AND PER.ANONYM = 0</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
    CAST(PER.SEKEL AS varchar) + PER.PNUMID AS PERSONNR
   ,ANS.PERSOID
   ,PER.FOERNAMN
@@ -4216,7 +4228,8 @@ WHERE ANS.GFOM &gt; CAST(CONVERT(varchar, GETDATE(), 112) AS int)
 AND ANS.VILANST = 0
 AND PER.ANONYM = 0
 AND KON.HUVUDKONTO = 1
-AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
+AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)
+AND (ANS.ANSTTOM = 0 OR ANS.ANSTTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int))</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -4910,7 +4923,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -5687,7 +5700,7 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
    CAST(PER.SEKEL AS varchar) + PER.PNUMID AS PERSONNR
   ,ANS.PERSOID
   ,PER.FOERNAMN
@@ -5728,8 +5741,8 @@ FROM dbo.OA0P0120 ANS
 INNER JOIN dbo.OA0P0123 KON ON (ANS.PERSOID = KON.PERSOID AND ANS.ANSTNR = KON.ANSTNR)
 INNER JOIN dbo.OA0P0100 PER ON ANS.PERSOID = PER.PERSOID
 INNER JOIN dbo.OA0P0806 KAT ON ANS.KATKOD = KAT.KAT
-WHERE ANS.GFOM &lt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)
-AND ANS.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)
+WHERE CAST(CONVERT(varchar, GETDATE(), 112) AS int) BETWEEN ANS.GFOM AND ANS.GTOM
+AND (ANS.ANSTTOM = 0 OR ANS.ANSTTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int))
 AND ANS.VILANST = 1
 AND PER.ANONYM = 0
 AND KON.HUVUDKONTO = 1
@@ -6370,14 +6383,6 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="271,42"
-          Id="Package\spCommitPersonecGamlaAnstallningar"
-          TopLeft="49.0000000000001,627.5" />
-        <NodeLayout
-          Size="193,42"
-          Id="Package\Avslutade anställningar"
-          TopLeft="88.0000000000001,423.5" />
-        <NodeLayout
           Size="184,42"
           Id="Package\Aktuella anställningar"
           TopLeft="92.5000000000001,117.5" />
@@ -6386,9 +6391,21 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           Id="Package\Aktuella anställningar FAIL"
           TopLeft="334.5,120.5" />
         <NodeLayout
+          Size="193,42"
+          Id="Package\Avslutade anställningar"
+          TopLeft="88.0000000000001,423.5" />
+        <NodeLayout
           Size="188,42"
           Id="Package\Framtida anställningar"
           TopLeft="90.5000000000001,219.5" />
+        <NodeLayout
+          Size="271,42"
+          Id="Package\spCommitPersonecGamlaAnstallningar"
+          TopLeft="49.0000000000001,627.5" />
+        <NodeLayout
+          Size="276,42"
+          Id="Package\spCommitPersonecVilandeAnstallningar"
+          TopLeft="46.5000000000001,729.5" />
         <NodeLayout
           Size="295,42"
           Id="Package\spInsertMissingSerialNumberFromPersonec"
@@ -6413,6 +6430,10 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           Size="189,42"
           Id="Package\spUpdatePersonecDiff"
           TopLeft="90.0000000000002,1137.5" />
+        <NodeLayout
+          Size="181,42"
+          Id="Package\Vilande anställningar"
+          TopLeft="94.0000000000001,525.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="184.5,57.5">
@@ -6479,6 +6500,28 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
             <mssgm:EdgeLabel
               BoundingBox="17.25,5,16,16"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="184.5,771.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6570,8 +6613,8 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 8]"
-          TopLeft="184.5,363.5">
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="184.5,465.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -6591,10 +6634,6 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="276,42"
-          Id="Package\spCommitPersonecVilandeAnstallningar"
-          TopLeft="46.5000000000001,729.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
           TopLeft="184.5,669.5">
@@ -6618,34 +6657,8 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 11]"
-          TopLeft="184.5,771.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="181,42"
-          Id="Package\Vilande anställningar"
-          TopLeft="94.0000000000001,525.5" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="184.5,465.5">
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="184.5,363.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -6690,91 +6703,6 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
       </GraphLayout>
     </LayoutInfo>
   </Package>
-  <TaskHost
-    design-time-name="Package\Avslutade anställningar">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="157,42"
-          Id="Package\Avslutade anställningar\OLE DB Source"
-          TopLeft="15.5,5.5" />
-        <NodeLayout
-          Size="173,42"
-          Id="Package\Avslutade anställningar\Convert to Unicode"
-          TopLeft="7.50000000000003,107.5" />
-        <NodeLayout
-          Size="177,42"
-          Id="Package\Avslutade anställningar\OLE DB Destination"
-          TopLeft="5.50000000000003,209.5" />
-        <EdgeLayout
-          Id="Package\Avslutade anställningar.Paths[OLE DB Source Output]"
-          TopLeft="94,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Avslutade anställningar.Paths[Data Conversion Output]"
-          TopLeft="94,149.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Avslutade anställningar\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Avslutade anställningar\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Aktuella anställningar">
     <LayoutInfo>
@@ -6875,6 +6803,91 @@ AND KON.GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Aktuella anställningar\MetaDirectory">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Avslutade anställningar">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Avslutade anställningar\OLE DB Source"
+          TopLeft="15.5,5.5" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Avslutade anställningar\Convert to Unicode"
+          TopLeft="7.50000000000003,107.5" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Avslutade anställningar\OLE DB Destination"
+          TopLeft="5.50000000000003,209.5" />
+        <EdgeLayout
+          Id="Package\Avslutade anställningar.Paths[OLE DB Source Output]"
+          TopLeft="94,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Avslutade anställningar.Paths[Data Conversion Output]"
+          TopLeft="94,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Avslutade anställningar\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Avslutade anställningar\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{78727D5A-1937-40EA-846B-2A5DB48276EF}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.152"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
   DTS:LocaleID="1053"
   DTS:ObjectName="PersonecAuxiliary"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="65"
-  DTS:VersionGUID="{CF97277C-6409-406C-82A6-53BAA5EC8DB6}">
+  DTS:VersionBuild="69"
+  DTS:VersionGUID="{44760C5F-2957-437D-93D6-B451EFC409F1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,9 @@
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[$Package::MetaDirectoryConnectionString]</DTS:PropertyExpression>
       <DTS:ObjectData>
-        <DTS:ConnectionManager />
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -36,7 +38,9 @@
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[$Package::PersonecConnectionString]</DTS:PropertyExpression>
       <DTS:ObjectData>
-        <DTS:ConnectionManager />
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -85,7 +89,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Commit"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -1242,14 +1246,35 @@ AND GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           VSTAMinorVersion="0"
           Language="CSharp">
           <ProjectItem
-            Name="Properties\Settings.settings"
-            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+            Name="Properties\AssemblyInfo.cs"
+            Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyCopyright("Copyright @  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1620,35 +1645,14 @@ namespace ST_69c0ff1828b745a69068061730c369ae.Properties {
     }
 }]]></ProjectItem>
           <ProjectItem
-            Name="Properties\AssemblyInfo.cs"
-            Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyCopyright("Copyright @  2016")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+            Name="Properties\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.Designer.cs"
             Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -3511,14 +3515,35 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           VSTAMinorVersion="0"
           Language="CSharp">
           <ProjectItem
-            Name="Properties\Settings.settings"
-            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+            Name="Properties\AssemblyInfo.cs"
+            Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyCopyright("Copyright @  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -3889,35 +3914,14 @@ namespace ST_69c0ff1828b745a69068061730c369ae.Properties {
     }
 }]]></ProjectItem>
           <ProjectItem
-            Name="Properties\AssemblyInfo.cs"
-            Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyCopyright("Copyright @  2016")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+            Name="Properties\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.Designer.cs"
             Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -6462,34 +6466,14 @@ AND
   </resheader>
 </root>]]></ProjectItem>
           <ProjectItem
-            Name="Properties\Settings.Designer.cs"
-            Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
-//
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_69c0ff1828b745a69068061730c369ae.Properties.Settings.get_Default():ST_69c0ff1828b745a69068061730c369ae.Properties.Sett" +
-    "ings")]
-
-namespace ST_69c0ff1828b745a69068061730c369ae.Properties {
-    
-    
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-        
-        public static Settings Default {
-            get {
-                return defaultInstance;
-            }
-        }
-    }
-}]]></ProjectItem>
+            Name="Properties\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
           <ProjectItem
             Name="ScriptMain.cs"
             Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
@@ -6626,6 +6610,35 @@ namespace ST_69c0ff1828b745a69068061730c369ae
   </msb:ItemGroup>
 </c:Project>]]></ProjectItem>
           <ProjectItem
+            Name="Properties\Settings.Designer.cs"
+            Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_69c0ff1828b745a69068061730c369ae.Properties.Settings.get_Default():ST_69c0ff1828b745a69068061730c369ae.Properties.Sett" +
+    "ings")]
+
+namespace ST_69c0ff1828b745a69068061730c369ae.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+          <ProjectItem
             Name="Properties\AssemblyInfo.cs"
             Encoding="UTF8"><![CDATA[using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -6655,15 +6668,6 @@ using System.Runtime.CompilerServices;
 // by using the '*' as shown below:
 
 [assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
-          <ProjectItem
-            Name="Properties\Settings.settings"
-            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.Designer.cs"
             Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -7562,14 +7566,35 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           VSTAMinorVersion="0"
           Language="CSharp">
           <ProjectItem
-            Name="Properties\Settings.settings"
-            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+            Name="Properties\AssemblyInfo.cs"
+            Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyCopyright("Copyright @  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -7940,35 +7965,14 @@ namespace ST_69c0ff1828b745a69068061730c369ae.Properties {
     }
 }]]></ProjectItem>
           <ProjectItem
-            Name="Properties\AssemblyInfo.cs"
-            Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyCopyright("Copyright @  2016")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+            Name="Properties\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.Designer.cs"
             Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -9811,14 +9815,35 @@ AND GTOM &gt;= CAST(CONVERT(varchar, GETDATE(), 112) AS int)</property>
           VSTAMinorVersion="0"
           Language="CSharp">
           <ProjectItem
-            Name="Properties\Settings.settings"
-            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+            Name="Properties\AssemblyInfo.cs"
+            Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyCopyright("Copyright @  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -10189,35 +10214,14 @@ namespace ST_69c0ff1828b745a69068061730c369ae.Properties {
     }
 }]]></ProjectItem>
           <ProjectItem
-            Name="Properties\AssemblyInfo.cs"
-            Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyCopyright("Copyright @  2016")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+            Name="Properties\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.Designer.cs"
             Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -10485,18 +10489,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].Columns[GFOM]"
-                      cachedDataType="i4"
-                      cachedName="GFOM"
-                      externalMetadataColumnId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[GFOM]"
-                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[GFOM]" />
-                    <inputColumn
-                      refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].Columns[GTOM]"
-                      cachedDataType="i4"
-                      cachedName="GTOM"
-                      externalMetadataColumnId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[GTOM]"
-                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[GTOM]" />
-                    <inputColumn
                       refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].Columns[BELOPP]"
                       cachedDataType="r8"
                       cachedName="BELOPP"
@@ -10509,20 +10501,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       cachedName="Copy of PERSOID"
                       externalMetadataColumnId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[PERSOID]"
                       lineageId="Package\PersonecKonstklubb\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of PERSOID]" />
-                    <inputColumn
-                      refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].Columns[Copy of ERSORS]"
-                      cachedDataType="wstr"
-                      cachedLength="8"
-                      cachedName="Copy of ERSORS"
-                      externalMetadataColumnId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ERSORS]"
-                      lineageId="Package\PersonecKonstklubb\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of ERSORS]" />
-                    <inputColumn
-                      refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].Columns[Copy of FTGOID]"
-                      cachedDataType="wstr"
-                      cachedLength="12"
-                      cachedName="Copy of FTGOID"
-                      externalMetadataColumnId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[FTGOID]"
-                      lineageId="Package\PersonecKonstklubb\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of FTGOID]" />
                     <inputColumn
                       refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].Columns[Copy of FOERNAMN]"
                       cachedDataType="wstr"
@@ -10572,36 +10550,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       cachedName="Copy of TELNR2"
                       externalMetadataColumnId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[TELNR2]"
                       lineageId="Package\PersonecKonstklubb\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of TELNR2]" />
+                    <inputColumn
+                      refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].Columns[AARTAL]"
+                      cachedDataType="i2"
+                      cachedName="AARTAL"
+                      externalMetadataColumnId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[AARTAL]"
+                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[AARTAL]" />
+                    <inputColumn
+                      refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].Columns[PERIOD]"
+                      cachedDataType="i2"
+                      cachedName="PERIOD"
+                      externalMetadataColumnId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[PERIOD]"
+                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[PERIOD]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[GFOM]"
-                      dataType="i4"
-                      name="GFOM" />
-                    <externalMetadataColumn
-                      refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[GTOM]"
-                      dataType="i4"
-                      name="GTOM" />
                     <externalMetadataColumn
                       refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[PERSOID]"
                       dataType="wstr"
                       length="12"
                       name="PERSOID" />
                     <externalMetadataColumn
-                      refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[ERSORS]"
-                      dataType="wstr"
-                      length="8"
-                      name="ERSORS" />
-                    <externalMetadataColumn
                       refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[BELOPP]"
                       dataType="r8"
                       name="BELOPP" />
-                    <externalMetadataColumn
-                      refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[FTGOID]"
-                      dataType="wstr"
-                      length="12"
-                      name="FTGOID" />
                     <externalMetadataColumn
                       refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[FOERNAMN]"
                       dataType="wstr"
@@ -10637,6 +10609,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       dataType="wstr"
                       length="20"
                       name="TELNR2" />
+                    <externalMetadataColumn
+                      refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[AARTAL]"
+                      dataType="i2"
+                      name="AARTAL" />
+                    <externalMetadataColumn
+                      refId="Package\PersonecKonstklubb\MetaDirectory.Inputs[OLE DB Destination Input].ExternalColumns[PERIOD]"
+                      dataType="i2"
+                      name="PERIOD" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -10690,20 +10670,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       cachedLength="102"
                       cachedName="PNUMID"
                       lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[PNUMID]" />
-                    <inputColumn
-                      refId="Package\PersonecKonstklubb\Non Unicode to Unicode.Inputs[Data Conversion Input].Columns[ERSORS]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="8"
-                      cachedName="ERSORS"
-                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[ERSORS]" />
-                    <inputColumn
-                      refId="Package\PersonecKonstklubb\Non Unicode to Unicode.Inputs[Data Conversion Input].Columns[FTGOID]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="12"
-                      cachedName="FTGOID"
-                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[FTGOID]" />
                     <inputColumn
                       refId="Package\PersonecKonstklubb\Non Unicode to Unicode.Inputs[Data Conversion Input].Columns[FOERNAMN]"
                       cachedCodepage="1252"
@@ -10793,48 +10759,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
                           name="SourceInputColumnLineageID">#{Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[PNUMID]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\PersonecKonstklubb\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of ERSORS]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="8"
-                      lineageId="Package\PersonecKonstklubb\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of ERSORS]"
-                      name="Copy of ERSORS"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[ERSORS]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\PersonecKonstklubb\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of FTGOID]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="12"
-                      lineageId="Package\PersonecKonstklubb\Non Unicode to Unicode.Outputs[Data Conversion Output].Columns[Copy of FTGOID]"
-                      name="Copy of FTGOID"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[FTGOID]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -11023,20 +10947,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
 SELECT
 A.PERSOID,
 CAST(B.SEKEL AS nvarchar(2)) + CAST(B.PNUMID as nvarchar(100)) AS PNUMID,
-A.ERSORS,
-A.GFOM,
-A.GTOM,
 A.BELOPP,
-A.FTGOID,
 B.FOERNAMN,
 B.EFTERNAMN,
 (SELECT MOBIL FROM OA0P0101 X WHERE A.PERSOID = X.PERSOID AND X.ADRART = 0) AS MOBIL,
 (SELECT EPOST FROM OA0P0101 X WHERE A.PERSOID = X.PERSOID AND X.ADRART = 0) AS EPOST,
 (SELECT TELNR1 FROM OA0P0101 X WHERE A.PERSOID = X.PERSOID AND X.ADRART = 0) AS TELNR1,
-(SELECT TELNR2 FROM OA0P0101 X WHERE A.PERSOID = X.PERSOID AND X.ADRART = 0) AS TELNR2
-FROM OA0P0142 A
+(SELECT TELNR2 FROM OA0P0101 X WHERE A.PERSOID = X.PERSOID AND X.ADRART = 0) AS TELNR2,
+A.AARTAL,
+A.PERIOD
+FROM OA0P0310 A
 INNER JOIN OA0P0100 B ON A.PERSOID = B.PERSOID
-WHERE A.ERSORS = 'KONSTKL'</property>
+WHERE A.ORSAK = 'KONSTKL'
+AND A.AARTAL &gt; (YEAR(GETDATE())-3)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -11094,28 +11017,6 @@ WHERE A.ERSORS = 'KONSTKL'</property>
                       name="PNUMID"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[ERSORS]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[ERSORS]"
-                      length="8"
-                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[ERSORS]"
-                      name="ERSORS"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[FTGOID]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[FTGOID]"
-                      length="12"
-                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[FTGOID]"
-                      name="FTGOID"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
                       refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[FOERNAMN]"
                       codePage="1252"
                       dataType="str"
@@ -11160,24 +11061,6 @@ WHERE A.ERSORS = 'KONSTKL'</property>
                       name="EPOST"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[GFOM]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[GFOM]"
-                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[GFOM]"
-                      name="GFOM"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[GTOM]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[GTOM]"
-                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[GTOM]"
-                      name="GTOM"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
                       refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[BELOPP]"
                       dataType="r8"
                       errorOrTruncationOperation="Conversion"
@@ -11208,17 +11091,27 @@ WHERE A.ERSORS = 'KONSTKL'</property>
                       lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[TELNR2]"
                       name="TELNR2"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[AARTAL]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[AARTAL]"
+                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[AARTAL]"
+                      name="AARTAL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[PERIOD]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[PERIOD]"
+                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].Columns[PERIOD]"
+                      name="PERIOD"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[GFOM]"
-                      dataType="i4"
-                      name="GFOM" />
-                    <externalMetadataColumn
-                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[GTOM]"
-                      dataType="i4"
-                      name="GTOM" />
                     <externalMetadataColumn
                       refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[PERSOID]"
                       codePage="1252"
@@ -11231,21 +11124,9 @@ WHERE A.ERSORS = 'KONSTKL'</property>
                       length="102"
                       name="PNUMID" />
                     <externalMetadataColumn
-                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[ERSORS]"
-                      codePage="1252"
-                      dataType="str"
-                      length="8"
-                      name="ERSORS" />
-                    <externalMetadataColumn
                       refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[BELOPP]"
                       dataType="r8"
                       name="BELOPP" />
-                    <externalMetadataColumn
-                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[FTGOID]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      name="FTGOID" />
                     <externalMetadataColumn
                       refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[FOERNAMN]"
                       codePage="1252"
@@ -11282,6 +11163,14 @@ WHERE A.ERSORS = 'KONSTKL'</property>
                       dataType="str"
                       length="20"
                       name="TELNR2" />
+                    <externalMetadataColumn
+                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[AARTAL]"
+                      dataType="i2"
+                      name="AARTAL" />
+                    <externalMetadataColumn
+                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Output].ExternalColumns[PERIOD]"
+                      dataType="i2"
+                      name="PERIOD" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -11302,20 +11191,6 @@ WHERE A.ERSORS = 'KONSTKL'</property>
                       length="102"
                       lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[PNUMID]"
                       name="PNUMID" />
-                    <outputColumn
-                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[ERSORS]"
-                      codePage="1252"
-                      dataType="str"
-                      length="8"
-                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[ERSORS]"
-                      name="ERSORS" />
-                    <outputColumn
-                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[FTGOID]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[FTGOID]"
-                      name="FTGOID" />
                     <outputColumn
                       refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[FOERNAMN]"
                       codePage="1252"
@@ -11357,11 +11232,6 @@ WHERE A.ERSORS = 'KONSTKL'</property>
                       name="ErrorColumn"
                       specialFlags="2" />
                     <outputColumn
-                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[GFOM]"
-                      dataType="i4"
-                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[GFOM]"
-                      name="GFOM" />
-                    <outputColumn
                       refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[TELNR1]"
                       codePage="1252"
                       dataType="str"
@@ -11369,17 +11239,22 @@ WHERE A.ERSORS = 'KONSTKL'</property>
                       lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[TELNR1]"
                       name="TELNR1" />
                     <outputColumn
+                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[AARTAL]"
+                      dataType="i2"
+                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[AARTAL]"
+                      name="AARTAL" />
+                    <outputColumn
+                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[PERIOD]"
+                      dataType="i2"
+                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[PERIOD]"
+                      name="PERIOD" />
+                    <outputColumn
                       refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[TELNR2]"
                       codePage="1252"
                       dataType="str"
                       length="20"
                       lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[TELNR2]"
                       name="TELNR2" />
-                    <outputColumn
-                      refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[GTOM]"
-                      dataType="i4"
-                      lineageId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[GTOM]"
-                      name="GTOM" />
                     <outputColumn
                       refId="Package\PersonecKonstklubb\Personec.Outputs[OLE DB Source Error Output].Columns[BELOPP]"
                       dataType="r8"
@@ -11448,7 +11323,7 @@ WHERE A.ERSORS = 'KONSTKL'</property>
       DTS:ExecutableType="Microsoft.ScriptTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="PersonecKonstklubb_FAIL"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <ScriptProject
@@ -11457,14 +11332,35 @@ WHERE A.ERSORS = 'KONSTKL'</property>
           VSTAMinorVersion="0"
           Language="CSharp">
           <ProjectItem
-            Name="Properties\Settings.settings"
-            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+            Name="Properties\AssemblyInfo.cs"
+            Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
+[assembly: AssemblyCopyright("Copyright @  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -11752,35 +11648,14 @@ namespace ST_69c0ff1828b745a69068061730c369ae.Properties {
     }
 }]]></ProjectItem>
           <ProjectItem
-            Name="Properties\AssemblyInfo.cs"
-            Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_69c0ff1828b745a69068061730c369ae")]
-[assembly: AssemblyCopyright("Copyright @  2016")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+            Name="Properties\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.Designer.cs"
             Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -11987,7 +11862,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       DTS:LocaleID="-1"
       DTS:ObjectName="spPopulatePersonecOrgDisplay"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -12003,7 +11878,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="spUpdatePersonecOrg"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -12183,14 +12058,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           Id="Package\OA0P0054_FAIL"
           TopLeft="351.166666501098,109" />
         <NodeLayout
-          Size="173.6,41.6"
-          Id="Package\PersonecKonstklubb"
-          TopLeft="116.499998708566,552.833331074185" />
-        <NodeLayout
-          Size="156.8,41.6"
-          Id="Package\PersonecKonstklubb_FAIL"
-          TopLeft="352.499985992909,549.400001467069" />
-        <NodeLayout
           Size="132.8,41.6"
           Id="Package\OA0P0806"
           TopLeft="139.166666501098,197.5" />
@@ -12222,6 +12089,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           Size="161.6,41.6"
           Id="Package\OA0P0883_FAIL"
           TopLeft="351.166666501098,376.714285714285" />
+        <NodeLayout
+          Size="173.6,41.6"
+          Id="Package\PersonecKonstklubb"
+          TopLeft="116.499998708566,552.833331074185" />
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\PersonecKonstklubb_FAIL"
+          TopLeft="352.499985992909,549.400001467069" />
         <NodeLayout
           Size="118.4,41.6"
           Id="Package\Prepare"
@@ -12701,117 +12576,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\PersonecKonstklubb">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="124.8,41.6"
-          Id="Package\PersonecKonstklubb\Personec"
-          TopLeft="42,5.5" />
-        <NodeLayout
-          Size="198.4,41.6"
-          Id="Package\PersonecKonstklubb\Non Unicode to Unicode"
-          TopLeft="5.50000000000001,107.5" />
-        <NodeLayout
-          Size="132.8,41.6"
-          Id="Package\PersonecKonstklubb\Row Count"
-          TopLeft="38,209.5" />
-        <NodeLayout
-          Size="148,41.6"
-          Id="Package\PersonecKonstklubb\MetaDirectory"
-          TopLeft="30.5,311.5" />
-        <EdgeLayout
-          Id="Package\PersonecKonstklubb.Paths[Row Count Output 1]"
-          TopLeft="104.5,251.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\PersonecKonstklubb.Paths[OLE DB Source Output]"
-          TopLeft="104.5,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\PersonecKonstklubb.Paths[Data Conversion Output]"
-          TopLeft="104.5,149.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\PersonecKonstklubb\Personec">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\PersonecKonstklubb\MetaDirectory">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
     design-time-name="Package\OA0P0806">
     <LayoutInfo>
       <GraphLayout
@@ -12932,7 +12696,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     design-time-name="Package\OA0P0816">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="124.8,41.6"
           Id="Package\OA0P0816\Personec"
@@ -12968,7 +12732,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -12990,7 +12756,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -13012,7 +12780,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -13165,7 +12935,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     design-time-name="Package\OA0P0883">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="198.4,41.6"
           Id="Package\OA0P0883\Non Unicode to Unicode"
@@ -13201,7 +12971,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -13223,7 +12995,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -13245,7 +13019,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -13269,6 +13045,117 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\PersonecKonstklubb">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="132.8,41.6"
+          Id="Package\PersonecKonstklubb\Row Count"
+          TopLeft="38,209.5" />
+        <NodeLayout
+          Size="191.2,41.6"
+          Id="Package\PersonecKonstklubb\Non Unicode to Unicode"
+          TopLeft="5.50000000000001,107.5" />
+        <NodeLayout
+          Size="148,41.6"
+          Id="Package\PersonecKonstklubb\MetaDirectory"
+          TopLeft="30.5,311.5" />
+        <NodeLayout
+          Size="124.8,41.6"
+          Id="Package\PersonecKonstklubb\Personec"
+          TopLeft="42,5.5" />
+        <EdgeLayout
+          Id="Package\PersonecKonstklubb.Paths[Row Count Output 1]"
+          TopLeft="104.5,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PersonecKonstklubb.Paths[OLE DB Source Output]"
+          TopLeft="102.75,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.4"
+              Start="0,0"
+              End="0,52.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PersonecKonstklubb.Paths[Data Conversion Output]"
+          TopLeft="102.75,149.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.4"
+              Start="0,0"
+              End="0,52.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\PersonecKonstklubb\MetaDirectory">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\PersonecKonstklubb\Personec">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

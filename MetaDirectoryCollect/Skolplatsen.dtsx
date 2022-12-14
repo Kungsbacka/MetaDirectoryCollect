@@ -12,8 +12,8 @@
   DTS:ObjectName="Skolplatsen"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="105"
-  DTS:VersionGUID="{E372E948-6F34-44DD-9189-588F788A2B81}">
+  DTS:VersionBuild="108"
+  DTS:VersionGUID="{899F1951-0528-4094-A28C-0A389FEBD6E9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -2331,6 +2331,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
                           name="FriendlyExpression">inriktning == "" ? NULL(DT_WSTR,0) : inriktning</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Elev\Derived Column.Inputs[Derived Column Input].Columns[hemkommun]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="hemkommun"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Elev\Flat File Source.Outputs[Flat File Source Output].Columns[hemkommun]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Elev\Flat File Source.Outputs[Flat File Source Output].Columns[hemkommun]} == "" ? NULL(DT_WSTR,0) : #{Package\Elev\Flat File Source.Outputs[Flat File Source Output].Columns[hemkommun]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">hemkommun == "" ? NULL(DT_WSTR,0) : hemkommun</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
@@ -10419,13 +10443,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           Id="Package\Elev\OLE DB Destination"
           TopLeft="5.50000000000003,209.5" />
         <NodeLayout
-          Size="156,42"
-          Id="Package\Elev\Flat File Source"
-          TopLeft="16,5.5" />
-        <NodeLayout
           Size="158,42"
           Id="Package\Elev\Derived Column"
           TopLeft="15,107.5" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Elev\Flat File Source"
+          TopLeft="16,5.5" />
         <EdgeLayout
           Id="Package\Elev.Paths[Flat File Source Output]"
           TopLeft="94,47.5">
@@ -11033,7 +11057,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     design-time-name="Package\Skolenhet">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="156,42"
           Id="Package\Skolenhet\Flat File Source"
@@ -11065,9 +11089,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -11089,9 +11111,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

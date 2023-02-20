@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{33EEDCA5-8516-4EE1-BC3E-998A0131BBC5}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.948.0"
+  DTS:LastModifiedProductVersion="16.0.5035.3"
   DTS:LocaleID="1053"
   DTS:ObjectName="Telenor"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="56"
-  DTS:VersionGUID="{B13350F3-360E-473A-A519-94465ADE796C}">
+  DTS:VersionBuild="59"
+  DTS:VersionGUID="{802E6FC5-5345-4808-95C9-D3A4E483E974}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -41,7 +41,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Efternamn"
-              DTS:DTSID="{8ADD500C-3ABD-41E7-B27B-811ECEB5EF4B}"
+              DTS:DTSID="{EE7EE2B4-9E0F-4983-985B-1FF8836BAA59}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -50,7 +50,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Förnamn"
-              DTS:DTSID="{47ECD56C-11CC-48F6-A9E1-9F96484354D7}"
+              DTS:DTSID="{14C2E417-B57E-48F8-BE31-49BD19C483A4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -59,7 +59,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Titel"
-              DTS:DTSID="{44A1261C-ADA0-4C81-B7D8-A4EED5DFF9AD}"
+              DTS:DTSID="{108DEDFC-6625-4CA5-A419-17534757D27E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -68,7 +68,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Avdelning"
-              DTS:DTSID="{48A541BD-6830-4967-9795-37CD601E1C18}"
+              DTS:DTSID="{6A0EBB38-56FF-427A-A360-04526AFEDA2F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -77,7 +77,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Bolag"
-              DTS:DTSID="{81CD62ED-6320-4B9A-82FF-31FE9E3D579C}"
+              DTS:DTSID="{CDB51B2C-934E-46B3-A675-4CC95010F4DF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -86,7 +86,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Mobiltelefon"
-              DTS:DTSID="{77390CB7-DE10-4413-8A38-4A8AF4490563}"
+              DTS:DTSID="{FF690685-4C69-4010-B9CD-B97416B23052}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -95,7 +95,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Fastnätsnummer"
-              DTS:DTSID="{3DD8758C-5CBB-414A-AA8C-CB8E11328A9F}"
+              DTS:DTSID="{8780714E-30C8-4CD0-884E-B3425FB11246}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -104,7 +104,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Epost"
-              DTS:DTSID="{6C3313CE-79CB-4F11-BE55-0BB95B1DD26F}"
+              DTS:DTSID="{DBDC4ECD-4A93-4B56-B2D5-C551E11B3E3F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -113,7 +113,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Plats"
-              DTS:DTSID="{376254EC-0FB2-41FC-9DD8-7B84D49A93F3}"
+              DTS:DTSID="{8F18F00E-C451-4A40-89B0-7DBCF82C2E91}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -122,7 +122,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="C O Adress"
-              DTS:DTSID="{7ECFA2D8-726E-4FA2-8C47-2703DB52EA01}"
+              DTS:DTSID="{8652873C-5D27-4765-A407-583E8A14E7D9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -131,7 +131,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Postnummer"
-              DTS:DTSID="{C2B5E8A5-93E2-4F2A-B759-9431E7937FCD}"
+              DTS:DTSID="{C3DD2E7E-1ACC-4090-B5BB-95CD0B877E10}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -140,7 +140,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Ort"
-              DTS:DTSID="{A7197D81-796C-4F2B-B4F5-DBA223ABC45E}"
+              DTS:DTSID="{018E0990-37E1-41F5-B0A0-6379FB0F8AC9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -149,7 +149,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Land"
-              DTS:DTSID="{D20F0CC1-BEDF-40EF-B126-A9B7BAEDEDE4}"
+              DTS:DTSID="{16D593B7-2E25-43B5-9D44-6FF99213B172}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -158,7 +158,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Kontakttyp"
-              DTS:DTSID="{28420E9B-8C6C-44BA-AB8E-FF70CFEAB6DC}"
+              DTS:DTSID="{21EC719D-85B3-406F-A940-DFA8270620C0}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -167,7 +167,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Dold"
-              DTS:DTSID="{00D290FB-08F3-4417-82EF-756FF3E8868A}"
+              DTS:DTSID="{9F5C1089-FD39-4733-B697-ED3D987C86F1}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -176,7 +176,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Sökord"
-              DTS:DTSID="{BA46647D-40ED-4E7D-81B6-3A692EFB28B5}"
+              DTS:DTSID="{9568AA0C-8FE0-40F8-A320-1E755419BAC0}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -185,7 +185,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="External-ID"
-              DTS:DTSID="{32CE74EF-08C5-454D-9B32-6460B0FF3320}"
+              DTS:DTSID="{7623A3A5-8F4C-4441-828E-7D381AE01636}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -194,7 +194,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Chef"
-              DTS:DTSID="{F507C5A1-FB6A-4758-9B31-9AC72493DA21}"
+              DTS:DTSID="{663B583E-4F7D-4DF3-86F3-74535AEE8927}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -203,7 +203,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Förvaltning"
-              DTS:DTSID="{6F04DF9F-D020-4E9C-AD42-B686830F4A4C}"
+              DTS:DTSID="{621B69A0-36AC-4323-8B81-D5E4FEA39FCE}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -212,16 +212,61 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Tips"
-              DTS:DTSID="{9634D8DF-092D-454E-83DE-9767ED398C47}"
+              DTS:DTSID="{3379BB1A-26F1-4810-B03C-9D8C557C15F7}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:ColumnDelimiter="_x003B_"
               DTS:MaximumWidth="600"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Fonetisk"
-              DTS:DTSID="{5AE2ED42-C3C8-44F7-9CB8-0CF516873004}"
+              DTS:DTSID="{84019E90-DC91-416E-8A4E-46C446A72764}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CustomValue 6"
+              DTS:DTSID="{17C2FADA-2C0A-4815-946D-218CEFF3C419}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CustomValue 7"
+              DTS:DTSID="{A9A470DF-B116-4BDD-8EA2-BDBE8010CEE4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CustomValue 8"
+              DTS:DTSID="{A74B27CF-F04D-4196-B8E0-1D653D123EC8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CustomValue 9"
+              DTS:DTSID="{5898495D-E3DF-4388-AE22-9DD88B88F082}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Nyckelord"
+              DTS:DTSID="{8069344F-A500-4C45-BD9D-E3E25B10BCBA}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -809,6 +854,111 @@
                               name="UseBinaryFormat">false</property>
                           </properties>
                         </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CustomValue 6]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CustomValue 6]"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CustomValue 6]"
+                          name="CustomValue 6"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CustomValue 7]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CustomValue 7]"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CustomValue 7]"
+                          name="CustomValue 7"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CustomValue 8]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CustomValue 8]"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CustomValue 8]"
+                          name="CustomValue 8"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CustomValue 9]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CustomValue 9]"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CustomValue 9]"
+                          name="CustomValue 9"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[Nyckelord]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Nyckelord]"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[Nyckelord]"
+                          name="Nyckelord"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -917,6 +1067,31 @@
                           dataType="wstr"
                           length="10"
                           name="Dold" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CustomValue 6]"
+                          dataType="wstr"
+                          length="500"
+                          name="CustomValue 6" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CustomValue 7]"
+                          dataType="wstr"
+                          length="500"
+                          name="CustomValue 7" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CustomValue 8]"
+                          dataType="wstr"
+                          length="500"
+                          name="CustomValue 8" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CustomValue 9]"
+                          dataType="wstr"
+                          length="500"
+                          name="CustomValue 9" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Nyckelord]"
+                          dataType="wstr"
+                          length="500"
+                          name="Nyckelord" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -1250,7 +1425,7 @@
                         <externalMetadataColumn
                           refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[bolag]"
                           dataType="wstr"
-                          length="25"
+                          length="35"
                           name="bolag" />
                         <externalMetadataColumn
                           refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[forvaltning]"
@@ -2325,15 +2500,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
               Language="CSharp"
               ReadOnlyVariables="User::CurrentFile">
               <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
-              <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
 <root>
@@ -2453,6 +2619,35 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
   </resheader>
 </root>]]></ProjectItem>
               <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_80cc72251a1c46569e985bf7ae3de31d.Properties.Settings.get_Default():ST_80cc72251a1c46569e985bf7ae3de31d.Properties.Sett" +
+    "ings")]
+
+namespace ST_80cc72251a1c46569e985bf7ae3de31d.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
                 Name="ScriptMain.cs"
                 Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
 /* The Script Task allows you to perform virtually any operation that can be accomplished in
@@ -2548,15 +2743,25 @@ namespace ST_80cc72251a1c46569e985bf7ae3de31d
 		public void Main()
 		{
             string currentFile = (string)Dts.Variables["User::CurrentFile"].Value;
+            string header = "Efternamn;Förnamn;Titel;Avdelning;Bolag;Mobiltelefon;Fastnätsnummer;Epost;Plats;C/O Adress;Postnummer;Ort;Land;Kontakttyp;Dold;Sökord;External-ID;Chef;Förvaltning;Tips;Fonetisk;CustomValue 6;CustomValue 7;CustomValue 8;CustomValue 9;Nyckelord";
             char qualifier = '"';
             char delimiter = ';';
-            int delimiterCount = 20; // column count minus one
+            int delimiterCount = header.Split(';').Length - 1;
             using (StreamReader stream = new StreamReader(currentFile))
             {
                 string line;
                 bool insideQualifier = false;
                 while ((line = stream.ReadLine()) != null)
                 {
+                    if (header != null)
+					{
+                        if (!line.Equals(header, StringComparison.OrdinalIgnoreCase))
+						{
+                            Dts.TaskResult = (int)ScriptResults.Failure;
+                            return;
+                        }
+                        header = null;
+					}
                     int c = 0;
                     int len = line.Length;
                     for (int i = 0; i < len; i++)
@@ -2620,7 +2825,7 @@ namespace ST_80cc72251a1c46569e985bf7ae3de31d
     <msb:CodeName>ST_80cc72251a1c46569e985bf7ae3de31d</msb:CodeName>
     <msb:Language>msBuild</msb:Language>
     <msb:DisplayName>ST_80cc72251a1c46569e985bf7ae3de31d</msb:DisplayName>
-    <msb:ProjectId>{2A86ABEE-2429-4FB7-8D9C-59E3BC210732}</msb:ProjectId>
+    <msb:ProjectId>{0711DB6C-DFD8-4BEF-A1EE-B4EF541F5648}</msb:ProjectId>
   </msb:PropertyGroup>
   <msb:ItemGroup>
     <msb:Project Include="ST_80cc72251a1c46569e985bf7ae3de31d.csproj" />
@@ -2633,34 +2838,35 @@ namespace ST_80cc72251a1c46569e985bf7ae3de31d
   </msb:ItemGroup>
 </c:Project>]]></ProjectItem>
               <ProjectItem
-                Name="Properties\Settings.Designer.cs"
-                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
 //
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_80cc72251a1c46569e985bf7ae3de31d")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_80cc72251a1c46569e985bf7ae3de31d")]
+[assembly: AssemblyCopyright("Copyright @  2021")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
 
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_80cc72251a1c46569e985bf7ae3de31d.Properties.Settings.get_Default():ST_80cc72251a1c46569e985bf7ae3de31d.Properties.Sett" +
-    "ings")]
-
-namespace ST_80cc72251a1c46569e985bf7ae3de31d.Properties {
-    
-    
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-        
-        public static Settings Default {
-            get {
-                return defaultInstance;
-            }
-        }
-    }
-}]]></ProjectItem>
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="ST_80cc72251a1c46569e985bf7ae3de31d.csproj"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -2748,35 +2954,14 @@ namespace ST_80cc72251a1c46569e985bf7ae3de31d.Properties {
   </ProjectExtensions>
 </Project>]]></ProjectItem>
               <ProjectItem
-                Name="Properties\AssemblyInfo.cs"
-                Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_80cc72251a1c46569e985bf7ae3de31d")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_80cc72251a1c46569e985bf7ae3de31d")]
-[assembly: AssemblyCopyright("Copyright @  2021")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -2848,112 +3033,121 @@ namespace ST_80cc72251a1c46569e985bf7ae3de31d.Properties {
               <BinaryItem
                 Name="ST_80cc72251a1c46569e985bf7ae3de31d.dll">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
-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
+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
-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
+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
-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
-YAVAAOkAOgM8AOkAaAA8AMkAmwUBAOkA1gBFAPEASAEGAHEAdwQGAJEAdwQGAPkApABJAPkAqgVR
-AJkAdwRXALkAdwQGAAgAFABxAAgAGAB2ACkAcwDeAC4ACwC2AC4AEwC/AC4AGwDeAC4AIwDnAC4A
-KwAQAS4AMwAQAS4AOwAQAS4AQwDnAC4ASwAWAS4AUwAQAS4AWwAtAUMAYwB2AEkAcwDeAGEAewB2
-AGMAawB2ABsAAwABAAQAAwAAAGcEpwAAAAwBrAAAAJMFsQACAAQAAwACAAUABQABAAYABQACAAcA
-BwAEgAAAAQAAAOQg4GAAAAAAAABEAAAABAAAAAAAAAAAAAAAXwA7AAAAAAAOAAAAAAAAAAAAAABo
-AD8DAAAAAAQAAAAAAAAAAAAAAF8A4AMAAAAADgAAAAAAAAAAAAAAaAAUAAAAAAAAAAAAAQAAAMgE
-AAAFAAIAAAAAPE1vZHVsZT4AU3lzdGVtLklPAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuTWFuYWdlZERU
-UwB2YWx1ZV9fAG1zY29ybGliAFNUXzgwY2M3MjI1MWExYzQ2NTY5ZTk4NWJmN2FlM2RlMzFkAFJl
-YWQAZGVmYXVsdEluc3RhbmNlAFZhcmlhYmxlAElEaXNwb3NhYmxlAFJ1bnRpbWVUeXBlSGFuZGxl
-AEdldFR5cGVGcm9tSGFuZGxlAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlJ1bnRpbWUAUmVhZExp
-bmUAVHlwZQBGYWlsdXJlAGdldF9DdWx0dXJlAHNldF9DdWx0dXJlAHJlc291cmNlQ3VsdHVyZQBW
-U1RBUlRTY3JpcHRPYmplY3RNb2RlbEJhc2UAQXBwbGljYXRpb25TZXR0aW5nc0Jhc2UARGlzcG9z
-ZQBFZGl0b3JCcm93c2FibGVTdGF0ZQBDb21waWxlckdlbmVyYXRlZEF0dHJpYnV0ZQBEZWJ1Z2dl
-ck5vblVzZXJDb2RlQXR0cmlidXRlAERlYnVnZ2FibGVBdHRyaWJ1dGUARWRpdG9yQnJvd3NhYmxl
-QXR0cmlidXRlAEFzc2VtYmx5VGl0bGVBdHRyaWJ1dGUAQXNzZW1ibHlUcmFkZW1hcmtBdHRyaWJ1
-dGUAVGFyZ2V0RnJhbWV3b3JrQXR0cmlidXRlAEFzc2VtYmx5Q29uZmlndXJhdGlvbkF0dHJpYnV0
-ZQBBc3NlbWJseURlc2NyaXB0aW9uQXR0cmlidXRlAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRy
-aWJ1dGUAQXNzZW1ibHlQcm9kdWN0QXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmlidXRl
-AFNTSVNTY3JpcHRUYXNrRW50cnlQb2ludEF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1
-dGUAUnVudGltZUNvbXBhdGliaWxpdHlBdHRyaWJ1dGUAZ2V0X1ZhbHVlAHZhbHVlAFN5c3RlbS5S
-dW50aW1lLlZlcnNpb25pbmcAU3RyaW5nAGdldF9MZW5ndGgAUGVlawBNaWNyb3NvZnQuU3FsU2Vy
-dmVyLlNjcmlwdFRhc2sATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuVGFza3MuU2NyaXB0VGFzawBT
-Y3JpcHRPYmplY3RNb2RlbABTeXN0ZW0uQ29tcG9uZW50TW9kZWwAU1RfODBjYzcyMjUxYTFjNDY1
-NjllOTg1YmY3YWUzZGUzMWQuZGxsAGdldF9JdGVtAFN5c3RlbQBFbnVtAHJlc291cmNlTWFuAFNj
-cmlwdE1haW4AU3lzdGVtLkNvbmZpZ3VyYXRpb24AU3lzdGVtLkdsb2JhbGl6YXRpb24AU3lzdGVt
-LlJlZmxlY3Rpb24AQ3VsdHVyZUluZm8AU3RyZWFtUmVhZGVyAFRleHRSZWFkZXIAZ2V0X1Jlc291
-cmNlTWFuYWdlcgAuY3RvcgAuY2N0b3IAU3lzdGVtLkRpYWdub3N0aWNzAFN5c3RlbS5SdW50aW1l
-LkNvbXBpbGVyU2VydmljZXMAU3lzdGVtLlJlc291cmNlcwBTVF84MGNjNzIyNTFhMWM0NjU2OWU5
-ODViZjdhZTNkZTMxZC5Qcm9wZXJ0aWVzLlJlc291cmNlcy5yZXNvdXJjZXMARGVidWdnaW5nTW9k
-ZXMAU1RfODBjYzcyMjUxYTFjNDY1NjllOTg1YmY3YWUzZGUzMWQuUHJvcGVydGllcwBnZXRfVmFy
-aWFibGVzAFNldHRpbmdzAGdldF9DaGFycwBTdWNjZXNzAGdldF9EdHMAU2NyaXB0UmVzdWx0cwBP
-YmplY3QAZ2V0X0RlZmF1bHQAc2V0X1Rhc2tSZXN1bHQAZ2V0X0Fzc2VtYmx5AAAAI1UAcwBlAHIA
-OgA6AEMAdQByAHIAZQBuAHQARgBpAGwAZQAAcVMAVABfADgAMABjAGMANwAyADIANQAxAGEAMQBj
-ADQANgA1ADYAOQBlADkAOAA1AGIAZgA3AGEAZQAzAGQAZQAzADEAZAAuAFAAcgBvAHAAZQByAHQA
-aQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAAAF3E67Orz65JrwFdGsdM+dIABCABAQgDIAABBSAB
-ARERBCABAQ4FIAEBEVUMBwkDAwgSPQ4CCAgIBCAAEmUEIAASaQUgARJtHAMgABwDIAAIBCABAwgD
-IAAOBwABEn0RgIEFIAASgIUHIAIBDhKAhQi3elxWGTTgiQiJhF3NgIDMkQQAAAAABAEAAAADBhJN
-AwYSUQMGEhACBggDBhEUBAAAEk0EAAASUQUAAQESUQQAABIQAwAAAQQIABJNBAgAElEECAASEAgB
-AAgAAAAAAB4BAAEAVAIWV3JhcE5vbkV4Y2VwdGlvblRocm93cwEIAQACAAAAAAAoAQAjU1RfODBj
-YzcyMjUxYTFjNDY1NjllOTg1YmY3YWUzZGUzMWQAAAUBAAAAABYBABFDb3B5cmlnaHQgQCAgMjAy
-MQAASQEAGi5ORVRGcmFtZXdvcmssVmVyc2lvbj12NC41AQBUDhRGcmFtZXdvcmtEaXNwbGF5TmFt
-ZRIuTkVUIEZyYW1ld29yayA0LjUAtAAAAM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2VzLlJl
-c291cmNlUmVhZGVyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWws
-IFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50aW1l
-UmVzb3VyY2VTZXQCAAAAAAAAAAAAAABQQURQQURQtAAAAMQuAAAAAAAAAAAAAN4uAAAAIAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAADQLgAAAAAAAAAAAAAAAF9Db3JEbGxNYWluAG1zY29yZWUuZGxsAAAA
-AAD/JQAgABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAcBEAAAAgAAAAEgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAHgEAAAAQAAAAAYAAAAUAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAGgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAABM
+MQAAAAAAAEgAAAACAAUA8CEAAHAOAAABAAAAAAAAAGAwAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAABswBQAZAQAAAQAAEQIoEAAACm8RAAAKcgEAAHBvEgAACm8T
+AAAKdBwAAAEKciUAAHALHyIMHzsNBxeNHQAAASUWHzudbxQAAAqOaRdZEwQGcxUAAAoTBRYTBzic
+AAAAByweEQYHG28WAAAKLRECKBAAAAoXbxcAAArdpgAAABQLFhMIEQZvGAAAChMJFhMKK1ARBhEK
+bxkAAAoJMxARBy0MEQgXWBMIEQgRBDA6EQYRCm8ZAAAKCDMiEQcsGxEFbxoAAAoI/gEsChEFbxsA
+AAomKwgWEwcrAxcTBxEKF1gTChEKEQkyqhEIEQQuDgIoEAAAChdvFwAACt4pEQVvHAAACiUTBjpV
+////3gwRBSwHEQVvHQAACtwCKBAAAAoWbxcAAAoqAAAAARAAAAIASwC1AAEMAAAAAB4CKB4AAAoq
+HgIoHwAACiqufgEAAAQtHnIMAgBw0AMAAAIoIAAACm8hAAAKcyIAAAqAAQAABH4BAAAEKhp+AgAA
+BCoeAoACAAAEKhp+AwAABCoeAigjAAAKKi5zCAAABoADAAAEKgAAQlNKQgEAAQAAAAAADAAAAHY0
+LjAuMzAzMTkAAAAABQBsAAAAEAQAACN+AAB8BAAA3AUAACNTdHJpbmdzAAAAAFgKAACAAgAAI1VT
+ANgMAAAQAAAAI0dVSUQAAADoDAAAiAEAACNCbG9iAAAAAAAAAAIAAAFXHaIBCQMAAAD6ATMAFgAA
+AQAAACMAAAAFAAAABgAAAAkAAAABAAAAIwAAAAIAAAAQAAAAAQAAAAIAAAADAAAABAAAAAEAAAAE
+AAAAAQAAAAEAAAAAAK8DAQAAAAAABgBRAq0EBgDgAq0EBgCdAZoEDwAhBQAABgDKAS0EBgA0Ai0E
+BgAVAi0EBgDHAi0EBgBxAi0EBgCKAi0EBgDhAS0EBgD8AQ4DCgClAl4DCgAUAV4DBgBhBAoABgDn
+A+ADBgCAAZoEBgClBeADBgB9BM0EBgBQBBgEDgBQAZkDDgCxAZkDDgAwAQMEBgBlAa0ECgCHA14D
+EgBjBbYAEgB9ALYABgAoA+ADBgBcBOADBgA/BOADBgBuBAoABgCGAOADBgDfAOADBgCSAOADBgDR
+BS0EAAAAAAEAAAAAAAEAAQABABAA+ANEADkAAQABAAAAEADUBDAFSQABAAMAAAEQAG0FMAVdAAMA
+BwADAQAAlwUAAEEABAAKABEA7AOMABEABAGQABEAbQCUAAYGMwCYAFaAhwWbAFaA5ACbAFAgAAAA
+AIYA/gMGAAEAiCEAAAAAhhiNBAYAAQCQIQAAAACDGI0EBgABAJghAAAAAJMIeQSfAAEAxCEAAAAA
+kwjsAKQAAQDLIQAAAACTCPgAqQABANMhAAAAAJYIsgWvAAIA2iEAAAAAhhiNBAYAAgDiIQAAAACR
+GJMEtAACAAAAAQAIAwkAjQQBABEAjQQGABkAjQQKACkAjQQQADEAjQQQADkAjQQQAEEAjQQQAEkA
+jQQQAFEAjQQQAFkAjQQQAGEAjQQQAGkAjQQGAIkAjQQGALEAjQQVAMEAjQQGAHEAjwUqAMkAXwUv
+ANEA1wM0ANkA/gI6AOEArAU+AHkAjQQQAOEAdgVFAMkAvgUBAOEALwNMAOEAfQVQAPkAOgNMAPkA
+aABMAPkA1gBVAAEBSAEGAHEAjQQGAJEAjQQGAAkBpABZAAkBzQViAJkAjQRoALkAjQQGAAgAFACC
+AAgAGACHACkAcwDvAC4ACwDHAC4AEwDQAC4AGwDvAC4AIwD4AC4AKwAhAS4AMwAhAS4AOwAhAS4A
+QwD4AC4ASwAnAS4AUwAhAS4AWwA+AUMAYwCHAEkAcwDvAGEAewCHAGMAawCHABsAAwABAAQAAwAA
+AH0EuAAAAAwBvQAAALYFwgACAAQAAwACAAUABQABAAYABQACAAcABwAEgAAAAQAAAAMhaEkAAAAA
+AABEAAAABAAAAAAAAAAAAAAAcAA7AAAAAAAOAAAAAAAAAAAAAAB5AD8DAAAAAAQAAAAAAAAAAAAA
+AHAA4AMAAAAADgAAAAAAAAAAAAAAeQAUAAAAAAAAAAAAAQAAAN4EAAAFAAIAAAAAPE1vZHVsZT4A
+U3lzdGVtLklPAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuTWFuYWdlZERUUwB2YWx1ZV9fAG1zY29ybGli
+AFNUXzgwY2M3MjI1MWExYzQ2NTY5ZTk4NWJmN2FlM2RlMzFkAFJlYWQAZGVmYXVsdEluc3RhbmNl
+AFZhcmlhYmxlAElEaXNwb3NhYmxlAFJ1bnRpbWVUeXBlSGFuZGxlAEdldFR5cGVGcm9tSGFuZGxl
+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlJ1bnRpbWUAUmVhZExpbmUAVHlwZQBGYWlsdXJlAGdl
+dF9DdWx0dXJlAHNldF9DdWx0dXJlAHJlc291cmNlQ3VsdHVyZQBWU1RBUlRTY3JpcHRPYmplY3RN
+b2RlbEJhc2UAQXBwbGljYXRpb25TZXR0aW5nc0Jhc2UARGlzcG9zZQBFZGl0b3JCcm93c2FibGVT
+dGF0ZQBDb21waWxlckdlbmVyYXRlZEF0dHJpYnV0ZQBEZWJ1Z2dlck5vblVzZXJDb2RlQXR0cmli
+dXRlAERlYnVnZ2FibGVBdHRyaWJ1dGUARWRpdG9yQnJvd3NhYmxlQXR0cmlidXRlAEFzc2VtYmx5
+VGl0bGVBdHRyaWJ1dGUAQXNzZW1ibHlUcmFkZW1hcmtBdHRyaWJ1dGUAVGFyZ2V0RnJhbWV3b3Jr
+QXR0cmlidXRlAEFzc2VtYmx5Q29uZmlndXJhdGlvbkF0dHJpYnV0ZQBBc3NlbWJseURlc2NyaXB0
+aW9uQXR0cmlidXRlAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1dGUAQXNzZW1ibHlQcm9k
+dWN0QXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmlidXRlAFNTSVNTY3JpcHRUYXNrRW50
+cnlQb2ludEF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1dGUAUnVudGltZUNvbXBhdGli
+aWxpdHlBdHRyaWJ1dGUAZ2V0X1ZhbHVlAHZhbHVlAFN5c3RlbS5SdW50aW1lLlZlcnNpb25pbmcA
+U3RyaW5nAGdldF9MZW5ndGgAUGVlawBNaWNyb3NvZnQuU3FsU2VydmVyLlNjcmlwdFRhc2sATWlj
+cm9zb2Z0LlNxbFNlcnZlci5EdHMuVGFza3MuU2NyaXB0VGFzawBTY3JpcHRPYmplY3RNb2RlbABT
+eXN0ZW0uQ29tcG9uZW50TW9kZWwAU1RfODBjYzcyMjUxYTFjNDY1NjllOTg1YmY3YWUzZGUzMWQu
+ZGxsAGdldF9JdGVtAFN5c3RlbQBFbnVtAHJlc291cmNlTWFuAFNjcmlwdE1haW4AU3lzdGVtLkNv
+bmZpZ3VyYXRpb24AU3lzdGVtLkdsb2JhbGl6YXRpb24AU3lzdGVtLlJlZmxlY3Rpb24AU3RyaW5n
+Q29tcGFyaXNvbgBDdWx0dXJlSW5mbwBDaGFyAFN0cmVhbVJlYWRlcgBUZXh0UmVhZGVyAGdldF9S
+ZXNvdXJjZU1hbmFnZXIALmN0b3IALmNjdG9yAFN5c3RlbS5EaWFnbm9zdGljcwBTeXN0ZW0uUnVu
+dGltZS5Db21waWxlclNlcnZpY2VzAFN5c3RlbS5SZXNvdXJjZXMAU1RfODBjYzcyMjUxYTFjNDY1
+NjllOTg1YmY3YWUzZGUzMWQuUHJvcGVydGllcy5SZXNvdXJjZXMucmVzb3VyY2VzAERlYnVnZ2lu
+Z01vZGVzAFNUXzgwY2M3MjI1MWExYzQ2NTY5ZTk4NWJmN2FlM2RlMzFkLlByb3BlcnRpZXMAZ2V0
+X1ZhcmlhYmxlcwBTZXR0aW5ncwBFcXVhbHMAZ2V0X0NoYXJzAFN1Y2Nlc3MAZ2V0X0R0cwBTY3Jp
+cHRSZXN1bHRzAE9iamVjdABTcGxpdABnZXRfRGVmYXVsdABzZXRfVGFza1Jlc3VsdABnZXRfQXNz
+ZW1ibHkAAAAAI1UAcwBlAHIAOgA6AEMAdQByAHIAZQBuAHQARgBpAGwAZQAAgeVFAGYAdABlAHIA
+bgBhAG0AbgA7AEYA9gByAG4AYQBtAG4AOwBUAGkAdABlAGwAOwBBAHYAZABlAGwAbgBpAG4AZwA7
+AEIAbwBsAGEAZwA7AE0AbwBiAGkAbAB0AGUAbABlAGYAbwBuADsARgBhAHMAdABuAOQAdABzAG4A
+dQBtAG0AZQByADsARQBwAG8AcwB0ADsAUABsAGEAdABzADsAQwAvAE8AIABBAGQAcgBlAHMAcwA7
+AFAAbwBzAHQAbgB1AG0AbQBlAHIAOwBPAHIAdAA7AEwAYQBuAGQAOwBLAG8AbgB0AGEAawB0AHQA
+eQBwADsARABvAGwAZAA7AFMA9gBrAG8AcgBkADsARQB4AHQAZQByAG4AYQBsAC0ASQBEADsAQwBo
+AGUAZgA7AEYA9gByAHYAYQBsAHQAbgBpAG4AZwA7AFQAaQBwAHMAOwBGAG8AbgBlAHQAaQBzAGsA
+OwBDAHUAcwB0AG8AbQBWAGEAbAB1AGUAIAA2ADsAQwB1AHMAdABvAG0AVgBhAGwAdQBlACAANwA7
+AEMAdQBzAHQAbwBtAFYAYQBsAHUAZQAgADgAOwBDAHUAcwB0AG8AbQBWAGEAbAB1AGUAIAA5ADsA
+TgB5AGMAawBlAGwAbwByAGQAAXFTAFQAXwA4ADAAYwBjADcAMgAyADUAMQBhADEAYwA0ADYANQA2
+ADkAZQA5ADgANQBiAGYANwBhAGUAMwBkAGUAMwAxAGQALgBQAHIAbwBwAGUAcgB0AGkAZQBzAC4A
+UgBlAHMAbwB1AHIAYwBlAHMAAAAAoPe/eM3Ly0+Aiequ639mtgAEIAEBCAMgAAEFIAEBEREEIAEB
+DgUgAQERVQ4HCw4OAwMIEj0OAggICAQgABJlBCAAEmkFIAESbRwDIAAcBiABHQ4dAwYgAgIOEXkD
+IAAIBCABAwgDIAAOCAABEoCFEYCJBSAAEoCNByACAQ4SgI0It3pcVhk04IkIiYRdzYCAzJEEAAAA
+AAQBAAAAAwYSTQMGElEDBhIQAgYIAwYRFAQAABJNBAAAElEFAAEBElEEAAASEAMAAAEECAASTQQI
+ABJRBAgAEhAIAQAIAAAAAAAeAQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBCAEAAgAAAAAA
+KAEAI1NUXzgwY2M3MjI1MWExYzQ2NTY5ZTk4NWJmN2FlM2RlMzFkAAAFAQAAAAAWAQARQ29weXJp
+Z2h0IEAgIDIwMjEAAEkBABouTkVURnJhbWV3b3JrLFZlcnNpb249djQuNQEAVA4URnJhbWV3b3Jr
+RGlzcGxheU5hbWUSLk5FVCBGcmFtZXdvcmsgNC41tAAAAM7K774BAAAAkQAAAGxTeXN0ZW0uUmVz
+b3VyY2VzLlJlc291cmNlUmVhZGVyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJl
+PW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkjU3lzdGVtLlJlc291cmNl
+cy5SdW50aW1lUmVzb3VyY2VTZXQCAAAAAAAAAAAAAABQQURQQURQtAAAAEAxAAAAAAAAAAAAAFox
+AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAABMMQAAAAAAAAAAAAAAAF9Db3JEbGxNYWluAG1zY29y
+ZWUuZGxsAAAAAAD/JQAgABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAEAEAAAABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAA
+AEgAAABYQAAAGgQAAAAAAAAAAAAAGgQ0AAAAVgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8A
+AAAAAL0E7/4AAAEAAAABAGhJAyEAAAEAaEkDIT8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABE
+AAAAAQBWAGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8A
+bgAAAAAAAACwBHoDAAABAFMAdAByAGkAbgBnAEYAaQBsAGUASQBuAGYAbwAAAFYDAAABADAAMAAw
+ADAAMAA0AGIAMAAAABoAAQABAEMAbwBtAG0AZQBuAHQAcwAAAAAAAAAiAAEAAQBDAG8AbQBwAGEA
+bgB5AE4AYQBtAGUAAAAAAAAAAABwACQAAQBGAGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAA
+AAAAUwBUAF8AOAAwAGMAYwA3ADIAMgA1ADEAYQAxAGMANAA2ADUANgA5AGUAOQA4ADUAYgBmADcA
+YQBlADMAZABlADMAMQBkAAAAPgAPAAEARgBpAGwAZQBWAGUAcgBzAGkAbwBuAAAAAAAxAC4AMAAu
+ADgANAA1ADEALgAxADgANwA5ADIAAAAAAHAAKAABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAA
+UwBUAF8AOAAwAGMAYwA3ADIAMgA1ADEAYQAxAGMANAA2ADUANgA5AGUAOQA4ADUAYgBmADcAYQBl
+ADMAZABlADMAMQBkAC4AZABsAGwAAABIABIAAQBMAGUAZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQA
+AABDAG8AcAB5AHIAaQBnAGgAdAAgAEAAIAAgADIAMAAyADEAAAAqAAEAAQBMAGUAZwBhAGwAVABy
+AGEAZABlAG0AYQByAGsAcwAAAAAAAAAAAHgAKAABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4A
+YQBtAGUAAABTAFQAXwA4ADAAYwBjADcAMgAyADUAMQBhADEAYwA0ADYANQA2ADkAZQA5ADgANQBi
+AGYANwBhAGUAMwBkAGUAMwAxAGQALgBkAGwAbAAAAGgAJAABAFAAcgBvAGQAdQBjAHQATgBhAG0A
+ZQAAAAAAUwBUAF8AOAAwAGMAYwA3ADIAMgA1ADEAYQAxAGMANAA2ADUANgA5AGUAOQA4ADUAYgBm
+ADcAYQBlADMAZABlADMAMQBkAAAAQgAPAAEAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAA
+MQAuADAALgA4ADQANQAxAC4AMQA4ADcAOQAyAAAAAABGAA8AAQBBAHMAcwBlAG0AYgBsAHkAIABW
+AGUAcgBzAGkAbwBuAAAAMQAuADAALgA4ADQANQAxAC4AMQA4ADcAOQAyAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAABABAAAAAYAACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAA
-AABIAAAAWEAAABoEAAAAAAAAAAAAABoENAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBP
-AAAAAAC9BO/+AAABAAAAAQDgYOQgAAABAOBg5CA/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAA
-RAAAAAEAVgBhAHIARgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBv
-AG4AAAAAAAAAsAR6AwAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAABWAwAAAQAwADAA
-MAAwADAANABiADAAAAAaAAEAAQBDAG8AbQBtAGUAbgB0AHMAAAAAAAAAIgABAAEAQwBvAG0AcABh
-AG4AeQBOAGEAbQBlAAAAAAAAAAAAcAAkAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4A
-AAAAAFMAVABfADgAMABjAGMANwAyADIANQAxAGEAMQBjADQANgA1ADYAOQBlADkAOAA1AGIAZgA3
-AGEAZQAzAGQAZQAzADEAZAAAAD4ADwABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAuADAA
-LgA4ADQAMgAwAC4AMgA0ADgAMAAwAAAAAABwACgAAQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAA
-AFMAVABfADgAMABjAGMANwAyADIANQAxAGEAMQBjADQANgA1ADYAOQBlADkAOAA1AGIAZgA3AGEA
-ZQAzAGQAZQAzADEAZAAuAGQAbABsAAAASAASAAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0
-AAAAQwBvAHAAeQByAGkAZwBoAHQAIABAACAAIAAyADAAMgAxAAAAKgABAAEATABlAGcAYQBsAFQA
-cgBhAGQAZQBtAGEAcgBrAHMAAAAAAAAAAAB4ACgAAQBPAHIAaQBnAGkAbgBhAGwARgBpAGwAZQBu
-AGEAbQBlAAAAUwBUAF8AOAAwAGMAYwA3ADIAMgA1ADEAYQAxAGMANAA2ADUANgA5AGUAOQA4ADUA
-YgBmADcAYQBlADMAZABlADMAMQBkAC4AZABsAGwAAABoACQAAQBQAHIAbwBkAHUAYwB0AE4AYQBt
-AGUAAAAAAFMAVABfADgAMABjAGMANwAyADIANQAxAGEAMQBjADQANgA1ADYAOQBlADkAOAA1AGIA
-ZgA3AGEAZQAzAGQAZQAzADEAZAAAAEIADwABAFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAA
-ADEALgAwAC4AOAA0ADIAMAAuADIANAA4ADAAMAAAAAAARgAPAAEAQQBzAHMAZQBtAGIAbAB5ACAA
-VgBlAHIAcwBpAG8AbgAAADEALgAwAC4AOAA0ADIAMAAuADIANAA4ADAAMAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAwAAADwPgAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAADAAAAGwxAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -2962,7 +3156,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
             </ScriptProject>
           </DTS:ObjectData>
         </DTS:Executable>

@@ -1,0 +1,753 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/17/2023 2:28:01 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName=""
+  DTS:CreatorName="Jonas Sjömark"
+  DTS:DTSID="{0A4DA4D7-2308-4887-A758-A1A04D94516E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5035.3"
+  DTS:LocaleID="8192"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{D17798E2-D38F-49D6-B55D-71193C450ABF}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Combine]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{4B195DDD-F21C-458E-9F29-41FCF8E44AD3}"
+      DTS:ObjectName="Combine">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::CombineConnectionString]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Retain="True"
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MetaDirectory]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{99DD446C-D820-4F9B-8867-F32291598C5B}"
+      DTS:ObjectName="MetaDirectory">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::MetaDirectoryConnectionString]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{269354E4-F84A-4A85-AD98-8B49CDE231D3}"
+      DTS:ObjectName="CombineConnectionString"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{EB595708-A576-4596-AB93-18D172043596}"
+      DTS:ObjectName="MetaDirectoryConnectionString"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Build temp table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B23877BC-3E38-4A39-8A52-5A94C3537838}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Build temp table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4B195DDD-F21C-458E-9F29-41FCF8E44AD3}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('tempdb..##CombineAnvandare') IS NOT NULL&#xA;    DROP TABLE ##CombineAnvandare;&#xA;&#xA;CREATE TABLE ##CombineAnvandare (&#xA;    personnr nvarchar(12) NOT NULL PRIMARY KEY,&#xA;    aktiv bit NOT NULL,&#xA;    myndighet bit NOT NULL,&#xA;    aktivMyndighet bit NOT NULL,&#xA;    utforare bit NOT NULL,&#xA;    aktivUtforare bit NOT NULL&#xA;);&#xA;&#xA;INSERT INTO ##CombineAnvandare &#xA;    (personnr, aktiv, myndighet, aktivMyndighet, utforare, aktivUtforare)&#xA;SELECT DISTINCT&#xA;    REPLACE(Personnummer, '-', '') COLLATE Finnish_Swedish_100_CI_AS,&#xA;    0, -- aktiv (sätts senare)&#xA;    1, -- myndighet&#xA;    0, -- aktivMyndighet (sätts senare)&#xA;    0, -- utforare&#xA;    0  -- aktivUtforare&#xA;FROM&#xA;     Combinestatistikmyndighet.RS.Användare&#xA;WHERE&#xA;    Personnummer LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]';&#xA;&#xA;MERGE ##CombineAnvandare dst&#xA;USING (&#xA;    SELECT DISTINCT&#xA;        REPLACE(Personnummer, '-', '') COLLATE Finnish_Swedish_100_CI_AS AS Personnummer&#xA;    FROM&#xA;        Combinestatistikutforare.RS.Användare src&#xA;    WHERE&#xA;        Personnummer LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'&#xA;) src&#xA;ON&#xA;    dst.personnr = src.Personnummer&#xA;WHEN MATCHED THEN&#xA;    UPDATE SET dst.utforare = 1&#xA;WHEN NOT MATCHED THEN&#xA;    INSERT&#xA;        (personnr, aktiv, myndighet, aktivMyndighet, utforare, aktivUtforare)&#xA;    VALUES (&#xA;        src.Personnummer,&#xA;        0, -- aktiv (sätts senare)&#xA;        0, -- myndighet&#xA;        0, -- aktivMyndighet&#xA;        1, -- utforare&#xA;        0  -- aktivUtforare (sätts senare)&#xA;    );&#xA;&#xA;UPDATE&#xA;    ##CombineAnvandare&#xA;SET&#xA;    aktivMyndighet = 1&#xA;WHERE&#xA;    personnr IN (&#xA;        SELECT&#xA;            REPLACE(Personnummer, '-', '') COLLATE Finnish_Swedish_100_CI_AS&#xA;        FROM&#xA;            Combinestatistikmyndighet.RS.Användare&#xA;        WHERE&#xA;            GETDATE() BETWEEN RollFrån AND RollTill&#xA;    );&#xA;&#xA;UPDATE&#xA;    ##CombineAnvandare&#xA;SET&#xA;    aktivUtforare = 1&#xA;WHERE&#xA;    personnr IN (&#xA;        SELECT&#xA;            REPLACE(Personnummer, '-', '') COLLATE Finnish_Swedish_100_CI_AS&#xA;        FROM&#xA;            Combinestatistikutforare.RS.Användare&#xA;        WHERE&#xA;            GETDATE() BETWEEN RollFrån AND RollTill&#xA;    );&#xA;&#xA;UPDATE&#xA;    ##CombineAnvandare&#xA;SET&#xA;    aktiv = 1&#xA;WHERE&#xA;    aktivMyndighet = 1 OR aktivUtforare = 1;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Commit"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F992CD14-3B60-43D1-B8AE-60CF2AF3F745}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Commit"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{99DD446C-D820-4F9B-8867-F32291598C5B}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spCommitCombineAnvandare" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Drop temp table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A8687712-795A-4EF9-AC7A-4C4287D3CFF9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop temp table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{99DD446C-D820-4F9B-8867-F32291598C5B}"
+          SQLTask:SqlStatementSource="DROP TABLE ##CombineAnvandare" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{1CE6D943-E4AD-4124-B17E-0D68203417FC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CombineAnvandare_stage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[personnr]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="personnr"
+                      externalMetadataColumnId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[personnr]" />
+                    <inputColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[aktiv]"
+                      cachedDataType="bool"
+                      cachedName="aktiv"
+                      externalMetadataColumnId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[aktiv]"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[aktiv]" />
+                    <inputColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[myndighet]"
+                      cachedDataType="bool"
+                      cachedName="myndighet"
+                      externalMetadataColumnId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[myndighet]"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[myndighet]" />
+                    <inputColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[aktivMyndighet]"
+                      cachedDataType="bool"
+                      cachedName="aktivMyndighet"
+                      externalMetadataColumnId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[aktivMyndighet]"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[aktivMyndighet]" />
+                    <inputColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[utforare]"
+                      cachedDataType="bool"
+                      cachedName="utforare"
+                      externalMetadataColumnId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[utforare]"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[utforare]" />
+                    <inputColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[aktivUtforare]"
+                      cachedDataType="bool"
+                      cachedName="aktivUtforare"
+                      externalMetadataColumnId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[aktivUtforare]"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[aktivUtforare]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
+                      dataType="wstr"
+                      length="12"
+                      name="personnr" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[aktiv]"
+                      dataType="bool"
+                      name="aktiv" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[myndighet]"
+                      dataType="bool"
+                      name="myndighet" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[aktivMyndighet]"
+                      dataType="bool"
+                      name="aktivMyndighet" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[utforare]"
+                      dataType="bool"
+                      name="utforare" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[aktivUtforare]"
+                      dataType="bool"
+                      name="aktivUtforare" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT * FROM ##CombineAnvandare;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Combine]"
+                  connectionManagerRefId="Package.ConnectionManagers[Combine]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[personnr]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[personnr]"
+                      length="12"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[personnr]"
+                      name="personnr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[aktiv]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aktiv]"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[aktiv]"
+                      name="aktiv"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[myndighet]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[myndighet]"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[myndighet]"
+                      name="myndighet"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[aktivMyndighet]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aktivMyndighet]"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[aktivMyndighet]"
+                      name="aktivMyndighet"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[utforare]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[utforare]"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[utforare]"
+                      name="utforare"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[aktivUtforare]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aktivUtforare]"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].Columns[aktivUtforare]"
+                      name="aktivUtforare"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[personnr]"
+                      dataType="wstr"
+                      length="12"
+                      name="personnr" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aktiv]"
+                      dataType="bool"
+                      name="aktiv" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[myndighet]"
+                      dataType="bool"
+                      name="myndighet" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aktivMyndighet]"
+                      dataType="bool"
+                      name="aktivMyndighet" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[utforare]"
+                      dataType="bool"
+                      name="utforare" />
+                    <externalMetadataColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aktivUtforare]"
+                      dataType="bool"
+                      name="aktivUtforare" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[personnr]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[personnr]"
+                      name="personnr" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aktiv]"
+                      dataType="bool"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aktiv]"
+                      name="aktiv" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[myndighet]"
+                      dataType="bool"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[myndighet]"
+                      name="myndighet" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aktivMyndighet]"
+                      dataType="bool"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aktivMyndighet]"
+                      name="aktivMyndighet" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[utforare]"
+                      dataType="bool"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[utforare]"
+                      name="utforare" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aktivUtforare]"
+                      dataType="bool"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aktivUtforare]"
+                      name="aktivUtforare" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage.Paths[OLE DB Source Output]"
+              endId="Package\Stage\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate stage"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7C74D76F-3C96-44C7-A5D8-372B7A4E3CB1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate stage"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{99DD446C-D820-4F9B-8867-F32291598C5B}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.CombineAnvandare_stage" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{B97A2501-E24D-4BA2-9E9A-943F7454CC43}"
+      DTS:From="Package\Build temp table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{9A65D236-8B71-406B-805F-A05FCDF37C79}"
+      DTS:From="Package\Truncate stage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Build temp table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{9EC571A4-AE53-45E0-A8E2-91E9CC8A96FB}"
+      DTS:From="Package\Stage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Drop temp table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{BBA1A24F-60D3-40CF-9F24-8BF19B1589F3}"
+      DTS:From="Package\Drop temp table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Commit" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Stage"
+          TopLeft="30.5,209.5" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Build temp table"
+          TopLeft="5.5,107.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="84.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Truncate stage"
+          TopLeft="8.5,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="84.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="117,42"
+          Id="Package\Commit"
+          TopLeft="26.0000000000001,428.5" />
+        <AnnotationLayout
+          Text="To be able to use a temp table in the OLEDB Source, you first have to build the temp&#xD;&#xA;table in an Execute SQL Task. There are a few things to think about with this approach:&#xD;&#xA;- The temp table has to be global (##)&#xD;&#xA;- RetainSameConnection must be set to true on the connection (in this case Combine)&#xD;&#xA;- ValidateExternalMetadata must be set to false on the OLEDB Source.&#xD;&#xA;&#xD;&#xA;To make changes to the OLEDB Source you first have to create the temp table by&#xD;&#xA;running the &quot;Build temp table&quot; task in isolation (right-click and choose Execute Task).&#xD;&#xA;While the task is running (do not press stop), open the OLEDB Source and make the&#xD;&#xA;necessary changes."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="483,184"
+          Id="29bc5012-668f-4e7c-80f4-1b621548baed"
+          TopLeft="198.5,16.5" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Drop temp table"
+          TopLeft="6.00000000000006,311.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="84.5,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="84.5000000000001,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,75"
+              Start="0,0"
+              End="0,67.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,67.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Stage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Stage\OLE DB Source"
+          TopLeft="15.5,5.5" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Stage\OLE DB Destination"
+          TopLeft="5.50000000000001,107.5" />
+        <EdgeLayout
+          Id="Package\Stage.Paths[OLE DB Source Output]"
+          TopLeft="94,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

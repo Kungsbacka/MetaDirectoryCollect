@@ -12,8 +12,8 @@
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="15"
-  DTS:VersionGUID="{D17798E2-D38F-49D6-B55D-71193C450ABF}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{638B604B-ADDD-4ACD-99A7-5CA8F63FF920}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -88,6 +88,22 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Calculate diff"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A8905FC5-99E7-464D-85A0-1BEE04853F9B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Calculate diff"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{99DD446C-D820-4F9B-8867-F32291598C5B}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spUpdateCombineAnvandareDiff" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Commit"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
@@ -117,6 +133,22 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{99DD446C-D820-4F9B-8867-F32291598C5B}"
           SQLTask:SqlStatementSource="DROP TABLE ##CombineAnvandare" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Prepare export"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7C74D76F-3C96-44C7-A5D8-372B7A4E3CB1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Prepare export"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{99DD446C-D820-4F9B-8867-F32291598C5B}"
+          SQLTask:SqlStatementSource="EXECUTE dbo.spPrepareCombineAnvandareExport" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -509,22 +541,6 @@
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Truncate stage"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{7C74D76F-3C96-44C7-A5D8-372B7A4E3CB1}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Truncate stage"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{99DD446C-D820-4F9B-8867-F32291598C5B}"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.CombineAnvandare_stage" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
@@ -539,7 +555,7 @@
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
       DTS:DTSID="{9A65D236-8B71-406B-805F-A05FCDF37C79}"
-      DTS:From="Package\Truncate stage"
+      DTS:From="Package\Prepare export"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\Build temp table" />
@@ -559,6 +575,14 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
       DTS:To="Package\Commit" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{99AF7693-D617-4F61-B8DC-E6BE91B067F0}"
+      DTS:From="Package\Commit"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Calculate diff" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -573,79 +597,72 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="108,42"
-          Id="Package\Stage"
-          TopLeft="30.5,209.5" />
-        <NodeLayout
           Size="158,42"
           Id="Package\Build temp table"
-          TopLeft="5.5,107.5" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="84.5,149.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="152,42"
-          Id="Package\Truncate stage"
-          TopLeft="8.5,5.5" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="84.5,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="5.00000000000006,107.5" />
         <NodeLayout
           Size="117,42"
           Id="Package\Commit"
-          TopLeft="26.0000000000001,428.5" />
-        <AnnotationLayout
-          Text="To be able to use a temp table in the OLEDB Source, you first have to build the temp&#xD;&#xA;table in an Execute SQL Task. There are a few things to think about with this approach:&#xD;&#xA;- The temp table has to be global (##)&#xD;&#xA;- RetainSameConnection must be set to true on the connection (in this case Combine)&#xD;&#xA;- ValidateExternalMetadata must be set to false on the OLEDB Source.&#xD;&#xA;&#xD;&#xA;To make changes to the OLEDB Source you first have to create the temp table by&#xD;&#xA;running the &quot;Build temp table&quot; task in isolation (right-click and choose Execute Task).&#xD;&#xA;While the task is running (do not press stop), open the OLEDB Source and make the&#xD;&#xA;necessary changes."
-          ParentId="Package"
-          FontInfo="{assembly:Null}"
-          Size="483,184"
-          Id="29bc5012-668f-4e7c-80f4-1b621548baed"
-          TopLeft="198.5,16.5" />
+          TopLeft="25.5000000000001,413.5" />
         <NodeLayout
           Size="157,42"
           Id="Package\Drop temp table"
-          TopLeft="6.00000000000006,311.5" />
+          TopLeft="5.50000000000006,311.5" />
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Stage"
+          TopLeft="30.0000000000001,209.5" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Prepare export"
+          TopLeft="8.00000000000006,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="84.0000000000001,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="84.0000000000001,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="84.5,251.5">
+          TopLeft="84.0000000000001,251.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -667,18 +684,51 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="84.5000000000001,353.5">
+          TopLeft="84.0000000000001,353.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,75"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,67.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,67.5" />
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="To be able to use a temp table in the OLEDB Source, you first have to build the temp&#xA;table in an Execute SQL Task. There are a few things to think about with this approach:&#xA;- The temp table has to be global (##)&#xA;- RetainSameConnection must be set to true on the connection (in this case Combine)&#xA;- ValidateExternalMetadata must be set to false on the OLEDB Source.&#xA;&#xA;To make changes to the OLEDB Source you first have to create the temp table by&#xA;running the &quot;Build temp table&quot; task in isolation (right-click and choose Execute Task).&#xA;While the task is running (do not press stop), open the OLEDB Source and make the&#xA;necessary changes."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="483,184"
+          Id="29bc5012-668f-4e7c-80f4-1b621548baed"
+          TopLeft="233,142.5" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\Calculate diff"
+          TopLeft="12.5000000000001,513.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="84.0000000000001,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -729,14 +779,6 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Stage\OLE DB Destination">
     <Properties>
       <Property>
@@ -746,6 +788,14 @@
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

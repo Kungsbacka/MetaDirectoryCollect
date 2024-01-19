@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{5D194524-9B52-4A7A-8082-DE4157E747E6}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5209.0"
+  DTS:LastModifiedProductVersion="16.0.5228.0"
   DTS:LocaleID="8192"
   DTS:ObjectName="Skolplatsen"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="122"
-  DTS:VersionGUID="{152C8B69-5E38-46E3-856E-9818A3106F51}">
+  DTS:VersionBuild="125"
+  DTS:VersionGUID="{709D6A47-2A69-46B9-AC43-3EA18FFB375D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -549,7 +549,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="personnummer"
-              DTS:DTSID="{C8AADB2A-C80F-4D2C-972A-4F79F0A6CD1A}"
+              DTS:DTSID="{CA6A34F7-A5E9-4783-9C56-AB8E68636B74}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -558,7 +558,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="fornamn"
-              DTS:DTSID="{4CA065F9-8761-40E7-8CC5-DB749952B218}"
+              DTS:DTSID="{2D4D1B31-DA90-41C7-B9C6-497CAEB37AF2}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -567,7 +567,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="efternamn"
-              DTS:DTSID="{369FFB58-24D6-4A93-B9AC-7D25A49F28C6}"
+              DTS:DTSID="{3FDF90E4-B3A6-4E09-9E63-3064D9FEA036}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -576,7 +576,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="epost"
-              DTS:DTSID="{DF75BCF0-FE14-478C-B94F-6C35D85554E9}"
+              DTS:DTSID="{8D7FC3A2-27E1-49AF-8D21-349F1562AE1B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -585,7 +585,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="telefon"
-              DTS:DTSID="{CDD13A36-E255-40B3-9000-6AD1128C7F43}"
+              DTS:DTSID="{EF922A5A-74FD-4D09-84BB-82A80A3F2564}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -594,7 +594,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="utdelningsadress1"
-              DTS:DTSID="{A8A27CE9-73EB-4203-94F3-D0420281EC2F}"
+              DTS:DTSID="{060D6F3B-13FC-4937-8404-50DB6F606D97}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -603,7 +603,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="utdelningsadress2"
-              DTS:DTSID="{D8081728-333D-4375-AFEF-F167DB2DD24A}"
+              DTS:DTSID="{2E9084FC-1957-4815-8619-FCDF19DB230C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -612,7 +612,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="careof"
-              DTS:DTSID="{19926366-041A-4733-8C9F-361B3BD5BC8A}"
+              DTS:DTSID="{D87226ED-8CAB-4B87-9B53-A9B0BD688FE7}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -621,7 +621,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="postnummer"
-              DTS:DTSID="{AFC3D150-FC69-4BD1-96F5-47EC31FFD3E7}"
+              DTS:DTSID="{3496497B-7393-4979-AABA-F91A4F26214F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -630,7 +630,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="postort"
-              DTS:DTSID="{D02E673C-3BC5-4EAE-8107-ADFD1A8A288F}"
+              DTS:DTSID="{FA46D33A-020E-405F-BADD-9DD72B2182E4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -639,7 +639,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="kommun"
-              DTS:DTSID="{69845260-A0D8-4F04-A303-3A04BAE88ED6}"
+              DTS:DTSID="{4DB7D369-0EB8-41DC-A93E-AFD40918FCD4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -648,7 +648,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="folkbokforingsdatum"
-              DTS:DTSID="{B737D8F5-554A-4432-AE96-141E81EC3F1F}"
+              DTS:DTSID="{010B6967-1BFD-45D4-A516-7572CE23BEB9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -657,7 +657,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="invandringsdatum"
-              DTS:DTSID="{179C268C-4215-4EB8-A24D-4BE5BBE43ECA}"
+              DTS:DTSID="{41849C08-59C1-4511-B388-42D6A7871992}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -666,16 +666,25 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="skapaddatum"
-              DTS:DTSID="{D897B743-EB2B-4666-BD69-76AAFFE4F748}"
+              DTS:DTSID="{4302C750-386D-4272-B595-0F1BCC9D4236}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:ColumnDelimiter="_x003B_"
               DTS:MaximumWidth="150"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="UUID"
-              DTS:DTSID="{3C865B0F-9FCB-455F-8236-7F8EF3459027}"
+              DTS:DTSID="{EC18E681-2F37-41FE-BF71-C4BBF708E0C5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="mobil"
+              DTS:DTSID="{C7D500C7-8585-46BC-B22D-BE2E94854BCF}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -5818,6 +5827,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                           name="FriendlyExpression">UUID == "" ? NULL(DT_WSTR,0) : UUID</property>
                       </properties>
                     </inputColumn>
+                    <inputColumn
+                      refId="Package\Folkbokforing\Derived Column.Inputs[Derived Column Input].Columns[mobil]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="mobil"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Folkbokforing\Flat File Source.Outputs[Flat File Source Output].Columns[mobil]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Folkbokforing\Flat File Source.Outputs[Flat File Source Output].Columns[mobil]} == "" ? NULL(DT_WSTR,0) : #{Package\Folkbokforing\Flat File Source.Outputs[Flat File Source Output].Columns[mobil]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">mobil == "" ? NULL(DT_WSTR,0) : mobil</property>
+                      </properties>
+                    </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -6273,6 +6306,27 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                           name="UseBinaryFormat">false</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\Folkbokforing\Flat File Source.Outputs[Flat File Source Output].Columns[mobil]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Folkbokforing\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[mobil]"
+                      length="25"
+                      lineageId="Package\Folkbokforing\Flat File Source.Outputs[Flat File Source Output].Columns[mobil]"
+                      name="mobil"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -6354,6 +6408,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       dataType="wstr"
                       length="150"
                       name="UUID" />
+                    <externalMetadataColumn
+                      refId="Package\Folkbokforing\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[mobil]"
+                      dataType="wstr"
+                      length="25"
+                      name="mobil" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -6559,6 +6618,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       cachedName="skapaddatum_calculated"
                       externalMetadataColumnId="Package\Folkbokforing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[skapaddatum]"
                       lineageId="Package\Folkbokforing\Derived Column.Outputs[Derived Column Output].Columns[skapaddatum_calculated]" />
+                    <inputColumn
+                      refId="Package\Folkbokforing\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[mobil]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="mobil"
+                      externalMetadataColumnId="Package\Folkbokforing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mobil]"
+                      lineageId="Package\Folkbokforing\Flat File Source.Outputs[Flat File Source Output].Columns[mobil]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -6634,6 +6700,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       dataType="wstr"
                       length="150"
                       name="uuid" />
+                    <externalMetadataColumn
+                      refId="Package\Folkbokforing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mobil]"
+                      dataType="wstr"
+                      length="25"
+                      name="mobil" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -10650,7 +10721,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="199,204"
+          PanelSize="199,205"
           Size="199,248"
           Id="Package\Download"
           TopLeft="5.50000000000003,5.5" />
@@ -10687,6 +10758,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           Id="Package\PersonalGrupp"
           TopLeft="507.166666666667,214.833333333333" />
         <NodeLayout
+          Size="171,42"
+          Id="Package\PersonalSkolenhet"
+          TopLeft="498.166666666667,316.833333333333" />
+        <NodeLayout
           Size="128,42"
           Id="Package\Skolenhet"
           TopLeft="295,214.166666666667" />
@@ -10719,6 +10794,50 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="359,256.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="583.666666666667,460.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="583.666666666667,562.833333333334">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -10782,32 +10901,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 9]"
-          TopLeft="204.5,131.333333333333">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="78.5,0"
-              Start="0,0"
-              End="71,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="71,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="171,42"
-          Id="Package\PersonalSkolenhet"
-          TopLeft="498.166666666667,316.833333333333" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
           TopLeft="359,562.166666666667">
@@ -10943,41 +11036,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 10]"
-          TopLeft="583.666666666667,460.833333333333">
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="204.5,131.333333333333">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="78.5,0"
               Start="0,0"
-              End="0,52.5">
+              End="71,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 11]"
-          TopLeft="583.666666666667,562.833333333334">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="71,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -11317,7 +11388,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     design-time-name="Package\Folkbokforing">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="156,42"
           Id="Package\Folkbokforing\Flat File Source"
@@ -11349,9 +11420,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -11373,9 +11442,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -11608,83 +11675,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\Skolenhet">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="156,42"
-          Id="Package\Skolenhet\Flat File Source"
-          TopLeft="16,5.5" />
-        <NodeLayout
-          Size="177,42"
-          Id="Package\Skolenhet\OLE DB Destination"
-          TopLeft="5.50000000000003,209.5" />
-        <NodeLayout
-          Size="158,42"
-          Id="Package\Skolenhet\Derived Column"
-          TopLeft="15,107.5" />
-        <EdgeLayout
-          Id="Package\Skolenhet.Paths[Flat File Source Output]"
-          TopLeft="94,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Skolenhet.Paths[Derived Column Output]"
-          TopLeft="94,149.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Skolenhet\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
     design-time-name="Package\PersonalSkolenhet">
     <LayoutInfo>
       <GraphLayout
@@ -11750,6 +11740,83 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
   </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\PersonalSkolenhet\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Skolenhet">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Skolenhet\Flat File Source"
+          TopLeft="16,5.5" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Skolenhet\OLE DB Destination"
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Skolenhet\Derived Column"
+          TopLeft="15,107.5" />
+        <EdgeLayout
+          Id="Package\Skolenhet.Paths[Flat File Source Output]"
+          TopLeft="94,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Skolenhet.Paths[Derived Column Output]"
+          TopLeft="94,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Skolenhet\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

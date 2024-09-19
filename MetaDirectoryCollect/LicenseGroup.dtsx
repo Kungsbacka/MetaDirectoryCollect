@@ -3,8 +3,8 @@
   DTS:refId="Package"
   DTS:CreationDate="5/20/2019 2:48:05 PM"
   DTS:CreationName="Microsoft.Package"
-  DTS:CreatorComputerName="ADM-00720"
-  DTS:CreatorName="KBA\jonas.sjomark"
+  DTS:CreatorComputerName=""
+  DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{84A9602E-340E-422D-A124-6F57818C52A3}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5556.0"
@@ -12,8 +12,8 @@
   DTS:ObjectName="LicenseGroup"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="16"
-  DTS:VersionGUID="{9443AC11-A213-428D-BB15-6DF6270954EF}">
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{61496512-BC16-4B40-82B3-CD889B63A07D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>

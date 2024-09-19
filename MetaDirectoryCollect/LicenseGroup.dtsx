@@ -7,13 +7,13 @@
   DTS:CreatorName="KBA\jonas.sjomark"
   DTS:DTSID="{84A9602E-340E-422D-A124-6F57818C52A3}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5397.1"
+  DTS:LastModifiedProductVersion="16.0.5556.0"
   DTS:LocaleID="1053"
   DTS:ObjectName="LicenseGroup"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="14"
-  DTS:VersionGUID="{64DEE0A1-858B-4A13-A269-C387E1A0367B}">
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{9443AC11-A213-428D-BB15-6DF6270954EF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -207,7 +207,7 @@
                     <inputColumn
                       refId="Package\Fetch from AD\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[baseLicense]"
                       cachedDataType="wstr"
-                      cachedLength="25"
+                      cachedLength="150"
                       cachedName="baseLicense"
                       externalMetadataColumnId="Package\Fetch from AD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[baseLicense]"
                       lineageId="Package\Fetch from AD\Script Component.Outputs[Group].Columns[baseLicense]" />
@@ -266,7 +266,7 @@
                     <externalMetadataColumn
                       refId="Package\Fetch from AD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[baseLicense]"
                       dataType="wstr"
-                      length="25"
+                      length="150"
                       name="baseLicense" />
                     <externalMetadataColumn
                       refId="Package\Fetch from AD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isDynamic]"
@@ -1498,7 +1498,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==]]></arrayElement>
                     <outputColumn
                       refId="Package\Fetch from AD\Script Component.Outputs[Group].Columns[baseLicense]"
                       dataType="wstr"
-                      length="25"
+                      length="150"
                       lineageId="Package\Fetch from AD\Script Component.Outputs[Group].Columns[baseLicense]"
                       name="baseLicense" />
                     <outputColumn

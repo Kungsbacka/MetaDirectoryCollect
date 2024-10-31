@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{0A4DA4D7-2308-4887-A758-A1A04D94516E}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5035.3"
+  DTS:LastModifiedProductVersion="16.0.5556.0"
   DTS:LocaleID="8192"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="17"
-  DTS:VersionGUID="{638B604B-ADDD-4ACD-99A7-5CA8F63FF920}">
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{9528FDB8-067B-4109-8BDC-BC3161BF4BC1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -84,7 +84,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4B195DDD-F21C-458E-9F29-41FCF8E44AD3}"
-          SQLTask:SqlStatementSource="IF OBJECT_ID('tempdb..##CombineAnvandare') IS NOT NULL&#xA;    DROP TABLE ##CombineAnvandare;&#xA;&#xA;CREATE TABLE ##CombineAnvandare (&#xA;    personnr nvarchar(12) NOT NULL PRIMARY KEY,&#xA;    aktiv bit NOT NULL,&#xA;    myndighet bit NOT NULL,&#xA;    aktivMyndighet bit NOT NULL,&#xA;    utforare bit NOT NULL,&#xA;    aktivUtforare bit NOT NULL&#xA;);&#xA;&#xA;INSERT INTO ##CombineAnvandare &#xA;    (personnr, aktiv, myndighet, aktivMyndighet, utforare, aktivUtforare)&#xA;SELECT DISTINCT&#xA;    REPLACE(Personnummer, '-', '') COLLATE Finnish_Swedish_100_CI_AS,&#xA;    0, -- aktiv (sätts senare)&#xA;    1, -- myndighet&#xA;    0, -- aktivMyndighet (sätts senare)&#xA;    0, -- utforare&#xA;    0  -- aktivUtforare&#xA;FROM&#xA;     Combinestatistikmyndighet.RS.Användare&#xA;WHERE&#xA;    Personnummer LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]';&#xA;&#xA;MERGE ##CombineAnvandare dst&#xA;USING (&#xA;    SELECT DISTINCT&#xA;        REPLACE(Personnummer, '-', '') COLLATE Finnish_Swedish_100_CI_AS AS Personnummer&#xA;    FROM&#xA;        Combinestatistikutforare.RS.Användare src&#xA;    WHERE&#xA;        Personnummer LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'&#xA;) src&#xA;ON&#xA;    dst.personnr = src.Personnummer&#xA;WHEN MATCHED THEN&#xA;    UPDATE SET dst.utforare = 1&#xA;WHEN NOT MATCHED THEN&#xA;    INSERT&#xA;        (personnr, aktiv, myndighet, aktivMyndighet, utforare, aktivUtforare)&#xA;    VALUES (&#xA;        src.Personnummer,&#xA;        0, -- aktiv (sätts senare)&#xA;        0, -- myndighet&#xA;        0, -- aktivMyndighet&#xA;        1, -- utforare&#xA;        0  -- aktivUtforare (sätts senare)&#xA;    );&#xA;&#xA;UPDATE&#xA;    ##CombineAnvandare&#xA;SET&#xA;    aktivMyndighet = 1&#xA;WHERE&#xA;    personnr IN (&#xA;        SELECT&#xA;            REPLACE(Personnummer, '-', '') COLLATE Finnish_Swedish_100_CI_AS&#xA;        FROM&#xA;            Combinestatistikmyndighet.RS.Användare&#xA;        WHERE&#xA;            GETDATE() BETWEEN RollFrån AND RollTill&#xA;    );&#xA;&#xA;UPDATE&#xA;    ##CombineAnvandare&#xA;SET&#xA;    aktivUtforare = 1&#xA;WHERE&#xA;    personnr IN (&#xA;        SELECT&#xA;            REPLACE(Personnummer, '-', '') COLLATE Finnish_Swedish_100_CI_AS&#xA;        FROM&#xA;            Combinestatistikutforare.RS.Användare&#xA;        WHERE&#xA;            GETDATE() BETWEEN RollFrån AND RollTill&#xA;    );&#xA;&#xA;UPDATE&#xA;    ##CombineAnvandare&#xA;SET&#xA;    aktiv = 1&#xA;WHERE&#xA;    aktivMyndighet = 1 OR aktivUtforare = 1;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="IF OBJECT_ID('tempdb..##CombineAnvandare') IS NOT NULL&#xA;    DROP TABLE ##CombineAnvandare;&#xA;&#xA;CREATE TABLE ##CombineAnvandare (&#xA;    personnr nvarchar(12) NOT NULL PRIMARY KEY,&#xA;    aktiv bit NOT NULL,&#xA;    myndighet bit NOT NULL,&#xA;    aktivMyndighet bit NOT NULL,&#xA;    utforare bit NOT NULL,&#xA;    aktivUtforare bit NOT NULL&#xA;);&#xA;&#xA;INSERT INTO ##CombineAnvandare &#xA;    (personnr, aktiv, myndighet, aktivMyndighet, utforare, aktivUtforare)&#xA;        SELECT DISTINCT&#xA;    REPLACE(Personnummer, '-', '') COLLATE Finnish_Swedish_100_CI_AS,&#xA;    0, -- aktiv (sätts senare)&#xA;    1, -- myndighet&#xA;    0, -- aktivMyndighet (sätts senare)&#xA;    0, -- utforare&#xA;    0  -- aktivUtforare&#xA;        FROM&#xA;                CombineStatistik.core.anvandare_myndighet&#xA;        WHERE&#xA;                Personnummer LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]';&#xA;&#xA;MERGE ##CombineAnvandare dst&#xA;USING (&#xA;        SELECT DISTINCT&#xA;                REPLACE(Personnummer, '-', '') COLLATE Finnish_Swedish_100_CI_AS AS Personnummer&#xA;        FROM&#xA;                CombineStatistik.core.anvandare_utforare&#xA;        WHERE&#xA;                Personnummer LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'&#xA;) src&#xA;ON&#xA;    dst.personnr = src.Personnummer&#xA;WHEN MATCHED THEN&#xA;    UPDATE SET dst.utforare = 1&#xA;WHEN NOT MATCHED THEN&#xA;    INSERT&#xA;        (personnr, aktiv, myndighet, aktivMyndighet, utforare, aktivUtforare)&#xA;    VALUES (&#xA;        src.Personnummer,&#xA;        0, -- aktiv (sätts senare)&#xA;        0, -- myndighet&#xA;        0, -- aktivMyndighet&#xA;        1, -- utforare&#xA;        0  -- aktivUtforare (sätts senare)&#xA;    );&#xA;&#xA;UPDATE&#xA;    ##CombineAnvandare&#xA;SET&#xA;    aktivMyndighet = 1&#xA;WHERE&#xA;    personnr IN (&#xA;        SELECT&#xA;                REPLACE(Personnummer, '-', '') COLLATE Finnish_Swedish_100_CI_AS&#xA;        FROM&#xA;                CombineStatistik.core.anvandare_myndighet am&#xA;        JOIN&#xA;                CombineStatistik.core.anvandarroll_myndighet arm ON arm.Anvandarid = am.Anvandarid&#xA;        WHERE&#xA;            GETDATE() BETWEEN arm.From_datum AND arm.Tom_datum&#xA;    );&#xA;&#xA;UPDATE&#xA;    ##CombineAnvandare&#xA;SET&#xA;    aktivUtforare = 1&#xA;WHERE&#xA;    personnr IN (&#xA;        SELECT&#xA;                REPLACE(Personnummer, '-', '') COLLATE Finnish_Swedish_100_CI_AS&#xA;        FROM&#xA;                CombineStatistik.core.anvandare_utforare au&#xA;        JOIN&#xA;                CombineStatistik.core.anvandarroll_utforare aru ON aru.Anvandarid = au.Anvandarid&#xA;        WHERE&#xA;            GETDATE() BETWEEN aru.From_datum AND aru.Tom_datum&#xA;    );&#xA;&#xA;UPDATE&#xA;    ##CombineAnvandare&#xA;SET&#xA;    aktiv = 1&#xA;WHERE&#xA;    aktivMyndighet = 1 OR aktivUtforare = 1;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -601,6 +601,10 @@
           Id="Package\Build temp table"
           TopLeft="5.00000000000006,107.5" />
         <NodeLayout
+          Size="143,42"
+          Id="Package\Calculate diff"
+          TopLeft="12.5000000000001,513.5" />
+        <NodeLayout
           Size="117,42"
           Id="Package\Commit"
           TopLeft="25.5000000000001,413.5" />
@@ -609,13 +613,13 @@
           Id="Package\Drop temp table"
           TopLeft="5.50000000000006,311.5" />
         <NodeLayout
-          Size="108,42"
-          Id="Package\Stage"
-          TopLeft="30.0000000000001,209.5" />
-        <NodeLayout
           Size="152,42"
           Id="Package\Prepare export"
           TopLeft="8.00000000000006,5.5" />
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Stage"
+          TopLeft="30.0000000000001,209.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="84.0000000000001,149.5">
@@ -704,17 +708,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <AnnotationLayout
-          Text="To be able to use a temp table in the OLEDB Source, you first have to build the temp&#xA;table in an Execute SQL Task. There are a few things to think about with this approach:&#xA;- The temp table has to be global (##)&#xA;- RetainSameConnection must be set to true on the connection (in this case Combine)&#xA;- ValidateExternalMetadata must be set to false on the OLEDB Source.&#xA;&#xA;To make changes to the OLEDB Source you first have to create the temp table by&#xA;running the &quot;Build temp table&quot; task in isolation (right-click and choose Execute Task).&#xA;While the task is running (do not press stop), open the OLEDB Source and make the&#xA;necessary changes."
-          ParentId="Package"
-          FontInfo="{assembly:Null}"
-          Size="483,184"
-          Id="29bc5012-668f-4e7c-80f4-1b621548baed"
-          TopLeft="233,142.5" />
-        <NodeLayout
-          Size="143,42"
-          Id="Package\Calculate diff"
-          TopLeft="12.5000000000001,513.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
           TopLeft="84.0000000000001,455.5">
@@ -737,6 +730,13 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <AnnotationLayout
+          Text="To be able to use a temp table in the OLEDB Source, you first have to build the temp&#xA;table in an Execute SQL Task. There are a few things to think about with this approach:&#xA;- The temp table has to be global (##)&#xA;- RetainSameConnection must be set to true on the connection (in this case Combine)&#xA;- ValidateExternalMetadata must be set to false on the OLEDB Source.&#xA;&#xA;To make changes to the OLEDB Source you first have to create the temp table by&#xA;running the &quot;Build temp table&quot; task in isolation (right-click and choose Execute Task).&#xA;While the task is running (do not press stop), open the OLEDB Source and make the&#xA;necessary changes."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="483,184"
+          Id="29bc5012-668f-4e7c-80f4-1b621548baed"
+          TopLeft="233,142.5" />
       </GraphLayout>
     </LayoutInfo>
   </Package>

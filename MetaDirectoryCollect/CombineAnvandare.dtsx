@@ -12,8 +12,8 @@
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="82"
-  DTS:VersionGUID="{1CA68B43-9B54-428D-AB75-E3F555923F2B}">
+  DTS:VersionBuild="91"
+  DTS:VersionGUID="{4AD7B886-D9AA-41EB-8007-BB0DB20E895B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -329,9 +329,7 @@
     SELECT 
         REPLACE(au.Personnummer, '-', '') AS Personnummer,
         ou.Sokvag
-    FROM [CombineStatistik_VO].[dbo].[uppdrag_utforare_anvandarroll_utforare] AS uuau
-    INNER JOIN CombineStatistik_VO.dbo.anvandarroll_utforare AS aru
-        ON uuau.Anvandarrollid = aru.Anvandarrollid
+    FROM CombineStatistik_VO.dbo.anvandarroll_utforare AS aru
     INNER JOIN CombineStatistik_VO.dbo.anvandare_utforare AS au
         ON aru.Anvandarid = au.Anvandarid
     INNER JOIN CombineStatistik_VO.dbo.anvandarroll_utforare_organisation_utforare AS auou
@@ -339,7 +337,6 @@
     INNER JOIN CombineStatistik_VO.dbo.organisation_utforare AS ou
         ON auou.Organisationsid = ou.Organisationsid
     WHERE aru.Titel LIKE 'Koordinator/Sam%'
-        AND uuau.Aktuell LIKE 'Ja'
         AND auou.Relation LIKE 'Ordinarie'
         AND aru.Tom_datum &gt;= GETDATE()
         AND aru.Roll LIKE '%' + SUBSTRING(ou.Organisation, 1, (CHARINDEX(' ', ou.Organisation + ' ') - 1)) + '%'
@@ -982,9 +979,17 @@ ORDER BY Grupp;</property>
           Id="Package\Calculate diff"
           TopLeft="39.5000000000001,513.5" />
         <NodeLayout
+          Size="216,42"
+          Id="Package\Clear MetaDirectory Groups"
+          TopLeft="5,612" />
+        <NodeLayout
           Size="117,42"
           Id="Package\Commit"
           TopLeft="53.5000000000001,413.5" />
+        <NodeLayout
+          Size="222,42"
+          Id="Package\Create MetaDirectory Groups"
+          TopLeft="4,710" />
         <NodeLayout
           Size="157,42"
           Id="Package\Drop temp table"
@@ -1107,28 +1112,6 @@ ORDER BY Grupp;</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <AnnotationLayout
-          Text="To be able to use a temp table in the OLEDB Source, you first have to build the temp&#xA;table in an Execute SQL Task. There are a few things to think about with this approach:&#xA;- The temp table has to be global (##)&#xA;- RetainSameConnection must be set to true on the connection (in this case Combine)&#xA;- ValidateExternalMetadata must be set to false on the OLEDB Source.&#xA;&#xA;To make changes to the OLEDB Source you first have to create the temp table by&#xA;running the &quot;Build temp table&quot; task in isolation (right-click and choose Execute Task).&#xA;While the task is running (do not press stop), open the OLEDB Source and make the&#xA;necessary changes."
-          ParentId="Package"
-          FontInfo="{assembly:Null}"
-          Size="483,184"
-          Id="29bc5012-668f-4e7c-80f4-1b621548baed"
-          TopLeft="261,142.5" />
-        <AnnotationLayout
-          Text="The &quot;Calculate diff&quot; step does not seem to be strictly necessary. Its results don't seem to be used. &#xA;Leaving as a change log, for now, but we may wish to remove this step and its associated stored &#xA;procedure and table at some point."
-          ParentId="Package"
-          FontInfo="{assembly:Null}"
-          Size="544,72"
-          Id="3ae438b3-4b86-4c71-9912-cf7d3ec09453"
-          TopLeft="268,503" />
-        <NodeLayout
-          Size="222,42"
-          Id="Package\Create MetaDirectory Groups"
-          TopLeft="4,710" />
-        <NodeLayout
-          Size="216,42"
-          Id="Package\Clear MetaDirectory Groups"
-          TopLeft="5,612" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
           TopLeft="112,555.5">
@@ -1174,15 +1157,95 @@ ORDER BY Grupp;</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <AnnotationLayout
-          Text="&quot;Clear MetaDirectory Groups&quot; and &quot;Create MetaDirectory Group creates the data that underlies &#xD;&#xA;the views GrouperCombineBoendeView and GrouperCombineHemtjanstView."
+          Text="To be able to use a temp table in the OLEDB Source, you first have to build the temp&#xA;table in an Execute SQL Task. There are a few things to think about with this approach:&#xA;- The temp table has to be global (##)&#xA;- RetainSameConnection must be set to true on the connection (in this case Combine)&#xA;- ValidateExternalMetadata must be set to false on the OLEDB Source.&#xA;&#xA;To make changes to the OLEDB Source you first have to create the temp table by&#xA;running the &quot;Build temp table&quot; task in isolation (right-click and choose Execute Task).&#xA;While the task is running (do not press stop), open the OLEDB Source and make the&#xA;necessary changes."
           ParentId="Package"
           FontInfo="{assembly:Null}"
-          Size="534,60"
+          Size="483,184"
+          Id="29bc5012-668f-4e7c-80f4-1b621548baed"
+          TopLeft="261,142.5" />
+        <AnnotationLayout
+          Text="The &quot;Calculate diff&quot; step does not seem to be strictly necessary. Its results don't seem to be used. &#xA;Leaving as a change log, for now, but we may wish to remove this step and its associated stored &#xA;procedure and table at some point."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="544,72"
+          Id="3ae438b3-4b86-4c71-9912-cf7d3ec09453"
+          TopLeft="268,503" />
+        <AnnotationLayout
+          Text="&quot;Clear MetaDirectory Groups&quot; and &quot;Create MetaDirectory Group creates the data that underlies &#xA;the views GrouperCombineBoendeView and GrouperCombineHemtjanstView."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="534,56"
           Id="35890245-80ad-4af2-9cb2-f802a3beae94"
           TopLeft="274,644" />
+        <AnnotationLayout
+          Text="OBS!&#xA;If you get an error message saying that your provider is invalid or does not exist, try using MSOLEDBSQL as the provider in your connection strings (in Parameters) intead of e g SQLNCLI11.1. "
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="1034,56"
+          Id="04f46f95-3881-49b2-9bb1-5c0e4dbcf2bd"
+          TopLeft="253,38" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
+  <TaskHost
+    design-time-name="Package\Create MetaDirectory Groups">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Create MetaDirectory Groups\OLE DB Source"
+          TopLeft="39,21" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Create MetaDirectory Groups\OLE DB Destination"
+          TopLeft="35,135" />
+        <EdgeLayout
+          Id="Package\Create MetaDirectory Groups.Paths[OLE DB Source Output]"
+          TopLeft="120.5,63">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,72"
+              Start="0,0"
+              End="0,64.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Create MetaDirectory Groups\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Create MetaDirectory Groups\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Stage">
     <LayoutInfo>
@@ -1236,65 +1299,6 @@ ORDER BY Grupp;</property>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Stage\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\Create MetaDirectory Groups">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="177,42"
-          Id="Package\Create MetaDirectory Groups\OLE DB Destination"
-          TopLeft="35,135" />
-        <NodeLayout
-          Size="157,42"
-          Id="Package\Create MetaDirectory Groups\OLE DB Source"
-          TopLeft="39,21" />
-        <EdgeLayout
-          Id="Package\Create MetaDirectory Groups.Paths[OLE DB Source Output]"
-          TopLeft="120.5,63">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,72"
-              Start="0,0"
-              End="0,64.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,64.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Create MetaDirectory Groups\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Create MetaDirectory Groups\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

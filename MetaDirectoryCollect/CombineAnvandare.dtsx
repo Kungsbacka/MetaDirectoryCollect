@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{0A4DA4D7-2308-4887-A758-A1A04D94516E}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5556.0"
+  DTS:LastModifiedProductVersion="17.0.1010.1"
   DTS:LocaleID="8192"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="91"
-  DTS:VersionGUID="{4AD7B886-D9AA-41EB-8007-BB0DB20E895B}">
+  DTS:VersionBuild="96"
+  DTS:VersionGUID="{9AE8D52A-43A1-4C23-98B4-090072325428}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -198,7 +198,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -325,43 +325,51 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">WITH FilteredData AS (
-    SELECT 
-        REPLACE(au.Personnummer, '-', '') AS Personnummer,
-        ou.Sokvag
-    FROM CombineStatistik_VO.dbo.anvandarroll_utforare AS aru
-    INNER JOIN CombineStatistik_VO.dbo.anvandare_utforare AS au
-        ON aru.Anvandarid = au.Anvandarid
-    INNER JOIN CombineStatistik_VO.dbo.anvandarroll_utforare_organisation_utforare AS auou
-        ON aru.Anvandarrollid = auou.Anvandarrollid
-    INNER JOIN CombineStatistik_VO.dbo.organisation_utforare AS ou
-        ON auou.Organisationsid = ou.Organisationsid
-    WHERE aru.Titel LIKE 'Koordinator/Sam%'
-        AND auou.Relation LIKE 'Ordinarie'
-        AND aru.Tom_datum &gt;= GETDATE()
-        AND aru.Roll LIKE '%' + SUBSTRING(ou.Organisation, 1, (CHARINDEX(' ', ou.Organisation + ' ') - 1)) + '%'
-        AND ou.Sokvag NOT LIKE '%extern%'
-        AND ou.Sokvag NOT LIKE '%upphört%'
-),
-GroupedData AS (
-    SELECT 
-        Personnummer,
-        CASE
-            WHEN Sokvag LIKE '%hemtjänst%' THEN 'Hemtjänst'
-            WHEN Sokvag LIKE '%våbo%' 
-                 OR Sokvag LIKE '%boende%' 
-                 OR Sokvag LIKE '%korttid%' 
-                 OR Sokvag LIKE '%dagomsorg%' THEN 'Boende'
-            ELSE NULL
-        END AS Grupp
-    FROM FilteredData
-)
-SELECT DISTINCT 
-    CAST(Personnummer AS NVARCHAR(12))  AS personnr,
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">WITH FilteredData
+AS (SELECT REPLACE(au.Personnummer, '-', '') AS Personnummer,
+       CASE
+          WHEN aru.Roll LIKE 'Insatsplan%' THEN
+             'Insatsplanerare'
+          WHEN aru.Roll LIKE 'Koordinat%' THEN
+             CASE
+                WHEN ou.Sokvag LIKE '%hemtjänst%' THEN
+                    'Hemtjänst'
+                WHEN ou.Sokvag LIKE '%boende%'
+                    OR ou.Sokvag LIKE '%Korttid/%Växelvård%' THEN
+                    'Boende'
+            END
+    END AS Grupp
+    FROM CombineStatistik_VO.dbo.anvandarroll_utforare_organisation_utforare auou
+        INNER JOIN CombineStatistik_VO.dbo.anvandarroll_utforare aru
+            ON auou.Anvandarrollid = aru.Anvandarrollid
+        INNER JOIN CombineStatistik_VO.dbo.anvandare_utforare au
+            ON aru.Anvandarid = au.Anvandarid
+        INNER JOIN CombineStatistik_VO.kba.active_directory_user adu
+            ON au.Personnummer = adu.employeeNumber
+        INNER JOIN CombineStatistik_VO.dbo.organisation_utforare ou
+            ON auou.Organisationsid = ou.Organisationsid
+    WHERE (
+              aru.Roll LIKE 'Insatsplanerare%'
+              OR aru.Roll LIKE 'Koordinator%'
+          )
+          AND adu.physicalDeliveryOfficeName NOT IN ( 
+                'Innovation &amp; Digitalisering', 
+                 '6306 Säkerhet Fastighet',
+                 'Biståndsenheten'
+          )
+          AND ou.Sokvag NOT LIKE '%hemsjukvård%'
+          AND ou.Sokvag NOT LIKE '%Extern reg%'
+          AND ou.Organisation NOT LIKE '%dagomsorg%'
+          AND ou.Organisation NOT LIKE '%test%'
+          AND ou.Tom_datum &gt;= CONVERT(date, GETDATE())
+          AND aru.Roll NOT LIKE '%resurs%'
+          AND aru.Tom_datum &gt;= CONVERT(date, GETDATE())
+   )
+SELECT DISTINCT
+    CAST(Personnummer AS NVARCHAR(12)) AS personnr,
     CAST(Grupp AS NVARCHAR(20)) AS grupp
-FROM GroupedData
-WHERE Grupp IS NOT NULL
-ORDER BY Grupp;</property>
+FROM FilteredData
+ORDER BY grupp</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -548,7 +556,7 @@ ORDER BY Grupp;</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -714,7 +722,7 @@ ORDER BY Grupp;</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT * FROM ##CombineAnvandare;</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT * FROM ##CombineAnvandare;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1171,10 +1179,10 @@ ORDER BY Grupp;</property>
           Id="3ae438b3-4b86-4c71-9912-cf7d3ec09453"
           TopLeft="268,503" />
         <AnnotationLayout
-          Text="&quot;Clear MetaDirectory Groups&quot; and &quot;Create MetaDirectory Group creates the data that underlies &#xA;the views GrouperCombineBoendeView and GrouperCombineHemtjanstView."
+          Text="&quot;Clear MetaDirectory Groups&quot; and &quot;Create MetaDirectory Group&quot; creates the data that underlies &#xA;the views GrouperCombineBoendeView, GrouperCombineHemtjanstView and GrouperCombineInsatsplanerareView."
           ParentId="Package"
           FontInfo="{assembly:Null}"
-          Size="534,56"
+          Size="642,56"
           Id="35890245-80ad-4af2-9cb2-f802a3beae94"
           TopLeft="274,644" />
         <AnnotationLayout

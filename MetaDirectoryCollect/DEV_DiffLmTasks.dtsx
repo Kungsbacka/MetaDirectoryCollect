@@ -12,8 +12,8 @@
   DTS:ObjectName="DEV_DiffLmTasks"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="27"
-  DTS:VersionGUID="{96C25363-6B47-4421-B5EC-93EC048C0CC8}">
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{7CA385A6-4649-41CE-B361-3414207BCE84}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -277,6 +277,12 @@
                       cachedName="accountSource"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[accountSource]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[accountSource]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[licenseGroup]"
+                      cachedDataType="guid"
+                      cachedName="licenseGroup"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[licenseGroup]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[licenseGroup]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -383,6 +389,10 @@
                       dataType="wstr"
                       length="50"
                       name="accountSource" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[licenseGroup]"
+                      dataType="guid"
+                      name="licenseGroup" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -460,6 +470,7 @@ SELECT
   , [telephoneNumber]
   , [title]
   , [localityName]
+  , [licenseGroup]
   , [accountType]
   , [accountSource]
 FROM sec.ufLmGetPendingLifecycleTask(@t, 1)
@@ -484,6 +495,7 @@ SELECT
   , [telephoneNumber]
   , [title]
   , [localityName]
+  , NULL AS [licenseGroup]
   , [accountType]
   , [accountSource]
 FROM dbo.ufLmGetPendingLifecycleTask(NULL, 1)</property>
@@ -730,6 +742,15 @@ FROM dbo.ufLmGetPendingLifecycleTask(NULL, 1)</property>
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[accountSource]"
                       name="accountSource"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[licenseGroup]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[licenseGroup]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[licenseGroup]"
+                      name="licenseGroup"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -836,6 +857,10 @@ FROM dbo.ufLmGetPendingLifecycleTask(NULL, 1)</property>
                       dataType="wstr"
                       length="50"
                       name="accountSource" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[licenseGroup]"
+                      dataType="guid"
+                      name="licenseGroup" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -955,6 +980,11 @@ FROM dbo.ufLmGetPendingLifecycleTask(NULL, 1)</property>
                       length="128"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[localityName]"
                       name="localityName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[licenseGroup]"
+                      dataType="guid"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[licenseGroup]"
+                      name="licenseGroup" />
                     <outputColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[accountType]"
                       dataType="wstr"

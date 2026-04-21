@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{0A4DA4D7-2308-4887-A758-A1A04D94516E}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="17.0.1010.1"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
   DTS:LocaleID="8192"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="96"
-  DTS:VersionGUID="{9AE8D52A-43A1-4C23-98B4-090072325428}">
+  DTS:VersionBuild="109"
+  DTS:VersionGUID="{6F47A9B3-7B24-4824-B370-58CA3E6555E0}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -128,22 +128,6 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Clear MetaDirectory Groups"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{871C08A3-529B-454F-B9DD-8640C5127789}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Clear MetaDirectory Groups"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{99DD446C-D820-4F9B-8867-F32291598C5B}"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.CombineAnvandareGrupp" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
       DTS:refId="Package\Commit"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
@@ -160,13 +144,29 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Create MetaDirectory Groups"
+      DTS:refId="Package\Drop temp table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A8687712-795A-4EF9-AC7A-4C4287D3CFF9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop temp table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{99DD446C-D820-4F9B-8867-F32291598C5B}"
+          SQLTask:SqlStatementSource="DROP TABLE ##CombineAnvandare" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Import groups"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{9FEEDE5D-C1F6-4161-B1E5-CAB7752A718F}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Create MetaDirectory Groups"
+      DTS:ObjectName="Import groups"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -174,7 +174,7 @@
           version="1">
           <components>
             <component
-              refId="Package\Create MetaDirectory Groups\OLE DB Destination"
+              refId="Package\Import groups\OLE DB Destination"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
@@ -231,7 +231,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Create MetaDirectory Groups\OLE DB Destination.Connections[OleDbConnection]"
+                  refId="Package\Import groups\OLE DB Destination.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
                   connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
                   description="The OLE DB runtime connection used to access the database."
@@ -239,36 +239,36 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\Create MetaDirectory Groups\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\Import groups\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[grupp]"
+                      refId="Package\Import groups\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[grupp]"
                       cachedDataType="wstr"
                       cachedLength="20"
                       cachedName="grupp"
-                      externalMetadataColumnId="Package\Create MetaDirectory Groups\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[grupp]"
-                      lineageId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Output].Columns[grupp]" />
+                      externalMetadataColumnId="Package\Import groups\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[grupp]"
+                      lineageId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Output].Columns[grupp]" />
                     <inputColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[personnr]"
+                      refId="Package\Import groups\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[personnr]"
                       cachedDataType="wstr"
                       cachedLength="12"
                       cachedName="personnr"
-                      externalMetadataColumnId="Package\Create MetaDirectory Groups\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
-                      lineageId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Output].Columns[personnr]" />
+                      externalMetadataColumnId="Package\Import groups\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
+                      lineageId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Output].Columns[personnr]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
+                      refId="Package\Import groups\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
                       dataType="wstr"
                       length="12"
                       name="personnr" />
                     <externalMetadataColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[grupp]"
+                      refId="Package\Import groups\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[grupp]"
                       dataType="wstr"
                       length="20"
                       name="grupp" />
@@ -277,22 +277,22 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Create MetaDirectory Groups\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Import groups\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Create MetaDirectory Groups\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Import groups\OLE DB Destination.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Import groups\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Create MetaDirectory Groups\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Import groups\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Import groups\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Create MetaDirectory Groups\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Import groups\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -301,7 +301,7 @@
               </outputs>
             </component>
             <component
-              refId="Package\Create MetaDirectory Groups\OLE DB Source"
+              refId="Package\Import groups\OLE DB Source"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
@@ -394,7 +394,7 @@ ORDER BY grupp</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Create MetaDirectory Groups\OLE DB Source.Connections[OleDbConnection]"
+                  refId="Package\Import groups\OLE DB Source.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[CombineVO]"
                   connectionManagerRefId="Package.ConnectionManagers[CombineVO]"
                   description="The OLE DB runtime connection used to access the database."
@@ -402,71 +402,71 @@ ORDER BY grupp</property>
               </connections>
               <outputs>
                 <output
-                  refId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Output]"
+                  refId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Output].Columns[personnr]"
+                      refId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Output].Columns[personnr]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[personnr]"
+                      externalMetadataColumnId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[personnr]"
                       length="12"
-                      lineageId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Output].Columns[personnr]"
+                      lineageId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Output].Columns[personnr]"
                       name="personnr"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Output].Columns[grupp]"
+                      refId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Output].Columns[grupp]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[grupp]"
+                      externalMetadataColumnId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[grupp]"
                       length="20"
-                      lineageId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Output].Columns[grupp]"
+                      lineageId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Output].Columns[grupp]"
                       name="grupp"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[personnr]"
+                      refId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[personnr]"
                       dataType="wstr"
                       length="12"
                       name="personnr" />
                     <externalMetadataColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[grupp]"
+                      refId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[grupp]"
                       dataType="wstr"
                       length="20"
                       name="grupp" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  refId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[personnr]"
+                      refId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[personnr]"
                       dataType="wstr"
                       length="12"
-                      lineageId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[personnr]"
+                      lineageId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[personnr]"
                       name="personnr" />
                     <outputColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[grupp]"
+                      refId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[grupp]"
                       dataType="wstr"
                       length="20"
-                      lineageId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[grupp]"
+                      lineageId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[grupp]"
                       name="grupp" />
                     <outputColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -477,28 +477,425 @@ ORDER BY grupp</property>
           </components>
           <paths>
             <path
-              refId="Package\Create MetaDirectory Groups.Paths[OLE DB Source Output]"
-              endId="Package\Create MetaDirectory Groups\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              refId="Package\Import groups.Paths[OLE DB Source Output]"
+              endId="Package\Import groups\OLE DB Destination.Inputs[OLE DB Destination Input]"
               name="OLE DB Source Output"
-              startId="Package\Create MetaDirectory Groups\OLE DB Source.Outputs[OLE DB Source Output]" />
+              startId="Package\Import groups\OLE DB Source.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Drop temp table"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{A8687712-795A-4EF9-AC7A-4C4287D3CFF9}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:refId="Package\Import organiszation info"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{BDA5A88D-1962-45FA-9C07-59E106552E0A}"
+      DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Drop temp table"
-      DTS:ThreadHint="0">
+      DTS:ObjectName="Import organiszation info"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{99DD446C-D820-4F9B-8867-F32291598C5B}"
-          SQLTask:SqlStatementSource="DROP TABLE ##CombineAnvandare" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Import organiszation info\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CombineAnvandareOrg]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Import organiszation info\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetaDirectory]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetaDirectory]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[personnr]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="personnr"
+                      externalMetadataColumnId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[personnr]" />
+                    <inputColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[forvaltning]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="forvaltning"
+                      externalMetadataColumnId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[forvaltning]"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[forvaltning]" />
+                    <inputColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[organisation]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="organisation"
+                      externalMetadataColumnId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[organisation]"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[organisation]" />
+                    <inputColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[roll]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="roll"
+                      externalMetadataColumnId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[roll]"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[roll]" />
+                    <inputColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[formatteradRoll]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="formatteradRoll"
+                      externalMetadataColumnId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[formatteradRoll]"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[formatteradRoll]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personnr]"
+                      dataType="wstr"
+                      length="12"
+                      name="personnr" />
+                    <externalMetadataColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[forvaltning]"
+                      dataType="wstr"
+                      length="2"
+                      name="forvaltning" />
+                    <externalMetadataColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[organisation]"
+                      dataType="wstr"
+                      length="100"
+                      name="organisation" />
+                    <externalMetadataColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[roll]"
+                      dataType="wstr"
+                      length="200"
+                      name="roll" />
+                    <externalMetadataColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[formatteradRoll]"
+                      dataType="wstr"
+                      length="200"
+                      name="formatteradRoll" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Import organiszation info\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Import organiszation info\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Import organiszation info\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Import organiszation info\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
+    CAST(REPLACE(Personnummer, '-', '') AS nvarchar(12)) COLLATE Finnish_Swedish_CI_AS AS personnr,
+    Forvaltning COLLATE Finnish_Swedish_CI_AS AS forvaltning,
+    Organisation COLLATE Finnish_Swedish_CI_AS AS organisation,
+    Roll COLLATE Finnish_Swedish_CI_AS AS roll,
+    STUFF(Roll2, 1, 1, UPPER(LEFT(Roll2, 1))) COLLATE Finnish_Swedish_CI_AS AS formatteradRoll
+FROM (
+    SELECT DISTINCT
+        U.Personnummer,
+        CASE WHEN OVO.Organisationsid IS NOT NULL THEN N'VO' ELSE N'IF' END AS Forvaltning,
+        COALESCE(OVO.Organisation, OIF.Organisation) AS Organisation,
+        ARU.Roll,
+        CASE WHEN CHARINDEX('-', Roll) &gt; 0 THEN LEFT(Roll, CHARINDEX('-', Roll) - 2) ELSE Roll END AS Roll2,
+        ROW_NUMBER() OVER (
+            PARTITION BY U.Personnummer
+            ORDER BY
+                CASE WHEN OVO.Organisationsid IS NOT NULL THEN 1 ELSE 2 END,
+                CASE WHEN ARUO.Relation = N'Ordinarie' THEN 1 ELSE 2 END,
+                CASE WHEN OVO.Organisationsid IS NOT NULL AND OVO.Nodtyp = N'Resurs' THEN 1 ELSE 2 END,
+                DATEDIFF(d, ARU.From_datum, ARU.Tom_datum),
+                ARU.From_datum
+        ) AS rn
+    FROM [CombineStatistik].[core].[anvandare_utforare] U
+    INNER JOIN CombineStatistik.core.anvandarroll_utforare ARU                        ON U.Anvandarid = ARU.Anvandarid
+    INNER JOIN CombineStatistik.core.anvandarroll_utforare_organisation_utforare ARUO ON ARU.Anvandarrollid = ARUO.Anvandarrollid
+    LEFT OUTER JOIN CombineStatistik_VO.dbo.organisation_utforare OVO                 ON ARUO.Organisationsid = OVO.Organisationsid
+    LEFT OUTER JOIN CombineStatistik_IF.dbo.organisation_utforare OIF                 ON ARUO.Organisationsid = OIF.Organisationsid
+    WHERE GETDATE() BETWEEN ARU.From_datum AND ARU.Tom_datum
+    AND U.Personnummer IS NOT NULL
+    AND COALESCE(OVO.Organisation, OIF.Organisation) IS NOT NULL
+    AND ARU.Roll IS NOT NULL
+) ranked
+WHERE rn = 1</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Import organiszation info\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Combine]"
+                  connectionManagerRefId="Package.ConnectionManagers[Combine]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[personnr]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[personnr]"
+                      length="12"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[personnr]"
+                      name="personnr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[forvaltning]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[forvaltning]"
+                      length="2"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[forvaltning]"
+                      name="forvaltning"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[organisation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[organisation]"
+                      length="100"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[organisation]"
+                      name="organisation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[roll]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[roll]"
+                      length="200"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[roll]"
+                      name="roll"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[formatteradRoll]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[formatteradRoll]"
+                      length="200"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[formatteradRoll]"
+                      name="formatteradRoll"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[personnr]"
+                      dataType="wstr"
+                      length="12"
+                      name="personnr" />
+                    <externalMetadataColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[forvaltning]"
+                      dataType="wstr"
+                      length="2"
+                      name="forvaltning" />
+                    <externalMetadataColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[organisation]"
+                      dataType="wstr"
+                      length="100"
+                      name="organisation" />
+                    <externalMetadataColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[roll]"
+                      dataType="wstr"
+                      length="200"
+                      name="roll" />
+                    <externalMetadataColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[formatteradRoll]"
+                      dataType="wstr"
+                      length="200"
+                      name="formatteradRoll" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[personnr]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[personnr]"
+                      name="personnr" />
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[forvaltning]"
+                      dataType="wstr"
+                      length="2"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[forvaltning]"
+                      name="forvaltning" />
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[organisation]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[organisation]"
+                      name="organisation" />
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[roll]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[roll]"
+                      name="roll" />
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[formatteradRoll]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[formatteradRoll]"
+                      name="formatteradRoll" />
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Import organiszation info.Paths[OLE DB Source Output]"
+              endId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -907,6 +1304,38 @@ ORDER BY grupp</property>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate CombineAnvandareGrupp"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{871C08A3-529B-454F-B9DD-8640C5127789}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate CombineAnvandareGrupp"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{99DD446C-D820-4F9B-8867-F32291598C5B}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.CombineAnvandareGrupp" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate CombineAnvandareOrg"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E077574B-9C55-424B-9E9A-0FBE6241C232}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate CombineAnvandareOrg"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{99DD446C-D820-4F9B-8867-F32291598C5B}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.CombineAnvandareOrg" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
@@ -956,15 +1385,31 @@ ORDER BY grupp</property>
       DTS:From="Package\Calculate diff"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 5"
-      DTS:To="Package\Clear MetaDirectory Groups" />
+      DTS:To="Package\Truncate CombineAnvandareGrupp" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
       DTS:CreationName=""
       DTS:DTSID="{8F716E3C-A03C-48E6-8EBB-09A2481EE39A}"
-      DTS:From="Package\Clear MetaDirectory Groups"
+      DTS:From="Package\Truncate CombineAnvandareGrupp"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 6"
-      DTS:To="Package\Create MetaDirectory Groups" />
+      DTS:To="Package\Import groups" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{F25D6BEE-B1C4-4CA0-AF82-6E835079AB59}"
+      DTS:From="Package\Import groups"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Truncate CombineAnvandareOrg" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{F17AD06A-94CC-493E-9F14-7C2205B6B6B4}"
+      DTS:From="Package\Truncate CombineAnvandareOrg"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Import organiszation info" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -981,38 +1426,46 @@ ORDER BY grupp</property>
         <NodeLayout
           Size="158,42"
           Id="Package\Build temp table"
-          TopLeft="33.0000000000001,107.5" />
+          TopLeft="95.0000000000001,107.5" />
         <NodeLayout
           Size="143,42"
           Id="Package\Calculate diff"
-          TopLeft="39.5000000000001,513.5" />
-        <NodeLayout
-          Size="216,42"
-          Id="Package\Clear MetaDirectory Groups"
-          TopLeft="5,612" />
+          TopLeft="102.5,513.5" />
         <NodeLayout
           Size="117,42"
           Id="Package\Commit"
-          TopLeft="53.5000000000001,413.5" />
+          TopLeft="115.5,413.5" />
         <NodeLayout
-          Size="222,42"
-          Id="Package\Create MetaDirectory Groups"
-          TopLeft="4,710" />
+          Size="199,42"
+          Id="Package\Import organiszation info"
+          TopLeft="74.5000000000001,903.5" />
         <NodeLayout
           Size="157,42"
           Id="Package\Drop temp table"
-          TopLeft="33.5000000000001,311.5" />
+          TopLeft="95.5000000000001,311.5" />
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Import groups"
+          TopLeft="100.5,708" />
         <NodeLayout
           Size="152,42"
           Id="Package\Prepare export"
-          TopLeft="36.0000000000001,5.5" />
+          TopLeft="98.0000000000001,5.5" />
         <NodeLayout
           Size="108,42"
           Id="Package\Stage"
-          TopLeft="58.0000000000001,209.5" />
+          TopLeft="120,209.5" />
+        <NodeLayout
+          Size="253,42"
+          Id="Package\Truncate CombineAnvandareGrupp"
+          TopLeft="47.5000000000001,611" />
+        <NodeLayout
+          Size="241,42"
+          Id="Package\Truncate CombineAnvandareOrg"
+          TopLeft="53.5000000000001,800.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="112,149.5">
+          TopLeft="174,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1034,7 +1487,7 @@ ORDER BY grupp</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="112,47.5">
+          TopLeft="174,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1056,7 +1509,7 @@ ORDER BY grupp</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="112,251.5">
+          TopLeft="174,251.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1078,7 +1531,7 @@ ORDER BY grupp</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="112,353.5">
+          TopLeft="174,353.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1100,7 +1553,7 @@ ORDER BY grupp</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="111.5,455.5">
+          TopLeft="174,455.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1122,18 +1575,18 @@ ORDER BY grupp</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="112,555.5">
+          TopLeft="174,555.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,56.5"
+              EndConnector="0,55.5"
               Start="0,0"
-              End="0,49">
+              End="0,48">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,49" />
+                    End="0,48" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1144,18 +1597,62 @@ ORDER BY grupp</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="114,654">
+          TopLeft="174,653">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,56"
+              EndConnector="0,55"
               Start="0,0"
-              End="0,48.5">
+              End="0,47.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,48.5" />
+                    End="0,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="174,750">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.5"
+              Start="0,0"
+              End="0,43">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="174,842.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61"
+              Start="0,0"
+              End="0,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1170,46 +1667,112 @@ ORDER BY grupp</property>
           FontInfo="{assembly:Null}"
           Size="483,184"
           Id="29bc5012-668f-4e7c-80f4-1b621548baed"
-          TopLeft="261,142.5" />
+          TopLeft="320,142.5" />
         <AnnotationLayout
           Text="The &quot;Calculate diff&quot; step does not seem to be strictly necessary. Its results don't seem to be used. &#xA;Leaving as a change log, for now, but we may wish to remove this step and its associated stored &#xA;procedure and table at some point."
           ParentId="Package"
           FontInfo="{assembly:Null}"
           Size="544,72"
           Id="3ae438b3-4b86-4c71-9912-cf7d3ec09453"
-          TopLeft="268,503" />
+          TopLeft="327,503" />
         <AnnotationLayout
-          Text="&quot;Clear MetaDirectory Groups&quot; and &quot;Create MetaDirectory Group&quot; creates the data that underlies &#xA;the views GrouperCombineBoendeView, GrouperCombineHemtjanstView and GrouperCombineInsatsplanerareView."
+          Text="Clear CombineAnvandareGrupp and import groups from CombineStatistik_VO. It creates the data that underlies &#xA;the views GrouperCombineBoendeView, GrouperCombineHemtjanstView and GrouperCombineInsatsplanerareView."
           ParentId="Package"
           FontInfo="{assembly:Null}"
           Size="642,56"
           Id="35890245-80ad-4af2-9cb2-f802a3beae94"
-          TopLeft="274,644" />
+          TopLeft="331,656" />
         <AnnotationLayout
           Text="OBS!&#xA;If you get an error message saying that your provider is invalid or does not exist, try using MSOLEDBSQL as the provider in your connection strings (in Parameters) intead of e g SQLNCLI11.1. "
           ParentId="Package"
           FontInfo="{assembly:Null}"
           Size="1034,56"
           Id="04f46f95-3881-49b2-9bb1-5c0e4dbcf2bd"
-          TopLeft="253,38" />
+          TopLeft="312,38" />
+        <AnnotationLayout
+          Text="Import information about role and organizational placement for external users into CombineAnvandareOrg"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="595,40"
+          Id="9825f0d2-33dc-40bd-9ceb-33e193c3f8f8"
+          TopLeft="328,864" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Create MetaDirectory Groups">
+    design-time-name="Package\Import organiszation info">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="157,42"
-          Id="Package\Create MetaDirectory Groups\OLE DB Source"
+          Id="Package\Import organiszation info\OLE DB Source"
+          TopLeft="15.5,5.5" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Import organiszation info\OLE DB Destination"
+          TopLeft="4.50000000000001,105.5" />
+        <EdgeLayout
+          Id="Package\Import organiszation info.Paths[OLE DB Source Output]"
+          TopLeft="93.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Import organiszation info\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Import organiszation info\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Import groups">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Import groups\OLE DB Source"
           TopLeft="39,21" />
         <NodeLayout
           Size="177,42"
-          Id="Package\Create MetaDirectory Groups\OLE DB Destination"
+          Id="Package\Import groups\OLE DB Destination"
           TopLeft="35,135" />
         <EdgeLayout
-          Id="Package\Create MetaDirectory Groups.Paths[OLE DB Source Output]"
+          Id="Package\Import groups.Paths[OLE DB Source Output]"
           TopLeft="120.5,63">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -1234,7 +1797,7 @@ ORDER BY grupp</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Create MetaDirectory Groups\OLE DB Destination">
+    design-time-name="Package\Import groups\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1247,7 +1810,7 @@ ORDER BY grupp</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Create MetaDirectory Groups\OLE DB Source">
+    design-time-name="Package\Import groups\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1258,7 +1821,7 @@ ORDER BY grupp</property>
     design-time-name="Package\Stage">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="157,42"
           Id="Package\Stage\OLE DB Source"
@@ -1286,7 +1849,9 @@ ORDER BY grupp</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

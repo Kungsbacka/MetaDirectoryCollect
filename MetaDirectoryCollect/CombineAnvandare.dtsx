@@ -12,8 +12,8 @@
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="109"
-  DTS:VersionGUID="{6F47A9B3-7B24-4824-B370-58CA3E6555E0}">
+  DTS:VersionBuild="112"
+  DTS:VersionGUID="{3E8030B0-7EBB-459E-AAEC-A62ED83E2C46}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -581,7 +581,7 @@ ORDER BY grupp</property>
                     <inputColumn
                       refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[forvaltning]"
                       cachedDataType="wstr"
-                      cachedLength="2"
+                      cachedLength="12"
                       cachedName="forvaltning"
                       externalMetadataColumnId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[forvaltning]"
                       lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[forvaltning]" />
@@ -617,7 +617,7 @@ ORDER BY grupp</property>
                     <externalMetadataColumn
                       refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[forvaltning]"
                       dataType="wstr"
-                      length="2"
+                      length="12"
                       name="forvaltning" />
                     <externalMetadataColumn
                       refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[organisation]"
@@ -696,7 +696,7 @@ ORDER BY grupp</property>
 FROM (
     SELECT DISTINCT
         U.Personnummer,
-        CASE WHEN OVO.Organisationsid IS NOT NULL THEN N'VO' ELSE N'IF' END AS Forvaltning,
+        CASE WHEN OVO.Organisationsid IS NOT NULL THEN N'011J0000G03A' ELSE N'011J0000G01M' END AS Forvaltning,
         COALESCE(OVO.Organisation, OIF.Organisation) AS Organisation,
         ARU.Roll,
         CASE WHEN CHARINDEX('-', Roll) &gt; 0 THEN LEFT(Roll, CHARINDEX('-', Roll) - 2) ELSE Roll END AS Roll2,
@@ -771,7 +771,7 @@ WHERE rn = 1</property>
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[forvaltning]"
-                      length="2"
+                      length="12"
                       lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[forvaltning]"
                       name="forvaltning"
                       truncationRowDisposition="FailComponent" />
@@ -816,7 +816,7 @@ WHERE rn = 1</property>
                     <externalMetadataColumn
                       refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[forvaltning]"
                       dataType="wstr"
-                      length="2"
+                      length="12"
                       name="forvaltning" />
                     <externalMetadataColumn
                       refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[organisation]"
@@ -849,7 +849,7 @@ WHERE rn = 1</property>
                     <outputColumn
                       refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[forvaltning]"
                       dataType="wstr"
-                      length="2"
+                      length="12"
                       lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[forvaltning]"
                       name="forvaltning" />
                     <outputColumn
@@ -1436,10 +1436,6 @@ WHERE rn = 1</property>
           Id="Package\Commit"
           TopLeft="115.5,413.5" />
         <NodeLayout
-          Size="199,42"
-          Id="Package\Import organiszation info"
-          TopLeft="74.5000000000001,903.5" />
-        <NodeLayout
           Size="157,42"
           Id="Package\Drop temp table"
           TopLeft="95.5000000000001,311.5" />
@@ -1447,6 +1443,10 @@ WHERE rn = 1</property>
           Size="147,42"
           Id="Package\Import groups"
           TopLeft="100.5,708" />
+        <NodeLayout
+          Size="199,42"
+          Id="Package\Import organiszation info"
+          TopLeft="74.5000000000001,903.5" />
         <NodeLayout
           Size="152,42"
           Id="Package\Prepare export"
@@ -1700,65 +1700,6 @@ WHERE rn = 1</property>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Import organiszation info">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="157,42"
-          Id="Package\Import organiszation info\OLE DB Source"
-          TopLeft="15.5,5.5" />
-        <NodeLayout
-          Size="177,42"
-          Id="Package\Import organiszation info\OLE DB Destination"
-          TopLeft="4.50000000000001,105.5" />
-        <EdgeLayout
-          Id="Package\Import organiszation info.Paths[OLE DB Source Output]"
-          TopLeft="93.5,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,58"
-              Start="0,0"
-              End="0,50.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,50.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Import organiszation info\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Import organiszation info\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
     design-time-name="Package\Import groups">
     <LayoutInfo>
       <GraphLayout
@@ -1811,6 +1752,65 @@ WHERE rn = 1</property>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Import groups\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Import organiszation info">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Import organiszation info\OLE DB Destination"
+          TopLeft="4.50000000000001,105.5" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Import organiszation info\OLE DB Source"
+          TopLeft="14.5,4.5" />
+        <EdgeLayout
+          Id="Package\Import organiszation info.Paths[OLE DB Source Output]"
+          TopLeft="93,46.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59"
+              Start="0,0"
+              End="0,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Import organiszation info\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Import organiszation info\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

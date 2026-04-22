@@ -12,8 +12,8 @@
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="112"
-  DTS:VersionGUID="{3E8030B0-7EBB-459E-AAEC-A62ED83E2C46}">
+  DTS:VersionBuild="113"
+  DTS:VersionGUID="{C3F82562-249A-48EB-BA55-0C793A5798CD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -699,7 +699,7 @@ FROM (
         CASE WHEN OVO.Organisationsid IS NOT NULL THEN N'011J0000G03A' ELSE N'011J0000G01M' END AS Forvaltning,
         COALESCE(OVO.Organisation, OIF.Organisation) AS Organisation,
         ARU.Roll,
-        CASE WHEN CHARINDEX('-', Roll) &gt; 0 THEN LEFT(Roll, CHARINDEX('-', Roll) - 2) ELSE Roll END AS Roll2,
+        CASE WHEN CHARINDEX(' - ', Roll) &gt; 0 THEN LEFT(Roll, CHARINDEX(' - ', Roll) - 1) ELSE Roll END AS Roll2,
         ROW_NUMBER() OVER (
             PARTITION BY U.Personnummer
             ORDER BY
@@ -707,7 +707,8 @@ FROM (
                 CASE WHEN ARUO.Relation = N'Ordinarie' THEN 1 ELSE 2 END,
                 CASE WHEN OVO.Organisationsid IS NOT NULL AND OVO.Nodtyp = N'Resurs' THEN 1 ELSE 2 END,
                 DATEDIFF(d, ARU.From_datum, ARU.Tom_datum),
-                ARU.From_datum
+                ARU.From_datum,
+                COALESCE(OVO.Organisation, OIF.Organisation)
         ) AS rn
     FROM [CombineStatistik].[core].[anvandare_utforare] U
     INNER JOIN CombineStatistik.core.anvandarroll_utforare ARU                        ON U.Anvandarid = ARU.Anvandarid

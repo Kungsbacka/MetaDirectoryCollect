@@ -12,8 +12,8 @@
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="113"
-  DTS:VersionGUID="{C3F82562-249A-48EB-BA55-0C793A5798CD}">
+  DTS:VersionBuild="118"
+  DTS:VersionGUID="{D277C0DC-A40E-4986-B59F-FD45229FCBCC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -606,6 +606,13 @@ ORDER BY grupp</property>
                       cachedName="formatteradRoll"
                       externalMetadataColumnId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[formatteradRoll]"
                       lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[formatteradRoll]" />
+                    <inputColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[chef]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="chef"
+                      externalMetadataColumnId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[chef]"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[chef]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -634,6 +641,11 @@ ORDER BY grupp</property>
                       dataType="wstr"
                       length="200"
                       name="formatteradRoll" />
+                    <externalMetadataColumn
+                      refId="Package\Import organiszation info\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[chef]"
+                      dataType="wstr"
+                      length="12"
+                      name="chef" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -687,39 +699,80 @@ ORDER BY grupp</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
-    CAST(REPLACE(Personnummer, '-', '') AS nvarchar(12)) COLLATE Finnish_Swedish_CI_AS AS personnr,
-    Forvaltning COLLATE Finnish_Swedish_CI_AS AS forvaltning,
-    Organisation COLLATE Finnish_Swedish_CI_AS AS organisation,
-    Roll COLLATE Finnish_Swedish_CI_AS AS roll,
-    STUFF(Roll2, 1, 1, UPPER(LEFT(Roll2, 1))) COLLATE Finnish_Swedish_CI_AS AS formatteradRoll
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">WITH SysAdminVO AS (
+        SELECT DISTINCT ANV.Personnummer
+        FROM core.anvandare_utforare ANV
+        INNER JOIN CombineStatistik_VO.dbo.anvandarroll_utforare ROLL ON ANV.Anvandarid = ROLL.Anvandarid
+        WHERE ROLL.Roll LIKE '%SysAdmin%'
+),
+CVO AS (
+    SELECT
+        Personnummer AS Personnr_chef_VO,
+        Organisationsid
+    FROM (
+        SELECT DISTINCT
+	        ANV.Personnummer,
+	        ORG.Organisationsid,
+            ROW_NUMBER() OVER (PARTITION BY ANV.Personnummer ORDER BY ANV.Personnummer) AS rn
+        FROM core.anvandare_utforare ANV
+        INNER JOIN CombineStatistik_VO.dbo.anvandarroll_utforare ROLL ON ANV.Anvandarid = ROLL.Anvandarid
+        INNER JOIN CombineStatistik_VO.dbo.anvandarroll_utforare_organisation_utforare REL ON ROLL.Anvandarrollid = REL.Anvandarrollid
+        INNER JOIN CombineStatistik_VO.dbo.organisation_utforare ORG ON REL.Organisationsid = ORG.Organisationsid
+        LEFT OUTER JOIN SysAdminVO SA ON ANV.Personnummer = SA.Personnummer
+        WHERE GETDATE() BETWEEN ROLL.From_datum AND ROLL.Tom_datum
+        AND ORG.Sokvag LIKE '%Extern%'
+        AND ROLL.Roll LIKE '%Enhetschef VO%'
+        AND ROLL.Roll NOT LIKE '%beredskap%'
+        AND ROLL.Roll NOT LIKE '%planeringsteamet%'
+        AND ROLL.Roll NOT LIKE '%nattpatrullen%'
+        AND SA.Personnummer IS NULL
+    ) ranked
+    WHERE rn = 1
+)
+SELECT 
+    personnr, forvaltning, organisation, roll, formatteradRoll, chef
 FROM (
-    SELECT DISTINCT
-        U.Personnummer,
-        CASE WHEN OVO.Organisationsid IS NOT NULL THEN N'011J0000G03A' ELSE N'011J0000G01M' END AS Forvaltning,
-        COALESCE(OVO.Organisation, OIF.Organisation) AS Organisation,
-        ARU.Roll,
-        CASE WHEN CHARINDEX(' - ', Roll) &gt; 0 THEN LEFT(Roll, CHARINDEX(' - ', Roll) - 1) ELSE Roll END AS Roll2,
-        ROW_NUMBER() OVER (
-            PARTITION BY U.Personnummer
-            ORDER BY
-                CASE WHEN OVO.Organisationsid IS NOT NULL THEN 1 ELSE 2 END,
-                CASE WHEN ARUO.Relation = N'Ordinarie' THEN 1 ELSE 2 END,
-                CASE WHEN OVO.Organisationsid IS NOT NULL AND OVO.Nodtyp = N'Resurs' THEN 1 ELSE 2 END,
-                DATEDIFF(d, ARU.From_datum, ARU.Tom_datum),
-                ARU.From_datum,
-                COALESCE(OVO.Organisation, OIF.Organisation)
-        ) AS rn
-    FROM [CombineStatistik].[core].[anvandare_utforare] U
-    INNER JOIN CombineStatistik.core.anvandarroll_utforare ARU                        ON U.Anvandarid = ARU.Anvandarid
-    INNER JOIN CombineStatistik.core.anvandarroll_utforare_organisation_utforare ARUO ON ARU.Anvandarrollid = ARUO.Anvandarrollid
-    LEFT OUTER JOIN CombineStatistik_VO.dbo.organisation_utforare OVO                 ON ARUO.Organisationsid = OVO.Organisationsid
-    LEFT OUTER JOIN CombineStatistik_IF.dbo.organisation_utforare OIF                 ON ARUO.Organisationsid = OIF.Organisationsid
-    WHERE GETDATE() BETWEEN ARU.From_datum AND ARU.Tom_datum
-    AND U.Personnummer IS NOT NULL
-    AND COALESCE(OVO.Organisation, OIF.Organisation) IS NOT NULL
-    AND ARU.Roll IS NOT NULL
-) ranked
+    SELECT 
+        CAST(REPLACE(Personnummer, '-', '') AS nvarchar(12)) COLLATE Finnish_Swedish_CI_AS AS personnr,
+        Forvaltning COLLATE Finnish_Swedish_CI_AS AS forvaltning,
+        Organisation COLLATE Finnish_Swedish_CI_AS AS organisation,
+        Roll COLLATE Finnish_Swedish_CI_AS AS roll,
+        STUFF(Roll2, 1, 1, UPPER(LEFT(Roll2, 1))) COLLATE Finnish_Swedish_CI_AS AS formatteradRoll,
+        CASE WHEN Personnummer &lt;&gt; Personnr_chef_VO THEN CAST(REPLACE(Personnr_chef_VO, '-', '') AS nvarchar(12)) COLLATE Finnish_Swedish_CI_AS ELSE NULL END AS chef,
+        ROW_NUMBER() OVER (PARTITION BY Personnummer ORDER BY Personnummer, Personnr_chef_VO) rn
+    FROM (
+        SELECT DISTINCT
+            U.Personnummer,
+            CASE WHEN OVO.Organisationsid IS NOT NULL THEN N'011J0000G03A' ELSE N'011J0000G01M' END AS Forvaltning,
+            COALESCE(OVO.Organisation, OIF.Organisation) AS Organisation,
+            OVO.Organisationsid VO_Organisationsid,
+            ARU.Roll,
+            CASE WHEN CHARINDEX(' - ', Roll) &gt; 0 THEN LEFT(Roll, CHARINDEX(' - ', Roll) - 1) ELSE Roll END AS Roll2,
+            OVO.Organisationsid AS Organisationsid_VO,
+            ROW_NUMBER() OVER (
+                PARTITION BY U.Personnummer
+                ORDER BY
+                    CASE WHEN OVO.Organisationsid IS NOT NULL THEN 1 ELSE 2 END,
+                    CASE WHEN ARUO.Relation = N'Ordinarie' THEN 1 ELSE 2 END,
+                    CASE WHEN OVO.Organisationsid IS NOT NULL AND OVO.Nodtyp = N'Resurs' THEN 1 ELSE 2 END,
+                    DATEDIFF(d, ARU.From_datum, ARU.Tom_datum),
+                    ARU.From_datum,
+                    COALESCE(OVO.Organisation, OIF.Organisation),
+                    ARU.Roll
+            ) AS rn
+        FROM [CombineStatistik].[core].[anvandare_utforare] U
+        INNER JOIN CombineStatistik.core.anvandarroll_utforare ARU                        ON U.Anvandarid = ARU.Anvandarid
+        INNER JOIN CombineStatistik.core.anvandarroll_utforare_organisation_utforare ARUO ON ARU.Anvandarrollid = ARUO.Anvandarrollid
+        LEFT OUTER JOIN CombineStatistik_VO.dbo.organisation_utforare OVO                 ON ARUO.Organisationsid = OVO.Organisationsid AND OVO.Sokvag LIKE '%Extern regi%'
+        LEFT OUTER JOIN CombineStatistik_IF.dbo.organisation_utforare OIF                 ON ARUO.Organisationsid = OIF.Organisationsid
+        WHERE GETDATE() BETWEEN ARU.From_datum AND ARU.Tom_datum
+        AND U.Personnummer IS NOT NULL
+        AND COALESCE(OVO.Organisation, OIF.Organisation) IS NOT NULL
+        AND ARU.Roll IS NOT NULL
+    ) ranked_inner
+    LEFT OUTER JOIN CVO ON CVO.Organisationsid = Organisationsid_VO
+    WHERE rn = 1
+) ranked_outer
 WHERE rn = 1</property>
                 <property
                   dataType="System.String"
@@ -806,6 +859,16 @@ WHERE rn = 1</property>
                       lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[formatteradRoll]"
                       name="formatteradRoll"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[chef]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[chef]"
+                      length="12"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].Columns[chef]"
+                      name="chef"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -834,6 +897,11 @@ WHERE rn = 1</property>
                       dataType="wstr"
                       length="200"
                       name="formatteradRoll" />
+                    <externalMetadataColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[chef]"
+                      dataType="wstr"
+                      length="12"
+                      name="chef" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -871,6 +939,12 @@ WHERE rn = 1</property>
                       length="200"
                       lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[formatteradRoll]"
                       name="formatteradRoll" />
+                    <outputColumn
+                      refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[chef]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[chef]"
+                      name="chef" />
                     <outputColumn
                       refId="Package\Import organiszation info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -1704,7 +1778,7 @@ WHERE rn = 1</property>
     design-time-name="Package\Import groups">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="157,42"
           Id="Package\Import groups\OLE DB Source"
@@ -1732,7 +1806,9 @@ WHERE rn = 1</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

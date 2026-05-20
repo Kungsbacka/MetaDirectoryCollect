@@ -12,8 +12,8 @@
   DTS:ObjectName="ARX"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="66"
-  DTS:VersionGUID="{003AEEF0-736A-458F-88A4-78FB3BD429DF}">
+  DTS:VersionBuild="67"
+  DTS:VersionGUID="{B51131A4-922A-455C-9DCF-2649CF4ECB32}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -48,11 +48,14 @@
       DTS:DataType="8"
       DTS:DTSID="{F05F3EBA-2F82-4691-9448-9E4096F52086}"
       DTS:ObjectName="ArxApiPassword"
-      DTS:Required="True">
+      DTS:Required="True"
+      DTS:Sensitive="True">
       <DTS:Property
-        DTS:DataType="8"
-        DTS:Name="ParameterValue"
-        xml:space="preserve"></DTS:Property>
+        DTS:Name="ParameterValue">
+        <DTS:Property
+          DTS:DataType="0"
+          DTS:Name="ParameterValue"></DTS:Property>
+      </DTS:Property>
     </DTS:PackageParameter>
     <DTS:PackageParameter
       DTS:CreationName=""

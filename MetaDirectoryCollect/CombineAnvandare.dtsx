@@ -12,8 +12,8 @@
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="118"
-  DTS:VersionGUID="{D277C0DC-A40E-4986-B59F-FD45229FCBCC}">
+  DTS:VersionBuild="120"
+  DTS:VersionGUID="{973A49DB-4EBF-4F67-8B9F-913E7DE38A4E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -769,6 +769,7 @@ FROM (
         AND U.Personnummer IS NOT NULL
         AND COALESCE(OVO.Organisation, OIF.Organisation) IS NOT NULL
         AND ARU.Roll IS NOT NULL
+        AND ARU.Roll NOT LIKE '%SSRS%'
     ) ranked_inner
     LEFT OUTER JOIN CVO ON CVO.Organisationsid = Organisationsid_VO
     WHERE rn = 1
@@ -1841,13 +1842,13 @@ WHERE rn = 1</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="177,42"
-          Id="Package\Import organiszation info\OLE DB Destination"
-          TopLeft="4.50000000000001,105.5" />
-        <NodeLayout
           Size="157,42"
           Id="Package\Import organiszation info\OLE DB Source"
           TopLeft="14.5,4.5" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Import organiszation info\OLE DB Destination"
+          TopLeft="4.50000000000001,105.5" />
         <EdgeLayout
           Id="Package\Import organiszation info.Paths[OLE DB Source Output]"
           TopLeft="93,46.5">

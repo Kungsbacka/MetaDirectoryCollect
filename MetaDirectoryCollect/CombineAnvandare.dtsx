@@ -12,8 +12,8 @@
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="120"
-  DTS:VersionGUID="{973A49DB-4EBF-4F67-8B9F-913E7DE38A4E}">
+  DTS:VersionBuild="121"
+  DTS:VersionGUID="{2188DCCB-50ED-4C44-8F36-02768FD1D999}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -774,7 +774,14 @@ FROM (
     LEFT OUTER JOIN CVO ON CVO.Organisationsid = Organisationsid_VO
     WHERE rn = 1
 ) ranked_outer
-WHERE rn = 1</property>
+WHERE rn = 1 AND roll NOT IN ( -- Har flera placeringar. Måste placeras manuellt
+'Studerande - Handläggare VO',
+'Studerande - Sjuksköterskestudent',
+'VO Konsult',
+'SysAdminPulsen',
+'Leg. Arbetsterapeut',
+'Leg. Fysioterapeut',
+'Leg. Sjuksköterska')</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."

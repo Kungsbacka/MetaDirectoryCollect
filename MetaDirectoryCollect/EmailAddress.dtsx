@@ -7,13 +7,13 @@
   DTS:CreatorName="Jonas Sjömark"
   DTS:DTSID="{2B768AA2-E019-4175-AD26-7D96B8967C56}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.152"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
   DTS:LocaleID="1053"
   DTS:ObjectName="EmailAddress"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="45"
-  DTS:VersionGUID="{261DED1E-79FB-46ED-B744-2F49483363A9}">
+  DTS:VersionBuild="48"
+  DTS:VersionGUID="{CCE84526-345B-4E72-96C3-98904B071DCA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,9 @@
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[$Package::MedvindConnectionString]</DTS:PropertyExpression>
       <DTS:ObjectData>
-        <DTS:ConnectionManager />
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -36,7 +38,9 @@
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[$Package::MetaDirectoryConnectionString]</DTS:PropertyExpression>
       <DTS:ObjectData>
-        <DTS:ConnectionManager />
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -47,7 +51,9 @@
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[$Package::NeptuneConnectionString]</DTS:PropertyExpression>
       <DTS:ObjectData>
-        <DTS:ConnectionManager />
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -58,7 +64,9 @@
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[$Package::PersonecConnectionString]</DTS:PropertyExpression>
       <DTS:ObjectData>
-        <DTS:ConnectionManager />
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -272,7 +280,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -423,7 +431,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE @year int
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE @year int
 SELECT @year = CAST(CONVERT(char(2), GETDATE(), 12) AS int)
 SELECT
    N'Medvind' AS sourcename,
@@ -749,7 +757,7 @@ FROM
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -900,7 +908,7 @@ FROM
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE @year int
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE @year int
 SELECT @year = CAST(CONVERT(char(2), GETDATE(), 12) AS int)
 SELECT
    N'Medvind_private' AS sourcename,
@@ -1120,6 +1128,12 @@ FROM
                       cachedLength="100"
                       cachedName="mail"
                       lineageId="Package\Neptune\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]" />
+                    <inputColumn
+                      refId="Package\Neptune\Data Conversion.Inputs[Data Conversion Input].Columns[sourcepid]"
+                      cachedDataType="wstr"
+                      cachedLength="113"
+                      cachedName="sourcepid"
+                      lineageId="Package\Neptune\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -1167,6 +1181,27 @@ FROM
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
                           name="SourceInputColumnLineageID">#{Package\Neptune\OLE DB Source.Outputs[OLE DB Source Output].Columns[mail]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Neptune\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sourcepid]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Neptune\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sourcepid]"
+                      name="Copy of sourcepid"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Neptune\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -1225,7 +1260,7 @@ FROM
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1280,13 +1315,6 @@ FROM
                       externalMetadataColumnId="Package\Neptune\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcename]"
                       lineageId="Package\Neptune\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcename]" />
                     <inputColumn
-                      refId="Package\Neptune\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[sourcepid]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="sourcepid"
-                      externalMetadataColumnId="Package\Neptune\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcepid]"
-                      lineageId="Package\Neptune\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]" />
-                    <inputColumn
                       refId="Package\Neptune\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of pid]"
                       cachedDataType="wstr"
                       cachedLength="12"
@@ -1300,6 +1328,13 @@ FROM
                       cachedName="Copy of mail"
                       externalMetadataColumnId="Package\Neptune\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mail]"
                       lineageId="Package\Neptune\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of mail]" />
+                    <inputColumn
+                      refId="Package\Neptune\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of sourcepid]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of sourcepid"
+                      externalMetadataColumnId="Package\Neptune\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sourcepid]"
+                      lineageId="Package\Neptune\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sourcepid]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1376,21 +1411,15 @@ FROM
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE @year int
-SELECT @year = CAST(CONVERT(char(2), GETDATE(), 12) AS int)
-SELECT
-   N'Neptune' AS sourcename,
-   CAST(SUBSTRING(LOGIN_NAME, 1, 50) AS nvarchar(50)) AS sourcepid,
-   CASE
-      WHEN CAST(SUBSTRING(LOGIN_NAME, 1, 2) AS int) &gt; @year
-      THEN N'19' + SUBSTRING(LOGIN_NAME, 1, 10)
-      ELSE N'20' + SUBSTRING(LOGIN_NAME, 1, 10)
-   END AS pid,
-  NULLIF(MAIL, '') AS mail
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+    N'Neptune' AS sourcename,
+    LOGIN_NAME AS sourcepid,
+    CAST(CAST(b.SEKEL AS varchar) + b.PNUMID AS nvarchar(12)) AS pid,
+    NULLIF(a.MAIL, '') AS mail
 FROM
-   dbo.t_User
-WHERE
-   ISNUMERIC(LOGIN_NAME) = 1;</property>
+    KUNKAK_Neptune.dbo.t_User a
+INNER JOIN
+    KUNKAK_PPP.dbo.OA0P0100 b ON a.LOGIN_NAME = SUBSTRING(b.PERSOID, 3, LEN(b.PERSOID))</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1463,7 +1492,7 @@ WHERE
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Neptune\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcepid]"
-                      length="50"
+                      length="113"
                       lineageId="Package\Neptune\OLE DB Source.Outputs[OLE DB Source Output].Columns[sourcepid]"
                       name="sourcepid"
                       truncationRowDisposition="FailComponent" />
@@ -1489,7 +1518,7 @@ WHERE
                     <externalMetadataColumn
                       refId="Package\Neptune\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sourcepid]"
                       dataType="wstr"
-                      length="50"
+                      length="113"
                       name="sourcepid" />
                   </externalMetadataColumns>
                 </output>
@@ -1507,7 +1536,7 @@ WHERE
                     <outputColumn
                       refId="Package\Neptune\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcepid]"
                       dataType="wstr"
-                      length="50"
+                      length="113"
                       lineageId="Package\Neptune\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sourcepid]"
                       name="sourcepid" />
                     <outputColumn
@@ -1728,7 +1757,7 @@ WHERE
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1879,7 +1908,7 @@ WHERE
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
    N'Personec' AS sourcename,
    a.PERSOID AS sourcepid,
    CAST(b.SEKEL AS nvarchar) + CAST(b.PNUMID AS nvarchar) AS pid,
@@ -2232,7 +2261,7 @@ WHERE
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -2383,7 +2412,7 @@ WHERE
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
    N'Personec_private' AS sourcename,
    a.PERSOID AS sourcepid,
    CAST(b.SEKEL AS nvarchar) + CAST(b.PNUMID AS nvarchar) AS pid,
